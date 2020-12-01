@@ -15,6 +15,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "op.h"
+# include <fcntl.h>
 # include "error.h"
 # include <stdio.h> // REMOVE BEFORE TURNING IN!!
 # include <sys/uio.h>
