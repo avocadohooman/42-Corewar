@@ -14,16 +14,16 @@
 # define ERROR_H
 # include "libft.h"
 
-char	*g_errors[] = {"Usage: ./asm [champion_file.s]", "Missing argument!",
-						"three"};
-
 typedef enum	e_error_type
 {
 	USAGE,
 	MISSING_ARG,
 	INVALID_TOKEN,
+	INVALID_FILE,
+	BUFFER,
+	GET_NEXT_LINE
 }				t_error_type;
 
-void	print_error(t_error_type type);
+void			print_error(t_error_type type);
 
 #endif
