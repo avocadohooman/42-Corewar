@@ -12,7 +12,6 @@
 
 #include "libft.h"
 #include "buffer.h"
-#include "llist.h"
 #include <stdio.h>
 
 int main(void)
