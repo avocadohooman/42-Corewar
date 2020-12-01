@@ -12,11 +12,11 @@
 
 VM_NAME = corewar
 ASM_NAME = asm
-FLAGS = -Wall -Werror -Wextra
+# FLAGS = -Wall -Werror -Wextra
 
 VM_MAIN = srcs/vm/main.c
 ASM_MAIN = srcs/asm/main.c
-SRCS = 
+SRCS = srcs/buffer/buffer.c
 
 INCL = ./includes
 LIBFT = ./libft
@@ -47,5 +47,7 @@ clean:
 
 fclean:
 	make fclean -C $(LIBFT)
+	rm -f $(VM_NAME)
+	rm -f $(ASM_NAME)
 
 re: fclean all
