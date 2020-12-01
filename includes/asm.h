@@ -15,9 +15,15 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "op.h"
+# include <fcntl.h>
 # include "error.h"
 # include <stdio.h> // REMOVE BEFORE TURNING IN!!
 # include <sys/uio.h>
 # include <sys/types.h>
+# include <buffer.h>
+
+
+
+char		*read_champ(char *champ);
 
 #endif
