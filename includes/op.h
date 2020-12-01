@@ -33,7 +33,7 @@
 # define CHAMP_MAX_SIZE		(MEM_SIZE / 6)
 # define COMMENT_CHAR		'#'
 # define LABEL_CHAR			':'
-# define DIRECT_CHAR			'%'
+# define DIRECT_CHAR		'%'
 # define SEPARATOR_CHAR		','
 
 # define LABEL_CHARS		"abcdefghijklmnopqrstuvwxyz_0123456789"
@@ -74,5 +74,9 @@ typedef struct		header_s
   unsigned int		prog_size;
   char				comment[COMMENT_LENGTH + 1];
 }					header_t;
+
+typedef struct		s_op
+{
+}					t_op;
 
 #endif
