@@ -12,6 +12,17 @@
 
 #include "asm.h"
 
+
+int			validate_file_ext(char *file, char *target_ext)
+{
+	char *file_ext;
+
+	file_ext = ft_strrchr(file, '.');
+	if (!(ft_strequ(file_ext, target_ext)))
+		return (0);
+	return (1);
+}
+
 char		*read_champ(char *champ)
 {
 	char		*line;
@@ -40,8 +51,8 @@ char		*read_champ(char *champ)
 
 int			main(int argc, char **argv)
 {
-	if (argc != 2) // here we also need to check if the file ends in .s
-		print_error(USAGE);
+	if (argc != 2 || !validate_file_ext(argv[1], FILE_EXT))
+		print_error(INVALID_FILE);
 	read_champ(argv[1]);
 	exit(1);
 }

@@ -22,8 +22,10 @@
 # include <sys/types.h>
 # include <buffer.h>
 
+# define	FILE_EXT ".s"
 
 
 char		*read_champ(char *champ);
+int			validate_file_ext(char *file, char *extension);
 
 #endif
