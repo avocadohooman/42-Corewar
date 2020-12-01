@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include "buffer.h"
+#include "llist.h"
 #include <stdio.h>
 
 int main(void)
@@ -31,6 +32,18 @@ int main(void)
     printf("%s\n", b.data);
     printf("%zu\n", b.size);
     printf("%zu\n", b.used);
+
+    // t_test  a;
+    // t_test  c;
+
+    // a.value = 123;
+    // c.value = 321;
+
+    // llist_add((t_llist *)a, (t_llist *)c);
+
+
+
+
 
 
     return (0);

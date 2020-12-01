@@ -10,11 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/asm.h"
-#include "includes/vm.h"
+#include "asm.h"
+#include "vm.h"
+#include "errors.h"
 
 void	print_error(t_error_type type)
 {
-	
+	ft_putendl(g_errors[type])
 	exit(0);
 }

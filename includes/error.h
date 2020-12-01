@@ -21,7 +21,7 @@ typedef enum	e_error_type
 {
 	USAGE,
 	MISSING_ARG,
-	INVALID_TOKEN
+	INVALID_TOKEN,
 }				t_error_type;
 
 void	print_error(t_error_type type);

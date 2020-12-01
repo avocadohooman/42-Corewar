@@ -13,7 +13,6 @@
 VM_NAME = corewar
 ASM_NAME = asm
 # FLAGS = -Wall -Werror -Wextra
-
 VM_MAIN = srcs/vm/main.c
 ASM_MAIN = srcs/asm/main.c
 SRCS = srcs/buffer/buffer.c

@@ -12,8 +12,8 @@
 
 #include "libft.h"
 
-#ifndef ARRAY_H
-# define ARRAY_H
+#ifndef BUFFER_H
+# define BUFFER_H
 
 typedef struct	s_buffer
 {
@@ -24,6 +24,7 @@ typedef struct	s_buffer
 
 t_buffer		*new_buffer(t_buffer *b, size_t s);
 t_buffer		*insert_buffer(t_buffer *b, char *data, size_t data_size);
+void			delete_buffer(t_buffer *b);
 
 
 #endif
