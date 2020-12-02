@@ -18,12 +18,36 @@ typedef enum	e_type
 {
 	TOKEN_EOF,
 	TOKEN_IDENTIFIER,
-	TOKEN_KEYWORD,
-	TOKEN_NUMBER,
 	TOKEN_STRING,
 	TOKEN_OPERATOR,
-	TOKEN_ILLEGAL
+	TOKEN_ILLEGAL,
+
+	OPCODE_LFORK,
+	OPCODE_STI,
+	OPCODE_FORK,
+	OPCODE_LLD,
+	OPCODE_LD,
+	OPCODE_ADD,
+	OPCODE_ZJMP,
+	OPCODE_SUB,
+	OPCODE_LDI,
+	OPCODE_OR,
+	OPCODE_ST,
+	OPCODE_AFF,
+	OPCODE_LIVE,
+	OPCODE_XOR,
+	OPCODE_LLDI,
+	OPCODE_AND
 }				t_type;
+
+typedef struct	s_test
+{
+	enum {
+		LIVE,
+		AFF,
+		ST
+	}	test;
+}				t_test;
 
 typedef struct	s_token
 {
