@@ -16,20 +16,19 @@
 
 typedef enum	e_type
 {
-	TOKEN_ILLEGAL,
+	TOKEN_EOF,
+	TOKEN_IDENTIFIER,
+	TOKEN_KEYWORD,
+	TOKEN_NUMBER,
 	TOKEN_STRING,
-	TOKEN_LABEL,
-	TOKEN_INSTRUCTION,
-	TOKEN_REGISTER,
-	TOKEN_SEPARATOR,
-	TOKEN_DIRECT_LABEL,
-	TOKEN_DIRECT
+	TOKEN_OPERATOR,
+	TOKEN_ILLEGAL
 }				t_type;
 
 typedef struct	s_token
 {
 	char		*value;
-	size_t		size;
+	t_type		type;
 }				t_token;
 
 t_token			*init_token(t_type type, char *value);
