@@ -28,13 +28,12 @@ char		*read_champ(char *champ)
 	char		*line;
 	int			fd;
 	t_buffer	buffer;
-	int			s;
+	size_t		s;
 
 	line = NULL;
 	if (((fd = open(champ, O_RDONLY)) == -1))
 		print_error(INVALID_FILE);
-	s = 1024;
-	new_buffer(&buffer, s);
+	new_buffer(&buffer, 1024);
 	while ((s = ft_get_next_line(fd, &line)) > 0)
 	{
 		line[s - 1] = '\n';
@@ -42,7 +41,6 @@ char		*read_champ(char *champ)
 			print_error(BUFFER);
 		ft_strdel(&line);
 	}
-	printf("%s\n", buffer.data); //delete
 	if (s < 0)
 		print_error(GET_NEXT_LINE);
 	return (buffer.data);
