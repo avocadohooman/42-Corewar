@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/01 21:03:11 by npimenof          #+#    #+#             */
-/*   Updated: 2020/12/01 21:23:10 by npimenof         ###   ########.fr       */
+/*   Created: 2020/12/02 10:57:54 by npimenof          #+#    #+#             */
+/*   Updated: 2020/12/02 11:03:25 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
-# include "libft.h"
-# include "token.h"
+#include "token.h"
 
-typedef struct	s_lexer
+t_token			*init_token(t_type type, char *value)
 {
-	char 		*data;
-	char		c;
-	size_t		size;
-	size_t		index;
-	size_t		line_number;
-}				t_lexer;
+	t_token	*token;
 
-t_lexer			*init_lexer(char *data, size_t size);
-void			free_lexer(t_lexer **lexer);
+	if (!(token = ft_memalloc(sizeof(t_token))))
+		return (NULL);
+	token->type = type;
+	token->value = value;
+	return (token);
+}
 
-t_token			*lex_get_next_token(t_lexer *lexer);
-void			lex_advance(t_lexer *lexer);
-
-#endif
-
+void			free_token(t_token **token)
+{
+	free((*token)->value);
+	(*token)->value = NULL;
+	free(*token);
+	*token = NULL;
+}
