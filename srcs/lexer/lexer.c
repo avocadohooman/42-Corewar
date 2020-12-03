@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "lexer.h"
+#include "opcodes.h"
 #include "op.h"
 
 t_lexer			*init_lexer(char *data, size_t size)
@@ -46,9 +47,29 @@ void			lex_skip_comment(t_lexer *lexer)
 		lex_advance(lexer);
 }
 
-t_token			*lex_get_keyword(t_lexer *lexer)
+// the order of the opcode_table and t_type enums are now dependent
+// on eachother. The opcodes must come first in the enum list and
+// should be presented in the same order as in the opcode_table
+t_token			*lex_get_keyword(char *value, size_t size)
 {
-	return (NULL);
+	char	*opcode_table;
+	int		i;
+
+	opcode_table = (char[17]){
+		LFORK_LITERAL, STI_LITERAL, FORK_LITERAL, LLD_LITERAL,
+		LD_LITERAL, ADD_LITERAL, ZJMP_LITERAL, SUB_LITERAL,
+		LDI_LITERAL, OR_LITERAL, ST_LITERAL, AFF_LITERAL,
+		LIVE_LITERAL, XOR_LITERAL, LLDI_LITERAL, AND_LITERAL,
+		NULL
+	};
+	i = 0;
+	while (opcode_table[i])
+	{
+		if (!ft_memcmp(value, opcode_table[i], size))
+			return (init_token(value, i));
+		i++;
+	}
+	return (init_token(TOKEN_IDENTIFIER, value));
 }
 
 // might need to exclude capital chars here.. if label
@@ -70,7 +91,7 @@ t_token			*lex_get_identifier(t_lexer *lexer)
 		value = tmp;
 		lex_advance(lexer);
 	}
-	return (init_token(TOKEN_IDENTIFIER, value));
+	return (lex_get_keyword(value, len + 2));
 }
 
 t_token			*lex_get_string(t_lexer *lexer)
@@ -95,12 +116,39 @@ t_token			*lex_get_string(t_lexer *lexer)
 	return (init_token(TOKEN_STRING, value));
 }
 
+char			*char_to_string(char c)
+{
+	char	*str;
+
+	if (!(str = ft_strnew(sizeof(char))))
+		return (NULL);
+	*str = c;
+	return str;
+}
+
+t_token			*lex_get_operator(t_lexer *lexer)
+{
+	if (lexer->c == LABEL_CHAR)
+		return (init_token(TOKEN_COLON, char_to_string(lexer->c)));
+	if (lexer->c == DIRECT_CHAR)
+		return (init_token(TOKEN_DIRECT, char_to_string(lexer->c)));
+	if (lexer->c == SEPARATOR_CHAR)
+		return (init_token(TOKEN_SEPARATOR, char_to_string(lexer->c)));
+	if (lexer->c == NEWLINE_CHAR)
+		return (init_token(TOKEN_NEWLINE, char_to_string(lexer->c)));
+	return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
+}
+
+int		is_operator(char c)
+{
+	if (c == LABEL_CHAR || c == DIRECT_CHAR ||
+		c == SEPARATOR_CHAR || c == NEWLINE_CHAR)
+		return (1);
+	return (0);
+}
+
 t_token			*lex_get_next_token(t_lexer *lexer)
 {
-	char *operators;
-
-	operators = (char[4]){LABEL_CHAR, DIRECT_CHAR,
-							SEPARATOR_CHAR};
 	while (lexer->c && lexer->index < lexer->size)
 	{
 		if (lexer->c == ' ' || lexer->c == '\t')
@@ -111,6 +159,7 @@ t_token			*lex_get_next_token(t_lexer *lexer)
 			return (lex_get_identifier(lexer));
 		if (lexer->c == '"')
 			return (lex_get_string(lexer));
+		return (lex_get_operator(lexer));
 	}
 	return (init_token(TOKEN_EOF, "\0"));
 }
