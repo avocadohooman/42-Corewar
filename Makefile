@@ -12,6 +12,8 @@
 
 VM_NAME = corewar
 ASM_NAME = asm
+
+LEXER_TEST_NAME = lexer-test
 # FLAGS = -Wall -Werror -Wextra
 VM_MAIN = srcs/vm/main.c
 ASM_MAIN = srcs/asm/main.c
@@ -51,5 +53,10 @@ fclean:
 	make fclean -C $(LIBFT)
 	rm -f $(VM_NAME)
 	rm -f $(ASM_NAME)
+	rm -f $(LEXER_TEST_NAME)
 
 re: fclean all
+
+lexer-test: 
+	make -C $(LIBFT)
+	gcc -o $(LEXER_TEST_NAME) srcs/lexer/lexer_test/lexer_test.c $(SRCS) -I$(INCL) -L$(LIBFT) -lft -I$(LIBFTINCL)
