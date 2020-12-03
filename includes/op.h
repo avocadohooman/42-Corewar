@@ -35,6 +35,7 @@
 # define LABEL_CHAR			':'
 # define DIRECT_CHAR		'%'
 # define SEPARATOR_CHAR		','
+# define NEWLINE_CHAR '\n'
 
 # define LABEL_CHARS		"abcdefghijklmnopqrstuvwxyz_0123456789"
 
