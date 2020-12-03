@@ -24,6 +24,7 @@ t_lexer			*init_lexer(char *data, size_t size)
 	lexer->size = size;
 	lexer->index = 0;
 	lexer->c = data[0];
+	lexer->line_number = 0;
 }
 
 void			lex_advance(t_lexer *lexer)
@@ -159,7 +160,7 @@ t_token			*lex_get_operator(t_lexer *lexer)
 		return (init_token(TOKEN_DIRECT, char_to_string(lexer->c)));
 	if (lexer->c == SEPARATOR_CHAR)
 		return (init_token(TOKEN_SEPARATOR, char_to_string(lexer->c)));
-	if (lexer->c == NEWLINE_CHAR)
+	if (lexer->c == NEWLINE_CHAR && ++(lexer->line_number))
 		return (init_token(TOKEN_NEWLINE, char_to_string(lexer->c)));
 	return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
 }
