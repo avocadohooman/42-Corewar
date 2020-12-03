@@ -10,21 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FILE_H
+# define FILE_H
+# include "libft.h"
+# include <fcntl.h>
+# include "error.h"
 
-#ifndef BUFFER_H
-# define BUFFER_H
-
-typedef struct	s_buffer
+typedef struct	s_file
 {
 	char		*data;
 	size_t		size;
 	size_t		used;
-}				t_buffer;
+}				t_file;
 
-t_buffer		*new_buffer(t_buffer *b, size_t s);
-t_buffer		*insert_buffer(t_buffer *b, char *data, size_t data_size);
-void			delete_buffer(t_buffer *b);
+t_file			*new_file(t_file *b, size_t s);
+t_file			*insert_file(t_file *b, char *data, size_t data_size);
+void			free_file(t_file *b);
+
+t_file			read_file(char *filename);
+int				write_file(int fd, t_file *file);
+int				file_extension(char *filename, char *expected_extension);
+
 
 
 #endif

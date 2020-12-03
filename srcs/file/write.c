@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   write.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onetane <nen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/01 13:50:53 by orantane          #+#    #+#             */
-/*   Updated: 2020/12/01 15:26:51 by onen              ###   ########.fr       */
+/*   Created: 2020/12/03 12:24:11 by npimenof          #+#    #+#             */
+/*   Updated: 2020/12/03 12:25:40 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
-# include <sys/uio.h>
-# include <sys/types.h>
-# include "libft.h"
-# include "op.h"
+#include "file.h"
 
-# define	FILE_EXT ".s"
-
-#endif
+int		write_file(int fd, t_file *file)
+{
+	write(fd, file->data, file->used);
+	return (file->used);
+}

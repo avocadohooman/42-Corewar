@@ -16,7 +16,7 @@ ASM_NAME = asm
 VM_MAIN = srcs/vm/main.c
 ASM_MAIN = srcs/asm/main.c
 
-SRCS = 	srcs/buffer/buffer.c \
+SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/lexer/lexer.c srcs/token/token.c srcs/parser/parser.c \
 		srcs/error.c
 
