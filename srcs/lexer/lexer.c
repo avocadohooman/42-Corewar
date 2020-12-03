@@ -47,6 +47,31 @@ void			lex_skip_comment(t_lexer *lexer)
 		lex_advance(lexer);
 }
 
+t_token			*lex_get_command(t_lexer *lexer)
+{
+	char	*value;
+	char	*tmp;
+	int		len;
+
+	if (!(value = ft_memalloc(sizeof(char))))
+		return (NULL);
+	while (ft_isalpha(lexer->c))
+	{
+		len = ft_strlen(value);
+		if (!(tmp = realloc(value, len + 2)))
+			return (NULL);
+		ft_strlcat(tmp, &lexer->c, len + 2);
+		value = tmp;
+		lex_advance(lexer);
+	}
+	lex_advance(lexer);
+	if (!(ft_memcmp(value, NAME_CMD_STRING, len + 2)))
+		return (init_token(COMMAND_NAME, value));
+	else if (!(ft_memcmp(value, COMMENT_CMD_STRING, len + 2)))
+		return (init_token(COMMAND_NAME, value));
+	return (init_token(TOKEN_ILLEGAL, value));
+}
+
 // the order of the opcode_table and t_type enums are now dependent
 // on eachother. The opcodes must come first in the enum list and
 // should be presented in the same order as in the opcode_table
@@ -159,6 +184,8 @@ t_token			*lex_get_next_token(t_lexer *lexer)
 			return (lex_get_identifier(lexer));
 		if (lexer->c == '"')
 			return (lex_get_string(lexer));
+		if (lexer->c == '.')
+			return (lex_get_command(lexer));
 		return (lex_get_operator(lexer));
 	}
 	return (init_token(TOKEN_EOF, "\0"));

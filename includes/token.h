@@ -13,7 +13,6 @@
 #ifndef TOKEN_H
 # define TOKEN_H
 # include "libft.h"
-// # include "opcodes.h"
 
 typedef enum	e_type
 {
@@ -33,6 +32,9 @@ typedef enum	e_type
 	OPCODE_XOR,
 	OPCODE_LLDI,
 	OPCODE_AND,
+
+	COMMAND_NAME,
+	COMMAND_COMMENT,
 
 	TOKEN_EOF,
 	TOKEN_IDENTIFIER,
