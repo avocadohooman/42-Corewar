@@ -52,10 +52,10 @@ void			lex_skip_comment(t_lexer *lexer)
 // should be presented in the same order as in the opcode_table
 t_token			*lex_get_keyword(char *value, size_t size)
 {
-	char	*opcode_table;
+	char	**opcode_table;
 	int		i;
 
-	opcode_table = (char[17]){
+	opcode_table = (char*[20]){
 		LFORK_LITERAL, STI_LITERAL, FORK_LITERAL, LLD_LITERAL,
 		LD_LITERAL, ADD_LITERAL, ZJMP_LITERAL, SUB_LITERAL,
 		LDI_LITERAL, OR_LITERAL, ST_LITERAL, AFF_LITERAL,
@@ -66,7 +66,7 @@ t_token			*lex_get_keyword(char *value, size_t size)
 	while (opcode_table[i])
 	{
 		if (!ft_memcmp(value, opcode_table[i], size))
-			return (init_token(value, i));
+			return (init_token(i, value));
 		i++;
 	}
 	return (init_token(TOKEN_IDENTIFIER, value));

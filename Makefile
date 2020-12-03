@@ -15,7 +15,9 @@ ASM_NAME = asm
 # FLAGS = -Wall -Werror -Wextra
 VM_MAIN = srcs/vm/main.c
 ASM_MAIN = srcs/asm/main.c
+
 SRCS = 	srcs/buffer/buffer.c \
+		srcs/lexer/lexer.c srcs/token/token.c srcs/parser/parser.c \
 		srcs/error.c
 
 INCL = ./includes
