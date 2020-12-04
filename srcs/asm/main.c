@@ -50,7 +50,7 @@ int			main(int argc, char **argv)
 	ass.statement_buff[0] = 0x0b;
 	if (example.statement->arg_type_req)
 		get_argument_type(&ass, &example);
-	printf("Arg type: 0x%x\n", ass.argument_type);
+	printf("Argument type: 0x%x\n", ass.argument_type);
 	// get_arguments(&ass, &example);
 	return (0);
 }
