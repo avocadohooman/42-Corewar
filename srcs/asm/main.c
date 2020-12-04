@@ -34,7 +34,7 @@ int			main(int argc, char **argv)
 		i++;
 	}
 	example.statement->arguments[0] = "r1,";
-	example.statement->arguments[1] = "%:live";
+	example.statement->arguments[1] = "%:live,";
 	example.statement->arguments[2] = "%1";
 	example.statement->arg_type_req = true;
 	example.statement->number_arg = 3;
@@ -50,7 +50,7 @@ int			main(int argc, char **argv)
 	ass.statement_buff[0] = 0x0b;
 	if (example.statement->arg_type_req)
 		get_argument_type(&ass, &example);
-	printf("Argument type: 0x%x\n", ass.argument_type);
-	// get_arguments(&ass, &example);
+	printf("Instruction Buff: %.2x %x\n", ass.statement_buff[0], ass.statement_buff[1]);
+	get_arguments(&ass, &example);
 	return (0);
 }
