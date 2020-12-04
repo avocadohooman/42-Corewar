@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:58 by gmolin            #+#    #+#             */
-/*   Updated: 2020/12/04 14:57:16 by gmolin           ###   ########.fr       */
+/*   Updated: 2020/12/04 17:18:43 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 #include "file.h"
 #include <stdio.h> // delete
 
-void		get_argument_type(t_ass *ass, char **arguments)
+void		get_argument_type(t_ass *ass, t_instruction *instruction)
 {
-	if (!ft_strcmp("sti", arguments[0]))
-		ass->argument_type_code = 0x68;
-	else if (!ft_strcmp("ld", arguments[0])) 
-		ass->argument_type_code = 0x90;
+	int	i;
 
+	i = 0;
+	while (i < instruction->statement->number_arg)
+	{
+		if (instruction->statement->arguments[i][0] == 'r')
+			ass->argument_type |= 1UL << (6 - (i + i));
+		else if (instruction->statement->arguments[i][0] == '%')
+			ass->argument_type |= 1UL << (7 - (i + i));
+		else if (instruction->statement->arguments[i][0] == '-')
+		{
+			ass->argument_type |= 1UL << (7 - (i + i));
+			ass->argument_type |= 1UL << (6 - (i + i));
+		}
+		i++;
+	}
 }
