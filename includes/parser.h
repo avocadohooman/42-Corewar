@@ -22,12 +22,12 @@ typedef struct	s_parser
 	t_token		*current_token;
 }				t_parser;
 
+typedef void	(*t_opcode_parse)(t_parser *parser);
+
 t_parser		*new_parser(t_lexer *lexer);
 void			free_parser(t_parser **parser);
 
 void			parser_consume(t_parser *parser, t_type type);
-
-
 
 void			parser_parse(t_parser *parser, char *data);
 
@@ -39,5 +39,23 @@ void			parser_parse_statement(t_parser *parser);
 void			parser_parse_label(t_parser *parser);
 void			parser_parse_opcode(t_parser *parser);
 void			parser_parse_arguments(t_parser *parser);
+
+void            parser_parse_lfork(t_parser *parser);
+void            parser_parse_sti(t_parser *parser);
+void            parser_parse_fork(t_parser *parser);
+void            parser_parse_lld(t_parser *parser);
+void            parser_parse_ld(t_parser *parser);
+void            parser_parse_add(t_parser *parser);
+void            parser_parse_zjmp(t_parser *parser);
+void            parser_parse_sub(t_parser *parser);
+void            parser_parse_sub(t_parser *parser);
+void            parser_parse_ldi(t_parser *parser);
+void            parser_parse_or(t_parser *parser);
+void            parser_parse_st(t_parser *parser);
+void            parser_parse_aff(t_parser *parser);
+void            parser_parse_live(t_parser *parser);
+void            parser_parse_xor(t_parser *parser);
+void            parser_parse_lldi(t_parser *parser);
+void            parser_parse_and(t_parser *parser);
 
 #endif

@@ -172,15 +172,16 @@ t_token			*lex_advance_with_token(t_lexer *lexer, t_token *token)
 t_token			*lex_get_operator(t_lexer *lexer)
 {
 	if (lexer->c == LABEL_CHAR)
-		return (lex_advance_with_token(lexer, init_token(TOKEN_COLON, char_to_string(lexer->c))));
+		return (lex_advance_with_token(lexer,
+				init_token(TOKEN_COLON, char_to_string(lexer->c))));
 	if (lexer->c == DIRECT_CHAR)
-		return (lex_advance_with_token(lexer, init_token(TOKEN_DIRECT, char_to_string(lexer->c))));
+		return (lex_advance_with_token(lexer,
+				init_token(TOKEN_DIRECT, char_to_string(lexer->c))));
 	if (lexer->c == SEPARATOR_CHAR)
-		return (lex_advance_with_token(lexer, init_token(TOKEN_SEPARATOR, char_to_string(lexer->c))));
+		return (lex_advance_with_token(lexer,
+				init_token(TOKEN_SEPARATOR, char_to_string(lexer->c))));
 	if (lexer->c == 13)
 		return (lex_get_newline(lexer));
-	// if (lexer->c == NEWLINE_CHAR && ++(lexer->line_number))
-	// 	return (init_token(TOKEN_NEWLINE, char_to_string(lexer->c)));
 	return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
 }
 

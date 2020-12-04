@@ -14,6 +14,26 @@
 #include "error.h"
 #include <stdio.h>
 
+static t_opcode_parse  g_builtin[16] = {
+    [OPCODE_LFORK] = parser_parse_lfork,
+    [OPCODE_STI] = parser_parse_sti,
+    [OPCODE_FORK] = parser_parse_fork,
+    [OPCODE_LLD] = parser_parse_lld,
+    [OPCODE_LD] = parser_parse_ld,
+    [OPCODE_ADD] = parser_parse_add,
+    [OPCODE_ZJMP] = parser_parse_zjmp,
+    [OPCODE_SUB] = parser_parse_sub,
+    [OPCODE_LDI] = parser_parse_ldi,
+    [OPCODE_OR] = parser_parse_or,
+    [OPCODE_ST] = parser_parse_st,
+    [OPCODE_AFF] = parser_parse_aff,
+    [OPCODE_LIVE] = parser_parse_live,
+    [OPCODE_XOR] = parser_parse_xor,
+    [OPCODE_LLDI] = parser_parse_lldi,
+    [OPCODE_AND] = parser_parse_and
+};
+
+
 t_parser		*new_parser(t_lexer *lexer)
 {
 	t_parser	*parser;
@@ -75,7 +95,7 @@ void			parser_parse_command(t_parser *parser)
 
 void			parser_parse_opcode(t_parser *parser)
 {
-	printf("hahahahaha\n");
+	g_builtin[OPCODE_STI](parser);
 }
 
 void			parser_parse_label(t_parser *parser)
@@ -97,10 +117,7 @@ void			parser_parse_statement(t_parser *parser)
 	else if (type == TOKEN_IDENTIFIER)
 		parser_parse_label(parser);
 	else if (is_opcode(type))
-	{
-		printf("yo\n");
 		parser_parse_opcode(parser);
-	}
 	else
 		printf("empty statement\n");
 }
@@ -125,7 +142,6 @@ void			parser_parse_statements(t_parser *parser)
 	while (parser->current_token->type == TOKEN_NEWLINE)
 	{
 		parser_consume(parser, TOKEN_NEWLINE);
-		printf("iteration\n");
 		parser_parse_statement(parser);
 	}
 }
