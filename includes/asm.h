@@ -30,20 +30,26 @@ typedef enum e_ass_num
 
 typedef struct	s_ass
 {
-	char					**label;
-	char					*operation; // = sti = 0x0b
-	int						operation_index;
 	int						arg1_type;
 	int						arg2_type;
 	int						arg3_type;
-	char					*arg1;
-	char					*arg2;
-	char					*arg3;
-	unsigned char			argument_type_code;
 	int						size;
 	unsigned char			*statement_buff;
 }				t_ass;
 
+typedef struct	s_statement 
+{
+	char	*opcode;
+	char	*arg1;
+	char	*arg2;
+	char	*arg3;
+}				t_statement;
+
+typedef	struct	s_instruction
+{
+	char		*label;
+	t_statement *statement;
+}				t_instruction;
 
 
 void			get_argument_type(t_ass *ass, char **arguments);
