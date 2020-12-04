@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:27 by gmolin            #+#    #+#             */
-/*   Updated: 2020/12/04 16:22:03 by seronen          ###   ########.fr       */
+/*   Updated: 2020/12/04 19:25:47 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@
 
 unsigned char		get_statement(char *statement)
 {
-	if (!ft_strcmp("sti", statement))
-		return 0x0b;
+	if (!ft_strcmp("live", statement))
+		return 0x01;
 	else if (!ft_strcmp("ld", statement))
 		return 0x02;
-	else if (!ft_strcmp("live", statement))
-		return 0x01;
 	else if (!ft_strcmp("st", statement))
 		return 0x03;
 	else if (!ft_strcmp("add", statement))
@@ -38,6 +36,8 @@ unsigned char		get_statement(char *statement)
 		return 0x09;
 	else if (!ft_strcmp("ldi", statement))
 		return 0x0a;
+	else if (!ft_strcmp("sti", statement))
+		return 0x0b;
 	else if (!ft_strcmp("fork", statement))
 		return 0x0c;
 	else if (!ft_strcmp("lld", statement))
@@ -49,5 +49,6 @@ unsigned char		get_statement(char *statement)
 	else if (!ft_strcmp("aff", statement))
 		return 0x10;
 	else
-		print_error(INVALID_STATEMENT);
+//		print_error(INVALID_STATEMENT);
+		return 0x0;
 }
