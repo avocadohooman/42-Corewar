@@ -37,6 +37,7 @@ typedef struct	s_ass
 	char					*arg3;
 	unsigned char			argument_type_code;
 	int						size;
+	unsigned char			*statement_buff;
 }				t_ass;
 
 
@@ -73,6 +74,7 @@ static void 	get_component_size(t_ass *ass, char **arguments)
 	}
 	//adding statemnt + arg type code
 	ass->size += 2;
+	ass->statement_buff = (unsigned char*)malloc(sizeof(unsigned char) * ass->size);
 	printf("%d\n", ass->size);
 }
 
@@ -99,6 +101,7 @@ static void		get_arguments(t_ass *ass)
 {
 
 	// 0x0b 0x68 0x01 0x00 0x07 0x00 0x01
+	
 }	
 	
 int main()
@@ -107,15 +110,24 @@ int main()
 	char 	*line = "sti r1, %:live, %1";
 	char 	**arguments;
 	t_ass 	ass;
+	unsigned char	*buff;
 
+	buff = (unsigned char*)malloc(sizeof(unsigned char) * 7);
+	buff[0] = 0x00;
+	buff[1] = 0x68;
+	buff[2] = 0x01;
+	buff[3] = 0x00;
+	buff[4] = 0x07;
+	buff[5] = 0x00;
+	buff[6] = 0x01;
 
-	arguments = ft_strsplit(line, ' ');
+	// arguments = ft_strsplit(line, ' ');
 
-	get_component_size(&ass, arguments);
-	printf("Statement code: %d\n", get_statement(arguments[0]));
-	get_argument_type(&ass, arguments);
-	printf("%x", ass.argument_type_code);
-	// int fd = open("bytecode", O_RDWR);
+	// get_component_size(&ass, arguments);
+	// printf("Statement code: %d\n", get_statement(arguments[0]));
+	// get_argument_type(&ass, arguments);
+	int fd = open("bytecode", O_RDWR, 0777);
 
-	// write(fd, &i, sizeof(int));
-}
+	write(fd, buff, 7);
+	close(fd);
+}	

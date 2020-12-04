@@ -18,11 +18,15 @@ int			main(int argc, char **argv)
 {
 	t_file	file;
 	int		bytes;
+	char 	*line = "sti r1, %:live, %1";
+	t_ass 	ass;
 
 	if (argc != 2 || !file_extension(argv[1], FILE_EXT))
 		print_error(INVALID_FILE);
 	file = read_file(argv[1]);
 	bytes = write_file(1, &file);
 	printf("wrote %d bytes\n", bytes);
+	// Here starts bytecode encoding prototype
+	
 	return (0);
 }
