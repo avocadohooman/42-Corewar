@@ -54,7 +54,7 @@ typedef	struct	s_instruction
 
 void			get_argument_type(t_ass *ass, char **arguments);
 void			get_arguments(t_ass *ass);
-void 			get_component_size(t_ass *ass, char **arguments);
-int 			get_statement(char *statement);
+void			get_component_size(t_ass *ass, t_statement *state);
+unsigned char 	get_statement(char *statement);
 
 #endif
