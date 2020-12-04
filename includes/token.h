@@ -35,6 +35,7 @@ typedef enum	e_type
 
 	COMMAND_NAME,
 	COMMAND_COMMENT,
+	COMMAND_UNKNOWN,
 
 	TOKEN_EOF,
 	TOKEN_IDENTIFIER,
@@ -57,23 +58,6 @@ typedef struct	s_token
 t_token			*init_token(t_type type, char *value);
 void			free_token(t_token **token);
 
-// static char		*g_opcode_table[17] = {
-// 	[OPCODE_LFORK] = LFORK_LITERAL,
-// 	[OPCODE_STI] = STI_LITERAL,
-// 	[OPCODE_FORK] = FORK_LITERAL,
-// 	[OPCODE_LLD] = LLD_LITERAL,
-// 	[OPCODE_LD] = LD_LITERAL,
-// 	[OPCODE_ADD] = ADD_LITERAL,
-// 	[OPCODE_ZJMP] = ZJMP_LITERAL,
-// 	[OPCODE_SUB] = SUB_LITERAL,
-// 	[OPCODE_LDI] = LDI_LITERAL,
-// 	[OPCODE_OR] = OR_LITERAL,
-// 	[OPCODE_ST] = ST_LITERAL,
-// 	[OPCODE_AFF] = AFF_LITERAL,
-// 	[OPCODE_LIVE] = LIVE_LITERAL,
-// 	[OPCODE_XOR] = XOR_LITERAL,
-// 	[OPCODE_LLDI] = LLDI_LITERAL,
-// 	[OPCODE_AND] = AND_LITERAL
-// };
+int				is_opcode(t_type type);
 
 #endif

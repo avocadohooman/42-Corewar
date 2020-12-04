@@ -12,17 +12,33 @@
 
 #include "asm.h"
 #include "file.h"
+#include "parser.h"
 #include <stdio.h> // delete
 
 int			main(int argc, char **argv)
 {
-	t_file	file;
-	int		bytes;
-
+	t_file		input_file;
+	t_file		output_file;
+	t_lexer		*lexer;
+	t_parser	*parser;
+	int			bytes;
+	
 	if (argc != 2 || !file_extension(argv[1], FILE_EXT))
 		print_error(INVALID_FILE);
-	file = read_file(argv[1]);
-	bytes = write_file(1, &file);
-	printf("wrote %d bytes\n", bytes);
+
+	input_file = read_file(argv[1]);
+	lexer = init_lexer(input_file.data, input_file.used);
+	parser = new_parser(lexer);
+	parser_parse(parser, NULL);
+
+
+
+
+	// bytes = write_file(1, &input_file);
+	// printf("wrote %d bytes\n", bytes);
+
+	// new_file(&output_file, 1024);
+	// insert_file(&output_file, "haha\n", 5);
+	// write_file(1, &output_file);
 	return (0);
 }

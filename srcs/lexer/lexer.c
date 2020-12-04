@@ -13,6 +13,7 @@
 #include "lexer.h"
 #include "opcodes.h"
 #include "op.h"
+#include <stdio.h>
 
 t_lexer			*init_lexer(char *data, size_t size)
 {
@@ -54,8 +55,10 @@ t_token			*lex_get_command(t_lexer *lexer)
 	char	*tmp;
 	int		len;
 
-	if (!(value = ft_memalloc(sizeof(char))))
+	if (!(value = ft_memalloc(sizeof(char) * 2)))
 		return (NULL);
+	value[0] = '.';
+	lex_advance(lexer);
 	while (ft_isalpha(lexer->c))
 	{
 		len = ft_strlen(value);
@@ -65,11 +68,10 @@ t_token			*lex_get_command(t_lexer *lexer)
 		value = tmp;
 		lex_advance(lexer);
 	}
-	lex_advance(lexer);
 	if (!(ft_memcmp(value, NAME_CMD_STRING, len + 2)))
 		return (init_token(COMMAND_NAME, value));
 	else if (!(ft_memcmp(value, COMMENT_CMD_STRING, len + 2)))
-		return (init_token(COMMAND_NAME, value));
+		return (init_token(COMMAND_COMMENT, value));
 	return (init_token(TOKEN_ILLEGAL, value));
 }
 
@@ -134,7 +136,7 @@ t_token			*lex_get_string(t_lexer *lexer)
 		len = ft_strlen(value);
 		if (!(tmp = realloc(value, len + 2)))
 			return (NULL);
-		ft_strlcat(tmp, &lexer->c, len + 2);
+		ft_strncat(tmp, &lexer->c, len + 2);
 		value = tmp;
 		lex_advance(lexer);
 	}
@@ -152,16 +154,33 @@ char			*char_to_string(char c)
 	return str;
 }
 
+t_token			*lex_get_newline(t_lexer *lexer)
+{
+	lex_advance(lexer);
+	if (lexer->c != 10)
+		return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
+	lex_advance(lexer);
+	return (init_token(TOKEN_NEWLINE, "\n"));
+}
+
+t_token			*lex_advance_with_token(t_lexer *lexer, t_token *token)
+{
+	lex_advance(lexer);
+	return (token);
+}
+
 t_token			*lex_get_operator(t_lexer *lexer)
 {
 	if (lexer->c == LABEL_CHAR)
-		return (init_token(TOKEN_COLON, char_to_string(lexer->c)));
+		return (lex_advance_with_token(lexer, init_token(TOKEN_COLON, char_to_string(lexer->c))));
 	if (lexer->c == DIRECT_CHAR)
-		return (init_token(TOKEN_DIRECT, char_to_string(lexer->c)));
+		return (lex_advance_with_token(lexer, init_token(TOKEN_DIRECT, char_to_string(lexer->c))));
 	if (lexer->c == SEPARATOR_CHAR)
-		return (init_token(TOKEN_SEPARATOR, char_to_string(lexer->c)));
-	if (lexer->c == NEWLINE_CHAR && ++(lexer->line_number))
-		return (init_token(TOKEN_NEWLINE, char_to_string(lexer->c)));
+		return (lex_advance_with_token(lexer, init_token(TOKEN_SEPARATOR, char_to_string(lexer->c))));
+	if (lexer->c == 13)
+		return (lex_get_newline(lexer));
+	// if (lexer->c == NEWLINE_CHAR && ++(lexer->line_number))
+	// 	return (init_token(TOKEN_NEWLINE, char_to_string(lexer->c)));
 	return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
 }
 

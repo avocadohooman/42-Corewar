@@ -25,7 +25,19 @@ typedef struct	s_parser
 t_parser		*new_parser(t_lexer *lexer);
 void			free_parser(t_parser **parser);
 
-void			parser_parse(t_parser *parser, char *data);
 void			parser_consume(t_parser *parser, t_type type);
+
+
+
+void			parser_parse(t_parser *parser, char *data);
+
+void			parser_parse_header(t_parser *parser);
+void			parser_parse_command(t_parser *parser);
+
+void			parser_parse_instruction(t_parser *parse);
+void			parser_parse_statement(t_parser *parser);
+void			parser_parse_label(t_parser *parser);
+void			parser_parse_opcode(t_parser *parser);
+void			parser_parse_arguments(t_parser *parser);
 
 #endif

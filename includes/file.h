@@ -31,6 +31,4 @@ t_file			read_file(char *filename);
 int				write_file(int fd, t_file *file);
 int				file_extension(char *filename, char *expected_extension);
 
-
-
 #endif
