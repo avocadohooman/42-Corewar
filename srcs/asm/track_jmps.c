@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 15:55:47 by seronen           #+#    #+#             */
-/*   Updated: 2020/12/05 14:40:58 by seronen          ###   ########.fr       */
+/*   Updated: 2020/12/05 14:53:48 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void        track_jmps(t_ass *ass, t_instruction *ins)
 	t_track *tmp;
 
 	bytes += get_component_size(ass, ins->statement);
+	if (ins->label)
+		new_tracker(ass, ins->label);
 	tmp = ass->track;
 	while (tmp)
 	{
