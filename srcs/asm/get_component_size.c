@@ -3,38 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   get_component_size.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:01 by gmolin            #+#    #+#             */
-/*   Updated: 2020/12/04 16:47:49 by seronen          ###   ########.fr       */
+/*   Updated: 2020/12/05 16:10:54 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include "file.h"
 #include <stdio.h> // delete
-
-int				check_dir_size(char *opcode)
+#include "../op.c"
+/*
+int		op_table_redefined[17][3] =
 {
-	if (!strcmp(opcode, "zjmp") || !ft_strcmp(opcode, "ldi") ||
-		!ft_strcmp(opcode, "sti") || !ft_strcmp(opcode, "fork") ||
-		!ft_strcmp(opcode, "lldi") || !ft_strcmp(opcode, "lfork"))
-		return 2;
-	else
-		return 4;
+	{0x01, 0, 4},
+	{0x02, 1, 4},
+	{0x03, 1, 4},
+	{0x04, 1, 4},
+	{0x05, 1, 4},
+	{0x06, 1, 4},
+	{0x07, 1, 4},
+	{0x08, 1, 4},
+	{0x09, 0, 2},
+	{0x0a, 1, 2},
+	{0x0b, 1, 2},
+	{0x0c, 0, 2},
+	{0x0d, 1, 4},
+	{0x0e, 1, 2},
+	{0x0f, 0, 2},
+	{0x10, 1, 4},
+	{0, 0, 0}
+};
+*/
+static int				fetch_index(unsigned char code)
+{
+	int		i;
+
+	i = 0;
+	while (i < 17)
+	{
+		if (op_table_redefined[i][0] == code)
+			return i;
+		else if (op_table_redefined[i][0] == 0)
+			return 100;
+		i++;
+	}
+	return 100;
 }
 
-int				check_arg_type_code(char *opcode)
-{
-	if (!strcmp(opcode, "live") || !ft_strcmp(opcode, "zjmp") ||
-		!ft_strcmp(opcode, "fork") || ft_strcmp(opcode, "fork") ||
-		!ft_strcmp(opcode, "lfork"))
-		return 0;
-	else
-		return 1;
-}
-
-int				component_type_size(char *arg, int dir_size)
+static int				component_type_size(char *arg, int dir_size)
 {
 	if (!arg)
 		return 0;
@@ -46,22 +64,31 @@ int				component_type_size(char *arg, int dir_size)
 		return 2;
 	else
 		printf("asm/get_component_size.c : Could not fetch arg size for %s!", arg);
+		return 0;
 }
 
-void			get_component_size(t_ass *ass, t_statement *state)
+int				get_component_size(t_ass *ass, t_statement *state)
 {
-	int dir_size;
+	int				dir_size;
+	unsigned char	statement;
+	int				index;
+	int				i;
 
-	ass->size = 1; // statement code
-	ass->size += check_arg_type_code(state->opcode);
-
-	dir_size = check_dir_size(state->opcode);
-
-	ass->size += component_type_size(state->arg1, dir_size);
-	ass->size += component_type_size(state->arg2, dir_size);
-	ass->size += component_type_size(state->arg3, dir_size);
-	
+	i = 0;
+	ass->size = 1;
+	statement = get_statement(state->opcode);
+	index = fetch_index(statement);
+	if (index == 100)
+		printf("Index not found for %s!\n", state->opcode);
+	ass->size += op_table_redefined[index][1];
+	dir_size = op_table_redefined[index][2];
+	while (i < state->number_arg)
+	{
+		ass->size += component_type_size(state->arguments[i], dir_size);
+		i++;
+	}
 	ass->statement_buff = (unsigned char*)malloc(sizeof(unsigned char) * ass->size);
-	ass->statement_buff[0] = get_statement(state->opcode);
+	ass->statement_buff[0] = statement;
 	printf("Statement final size = %d\n", ass->size);
+	return ass->size;
 }
