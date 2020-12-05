@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 15:55:47 by seronen           #+#    #+#             */
-/*   Updated: 2020/12/05 15:02:09 by gmolin           ###   ########.fr       */
+/*   Updated: 2020/12/05 17:17:30 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ t_track     *new_tracker(t_ass *ass, char *label)
 	return new; 
 }
 
-int			fetch_jmp(t_track *head, char *key)
+int			fetch_jmp(t_track *head, char *key, int current_size)
 {
 	t_track *tmp;
 
 	tmp = head;
 	while (tmp)
 	{
-		if (ft_strcmp(key, tmp->label))
-			return tmp->jmp_bytes * -1;
+		if (!ft_strcmp(key, tmp->label))
+			return ((tmp->jmp_bytes - current_size) * -1);
 		tmp = tmp->next;
 	}
 	return 0;
@@ -53,16 +53,15 @@ int			fetch_jmp(t_track *head, char *key)
 
 void        track_jmps(t_ass *ass, t_instruction *ins)
 {
-	int     bytes;
 	t_track *tmp;
 
-	bytes += get_component_size(ass, ins->statement);
+	get_component_size(ass, ins->statement);
 	if (ins->label)
 		new_tracker(ass, ins->label);
 	tmp = ass->track;
 	while (tmp)
 	{
-		tmp->jmp_bytes += bytes;
+		tmp->jmp_bytes += ass->size;
 		tmp = tmp->next;
 	}
 }

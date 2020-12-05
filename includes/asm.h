@@ -43,6 +43,8 @@ typedef struct				s_ass
 	int						size;
 	unsigned char			*statement_buff;
 	unsigned char			argument_type;
+	int						buff_slot;
+	struct	s_ass			*next;
 	t_track					*track;
 }							t_ass;
 
@@ -62,11 +64,11 @@ typedef	struct				s_instruction
 	struct s_instruction	*next;
 }							t_instruction;
 
-void			get_argument_type(t_ass *ass, t_instruction *instruction);
-void			get_arguments(t_ass *ass, t_instruction *instruction);
-int				get_component_size(t_ass *ass, t_statement *state);
-unsigned char 	get_statement(char *statement);
-int				fetch_jmp(t_track *head, char *key);
-void        	track_jmps(t_ass *ass, t_instruction *ins);
+void						get_argument_type(t_ass *ass, t_instruction *instruction);
+void						get_arguments(t_ass *ass, t_instruction *instruction);
+void						get_component_size(t_ass *ass, t_statement *state);
+unsigned char 				get_statement(char *statement);
+int							fetch_jmp(t_track *head, char *key, int current_size);
+void        				track_jmps(t_ass *ass, t_instruction *ins);
 
 #endif
