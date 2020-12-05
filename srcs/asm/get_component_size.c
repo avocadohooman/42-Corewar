@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:01 by gmolin            #+#    #+#             */
-/*   Updated: 2020/12/04 19:32:29 by seronen          ###   ########.fr       */
+/*   Updated: 2020/12/05 14:24:32 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int				component_type_size(char *arg, int dir_size)
 		return 0;
 }
 
-void			get_component_size(t_ass *ass, t_statement *state)
+int				get_component_size(t_ass *ass, t_statement *state)
 {
 	int				dir_size;
 	unsigned char	statement;
@@ -89,4 +89,5 @@ void			get_component_size(t_ass *ass, t_statement *state)
 	ass->statement_buff = (unsigned char*)malloc(sizeof(unsigned char) * ass->size);
 	ass->statement_buff[0] = statement;
 	printf("Statement final size = %d\n", ass->size);
+	return ass->size;
 }
