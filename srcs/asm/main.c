@@ -88,6 +88,7 @@ int			main(int argc, char **argv)
 
 	tmp = instruction;
 	ass.buff_slot = 0;
+	int fd = open("bytecode", O_RDWR, 0777);
 	while (tmp)
 	{
 		track_jmps(&ass, tmp);
@@ -102,8 +103,9 @@ int			main(int argc, char **argv)
 		printf("\n------\n\n");
 		ass.buff_slot = 0;
 		tmp = tmp->next;
+		write(fd, ass.statement_buff, ass.size);
 	}
-
+	close(fd);
 	// if (argc != 2 || !file_extension(argv[1], FILE_EXT))
 	// 	print_error(INVALID_FILE);
 	// file = read_file(argv[1]);
