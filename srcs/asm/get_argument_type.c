@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:58 by gmolin            #+#    #+#             */
-/*   Updated: 2020/12/04 18:21:19 by gmolin           ###   ########.fr       */
+/*   Updated: 2020/12/05 14:54:09 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		get_argument_type(t_ass *ass, t_instruction *instruction)
 			ass->argument_type |= 1UL << (6 - (i + i));
 		else if (ft_strchr(instruction->statement->arguments[i], '%'))
 			ass->argument_type |= 1UL << (7 - (i + i));
-		else if (ft_strchr(instruction->statement->arguments[i], '-'))
+		else
 		{
 			ass->argument_type |= 1UL << (7 - (i + i));
 			ass->argument_type |= 1UL << (6 - (i + i));

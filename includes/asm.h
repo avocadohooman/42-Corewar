@@ -42,12 +42,14 @@ typedef struct				s_statement
 	char					**arguments;
 	bool					arg_type_req;
 	int						number_arg;
+	int						t_dir;
 }							t_statement;
 
 typedef	struct				s_instruction
 {
 	char					*label;
 	t_statement 			*statement;
+	struct s_instruction	*next;
 }							t_instruction;
 
 

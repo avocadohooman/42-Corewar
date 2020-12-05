@@ -38,6 +38,7 @@ int			main(int argc, char **argv)
 	example.statement->arguments[2] = "%1";
 	example.statement->arg_type_req = true;
 	example.statement->number_arg = 3;
+	example.statement->t_dir = 2;
 	ass.size = 7;
 
 	// if (argc != 2 || !file_extension(argv[1], FILE_EXT))
