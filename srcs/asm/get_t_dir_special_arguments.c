@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 15:43:04 by gmolin            #+#    #+#             */
-/*   Updated: 2020/12/06 17:17:26 by gmolin           ###   ########.fr       */
+/*   Updated: 2020/12/06 17:40:40 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 static int			handle_zjump(t_ass *ass, char *t_dir_arg, int t_dir_size)
 {
 	int bytes;
+	char *trimmed_arg;
 
-	char *trimmed_arg = ft_strchr(t_dir_arg, ':');
+	trimmed_arg = ft_strchr(t_dir_arg, ':');
 	bytes = fetch_jmp(ass->track, &trimmed_arg[1], ass->size);
 	return bytes;
 }
