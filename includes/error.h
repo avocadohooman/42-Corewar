@@ -21,7 +21,8 @@ typedef enum	e_error_type
 	INVALID_TOKEN,
 	INVALID_FILE,
 	BUFFER,
-	GET_NEXT_LINE
+	GET_NEXT_LINE,
+	INVALID_STATEMENT
 }				t_error_type;
 
 void			print_error(t_error_type type);
