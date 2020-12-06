@@ -22,7 +22,7 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/lexer/lexer.c srcs/token/token.c srcs/parser/parser.c \
 		srcs/error.c \
 		srcs/asm/get_argument_type.c srcs/asm/get_arguments.c srcs/asm/get_component_size.c \
-		srcs/asm/get_statement.c srcs/asm/track_jmps.c
+		srcs/asm/get_statement.c srcs/asm/track_jmps.c srcs/asm/get_t_dir_special_arguments.c
 
 INCL = ./includes
 LIBFT = ./libft

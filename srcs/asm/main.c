@@ -94,6 +94,7 @@ int			main(int argc, char **argv)
 		track_jmps(&ass, tmp);
 		get_argument_type(&ass, tmp);
 		printf("\nInstruction ByteCode: \n");
+		get_arguments(&ass, tmp->statement);
 		i = 0;
 		while (i < ass.buff_slot)
 		{
@@ -112,7 +113,6 @@ int			main(int argc, char **argv)
 	// bytes = write_file(1, &file);
 	// printf("wrote %d bytes\n", bytes);
 	// Here starts bytecode encoding protot
-	get_arguments(&ass, instruction);
 	printf("Amount of bytes to jump %d\n", fetch_jmp(ass.track, "loop", ass.size));
 	return (0);
 }

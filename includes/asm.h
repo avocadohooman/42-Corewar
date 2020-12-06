@@ -65,7 +65,8 @@ typedef	struct				s_instruction
 }							t_instruction;
 
 void						get_argument_type(t_ass *ass, t_instruction *instruction);
-void						get_arguments(t_ass *ass, t_instruction *instruction);
+void						get_arguments(t_ass *ass, t_statement *statement);
+int							handle_t_dir_special(t_ass *ass, t_statement *statement, char *t_dir_arg, int t_dir_size);
 void						get_component_size(t_ass *ass, t_statement *state);
 unsigned char 				get_statement(char *statement);
 int							fetch_jmp(t_track *head, char *key, int current_size);
