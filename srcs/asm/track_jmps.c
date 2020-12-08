@@ -6,13 +6,13 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 15:55:47 by seronen           #+#    #+#             */
-/*   Updated: 2020/12/05 20:51:26 by gmolin           ###   ########.fr       */
+/*   Updated: 2020/12/08 16:04:01 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-t_track     *trackadd(t_track **alst, t_track *new)
+void		trackadd(t_track **alst, t_track *new)
 {
 	if (*alst && new)
 	{
@@ -23,21 +23,20 @@ t_track     *trackadd(t_track **alst, t_track *new)
 		*alst = new;
 }
 
-t_track     *new_tracker(t_ass *ass, char *label)
+t_track     *new_tracker(t_ass *ass, char *label, int pos)
 {
 	t_track *new;
 
 	if (!(new = (t_track*)malloc(sizeof(t_track))))
 		return NULL;
-	new->jmp_bytes = 0;
-	new->labelnb = 0;
+	new->label_start = pos;
 	new->label = label;
 	new->next = NULL;
 	trackadd(&ass->track, new);
 	return new; 
 }
 
-int			fetch_jmp(t_track *head, char *key, int current_size)
+int			fetch_jmp(t_track *head, char *key, int from)
 {
 	t_track *tmp;
 
@@ -45,7 +44,9 @@ int			fetch_jmp(t_track *head, char *key, int current_size)
 	while (tmp)
 	{
 		if (!ft_strcmp(key, tmp->label))
-			return ((tmp->jmp_bytes - current_size) * -1);
+		{
+			return (tmp->label_start - from);
+		}
 		tmp = tmp->next;
 	}
 	return 0;
@@ -53,15 +54,18 @@ int			fetch_jmp(t_track *head, char *key, int current_size)
 
 void        track_jmps(t_ass *ass, t_instruction *ins)
 {
-	t_track *tmp;
+	t_instruction *tmp;
+	int pos;
 
-	get_component_size(ass, ins->statement);
-	if (ins->label)
-		new_tracker(ass, ins->label);
-	tmp = ass->track;
+	pos = 0;
+	tmp = ins;
 	while (tmp)
 	{
-		tmp->jmp_bytes += ass->size;
+		get_component_size(ass, tmp->statement, false);
+		if (tmp->label)
+			new_tracker(ass, tmp->label, pos);
+		tmp->statement->pos = pos;
+		pos += ass->size;
 		tmp = tmp->next;
 	}
 }

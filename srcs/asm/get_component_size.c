@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:01 by gmolin            #+#    #+#             */
-/*   Updated: 2020/12/06 15:33:20 by gmolin           ###   ########.fr       */
+/*   Updated: 2020/12/08 15:42:51 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int				component_type_size(char *arg, int dir_size)
 		return 0;
 }
 
-void				get_component_size(t_ass *ass, t_statement *state)
+void				get_component_size(t_ass *ass, t_statement *state, bool write)
 {
 	int				dir_size;
 	unsigned char	statement;
@@ -82,14 +82,25 @@ void				get_component_size(t_ass *ass, t_statement *state)
 		printf("Index not found for %s!\n", state->opcode);
 	ass->size += op_table_redefined[index][1];
 	dir_size = op_table_redefined[index][2];
+
+	// Set dir size and need of arg type code
+
+	state->t_dir = dir_size;
+	if (op_table_redefined[index][1] == 1)
+		state->arg_type_req = true;
+	else
+		state->arg_type_req = false;
 	while (i < state->number_arg)
 	{
 		ass->size += component_type_size(state->arguments[i], dir_size);
 		i++;
 	}
-	printf("Statement final size = %d\n", ass->size);
-	ass->statement_buff = (unsigned char*)malloc(sizeof(unsigned char) * ass->size);
-	ass->statement_buff[ass->buff_slot] = statement;
-	printf("Statement Bytecode = 0x%.2x\n", ass->statement_buff[ass->buff_slot]);
-	ass->buff_slot++;
+	if (write)
+	{
+		printf("Statement final size = %d\n", ass->size);
+		ass->statement_buff = (unsigned char*)malloc(sizeof(unsigned char) * ass->size);
+		ass->statement_buff[ass->buff_slot] = statement;
+		printf("Statement Bytecode = 0x%.2x\n", ass->statement_buff[ass->buff_slot]);
+		ass->buff_slot++;
+	}
 }
