@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arguments.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:57:33 by gmolin            #+#    #+#             */
-/*   Updated: 2020/12/08 14:16:28 by seronen          ###   ########.fr       */
+/*   Updated: 2020/12/08 15:33:15 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,16 @@
 
 static void		handle_t_ind(t_ass *ass, char *t_ind_arg)
 {
-	short bytes;
+	short 	bytes;
+	char 	*trimmed_arg;
 
-	bytes = ft_atoi(t_ind_arg);
+	if (ft_strchr(t_ind_arg, ':'))
+	{
+		trimmed_arg = ft_strchr(t_ind_arg, ':');
+		bytes = ft_atoi(&t_ind_arg[1]);
+	}
+	else
+		bytes = ft_atoi(t_ind_arg);
 	ass->statement_buff[ass->buff_slot] = ((unsigned char*)&bytes)[1];
 	ass->buff_slot++;
 	ass->statement_buff[ass->buff_slot] = ((unsigned char*)&bytes)[0];
@@ -29,10 +36,15 @@ static void		handle_t_ind(t_ass *ass, char *t_ind_arg)
 static void		handle_t_dir(t_ass *ass, t_statement *statement, char *t_dir_arg)
 {
 	int				bytes;
+	char 			*trimmed_arg;
 
-	bytes = ft_atoi(ft_strchr(t_dir_arg, '%') + 1);
-	if (!ft_strcmp(statement->opcode, "zjmp") || ft_strstr(t_dir_arg, "live"))
-		bytes = handle_t_dir_special(ass, statement, t_dir_arg, statement->t_dir);
+	if (ft_strchr(t_dir_arg, ':'))
+	{
+		trimmed_arg = ft_strchr(t_dir_arg, ':');
+		bytes = handle_t_dir_label(ass, statement, &trimmed_arg[1], statement->pos);
+	}
+	else
+		bytes = ft_atoi(ft_strchr(t_dir_arg, '%') + 1);
 	if (statement->t_dir == 4)
 	{
 		ass->statement_buff[ass->buff_slot] = ((unsigned char*)&bytes)[3];

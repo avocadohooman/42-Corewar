@@ -38,7 +38,7 @@ int			main(int argc, char **argv)
 	}
 
 	instruction->statement->arguments[0] = ft_strdup("r1,");
-	instruction->statement->arguments[1] = ft_strdup("%:live,");
+	instruction->statement->arguments[1] = ft_strdup("%:live");
 	instruction->statement->arguments[2] = ft_strdup("%1");
 	//instruction->statement->arg_type_req = true;
 	instruction->statement->number_arg = 3;
@@ -48,6 +48,7 @@ int			main(int argc, char **argv)
     //     live %0
 	instruction->next = (t_instruction *)malloc(sizeof(t_instruction));
 	instruction->next->statement =  (t_statement *)malloc(sizeof(t_statement));
+	instruction->next->label = ft_strdup("live:");
 	instruction->next->statement->opcode = ft_strdup("live");
 	instruction->next->statement->opcode = "live";
 	instruction->next->statement->arguments = (char **)malloc(sizeof(char *) * 1);
@@ -61,7 +62,7 @@ int			main(int argc, char **argv)
     // ld  %0, r2
 	instruction->next->next = (t_instruction *)malloc(sizeof(t_instruction));
 	instruction->next->next->statement =  (t_statement *)malloc(sizeof(t_statement));
-	instruction->next->next->label = "";
+	instruction->next->next->label = 0;
 	instruction->next->next->statement = (t_statement *)malloc(sizeof(t_statement));
 	instruction->next->next->statement->opcode = ft_strdup("ld");
 	instruction->next->next->statement->arguments = (char **)malloc(sizeof(char *) * 2);
@@ -74,7 +75,7 @@ int			main(int argc, char **argv)
 	// zjmp%: loop
 	instruction->next->next->next = (t_instruction *)malloc(sizeof(t_instruction));
 	instruction->next->next->next->statement =  (t_statement *)malloc(sizeof(t_statement));
-	instruction->next->next->next->label = "";
+	instruction->next->next->next->label = 0;
 	instruction->next->next->next->statement->opcode = ft_strdup("zjmp");
 	instruction->next->next->next->statement->arguments = (char **)malloc(sizeof(char *) * 1);
 	instruction->next->next->next->statement->arguments[0] = ft_strdup("%:loop");
@@ -92,6 +93,7 @@ int			main(int argc, char **argv)
 	track_jmps(&ass, instruction);
 	while (tmp)
 	{
+		get_component_size(&ass, tmp->statement, true);
 		get_argument_type(&ass, tmp);
 		printf("\nInstruction ByteCode: \n");
 		get_arguments(&ass, tmp->statement);

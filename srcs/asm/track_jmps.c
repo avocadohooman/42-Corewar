@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   track_jmps.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 15:55:47 by seronen           #+#    #+#             */
-/*   Updated: 2020/12/08 14:31:39 by seronen          ###   ########.fr       */
+/*   Updated: 2020/12/08 16:04:01 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ int			fetch_jmp(t_track *head, char *key, int from)
 	t_track *tmp;
 
 	tmp = head;
-	printf("fetch pos from %d\n", from);
 	while (tmp)
 	{
 		if (!ft_strcmp(key, tmp->label))
+		{
 			return (tmp->label_start - from);
+		}
 		tmp = tmp->next;
 	}
 	return 0;
@@ -60,7 +61,7 @@ void        track_jmps(t_ass *ass, t_instruction *ins)
 	tmp = ins;
 	while (tmp)
 	{
-		get_component_size(ass, tmp->statement);
+		get_component_size(ass, tmp->statement, false);
 		if (tmp->label)
 			new_tracker(ass, tmp->label, pos);
 		tmp->statement->pos = pos;

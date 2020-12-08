@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_component_size.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:01 by gmolin            #+#    #+#             */
-/*   Updated: 2020/12/08 13:52:37 by seronen          ###   ########.fr       */
+/*   Updated: 2020/12/08 15:42:51 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int				component_type_size(char *arg, int dir_size)
 		return 0;
 }
 
-void				get_component_size(t_ass *ass, t_statement *state)
+void				get_component_size(t_ass *ass, t_statement *state, bool write)
 {
 	int				dir_size;
 	unsigned char	statement;
@@ -95,9 +95,12 @@ void				get_component_size(t_ass *ass, t_statement *state)
 		ass->size += component_type_size(state->arguments[i], dir_size);
 		i++;
 	}
-	printf("Statement final size = %d\n", ass->size);
-	ass->statement_buff = (unsigned char*)malloc(sizeof(unsigned char) * ass->size);
-	ass->statement_buff[ass->buff_slot] = statement;
-	printf("Statement Bytecode = 0x%.2x\n", ass->statement_buff[ass->buff_slot]);
-	ass->buff_slot++;
+	if (write)
+	{
+		printf("Statement final size = %d\n", ass->size);
+		ass->statement_buff = (unsigned char*)malloc(sizeof(unsigned char) * ass->size);
+		ass->statement_buff[ass->buff_slot] = statement;
+		printf("Statement Bytecode = 0x%.2x\n", ass->statement_buff[ass->buff_slot]);
+		ass->buff_slot++;
+	}
 }
