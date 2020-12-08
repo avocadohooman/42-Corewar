@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_component_size.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:01 by gmolin            #+#    #+#             */
-/*   Updated: 2020/12/06 15:33:20 by gmolin           ###   ########.fr       */
+/*   Updated: 2020/12/08 13:52:37 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,14 @@ void				get_component_size(t_ass *ass, t_statement *state)
 		printf("Index not found for %s!\n", state->opcode);
 	ass->size += op_table_redefined[index][1];
 	dir_size = op_table_redefined[index][2];
+
+	// Set dir size and need of arg type code
+
+	state->t_dir = dir_size;
+	if (op_table_redefined[index][1] == 1)
+		state->arg_type_req = true;
+	else
+		state->arg_type_req = false;
 	while (i < state->number_arg)
 	{
 		ass->size += component_type_size(state->arguments[i], dir_size);
