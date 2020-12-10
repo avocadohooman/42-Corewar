@@ -48,7 +48,7 @@ int			main(int argc, char **argv)
     //     live %0
 	instruction->next = (t_instruction *)malloc(sizeof(t_instruction));
 	instruction->next->statement =  (t_statement *)malloc(sizeof(t_statement));
-	instruction->next->label = ft_strdup("live:");
+	instruction->next->label = ft_strdup("live");
 	instruction->next->statement->opcode = ft_strdup("live");
 	instruction->next->statement->opcode = "live";
 	instruction->next->statement->arguments = (char **)malloc(sizeof(char *) * 1);
