@@ -25,7 +25,8 @@ t_lexer			*init_lexer(char *data, size_t size)
 	lexer->size = size;
 	lexer->index = 0;
 	lexer->c = data[0];
-	lexer->line_number = 0;
+	lexer->line_number = 1;
+	lexer->column = 1;
 }
 
 void			lex_advance(t_lexer *lexer)
@@ -34,7 +35,37 @@ void			lex_advance(t_lexer *lexer)
 	{
 		lexer->index++;
 		lexer->c = lexer->data[lexer->index];
+		lexer->column++;
 	}
+}
+
+void			lex_retreat(t_lexer *lexer)
+{
+	if (lexer->index > 0)
+	{
+		lexer->index--;
+		lexer->c = lexer->data[lexer->index];
+		lexer->column--;
+	}
+}
+
+int				lex_lookahead(t_lexer *lexer, char c)
+{
+	char	next;
+
+	lex_advance(lexer);
+	next = lexer->c;
+	lex_retreat(lexer);
+	if (c == next)
+		return (1);
+	return (0);
+}
+
+int				is_label_char(char c)
+{
+	if (ft_strchr(LABEL_CHARS, c))
+		return (1);
+	return (0);
 }
 
 void			lex_skip_whitespace(t_lexer *lexer)
@@ -45,7 +76,7 @@ void			lex_skip_whitespace(t_lexer *lexer)
 
 void			lex_skip_comment(t_lexer *lexer)
 {
-	while (lexer->c != '\n')
+	while (lexer->c != 13)
 		lex_advance(lexer);
 }
 
@@ -68,11 +99,13 @@ t_token			*lex_get_command(t_lexer *lexer)
 		value = tmp;
 		lex_advance(lexer);
 	}
-	if (!(ft_memcmp(value, NAME_CMD_STRING, len + 2)))
-		return (init_token(COMMAND_NAME, value));
-	else if (!(ft_memcmp(value, COMMENT_CMD_STRING, len + 2)))
-		return (init_token(COMMAND_COMMENT, value));
-	return (init_token(TOKEN_ILLEGAL, value));
+	return (init_token(TOKEN_COMMAND, value));
+	// return TOKEN_COMMAND istead?
+	// if (!(ft_memcmp(value, NAME_CMD_STRING, len + 2)))
+	// 	return (init_token(COMMAND_NAME, value));
+	// else if (!(ft_memcmp(value, COMMENT_CMD_STRING, len + 2)))
+	// 	return (init_token(COMMAND_COMMENT, value));
+	// return (init_token(TOKEN_ILLEGAL, value));
 }
 
 // the order of the opcode_table and t_type enums are now dependent
@@ -94,14 +127,14 @@ t_token			*lex_get_keyword(char *value, size_t size)
 	while (opcode_table[i])
 	{
 		if (!ft_memcmp(value, opcode_table[i], size))
-			return (init_token(i, value));
+			return (init_token(TOKEN_OPERATION, value));
 		i++;
 	}
 	return (init_token(TOKEN_IDENTIFIER, value));
 }
 
 // might need to exclude capital chars here.. if label
-// and identifier is supposed to be the same thing..?? struggless
+// and identifier is supposed to be the same thing..??
 t_token			*lex_get_identifier(t_lexer *lexer)
 {
 	char	*value;
@@ -160,11 +193,15 @@ t_token			*lex_get_newline(t_lexer *lexer)
 	if (lexer->c != 10)
 		return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
 	lex_advance(lexer);
-	return (init_token(TOKEN_NEWLINE, "\n"));
+	lexer->line_number++;
+	lexer->column = 1;
+	return (init_token(TOKEN_NEWLINE, "\\n"));
 }
 
 t_token			*lex_advance_with_token(t_lexer *lexer, t_token *token)
 {
+	// if (token->type == TOKEN_NEWLINE)
+	// 	lex_advance(lexer);
 	lex_advance(lexer);
 	return (token);
 }
@@ -182,6 +219,8 @@ t_token			*lex_get_operator(t_lexer *lexer)
 				init_token(TOKEN_SEPARATOR, char_to_string(lexer->c))));
 	if (lexer->c == 13)
 		return (lex_get_newline(lexer));
+		// return (lex_advance_with_token(lexer,
+		// 		init_token(TOKEN_NEWLINE, char_to_string(lexer->c))));
 	return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
 }
 

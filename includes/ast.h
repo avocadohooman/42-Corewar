@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/01 21:03:11 by npimenof          #+#    #+#             */
-/*   Updated: 2020/12/01 21:23:10 by npimenof         ###   ########.fr       */
+/*   Created: 2021/01/12 13:43:24 by npimenof          #+#    #+#             */
+/*   Updated: 2021/01/12 13:45:42 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
-# include "libft.h"
-# include "token.h"
+enum {
+    OPCODE
+};
 
-typedef struct	s_lexer
+typedef struct  s_ast
 {
-	char 		*data;
-	char		c;
-	size_t		size;
-	size_t		index;
-	size_t		line_number;
-	size_t		column;
-}				t_lexer;
-
-t_lexer			*init_lexer(char *data, size_t size);
-void			free_lexer(t_lexer **lexer);
-
-t_token			*lex_get_next_token(t_lexer *lexer);
-void			lex_advance(t_lexer *lexer);
-
-#endif
-
+    int         type;
+    char        *opcode;
+    char        **args;
+    char        *command;
+    char        *command_string;
+}               t_ast;

@@ -23,6 +23,7 @@ typedef struct	s_parser
 }				t_parser;
 
 typedef void	(*t_opcode_parse)(t_parser *parser);
+typedef void	(*t_command)(t_parser *parser);
 
 t_parser		*new_parser(t_lexer *lexer);
 void			free_parser(t_parser **parser);
@@ -30,6 +31,9 @@ void			free_parser(t_parser **parser);
 void			parser_consume(t_parser *parser, t_type type);
 
 void			parser_parse(t_parser *parser, char *data);
+
+void			parser_parse_body_statements(t_parser *parser);
+void			parser_parse_header_statements(t_parser *parser);
 
 void			parser_parse_header(t_parser *parser);
 void			parser_parse_command(t_parser *parser);
@@ -57,5 +61,8 @@ void            parser_parse_live(t_parser *parser);
 void            parser_parse_xor(t_parser *parser);
 void            parser_parse_lldi(t_parser *parser);
 void            parser_parse_and(t_parser *parser);
+
+void			parser_parse_command_name(t_parser *parser);
+void			parser_parse_command_comment(t_parser *parser);
 
 #endif
