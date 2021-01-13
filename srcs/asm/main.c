@@ -25,7 +25,7 @@ int         check_registry(char *string)
     {
         if (len == 2 && string[1] != '0' && ft_isdigit(string[1]))
             return (1);
-        else if (len == 3 && ft_atoi(&string[1]) != 0)
+        else if (len == 3 && ft_atoi(&string[1]) != 0 && ft_atoi(&string[2]) != 0)
             return (1);
     }
     return (0);
@@ -69,7 +69,7 @@ int			main(int argc, char **argv)
 	lexer = init_lexer(input_file.data, input_file.used);
 	parser = new_parser(lexer);
 	parser_parse(parser, NULL);
-    printf("check registry: %d\ncheck dir || ind value: %d\n", check_registry("r10"), check_dir_ind("-0000000000000000000000000000000000000000000021343"));
+    printf("check registry: %d\ncheck dir || ind value: %d\n", check_registry("r-1"), check_dir_ind("-0000000000000000000000000000000000000000000021343"));
 
 	// bytes = write_file(1, &input_file);
 	// printf("wrote %d bytes\n", bytes);
