@@ -15,6 +15,45 @@
 #include "parser.h"
 #include <stdio.h> // delete
 
+
+int         check_registry(char *string) 
+{
+    int len;
+
+    len = ft_strlen(string);
+    if (string[0] == 'r' && !ft_strchr(string, '-'))
+    {
+        if (len == 2 && string[1] != '0' && ft_isdigit(string[1]))
+            return (1);
+        else if (len == 3 && ft_atoi(&string[1]) != 0)
+            return (1);
+    }
+    return (0);
+}
+
+int         check_dir_ind(char *string)
+{
+    int     i;
+    int     zeros;
+
+    i = 0;
+    zeros = 0;
+    while (string[i]) 
+    {
+        if (string[i] == '0')
+            zeros++;
+        i++;
+    }
+    if (string[0] == '-') 
+    {
+         if (ft_atoi(string) && (ft_strlen(&string[1]) == zeros + ft_ndigits(ft_atoi(string))))
+            return (1);
+    }
+    else if (ft_atoi(string) && (ft_strlen(string) == zeros + ft_ndigits(ft_atoi(string))))
+        return (1);
+    return (0);
+}
+
 int			main(int argc, char **argv)
 {
 	t_file		input_file;
@@ -30,9 +69,7 @@ int			main(int argc, char **argv)
 	lexer = init_lexer(input_file.data, input_file.used);
 	parser = new_parser(lexer);
 	parser_parse(parser, NULL);
-
-
-
+    printf("check registry: %d\ncheck dir || ind value: %d\n", check_registry("r10"), check_dir_ind("-0000000000000000000000000000000000000000000021343"));
 
 	// bytes = write_file(1, &input_file);
 	// printf("wrote %d bytes\n", bytes);
