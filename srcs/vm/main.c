@@ -40,14 +40,8 @@
 
 */
 
-int     main(int ac, char **av)
+void	print_info(t_vm *vm)
 {
-	t_vm *vm;
-
-	vm = malloc(sizeof(t_vm));
-	vm->dump = 0;
-	bzero(vm->players, sizeof(t_player) * MAX_PLAYERS + 1);
-	get_players(vm, av, ac);
 	if (vm->dump)
 		printf("Found dump with value: %d\n", vm->dump);
 	printf("\nPLAYER POSITIONS\n");
@@ -59,5 +53,17 @@ int     main(int ac, char **av)
 		printf("3: Name: %s, id: %d\n", vm->players[2]->file_name, vm->players[2]->id);
 	if (vm->players[3])
 		printf("4: Name: %s, id: %d\n", vm->players[3]->file_name, vm->players[3]->id);
+}
+
+int     main(int ac, char **av)
+{
+	t_vm *vm;
+
+	vm = malloc(sizeof(t_vm));
+	vm->dump = 0;
+	bzero(vm->players, sizeof(t_player) * MAX_PLAYERS + 1);
+	get_players(vm, av, ac);
+	print_info(vm);
+	read_files(vm);
 	return (0);
 }

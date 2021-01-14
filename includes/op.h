@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seroorann <seroorane@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/12/01 14:05:54 by seroorantane          ###   ########.fr       */
+/*   Updated: 2021/01/14 15:50:15 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Toutes les tailles sont en octets.
-** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
+** All sizes are in bytes.
+** We assume that an int is 32 bits. Is this true for you?
 */
 
 #ifndef OP_H
