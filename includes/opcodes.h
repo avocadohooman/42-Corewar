@@ -13,6 +13,8 @@
 #ifndef OPCODES_H
 # define OPCODES_H
 
+# include "parser.h"
+ 
 # define LFORK_LITERAL	"lfork"
 # define STI_LITERAL	"sti"
 # define FORK_LITERAL	"fork"
@@ -30,14 +32,33 @@
 # define LLDI_LITERAL	"lldi"
 # define AND_LITERAL	"and"
 
+typedef struct  s_opcode
+{
+    char        *literal;
+    void        (*parse)(t_parser*);
+}               t_opcode;
 
+static t_opcode opcode_table[] = {
+    {LFORK_LITERAL, parser_parse_lfork},
+    {STI_LITERAL, parser_parse_sti},
+    {FORK_LITERAL, parser_parse_fork},
+    {LLD_LITERAL, parser_parse_lld},
+    {LD_LITERAL, parser_parse_ld},
+    {ADD_LITERAL, parser_parse_add},
+    {ZJMP_LITERAL, parser_parse_zjmp},
+    {SUB_LITERAL, parser_parse_sub},
+    {LDI_LITERAL, parser_parse_ldi},
+    {OR_LITERAL, parser_parse_or},
+    {ST_LITERAL, parser_parse_st},
+    {AFF_LITERAL, parser_parse_aff},
+    {LIVE_LITERAL, parser_parse_live},
+    {XOR_LITERAL, parser_parse_xor},
+    {LLDI_LITERAL, parser_parse_lldi},
+    {AND_LITERAL, parser_parse_and},
+    {NULL, NULL},
+};
 
-// char **table_opcode = (char **){
-//     LFORK_LITERAL, STI_LITERAL, FORK_LITERAL, LLD_LITERAL,
-// 	LD_LITERAL, ADD_LITERAL, ZJMP_LITERAL, SUB_LITERAL,
-// 	LDI_LITERAL, OR_LITERAL, ST_LITERAL, AFF_LITERAL,
-// 	LIVE_LITERAL, XOR_LITERAL, LLDI_LITERAL, AND_LITERAL,
-// 	NULL
-// };
+int     lookup_opcode(char *str);
+void    opcode_parse(t_parser *parser);
 
 #endif

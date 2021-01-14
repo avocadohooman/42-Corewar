@@ -27,6 +27,7 @@ t_lexer			*init_lexer(char *data, size_t size)
 	lexer->c = data[0];
 	lexer->line_number = 1;
 	lexer->column = 1;
+	return (lexer);
 }
 
 void			lex_advance(t_lexer *lexer)
@@ -100,41 +101,20 @@ t_token			*lex_get_command(t_lexer *lexer)
 		lex_advance(lexer);
 	}
 	return (init_token(TOKEN_COMMAND, value));
-	// return TOKEN_COMMAND istead?
-	// if (!(ft_memcmp(value, NAME_CMD_STRING, len + 2)))
-	// 	return (init_token(COMMAND_NAME, value));
-	// else if (!(ft_memcmp(value, COMMENT_CMD_STRING, len + 2)))
-	// 	return (init_token(COMMAND_COMMENT, value));
-	// return (init_token(TOKEN_ILLEGAL, value));
 }
 
-// the order of the opcode_table and t_type enums are now dependent
-// on eachother. The opcodes must come first in the enum list and
-// should be presented in the same order as in the opcode_table
 t_token			*lex_get_keyword(char *value, size_t size)
 {
-	char	**opcode_table;
 	int		i;
 
-	opcode_table = (char*[20]){
-		LFORK_LITERAL, STI_LITERAL, FORK_LITERAL, LLD_LITERAL,
-		LD_LITERAL, ADD_LITERAL, ZJMP_LITERAL, SUB_LITERAL,
-		LDI_LITERAL, OR_LITERAL, ST_LITERAL, AFF_LITERAL,
-		LIVE_LITERAL, XOR_LITERAL, LLDI_LITERAL, AND_LITERAL,
-		NULL
-	};
 	i = 0;
-	while (opcode_table[i])
-	{
-		if (!ft_memcmp(value, opcode_table[i], size))
-			return (init_token(TOKEN_OPERATION, value));
-		i++;
-	}
+	if (lookup_opcode(value) >= 0)
+		return (init_token(TOKEN_OPERATION, value));
 	return (init_token(TOKEN_IDENTIFIER, value));
 }
 
 // might need to exclude capital chars here.. if label
-// and identifier is supposed to be the same thing..??
+// and identifier is supposed to be the same thing..?? 
 t_token			*lex_get_identifier(t_lexer *lexer)
 {
 	char	*value;
@@ -152,7 +132,8 @@ t_token			*lex_get_identifier(t_lexer *lexer)
 		value = tmp;
 		lex_advance(lexer);
 	}
-	return (lex_get_keyword(value, len + 2));
+	return (init_token(TOKEN_IDENTIFIER, value));
+	// return (lex_get_keyword(value, len + 2));
 }
 
 t_token			*lex_get_string(t_lexer *lexer)
@@ -200,8 +181,6 @@ t_token			*lex_get_newline(t_lexer *lexer)
 
 t_token			*lex_advance_with_token(t_lexer *lexer, t_token *token)
 {
-	// if (token->type == TOKEN_NEWLINE)
-	// 	lex_advance(lexer);
 	lex_advance(lexer);
 	return (token);
 }

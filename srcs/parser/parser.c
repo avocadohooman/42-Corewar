@@ -14,26 +14,6 @@
 #include "error.h"
 #include <stdio.h>
 
-// static t_opcode_parse  g_builtin[16] = {
-//     [OPCODE_LFORK] = parser_parse_lfork,
-//     [OPCODE_STI] = parser_parse_sti,
-//     [OPCODE_FORK] = parser_parse_fork,
-//     [OPCODE_LLD] = parser_parse_lld,
-//     [OPCODE_LD] = parser_parse_ld,
-//     [OPCODE_ADD] = parser_parse_add,
-//     [OPCODE_ZJMP] = parser_parse_zjmp,
-//     [OPCODE_SUB] = parser_parse_sub,
-//     [OPCODE_LDI] = parser_parse_ldi,
-//     [OPCODE_OR] = parser_parse_or,
-//     [OPCODE_ST] = parser_parse_st,
-//     [OPCODE_AFF] = parser_parse_aff,
-//     [OPCODE_LIVE] = parser_parse_live,
-//     [OPCODE_XOR] = parser_parse_xor,
-//     [OPCODE_LLDI] = parser_parse_lldi,
-//     [OPCODE_AND] = parser_parse_and
-// };
-
-
 t_parser		*new_parser(t_lexer *lexer)
 {
 	t_parser	*parser;

@@ -42,7 +42,8 @@ void			parser_parse_instruction(t_parser *parse);
 void			parser_parse_statement(t_parser *parser);
 void			parser_parse_label(t_parser *parser);
 void			parser_parse_opcode(t_parser *parser);
-void			parser_parse_arguments(t_parser *parser);
+void			parser_parse_body_args(t_parser *parser);
+void			parser_parse_body_label(t_parser *parser);
 
 void            parser_parse_lfork(t_parser *parser);
 void            parser_parse_sti(t_parser *parser);
@@ -64,5 +65,8 @@ void            parser_parse_and(t_parser *parser);
 
 void			parser_parse_command_name(t_parser *parser);
 void			parser_parse_command_comment(t_parser *parser);
+
+int				is_number(char *string);
+int				is_registry(char *string);
 
 #endif
