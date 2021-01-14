@@ -11,26 +11,11 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "buffer.h"
 #include <stdio.h>
 
 int main(void)
 {
-    t_buffer b;
 
-    printf("hello vm\n");
-    if (!new_buffer(&b, 10))
-        return (1);
-
-    for (int i = 0; i < 20; i++)
-    {
-        if (!insert_buffer(&b, "asd ", 4))
-            return (1);
-    }
-
-    printf("%s\n", b.data);
-    printf("%zu\n", b.size);
-    printf("%zu\n", b.used);
 
     // t_test  a;
     // t_test  c;

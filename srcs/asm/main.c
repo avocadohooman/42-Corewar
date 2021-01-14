@@ -12,9 +12,11 @@
 
 #include "asm.h"
 #include "file.h"
+#include "parser.h"
 #include <stdio.h> // delete
 
-int			main(int argc, char **argv)
+
+int         check_registry(char *string) 
 {
 	t_file			file;
 	int				bytes;
