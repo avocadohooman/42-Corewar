@@ -45,10 +45,11 @@ int     main(int ac, char **av)
 	t_vm *vm;
 
 	vm = malloc(sizeof(t_vm));
-	vm->cur_id = 1;
 	vm->dump = 0;
 	bzero(vm->players, sizeof(t_player) * MAX_PLAYERS + 1);
 	get_players(vm, av, ac);
+	if (vm->dump)
+		printf("Found dump with value: %d\n", vm->dump);
 	printf("\nPLAYER POSITIONS\n");
 	if (vm->players[0])
 		printf("\n1: Name: %s, id: %d\n", vm->players[0]->file_name, vm->players[0]->id);
