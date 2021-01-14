@@ -25,24 +25,24 @@ int			file_extension(char *file, char *expected_extension)
 
 t_file		read_file(char *filename)
 {
+	char		*line;
 	int			fd;
 	t_file		file;
 	size_t		s;
-	char		buf[512 + 1];
-	int			ret;
 
-	ft_bzero(buf, 512 + 1);
+	line = NULL;
 	if (((fd = open(filename, O_RDONLY)) == -1))
 		print_error(INVALID_FILE);
 	new_file(&file, 1024);
-	while ((ret = read(fd, buf, 512)) > 0)
+	while ((s = ft_get_next_line(fd, &line)) > 0)
 	{
-		buf[ret] = 0;
-		if (!insert_file(&file, buf, ret))
+		line[s - 1] = '\n';
+		if (!(insert_file(&file, line, s)))
 		{
 			close(fd);
 			print_error(BUFFER);
 		}
+		ft_strdel(&line);
 	}
 	close(fd);
 	if (s < 0)
