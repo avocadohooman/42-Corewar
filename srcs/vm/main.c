@@ -53,6 +53,7 @@ void	print_info(t_vm *vm)
 		printf("3: Name: %s, id: %d\n", vm->players[2]->file_name, vm->players[2]->id);
 	if (vm->players[3])
 		printf("4: Name: %s, id: %d\n", vm->players[3]->file_name, vm->players[3]->id);
+	printf("\n");
 }
 
 int     main(int ac, char **av)

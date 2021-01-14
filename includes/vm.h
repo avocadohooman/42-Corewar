@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/01/14 16:33:18 by seronen          ###   ########.fr       */
+/*   Updated: 2021/01/14 20:38:48 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ typedef struct  s_player
 {
 	int				id;
 	char            *file_name;
-	char			*name;
-	char			*comment;
-	unsigned int	exec_size;
+	char			name[PROG_NAME_LENGTH + 1];
+	char			comment[COMMENT_LENGTH + 1];
+	char			exec_size;
 	unsigned char	*exec_code;
 }               t_player;
 
