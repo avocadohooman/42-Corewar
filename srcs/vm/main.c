@@ -40,19 +40,17 @@
 
 */
 
-void	print_info(t_vm *vm)
+void	introduce_players(t_vm *vm)
 {
-	if (vm->dump)
-		printf("Found dump with value: %d\n", vm->dump);
-	printf("\nPLAYER POSITIONS\n");
+	printf("\nIntroducing contestants...\n");
 	if (vm->players[0])
-		printf("\n1: Name: %s, id: %d\n", vm->players[0]->file_name, vm->players[0]->id);
+		printf("* Player 1, weighing %d bytes, \"%s\" (\"%s\")!\n", vm->players[0]->exec_size, vm->players[0]->name, vm->players[0]->comment);
 	if (vm->players[1])
-		printf("2: Name: %s, id: %d\n", vm->players[1]->file_name, vm->players[1]->id);
+		printf("* Player 2, weighing %d bytes, \"%s\" (\"%s\")!\n", vm->players[1]->exec_size, vm->players[1]->name, vm->players[1]->comment);
 	if (vm->players[2])
-		printf("3: Name: %s, id: %d\n", vm->players[2]->file_name, vm->players[2]->id);
+		printf("* Player 3, weighing %d bytes, \"%s\" (\"%s\")!\n", vm->players[2]->exec_size, vm->players[2]->name, vm->players[2]->comment);
 	if (vm->players[3])
-		printf("4: Name: %s, id: %d\n", vm->players[3]->file_name, vm->players[3]->id);
+		printf("* Player 4, weighing %d bytes, \"%s\" (\"%s\")!\n", vm->players[3]->exec_size, vm->players[3]->name, vm->players[3]->comment);
 	printf("\n");
 }
 
@@ -64,7 +62,7 @@ int     main(int ac, char **av)
 	vm->dump = 0;
 	bzero(vm->players, sizeof(t_player) * MAX_PLAYERS + 1);
 	get_players(vm, av, ac);
-	print_info(vm);
 	read_files(vm);
+	introduce_players(vm);
 	return (0);
 }

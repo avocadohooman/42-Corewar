@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/01/14 23:13:45 by seronen          ###   ########.fr       */
+/*   Updated: 2021/01/14 23:29:58 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,6 @@ int     read_files(t_vm *vm)
 	{
 		file = read_file(vm->players[i]->file_name);
 		gather_data(vm->players[i], file.data);
-		printf("Found name: '%s'\n", vm->players[i]->name);
-		printf("Found comment: '%s'\n", vm->players[i]->comment);
-		printf("Found exec code size: %d\n", vm->players[i]->exec_size);
 		i++;
 	}
 	return (0);
