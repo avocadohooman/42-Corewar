@@ -89,8 +89,8 @@ int     arguments(t_vm *vm, int player, char **args, int ac)
 		if (args[i] && !ft_strcmp(args[i], "-n"))
 		{
 			pos = ft_atoi(args[i + 1]);
-			if (pos > MAX_PLAYERS)
-				error("Poitional argument over limit!\n");
+			if (pos < player || pos < 0 || pos > MAX_PLAYERS)
+				error("Invalid positional argument!\n");
 			if (pos == player)
 			{
 				new_player(vm ,player, ft_strdup(args[i + 2]));
