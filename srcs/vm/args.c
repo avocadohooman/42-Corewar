@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:46:01 by seronen           #+#    #+#             */
-/*   Updated: 2021/01/14 14:12:36 by seronen          ###   ########.fr       */
+/*   Updated: 2021/01/14 15:19:37 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,7 @@ static int     		arguments(t_vm *vm, int player, char **args, int ac)
 	i = 0;
 	while (i++ < ac)
 	{
-		if (!vm->dump && args[i] && !ft_strcmp("-dump", args[i]))
-		{
-			vm->dump = validate_nb(args[i + 1], 0);
-			i += 2;
-		}
-		if (args[i] && !ft_strcmp(args[i], "-n"))
+		if (args[i] && (!ft_strcmp(args[i], "-n")))
 		{
 			pos = validate_nb(args[i + 1], player);
 			if (pos == player)
@@ -96,18 +91,19 @@ static int     		arguments(t_vm *vm, int player, char **args, int ac)
 	return (add_first(vm, player, args, ac));
 }
 
-static int			get_player_amount(char **args, int ac)
+static int			get_player_amount(t_vm *vm, char **args, int ac)
 {
 	int i;
 	int amount;
 
-	i = 0;
+	i = 1;
 	amount = 0;
 	while (i < ac)
 	{
-		if (args[i] && (!ft_strcmp("-n", args[i]) || !ft_strcmp("-dump", args[i])))
-			i += 2;
-		else
+		if (args[i] && (!ft_strcmp("-n", args[i])) ||
+			(!ft_strcmp("-dump", args[i])) && (vm->dump = validate_nb(args[i + 1], 0)))
+			i++;
+		else if (args[i])
 			amount++;
 		i++;
 	}
@@ -122,7 +118,8 @@ int					get_players(t_vm *vm, char **args, int ac)
 	player = 0;
 	if (!args || ac < 2)
 		print_error(INVALID_ARG);
-	amount = get_player_amount(args, ac);
+	amount = get_player_amount(vm, args, ac);
+	printf("Found %d players.\n", amount);
 	if (amount > MAX_PLAYERS)
 		print_error(INVALID_ARG);
 	while (player < amount)
