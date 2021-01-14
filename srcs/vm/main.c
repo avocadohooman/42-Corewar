@@ -86,6 +86,12 @@ int     arguments(t_vm *vm, int player, char **args, int ac)
 	i = 0;
 	while (i++ < ac)
 	{
+		if (!vm->dump && args[i] && !ft_strcmp("-dump", args[i]))
+		{
+			vm->dump = ft_atoi(args[i + 1]);
+			printf("Found dump with value: %d\n", vm->dump);
+			i += 2;
+		}
 		if (args[i] && !ft_strcmp(args[i], "-n"))
 		{
 			pos = ft_atoi(args[i + 1]);
@@ -123,6 +129,7 @@ int     main(int ac, char **av)
 
 	vm = malloc(sizeof(t_vm));
 	vm->cur_id = 1;
+	vm->dump = 0;
 	bzero(vm->players, sizeof(t_player) * MAX_PLAYERS + 1);
 	get_positions(vm, av, ac);
 	printf("\nPLAYER POSITIONS\n");
