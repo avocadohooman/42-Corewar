@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "vm.h"
-#include <stdio.h>
 
 /*
 	#include "buffer.h"
@@ -42,87 +40,6 @@
 
 */
 
-void		error(char *msg)
-{
-	printf("%s", msg);
-	exit(0);
-}
-
-void		new_player(t_vm *vm, int id, char *name)
-{
-	t_player *new;
-
-	new = malloc(sizeof(t_player));
-	new->file_name = name;
-	new->id = id;
-	vm->players[id - 1] = new;
-}
-
-int		add_first(t_vm *vm, int player, char **args, int ac)
-{
-	int i;
-
-	i = 1;
-	while (i < ac)
-	{
-		if (args[i] && !ft_strcmp(args[i], "-n"))
-			i += 2;
-		else if (args[i])
-		{
-			new_player(vm ,player, ft_strdup(args[i]));
-			args[i] = NULL;
-			return (0);
-		}
-		i++;
-	}
-	return (0);
-}
-
-int     arguments(t_vm *vm, int player, char **args, int ac)
-{
-	int i;
-	int pos;
-
-	i = 0;
-	while (i++ < ac)
-	{
-		if (!vm->dump && args[i] && !ft_strcmp("-dump", args[i]))
-		{
-			vm->dump = ft_atoi(args[i + 1]);
-			printf("Found dump with value: %d\n", vm->dump);
-			i += 2;
-		}
-		if (args[i] && !ft_strcmp(args[i], "-n"))
-		{
-			pos = ft_atoi(args[i + 1]);
-			if (pos < player || pos < 0 || pos > MAX_PLAYERS)
-				error("Invalid positional argument!\n");
-			if (pos == player)
-			{
-				new_player(vm ,player, ft_strdup(args[i + 2]));
-				bzero(&args[i], sizeof(char*) * 3);
-				return (0);
-			}
-			else
-				i += 2;
-		}
-	}
-	return (add_first(vm, player, args, ac));
-}
-
-int		get_positions(t_vm *vm, char **args, int ac)
-{
-	int player;
-
-	player = 0;
-	while (player < MAX_PLAYERS)
-	{
-		arguments(vm, player + 1, args, ac);
-		player++;
-	}
-	return (0);
-}
-
 int     main(int ac, char **av)
 {
 	t_vm *vm;
@@ -131,7 +48,7 @@ int     main(int ac, char **av)
 	vm->cur_id = 1;
 	vm->dump = 0;
 	bzero(vm->players, sizeof(t_player) * MAX_PLAYERS + 1);
-	get_positions(vm, av, ac);
+	get_players(vm, av, ac);
 	printf("\nPLAYER POSITIONS\n");
 	if (vm->players[0])
 		printf("\n1: Name: %s, id: %d\n", vm->players[0]->file_name, vm->players[0]->id);

@@ -22,6 +22,8 @@ typedef enum	e_error_type
 	INVALID_FILE,
 	BUFFER,
 	GET_NEXT_LINE,
+	INVALID_ARG,
+	MALLOC,
 	INVALID_STATEMENT
 }				t_error_type;
 

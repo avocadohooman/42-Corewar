@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/01/14 02:26:51 by seronen          ###   ########.fr       */
+/*   Updated: 2021/01/14 13:17:37 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define VM_H
 
 # include "op.h"
+# include "libft.h"
+# include <stdio.h> //remove
+# include "error.h"
 
 typedef struct  s_player
 {
@@ -27,6 +30,8 @@ typedef struct  s_vm
 	int			dump;
 	t_player	*players[MAX_PLAYERS + 1];
 }               t_vm;
+
+int				get_players(t_vm *vm, char **args, int ac);
 
 #endif
 
