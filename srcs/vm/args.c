@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:46:01 by seronen           #+#    #+#             */
-/*   Updated: 2021/01/14 13:21:00 by seronen          ###   ########.fr       */
+/*   Updated: 2021/01/14 13:26:47 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int			validate_nb(char *str, int player)
 		i++;
 	}
 	nb = ft_atoi(str);
-	if (nb < 0)
+	if (nb < 1)
 		print_error(INVALID_ARG);
 	if (player && (nb < player || nb > MAX_PLAYERS))
 		print_error(INVALID_ARG);
