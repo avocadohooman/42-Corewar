@@ -22,7 +22,6 @@ typedef struct	s_lexer
 	size_t		size;
 	size_t		index;
 	size_t		line_number;
-	size_t		column;
 }				t_lexer;
 
 t_lexer			*init_lexer(char *data, size_t size);

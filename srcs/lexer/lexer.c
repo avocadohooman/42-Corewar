@@ -13,7 +13,6 @@
 #include "lexer.h"
 #include "opcodes.h"
 #include "op.h"
-#include <stdio.h>
 
 t_lexer			*init_lexer(char *data, size_t size)
 {
@@ -25,8 +24,7 @@ t_lexer			*init_lexer(char *data, size_t size)
 	lexer->size = size;
 	lexer->index = 0;
 	lexer->c = data[0];
-	lexer->line_number = 1;
-	lexer->column = 1;
+	lexer->line_number = 0;
 }
 
 void			lex_advance(t_lexer *lexer)
@@ -35,37 +33,7 @@ void			lex_advance(t_lexer *lexer)
 	{
 		lexer->index++;
 		lexer->c = lexer->data[lexer->index];
-		lexer->column++;
 	}
-}
-
-void			lex_retreat(t_lexer *lexer)
-{
-	if (lexer->index > 0)
-	{
-		lexer->index--;
-		lexer->c = lexer->data[lexer->index];
-		lexer->column--;
-	}
-}
-
-int				lex_lookahead(t_lexer *lexer, char c)
-{
-	char	next;
-
-	lex_advance(lexer);
-	next = lexer->c;
-	lex_retreat(lexer);
-	if (c == next)
-		return (1);
-	return (0);
-}
-
-int				is_label_char(char c)
-{
-	if (ft_strchr(LABEL_CHARS, c))
-		return (1);
-	return (0);
 }
 
 void			lex_skip_whitespace(t_lexer *lexer)
@@ -76,7 +44,7 @@ void			lex_skip_whitespace(t_lexer *lexer)
 
 void			lex_skip_comment(t_lexer *lexer)
 {
-	while (lexer->c != 13)
+	while (lexer->c != '\n')
 		lex_advance(lexer);
 }
 
@@ -86,10 +54,8 @@ t_token			*lex_get_command(t_lexer *lexer)
 	char	*tmp;
 	int		len;
 
-	if (!(value = ft_memalloc(sizeof(char) * 2)))
+	if (!(value = ft_memalloc(sizeof(char))))
 		return (NULL);
-	value[0] = '.';
-	lex_advance(lexer);
 	while (ft_isalpha(lexer->c))
 	{
 		len = ft_strlen(value);
@@ -99,13 +65,12 @@ t_token			*lex_get_command(t_lexer *lexer)
 		value = tmp;
 		lex_advance(lexer);
 	}
-	return (init_token(TOKEN_COMMAND, value));
-	// return TOKEN_COMMAND istead?
-	// if (!(ft_memcmp(value, NAME_CMD_STRING, len + 2)))
-	// 	return (init_token(COMMAND_NAME, value));
-	// else if (!(ft_memcmp(value, COMMENT_CMD_STRING, len + 2)))
-	// 	return (init_token(COMMAND_COMMENT, value));
-	// return (init_token(TOKEN_ILLEGAL, value));
+	lex_advance(lexer);
+	if (!(ft_memcmp(value, NAME_CMD_STRING, len + 2)))
+		return (init_token(COMMAND_NAME, value));
+	else if (!(ft_memcmp(value, COMMENT_CMD_STRING, len + 2)))
+		return (init_token(COMMAND_NAME, value));
+	return (init_token(TOKEN_ILLEGAL, value));
 }
 
 // the order of the opcode_table and t_type enums are now dependent
@@ -127,14 +92,14 @@ t_token			*lex_get_keyword(char *value, size_t size)
 	while (opcode_table[i])
 	{
 		if (!ft_memcmp(value, opcode_table[i], size))
-			return (init_token(TOKEN_OPERATION, value));
+			return (init_token(i, value));
 		i++;
 	}
 	return (init_token(TOKEN_IDENTIFIER, value));
 }
 
 // might need to exclude capital chars here.. if label
-// and identifier is supposed to be the same thing..??
+// and identifier is supposed to be the same thing..?? struggless
 t_token			*lex_get_identifier(t_lexer *lexer)
 {
 	char	*value;
@@ -169,7 +134,7 @@ t_token			*lex_get_string(t_lexer *lexer)
 		len = ft_strlen(value);
 		if (!(tmp = realloc(value, len + 2)))
 			return (NULL);
-		ft_strncat(tmp, &lexer->c, len + 2);
+		ft_strlcat(tmp, &lexer->c, len + 2);
 		value = tmp;
 		lex_advance(lexer);
 	}
@@ -187,40 +152,16 @@ char			*char_to_string(char c)
 	return str;
 }
 
-t_token			*lex_get_newline(t_lexer *lexer)
-{
-	lex_advance(lexer);
-	if (lexer->c != 10)
-		return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
-	lex_advance(lexer);
-	lexer->line_number++;
-	lexer->column = 1;
-	return (init_token(TOKEN_NEWLINE, "\\n"));
-}
-
-t_token			*lex_advance_with_token(t_lexer *lexer, t_token *token)
-{
-	// if (token->type == TOKEN_NEWLINE)
-	// 	lex_advance(lexer);
-	lex_advance(lexer);
-	return (token);
-}
-
 t_token			*lex_get_operator(t_lexer *lexer)
 {
 	if (lexer->c == LABEL_CHAR)
-		return (lex_advance_with_token(lexer,
-				init_token(TOKEN_COLON, char_to_string(lexer->c))));
+		return (init_token(TOKEN_COLON, char_to_string(lexer->c)));
 	if (lexer->c == DIRECT_CHAR)
-		return (lex_advance_with_token(lexer,
-				init_token(TOKEN_DIRECT, char_to_string(lexer->c))));
+		return (init_token(TOKEN_DIRECT, char_to_string(lexer->c)));
 	if (lexer->c == SEPARATOR_CHAR)
-		return (lex_advance_with_token(lexer,
-				init_token(TOKEN_SEPARATOR, char_to_string(lexer->c))));
-	if (lexer->c == 13)
-		return (lex_get_newline(lexer));
-		// return (lex_advance_with_token(lexer,
-		// 		init_token(TOKEN_NEWLINE, char_to_string(lexer->c))));
+		return (init_token(TOKEN_SEPARATOR, char_to_string(lexer->c)));
+	if (lexer->c == NEWLINE_CHAR && ++(lexer->line_number))
+		return (init_token(TOKEN_NEWLINE, char_to_string(lexer->c)));
 	return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
 }
 
