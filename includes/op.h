@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2021/01/14 15:50:15 by seronen          ###   ########.fr       */
+/*   Updated: 2021/01/15 12:59:34 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define IND_SIZE			2
 # define REG_SIZE			4
-# define DIR_SIZE			REG_SIZ
+# define DIR_SIZE			REG_SIZE
 # define REG_CODE			1
 # define DIR_CODE			2
 # define IND_CODE			3
@@ -35,7 +35,7 @@
 # define LABEL_CHAR			':'
 # define DIRECT_CHAR		'%'
 # define SEPARATOR_CHAR		','
-# define NEWLINE_CHAR '\n'
+# define NEWLINE_CHAR		'\n'
 
 # define LABEL_CHARS		"abcdefghijklmnopqrstuvwxyz_0123456789"
 

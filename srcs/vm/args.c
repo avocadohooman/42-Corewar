@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:46:01 by seronen           #+#    #+#             */
-/*   Updated: 2021/01/14 20:51:42 by seronen          ###   ########.fr       */
+/*   Updated: 2021/01/15 13:14:03 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void			new_player(t_vm *vm, int id, char *name)
 		print_error(INVALID_ARG);
 	if (!(new = malloc(sizeof(t_player))))
 		print_error(MALLOC);
+	new->id = id;
 	new->file_name = name;
 	bzero(&new->name, PROG_NAME_LENGTH + 1);
 	bzero(&new->comment, COMMENT_LENGTH + 1);
 	new->exec_code = NULL;
-	new->id = id;
 	vm->players[id - 1] = new;
 }
 
@@ -110,6 +110,8 @@ static int			get_player_amount(t_vm *vm, char **args, int ac)
 			amount++;
 		i++;
 	}
+	if (amount < 2)
+		print_error(INVALID_ARG);
 	return (amount);
 }
 

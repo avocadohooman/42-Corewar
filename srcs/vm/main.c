@@ -40,6 +40,25 @@
 
 */
 
+void	dump_arena(unsigned char *arena)
+{
+	int i;
+	int line;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		line = 0;
+		while (line < 32)
+		{
+			printf("%02x ", arena[i + line]);
+			line++;
+		}
+		printf("\n");
+		i += line;
+	}
+}
+
 void	introduce_players(t_vm *vm)
 {
 	printf("\nIntroducing contestants...\n");
@@ -57,6 +76,7 @@ void	introduce_players(t_vm *vm)
 int     main(int ac, char **av)
 {
 	t_vm *vm;
+	unsigned char *arena;
 
 	vm = malloc(sizeof(t_vm));
 	vm->dump = 0;
@@ -64,5 +84,7 @@ int     main(int ac, char **av)
 	get_players(vm, av, ac);
 	read_files(vm);
 	introduce_players(vm);
+	arena = init_arena(vm);
+	dump_arena(arena);
 	return (0);
 }

@@ -6,15 +6,15 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/01/14 23:29:58 by seronen          ###   ########.fr       */
+/*   Updated: 2021/01/15 15:25:48 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-uint32_t		convert_exec_size(char *data)
+int		convert_exec_size(char *data)
 {
-	uint32_t value;
+	int value;
 
 	value = (data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3];
 	return (value);
@@ -40,7 +40,7 @@ int		validate_player(t_player *player)
 	return (0);
 }
 
-int		gather_data(t_player *player, char *data)
+int		gather_data(t_player *player, char *data, size_t total_size)
 {
 	if (!data || !player)
 	{
@@ -52,7 +52,7 @@ int		gather_data(t_player *player, char *data)
 	ft_memcpy(&player->comment, &data[140], 2048);
 	player->exec_size = convert_exec_size(&data[136]);
 	if (!player->exec_size)
-		player->exec_size = CHAMP_MAX_SIZE;
+		player->exec_size = total_size - 2192;						// If exec_size unpresent in bytecode, calculate the exact size yourself
 	player->exec_code = malloc(sizeof(char) * player->exec_size + 1);
 	bzero(&player->exec_code, sizeof(char) * player->exec_size + 1);
 	ft_memcpy(&player->exec_code, &data[2192], player->exec_size);	// index is validated to be 2192! by hackerman
@@ -72,7 +72,7 @@ int     read_files(t_vm *vm)
 	while (i < vm->player_nb)
 	{
 		file = read_file(vm->players[i]->file_name);
-		gather_data(vm->players[i], file.data);
+		gather_data(vm->players[i], file.data, file.used);
 		i++;
 	}
 	return (0);

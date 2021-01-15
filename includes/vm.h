@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/01/14 23:11:17 by seronen          ###   ########.fr       */
+/*   Updated: 2021/01/15 15:26:02 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct  s_vm
 
 int				get_players(t_vm *vm, char **args, int ac);
 int     		read_files(t_vm *vm);
+unsigned char			*init_arena(t_vm *vm);
 
 #endif
 
