@@ -13,7 +13,7 @@
 #include "asm.h"
 #include "file.h"
 #include "parser.h"
-#include <stdio.h> // delete
+#include <stdio.h>
 
 int			main(int argc, char **argv)
 {

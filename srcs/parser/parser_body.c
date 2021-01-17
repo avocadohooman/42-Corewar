@@ -64,6 +64,7 @@ int         is_number(char *string)
 void	parser_parse_body_label(t_parser *parser)
 {
 	parser_consume(parser, TOKEN_COLON);
+	return ;
 }
 
 void	parser_parse_body_identifier(t_parser *parser)
@@ -82,7 +83,7 @@ void	parser_parse_body_identifier(t_parser *parser)
 		opcode_parse(parser);
 		return ;
 	}
-	return ; // error
+	return ; // error or newline
 }
 
 void	parser_parse_body_statement(t_parser *parser)
@@ -94,6 +95,7 @@ void	parser_parse_body_statement(t_parser *parser)
 		if (parser->current_token->type == TOKEN_IDENTIFIER)
 			parser_parse_body_identifier(parser);
 	}
+	return ;
 }
 
 void	parser_parse_body_statements(t_parser *parser)
@@ -105,6 +107,7 @@ void	parser_parse_body_statements(t_parser *parser)
 		parser_parse_body_statement(parser);
 
 	}
+	return ;
 }
 
 

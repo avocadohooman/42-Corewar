@@ -21,7 +21,6 @@ ASM_MAIN = srcs/asm/main.c
 SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/lexer/lexer.c srcs/token/token.c srcs/parser/parser.c \
 		srcs/error.c \
-		srcs/parser/opcode/opcode.c \
 		srcs/parser/parser_body.c srcs/parser/parser_header.c \
 		srcs/parser/parser_args.c \
 		srcs/opcode/opcode.c

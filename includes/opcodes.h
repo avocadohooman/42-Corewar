@@ -60,25 +60,6 @@ static t_opcode opcode_table[] = {
 	{LLDI_LITERAL, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, NULL},
 	{AND_LITERAL, 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, NULL},
 	{0, 0, 0, 0}
-
-
-    // {LFORK_LITERAL, parser_parse_lfork},
-    // {STI_LITERAL, parser_parse_sti},
-    // {FORK_LITERAL, parser_parse_fork},
-    // {LLD_LITERAL, parser_parse_lld},
-    // {LD_LITERAL, parser_parse_ld},
-    // {ADD_LITERAL, parser_parse_add},
-    // {ZJMP_LITERAL, parser_parse_zjmp},
-    // {SUB_LITERAL, parser_parse_sub},
-    // {LDI_LITERAL, parser_parse_ldi},
-    // {OR_LITERAL, parser_parse_or},
-    // {ST_LITERAL, parser_parse_st},
-    // {AFF_LITERAL, parser_parse_aff},
-    // {LIVE_LITERAL, parser_parse_live},
-    // {XOR_LITERAL, parser_parse_xor},
-    // {LLDI_LITERAL, parser_parse_lldi},
-    // {AND_LITERAL, parser_parse_and},
-    // {NULL, NULL},
 };
 
 int     lookup_opcode(char *str);
