@@ -33,25 +33,32 @@ int         is_registry(char *string)
 
 int         is_number(char *string)
 {
-    int     i;
-    int     zeros;
+	int     i;
+	int     zeros;
+	int     len;
+	int     n_digits;
 
-    i = 0;
-    zeros = 0;
-    while (string[i]) 
-    {
-        if (string[i] == '0')
-            zeros++;
-        i++;
-    }
-    if (string[0] == '-') 
-    {
-         if (ft_atoi(string) && (ft_strlen(&string[1]) == zeros + ft_ndigits(ft_atoi(string))))
-            return (1);
-    }
-    else if (ft_atoi(string) && (ft_strlen(string) == zeros + ft_ndigits(ft_atoi(string))))
-        return (1);
-    return (0);
+	i = 0;
+	zeros = 0;
+	len = ft_strlen(string);
+	n_digits = ft_ndigits(ft_atoi(string));
+	while (string[i])
+	{
+		if (string[i] == '0')
+			zeros++;
+		if (string[i + 1] != '0')
+			break ;
+		i++;
+	}
+	if (string[0] == '-') 
+	{
+		len = ft_strlen(&string[1]);
+		if ((ft_atoi(string) && (len == zeros + n_digits)) || len == zeros)
+			return (1);
+	}
+	else if ((ft_atoi(string) && (len == zeros + n_digits)) || len == zeros)
+		return (1);
+	return (0);
 }
 
 void	parser_parse_body_label(t_parser *parser)
@@ -63,55 +70,30 @@ void	parser_parse_body_identifier(t_parser *parser)
 {
 	char	*value;
 
-	printf("parse identifier\n");
 	value = parser->current_token->value;
 	parser_consume(parser, TOKEN_IDENTIFIER);
 	if (parser->current_token->type == TOKEN_COLON)
 	{
-		printf("parser_parse_label\n");
 		parser_parse_body_label(parser);
-		return ; // parser_parse_label
+		return ;
 	}
 	else if (lookup_opcode(value) >= 0)
 	{
-		printf("opcode_parse(...)\n");
 		opcode_parse(parser);
-		return ; // opcode_parse(parser);
-	}
-	else if (is_number(value))
-	{
-		printf("parser_parse_indirect\n");
-		return ; // parser_parse_indirect
-	}
-	else if (is_registry(value))
-	{
-		printf("parser_parse_registry\n");
-		return ; // parser_parse_registry
-	}
-}
-
-void	parser_parse_body_operation(t_parser *parser)
-{
-	int		i;
-	
-	printf("parse operation\n");
-	parser_consume(parser, TOKEN_OPERATION);
-	// for labels 
-	if (parser->current_token->type == TOKEN_COLON)
-	{
-		parser_consume(parser, TOKEN_COLON);
 		return ;
 	}
-	opcode_parse(parser);
+	return ; // error
 }
 
 void	parser_parse_body_statement(t_parser *parser)
 {
-	if (parser->current_token->type == TOKEN_NEWLINE)
-		printf("empty statement\n");
-	parser_parse_body_identifier(parser);
-	if (parser->current_token->type != TOKEN_NEWLINE)
+
+	if (parser->current_token->type == TOKEN_IDENTIFIER)
+	{
 		parser_parse_body_identifier(parser);
+		if (parser->current_token->type == TOKEN_IDENTIFIER)
+			parser_parse_body_identifier(parser);
+	}
 }
 
 void	parser_parse_body_statements(t_parser *parser)
@@ -121,5 +103,8 @@ void	parser_parse_body_statements(t_parser *parser)
 	{
 		parser_consume(parser, TOKEN_NEWLINE);
 		parser_parse_body_statement(parser);
+
 	}
 }
+
+

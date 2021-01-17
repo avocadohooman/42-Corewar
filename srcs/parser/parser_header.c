@@ -35,7 +35,6 @@ void	parser_parse_command(t_parser *parser)
 {
 	char	*value;
 	
-	printf("parsing some command\n");
 	value = parser->current_token->value;
 	if (ft_strequ(value, NAME_CMD_STRING))
 		parser_parse_command_name(parser);
@@ -52,8 +51,6 @@ void	parser_parse_header_statement(t_parser *parser)
 	type = parser->current_token->type;
 	if (type == TOKEN_COMMAND)
 		parser_parse_command(parser);
-	else
-		printf("empty statement\n");
 }
 
 void	parser_parse_header_statements(t_parser *parser)
@@ -67,5 +64,4 @@ void	parser_parse_header_statements(t_parser *parser)
 			break ;
 		parser_parse_header_statement(parser);
 	}
-	printf("header done\n");
 }

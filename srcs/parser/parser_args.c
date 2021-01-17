@@ -48,25 +48,23 @@ void	parser_parse_body_registry(t_parser *parser)
 	parser_consume(parser, TOKEN_IDENTIFIER);
 }
 
-void	parser_parse_body_args(t_parser *parser)
+void	parser_parse_argtype(int opts, int recieved, 
+							void (*type)(t_parser*), t_parser *parser)
 {
-	char	*value;
+	if (!check_argument(opts, recieved))
+		return ; // error
+	type(parser);
+}
 
-	value = parser->current_token->value;
-	if (parser->current_token->type == TOKEN_COLON)
-	{
-		printf("arg: indirect label\n");
-		return ; // parser_parse_indirect
-	}
+void	parser_parse_body_arg(t_parser *parser, int opts)
+{
+	int			index;
+	t_opcode	code;
+
+	if (is_registry(parser->current_token->value))
+		parser_parse_argtype(opts, T_REG, parser_parse_body_registry, parser);
 	else if (parser->current_token->type == TOKEN_DIRECT)
-	{
-		printf("args: direct\n");
-		parser_parse_body_direct(parser);
-		return ; // parser_parse_dir
-	}
+		parser_parse_argtype(opts, T_DIR, parser_parse_body_direct, parser);
 	else
-	{
-		printf("registry or indirect\n");
-		return ; // parser_parse_body_identifier(parser);
-	}
+		parser_parse_argtype(opts, T_IND, parser_parse_body_indirect, parser);
 }

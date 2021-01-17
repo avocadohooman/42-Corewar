@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-enum {
-    
-};
-
-typedef struct  s_argument
+typedef struct		s_ast
 {
-    int                 type;
-}               t_argument;
+	int				type;
+	char			*label;
+	int				operation;
+	t_ast			**operations_args;
+	int				arg_value;
+}					t_ast;

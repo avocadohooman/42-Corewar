@@ -11,7 +11,13 @@
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "opcodes.h"
 #include <stdio.h>
+
+// void            parser_parse_opcode(t_parser *parser, t_opcode *op)
+// {
+    
+// }
 
 void            parser_parse_lfork(t_parser *parser)
 {
@@ -19,6 +25,7 @@ void            parser_parse_lfork(t_parser *parser)
 
 void            parser_parse_sti(t_parser *parser)
 {
+    return ;
     printf("hello parser_parse_sti\n");
     parser_consume(parser, TOKEN_IDENTIFIER);
     if (!is_registry(parser->prev_token->value))
@@ -26,7 +33,7 @@ void            parser_parse_sti(t_parser *parser)
     while (parser->current_token->type == TOKEN_SEPARATOR)
     {
         parser_consume(parser, TOKEN_SEPARATOR);
-        parser_parse_body_args(parser);
+        // parser_parse_body_arg(parser);
     }
 }
 
