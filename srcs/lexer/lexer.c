@@ -103,15 +103,15 @@ t_token			*lex_get_command(t_lexer *lexer)
 	return (init_token(TOKEN_COMMAND, value));
 }
 
-t_token			*lex_get_keyword(char *value, size_t size)
-{
-	int		i;
+// t_token			*lex_get_keyword(char *value, size_t size)
+// {
+// 	int		i;
 
-	i = 0;
-	if (lookup_opcode(value) >= 0)
-		return (init_token(TOKEN_OPERATION, value));
-	return (init_token(TOKEN_IDENTIFIER, value));
-}
+// 	i = 0;
+// 	if (lookup_opcode(value) >= 0)
+// 		return (init_token(TOKEN_OPERATION, value));
+// 	return (init_token(TOKEN_IDENTIFIER, value));
+// }
 
 // might need to exclude capital chars here.. if label
 // and identifier is supposed to be the same thing..?? 
@@ -133,7 +133,6 @@ t_token			*lex_get_identifier(t_lexer *lexer)
 		lex_advance(lexer);
 	}
 	return (init_token(TOKEN_IDENTIFIER, value));
-	// return (lex_get_keyword(value, len + 2));
 }
 
 t_token			*lex_get_string(t_lexer *lexer)

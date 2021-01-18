@@ -14,6 +14,22 @@
 # define PARSER_H
 # include "libft.h"
 # include "lexer.h"
+# include "ast.h"
+
+typedef enum	e_error
+{
+	ERROR_UNKNOWN_COMMAND,
+	ERROR_UNEXPECTED_ARG_TYPE,
+	ERROR_MALFORMATTED_ARG,
+	ERROR_UNKNOWN_OPERATION
+}				t_error;
+
+static const char *g_parser_error[] = {
+	[ERROR_UNKNOWN_COMMAND] = "Unknown command.",
+	[ERROR_UNEXPECTED_ARG_TYPE] = "Unexpected argument type.",
+	[ERROR_MALFORMATTED_ARG] = "Malformatted argument",
+	[ERROR_UNKNOWN_OPERATION] = "Unknown operation."
+};
 
 typedef struct	s_parser
 {
@@ -27,13 +43,14 @@ void			free_parser(t_parser **parser);
 
 void			parser_consume(t_parser *parser, t_type type);
 
-void			parser_parse(t_parser *parser, char *data);
-void			parser_parse_header_statements(t_parser *parser);
-void			parser_parse_body_statements(t_parser *parser);
-void			parser_parse_body_arg(t_parser *parser, int opts);
-void			parser_parse_body_label(t_parser *parser);
+t_ast			*parser_parse(t_parser *parser);
+t_ast			*parser_parse_header_statements(t_parser *parser);
+t_ast			*parser_parse_body_statements(t_parser *parser);
+t_ast			*parser_parse_body_arg(t_parser *parser, int opts);
 
 int				is_number(char *string);
 int				is_registry(char *string);
+
+void			parser_exit_with_message(t_error type);
 
 #endif

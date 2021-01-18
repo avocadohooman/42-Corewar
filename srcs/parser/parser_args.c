@@ -14,57 +14,80 @@
 #include "opcodes.h"
 #include <stdio.h>
 
-void	parser_parse_body_direct(t_parser *parser)
+t_ast	*parser_parse_body_direct(t_parser *parser)
 {
+	t_ast	*arg;
+
 	parser_consume(parser, TOKEN_DIRECT);
+	if (!(arg = init_ast(AST_ARGUMENT)))
+		return (NULL);
+	arg->arg_type = T_DIR;
 	if (parser->current_token->type == TOKEN_COLON)
 	{
 		parser_consume(parser, TOKEN_COLON);
+		arg->label = parser->current_token->value;
 		parser_consume(parser, TOKEN_IDENTIFIER);
-		return ;
+		return (arg);
 	}
 	if (!is_number(parser->current_token->value))
-		return ; // error
+		parser_exit_with_message(ERROR_MALFORMATTED_ARG);
+	arg->arg_value = ft_atoi(parser->current_token->value);
 	parser_consume(parser, TOKEN_IDENTIFIER);
+	return (arg);
 }
 
-void	parser_parse_body_indirect(t_parser *parser)
+t_ast	*parser_parse_body_indirect(t_parser *parser)
 {
+	t_ast	*arg;
+
+	if (!(arg = init_ast(AST_ARGUMENT)))
+		return (NULL);
+	arg->arg_type = T_IND;
 	if (parser->current_token->type == TOKEN_COLON)
 	{
 		parser_consume(parser, TOKEN_COLON);
+		arg->label = parser->current_token->value;
 		parser_consume(parser, TOKEN_IDENTIFIER);
-		return ;
+		return (arg);
 	}
 	if (!is_number(parser->current_token->value))
-		return ; // error
+		parser_exit_with_message(ERROR_MALFORMATTED_ARG);
+	arg->arg_value = ft_atoi(parser->current_token->value);
 	parser_consume(parser, TOKEN_IDENTIFIER);
+	return (arg);
 }
 
-void	parser_parse_body_registry(t_parser *parser)
+t_ast	*parser_parse_body_registry(t_parser *parser)
 {
+	t_ast	*arg;
+
+	if (!(arg = init_ast(AST_ARGUMENT)))
+		return (NULL);
+	arg->arg_type = T_REG;
 	if (!is_registry(parser->current_token->value))
-		return ; // error
+		parser_exit_with_message(ERROR_MALFORMATTED_ARG);
+	if ((arg->arg_value = ft_atoi(parser->current_token->value + 1) < 1))
+		parser_exit_with_message(ERROR_MALFORMATTED_ARG);
 	parser_consume(parser, TOKEN_IDENTIFIER);
+	return (arg);
 }
 
-void	parser_parse_argtype(int opts, int recieved, 
-							void (*type)(t_parser*), t_parser *parser)
+t_ast	*parser_parse_argtype(int opts, int recieved, 
+							t_ast *(*type)(t_parser*), t_parser *parser)
 {
 	if (!check_argument(opts, recieved))
-		return ; // error
-	type(parser);
+		parser_exit_with_message(ERROR_UNEXPECTED_ARG_TYPE);
+	return (type(parser));
 }
 
-void	parser_parse_body_arg(t_parser *parser, int opts)
+t_ast	*parser_parse_body_arg(t_parser *parser, int opts)
 {
-	int			index;
-	t_opcode	code;
-
 	if (is_registry(parser->current_token->value))
-		parser_parse_argtype(opts, T_REG, parser_parse_body_registry, parser);
+		return (parser_parse_argtype(opts,
+				T_REG, parser_parse_body_registry, parser));
 	else if (parser->current_token->type == TOKEN_DIRECT)
-		parser_parse_argtype(opts, T_DIR, parser_parse_body_direct, parser);
-	else
-		parser_parse_argtype(opts, T_IND, parser_parse_body_indirect, parser);
+		return (parser_parse_argtype(opts,
+				T_DIR, parser_parse_body_direct, parser));
+	return (parser_parse_argtype(opts,
+			T_IND, parser_parse_body_indirect, parser));
 }

@@ -35,21 +35,30 @@ int		check_argument(int options, int received)
 	return (0);
 }
 
-void	opcode_parse(t_parser *parser)
+t_ast	*opcode_parse(t_parser *parser)
 {
 	int			opcode;
 	int			i;
 	t_opcode	code;
+	t_ast		*operation;
 
 	if ((opcode = lookup_opcode(parser->prev_token->value)) < 0)
-		return ; // error
+		parser_exit_with_message(ERROR_UNKNOWN_OPERATION);
 	code = opcode_table[opcode];
-	parser_parse_body_arg(parser, code.argument_types[0]);
+	if (!(operation = init_ast(AST_OPERATION)))
+		return (NULL);
+	operation->operation = opcode;
+	if (!(operation->operation_args = ft_memalloc(sizeof(t_ast *) * code.argument_amount)))
+		return (NULL);
+	if (!(operation->operation_args[0] = parser_parse_body_arg(parser, code.argument_types[0])))
+		return (NULL);
 	i = 1;
 	while (i < code.argument_amount)
 	{
 		parser_consume(parser, TOKEN_SEPARATOR);
-		parser_parse_body_arg(parser, code.argument_types[i]);
+		if (!(operation->operation_args[i] = parser_parse_body_arg(parser, code.argument_types[i])))
+			return (NULL);
 		i++;
 	}
+	return (operation);
 }

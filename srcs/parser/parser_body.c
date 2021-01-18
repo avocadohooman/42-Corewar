@@ -61,53 +61,71 @@ int         is_number(char *string)
 	return (0);
 }
 
-void	parser_parse_body_label(t_parser *parser)
+t_ast	*parser_parse_body_label(t_parser *parser)
 {
+	t_ast	*label;
+
+	if (!(label = init_ast(AST_LABEL)))
+		return (NULL);
+	label->label = parser->current_token->value;
 	parser_consume(parser, TOKEN_COLON);
-	return ;
+	return (label);
 }
 
-void	parser_parse_body_identifier(t_parser *parser)
+t_ast	*parser_parse_body_identifier(t_parser *parser)
 {
-	char	*value;
-
-	value = parser->current_token->value;
 	parser_consume(parser, TOKEN_IDENTIFIER);
-	if (parser->current_token->type == TOKEN_COLON)
-	{
-		parser_parse_body_label(parser);
-		return ;
-	}
-	else if (lookup_opcode(value) >= 0)
+	if (parser->current_token->type != TOKEN_COLON &&
+		lookup_opcode(parser->prev_token->value) >= 0)
 	{
 		opcode_parse(parser);
-		return ;
+		return (NULL);
 	}
-	return ; // error or newline
+	return (parser_parse_body_label(parser));
 }
 
-void	parser_parse_body_statement(t_parser *parser)
+t_ast	*parser_parse_body_statement(t_parser *parser)
 {
+	t_ast	*compound;
 
+	if (parser->current_token->type == TOKEN_NEWLINE)
+		return (init_ast(AST_EMPTY));
+	if (!(compound = init_ast(AST_COMPOUND)))
+		return (NULL);
+	if (!(compound->compound_value = ft_memalloc(sizeof(t_ast *) * 2)))
+		return (NULL);
+	if (!(compound->compound_value[0] = parser_parse_body_identifier(parser)))
+		return (NULL);
 	if (parser->current_token->type == TOKEN_IDENTIFIER)
 	{
-		parser_parse_body_identifier(parser);
-		if (parser->current_token->type == TOKEN_IDENTIFIER)
-			parser_parse_body_identifier(parser);
+		if (!(compound->compound_value[1] = parser_parse_body_identifier(parser)))
+			return (NULL);
 	}
-	return ;
+	return (compound);
 }
 
-void	parser_parse_body_statements(t_parser *parser)
+t_ast	*parser_parse_body_statements(t_parser *parser)
 {
-	parser_parse_body_statement(parser);
+	t_ast	*compound;
+	t_ast	*statement;
+
+	if (!(compound = init_ast(AST_COMPOUND)))
+		return (NULL);
+	if (!(compound->compound_value = ft_memalloc(sizeof(t_ast *))))
+		return (NULL);
+	if (!(compound->compound_value[0] = parser_parse_body_statement(parser)))
+		return (NULL);
+	compound->compound_size += 1;
 	while (parser->current_token->type == TOKEN_NEWLINE)
 	{
 		parser_consume(parser, TOKEN_NEWLINE);
-		parser_parse_body_statement(parser);
-
+		if (!(statement = parser_parse_body_statement(parser)))
+		{
+			if (!(compound_insert(compound, statement)))
+				return (NULL);
+		}
 	}
-	return ;
+	return (compound);
 }
 
 

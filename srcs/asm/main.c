@@ -21,6 +21,7 @@ int			main(int argc, char **argv)
 	t_file		output_file;
 	t_lexer		*lexer;
 	t_parser	*parser;
+	t_ast		*root;
 	int			bytes;
 	
 	if (argc != 2 || !file_extension(argv[1], FILE_EXT))
@@ -29,8 +30,7 @@ int			main(int argc, char **argv)
 	input_file = read_file(argv[1]);
 	lexer = init_lexer(input_file.data, input_file.used);
 	parser = new_parser(lexer);
-	parser_parse(parser, NULL);
-    // printf("check registry: %d\ncheck dir || ind value: %d\n", check_registry("r-1"), check_dir_ind("-0000000000000000000000000000000000000000000021343"));
+	root = parser_parse(parser);
 
 	// bytes = write_file(1, &input_file);
 	// printf("wrote %d bytes\n", bytes);
