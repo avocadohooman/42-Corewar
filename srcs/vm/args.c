@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:46:01 by seronen           #+#    #+#             */
-/*   Updated: 2021/01/15 13:14:03 by seronen          ###   ########.fr       */
+/*   Updated: 2021/01/16 18:10:44 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int					get_players(t_vm *vm, char **args, int ac)
 		print_error(INVALID_ARG);
 	vm->player_nb = get_player_amount(vm, args, ac);
 	printf("Found %d players.\n", vm->player_nb);
-	if (vm->player_nb > MAX_PLAYERS)
+	if (vm->player_nb > MAX_PLAYERS || vm->player_nb < MIN_PLAYERS)
 		print_error(INVALID_ARG);
 	while (player < vm->player_nb)
 	{
