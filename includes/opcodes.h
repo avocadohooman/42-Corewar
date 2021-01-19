@@ -62,7 +62,7 @@ enum {
     NO_OPERATION
 };
 
-static t_opcode opcode_table[] = {
+static const t_opcode opcode_table[] = {
 
 	[LFORK_INDEX] = {LFORK_LITERAL, 1, {T_DIR}, NULL},
 	[STI_INDEX] = {STI_LITERAL, 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, NULL},

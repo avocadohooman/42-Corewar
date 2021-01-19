@@ -26,7 +26,6 @@ int			main(int argc, char **argv)
 	
 	if (argc != 2 || !file_extension(argv[1], FILE_EXT))
 		print_error(INVALID_FILE);
-
 	input_file = read_file(argv[1]);
 	lexer = init_lexer(input_file.data, input_file.used);
 	parser = new_parser(lexer);

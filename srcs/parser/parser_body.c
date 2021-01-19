@@ -127,5 +127,3 @@ t_ast	*parser_parse_body_statements(t_parser *parser)
 	}
 	return (compound);
 }
-
-
