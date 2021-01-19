@@ -25,8 +25,8 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/parser/parser_args.c srcs/parser/parser_error.c \
 		srcs/opcode/opcode.c \
 		srcs/ast/ast.c \
-		srcs/encoder/encoder_bogy/get_argument_type.c srcs/encoder/encoder_bogy/get_arguments.c srcs/encoder/encoder_bogy/get_component_size.c \
-		srcs/encoder/encoder_bogy/get_statement.c srcs/encoder/encoder_bogy/track_jmps.c srcs/encoder/encoder_bogy/get_t_dir_special_arguments.c \
+		srcs/encoder/encoder_body/get_argument_type.c srcs/encoder/encoder_body/get_arguments.c srcs/encoder/encoder_body/get_component_size.c \
+		srcs/encoder/encoder_body/get_statement.c srcs/encoder/encoder_body/track_jmps.c srcs/encoder/encoder_body/get_t_dir_special_arguments.c \
 		srcs/vm/args.c srcs/vm/read_files.c srcs/vm/arena.c
 
 INCL = ./includes/
