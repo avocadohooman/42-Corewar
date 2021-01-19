@@ -195,10 +195,10 @@ t_token			*lex_get_operator(t_lexer *lexer)
 	if (lexer->c == SEPARATOR_CHAR)
 		return (lex_advance_with_token(lexer,
 				init_token(TOKEN_SEPARATOR, char_to_string(lexer->c))));
-	if (lexer->c == 13)
-		return (lex_get_newline(lexer));
-		// return (lex_advance_with_token(lexer,
-		// 		init_token(TOKEN_NEWLINE, char_to_string(lexer->c))));
+	if (lexer->c == '\n')
+		return (lex_advance_with_token(lexer,
+				init_token(TOKEN_NEWLINE, char_to_string(lexer->c))));
+		// return (lex_get_newline(lexer));
 	return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
 }
 

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2013/11/06 14:44:35 by zaz              ###   ########.fr       */
+/*   Updated: 2021/01/19 12:26:21 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
-
+/*
 t_op    op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
@@ -37,4 +37,50 @@ t_op    op_tab[17] =
 	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
 	{0, 0, {0}, 0, 0, 0, 0, 0}
+};
+
+// This is not used atm :))))))
+
+int		op_table[17] = 
+{
+	{0x01, {T_DIR}, {0}, {0}, 0, 4},
+	{0x02, {T_DIR, T_IND}, {T_REG}, {0}, 1, 4},
+	{0x03, {T_REG}, {T_REG, T_IND}, {0}, 1, 4},
+	{0x04, {T_REG}, {T_REG}, {T_REG}, 1, 4},
+	{0x05, {T_REG}, {T_REG}, {T_REG}, 1, 4},
+	{0x06, {T_REG, T_IND, T_DIR}, {T_REG, T_IND, T_DIR}, {T_REG}, 1, 4},
+	{0x07, {T_REG, T_IND, T_DIR}, {T_REG, T_IND, T_DIR}, {T_REG}, 1, 4},
+	{0x08, {T_REG, T_IND, T_DIR}, {T_REG, T_IND, T_DIR}, {T_REG}, 1, 4},
+	{0x09, {T_DIR}, {0}, {0}, 0, 2},
+	{0x0a, {T_REG, T_IND, T_DIR}, {T_REG, T_DIR}, {T_REG}, 1, 2},
+	{0x0b, {T_REG}, {T_REG, T_IND, T_DIR}, {T_REG, T_DIR}, 1, 2},
+	{0x0c, {T_DIR}, {0}, {0}, 0, 2},
+	{0x0d, {T_DIR, T_IND}, {T_REG}, {0}, 1, 4},
+	{0x0e, {T_REG, T_IND, T_DIR}, {T_REG, T_DIR}, {T_REG}, 1, 2},
+	{0x0f, {T_DIR}, {0}, {0}, 0, 2},
+	{0x10, {T_DIR}, {0}, {0}, 1, 4},
+	{0, {0}, {0}, {0}, 0, 0}
+};
+*/
+// This is used!!!
+
+int		op_table_redefined[17][3] =
+{
+	{0x01, 0, 4},
+	{0x02, 1, 4},
+	{0x03, 1, 4},
+	{0x04, 1, 4},
+	{0x05, 1, 4},
+	{0x06, 1, 4},
+	{0x07, 1, 4},
+	{0x08, 1, 4},
+	{0x09, 0, 2},
+	{0x0a, 1, 2},
+	{0x0b, 1, 2},
+	{0x0c, 0, 2},
+	{0x0d, 1, 4},
+	{0x0e, 1, 2},
+	{0x0f, 0, 2},
+	{0x10, 1, 4},
+	{0, 0, 0}
 };

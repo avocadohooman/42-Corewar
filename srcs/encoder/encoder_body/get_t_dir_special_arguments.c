@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   get_t_dir_special_arguments.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/01 21:03:11 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/19 12:22:57 by npimenof         ###   ########.fr       */
+/*   Created: 2020/12/06 15:43:04 by gmolin            #+#    #+#             */
+/*   Updated: 2021/01/19 12:35:26 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
-# include "libft.h"
-# include "token.h"
+#include "asm.h"
+#include "file.h"
+#include <stdio.h> // delete
+#include <limits.h>
 
-typedef struct	s_lexer
+int					handle_t_dir_label(t_ass *ass, t_statement *statement, char *t_dir_arg, int t_dir_size)
 {
-	char 		*data;
-	char		c;
-	size_t		size;
-	size_t		index;
-	size_t		line_number;
-	size_t		column;
-}				t_lexer;
+	int bytes;
 
-t_lexer			*init_lexer(char *data, size_t size);
-void			free_lexer(t_lexer **lexer);
-
-t_token			*lex_get_next_token(t_lexer *lexer);
-void			lex_advance(t_lexer *lexer);
-
-#endif
-
+	if (fetch_jmp(ass->track, t_dir_arg, statement->pos))
+		return bytes = fetch_jmp(ass->track, t_dir_arg, t_dir_size);
+	return 0;
+}

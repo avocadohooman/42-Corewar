@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "token.h"
-#include <stdio.h>
 
 t_token			*init_token(t_type type, char *value)
 {
@@ -26,15 +25,8 @@ t_token			*init_token(t_type type, char *value)
 
 void			free_token(t_token **token)
 {
+	free((*token)->value);
+	(*token)->value = NULL;
 	free(*token);
 	*token = NULL;
-}
-
-// This is a bad idea, as this function is refering to
-// enum values defined in token.h
-int				is_opcode(t_type type)
-{
-	if (type >= 0 && type <= 15)
-		return (1);
-	return (0);
 }

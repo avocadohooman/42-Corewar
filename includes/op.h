@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seroorann <seroorane@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/12/01 14:05:54 by seroorantane          ###   ########.fr       */
+/*   Updated: 2021/01/19 12:22:11 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Toutes les tailles sont en octets.
-** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
+** All sizes are in bytes.
+** We assume that an int is 32 bits. Is this true for you?
 */
 
 #ifndef OP_H
@@ -20,7 +20,7 @@
 
 # define IND_SIZE			2
 # define REG_SIZE			4
-# define DIR_SIZE			REG_SIZ
+# define DIR_SIZE			REG_SIZE
 # define REG_CODE			1
 # define DIR_CODE			2
 # define IND_CODE			3
@@ -35,7 +35,7 @@
 # define LABEL_CHAR			':'
 # define DIRECT_CHAR		'%'
 # define SEPARATOR_CHAR		','
-# define NEWLINE_CHAR '\n'
+# define NEWLINE_CHAR		'\n'
 
 # define LABEL_CHARS		"abcdefghijklmnopqrstuvwxyz_0123456789"
 

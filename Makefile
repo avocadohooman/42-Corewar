@@ -19,14 +19,18 @@ VM_MAIN = srcs/vm/main.c
 ASM_MAIN = srcs/asm/main.c
 
 SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
-		srcs/lexer/lexer.c srcs/token/token.c srcs/parser/parser.c \
+		srcs/lexer/lexer.c srcs/token/token.c \
 		srcs/error.c \
-		srcs/parser/parser_body.c srcs/parser/parser_header.c \
-		srcs/parser/parser_args.c srcs/parser/parser_error.c \
+		srcs/encoder/encoder_body/get_argument_type.c srcs/encoder/encoder_body/get_arguments.c srcs/encoder/encoder_body/get_component_size.c \
+		srcs/encoder/encoder_body/get_statement.c srcs/encoder/encoder_body/track_jmps.c srcs/encoder/encoder_body/get_t_dir_special_arguments.c \
+		srcs/vm/args.c srcs/vm/read_files.c srcs/vm/arena.c \
+		srcs/ast/ast.c \
+		srcs/parser/parser.c srcs/parser/parser_header.c \
+		srcs/parser/parser_body.c srcs/parser/parser_args.c \
+		srcs/parser/parser_error.c \
 		srcs/opcode/opcode.c \
-		srcs/ast/ast.c
 
-INCL = ./includes/
+INCL = ./includes
 LIBFT = ./libft
 LIBFTINCL = $(LIBFT)/includes
 
@@ -41,7 +45,7 @@ $(VM_NAME): $(SRCS) $(INCL) $(VM_MAIN)
 	gcc $(FLAGS) -o $(VM_NAME) $(VM_MAIN) -I$(INCL) $(SRCS)  \
 	-L$(LIBFT) -lft -I$(LIBFTINCL)
 
-$(ASM_NAME): $(SRCS) $(INCL)/* $(ASM_MAIN)
+$(ASM_NAME): $(SRCS) $(INCL) $(ASM_MAIN)
 	@if git submodule status | egrep -q '^[-]' ; then \
 		echo "INFO: Initializing git submodules"; \
 		git submodule update --init; \
