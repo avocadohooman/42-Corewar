@@ -23,6 +23,7 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/error.c \
 		srcs/encoder/encoder_bogy/get_argument_type.c srcs/encoder/encoder_bogy/get_arguments.c srcs/encoder/encoder_bogy/get_component_size.c \
 		srcs/encoder/encoder_bogy/get_statement.c srcs/encoder/encoder_bogy/track_jmps.c srcs/encoder/encoder_bogy/get_t_dir_special_arguments.c
+		srcs/vm/args.c srcs/vm/read_files.c srcs/vm/arena.c
 
 INCL = ./includes
 LIBFT = ./libft
