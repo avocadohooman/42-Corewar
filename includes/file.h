@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buffer.h                                           :+:      :+:    :+:   */
+/*   file.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 14:55:00 by npimenof          #+#    #+#             */
-/*   Updated: 2020/12/01 22:02:11 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/01/19 12:21:30 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,5 @@ void			free_file(t_file *b);
 t_file			read_file(char *filename);
 int				write_file(int fd, t_file *file);
 int				file_extension(char *filename, char *expected_extension);
-
-
 
 #endif

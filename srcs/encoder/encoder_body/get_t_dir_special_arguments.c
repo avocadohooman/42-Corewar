@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_t_dir_special_arguments.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 15:43:04 by gmolin            #+#    #+#             */
-/*   Updated: 2021/01/19 12:16:00 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/01/19 12:35:26 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

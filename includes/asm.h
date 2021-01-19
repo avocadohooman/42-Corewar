@@ -64,6 +64,12 @@ typedef	struct				s_instruction
 	struct s_instruction	*next;
 }							t_instruction;
 
+typedef struct      s_header
+{
+    unsigned char   prog_name[5];
+    unsigned char   comment[8];
+}                   t_header;
+
 void						get_argument_type(t_ass *ass, t_instruction *instruction);
 void						get_arguments(t_ass *ass, t_statement *statement);
 int							handle_t_dir_label(t_ass *ass, t_statement *statement, char *t_dir_arg, int t_dir_size);

@@ -16,13 +16,8 @@ char	*g_errors[] = {"Usage: ./asm [champion_file.s]", "Missing argument!",
 						"three", "File could not be opened.","Buffer Error", 
 						"Get Next Line Error", "Invalid argument!", "Malloc error!"};
 
-void	print_error(t_error_type type)
+void	print_error(int type)
 {
 	ft_putendl(g_errors[type]);
 	exit(0);
 }
-
-// void	exit_with_message(t_error type)
-// {
-// 	ft_putendl()
-// }

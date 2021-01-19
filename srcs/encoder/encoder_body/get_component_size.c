@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   get_component_size.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:01 by gmolin            #+#    #+#             */
-/*   Updated: 2020/12/08 15:42:51 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/01/19 12:42:21 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include "file.h"
 #include <stdio.h> // delete
-#include "../op.c"
-/*
+
+
 int		op_table_redefined[17][3] =
 {
 	{0x01, 0, 4},
@@ -35,7 +35,7 @@ int		op_table_redefined[17][3] =
 	{0x10, 1, 4},
 	{0, 0, 0}
 };
-*/
+
 static int				fetch_index(unsigned char code)
 {
 	int		i;
