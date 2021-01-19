@@ -7,12 +7,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
-
-typedef struct      s_header
-{
-    unsigned char   prog_name[5];
-    unsigned char   comment[8];
-}                   t_header;
+#include "asm.h"
 
 int     main(void)
 {

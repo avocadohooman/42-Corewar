@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_t_dir_special_arguments.c                      :+:      :+:    :+:   */
+/*   parser_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/06 15:43:04 by gmolin            #+#    #+#             */
-/*   Updated: 2021/01/19 12:35:26 by npimenof         ###   ########.fr       */
+/*   Created: 2021/01/18 11:36:40 by npimenof          #+#    #+#             */
+/*   Updated: 2021/01/19 12:36:03 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
-#include "file.h"
-#include <stdio.h> // delete
-#include <limits.h>
+#include "parser.h"
+#include <stdio.h>
 
-int					handle_t_dir_label(t_ass *ass, t_statement *statement, char *t_dir_arg, int t_dir_size)
+void    parser_exit_with_message(t_error type)
 {
-	int bytes;
-
-	if (fetch_jmp(ass->track, t_dir_arg, statement->pos))
-		return bytes = fetch_jmp(ass->track, t_dir_arg, t_dir_size);
-	return 0;
+    ft_putendl_fd(g_parser_error[type], 2);
+    exit(1);
 }

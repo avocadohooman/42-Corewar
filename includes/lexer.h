@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:03:11 by npimenof          #+#    #+#             */
-/*   Updated: 2020/12/01 21:23:10 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/01/19 12:22:57 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct	s_lexer
 	size_t		size;
 	size_t		index;
 	size_t		line_number;
+	size_t		column;
 }				t_lexer;
 
 t_lexer			*init_lexer(char *data, size_t size);

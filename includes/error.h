@@ -27,6 +27,6 @@ typedef enum	e_error_type
 	INVALID_STATEMENT
 }				t_error_type;
 
-void			print_error(t_error_type type);
+void			print_error(int type);
 
 #endif
