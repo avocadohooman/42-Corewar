@@ -28,5 +28,7 @@ typedef enum	e_error_type
 }				t_error_type;
 
 void			print_error(t_error_type type);
+void			exit_with_message();
+
 
 #endif
