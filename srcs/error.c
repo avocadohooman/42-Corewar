@@ -21,8 +21,3 @@ void	print_error(t_error_type type)
 	ft_putendl(g_errors[type]);
 	exit(0);
 }
-
-// void	exit_with_message(t_error type)
-// {
-// 	ft_putendl()
-// }
