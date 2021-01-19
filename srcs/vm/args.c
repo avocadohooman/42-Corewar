@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:46:01 by seronen           #+#    #+#             */
-/*   Updated: 2021/01/16 18:10:44 by seronen          ###   ########.fr       */
+/*   Updated: 2021/01/19 15:36:10 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ static int			get_player_amount(t_vm *vm, char **args, int ac)
 	amount = 0;
 	while (i < ac)
 	{
-		if (args[i] && (!ft_strcmp("-n", args[i])) ||
-			(!ft_strcmp("-dump", args[i])) && (vm->dump = validate_nb(args[i + 1], 0)))
+		if (args[i] && ((!ft_strcmp("-n", args[i])) ||
+			((!ft_strcmp("-dump", args[i])) && (vm->dump = validate_nb(args[i + 1], 0)))))
 			i++;
 		else if (args[i])
 			amount++;
