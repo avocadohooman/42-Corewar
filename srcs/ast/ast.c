@@ -45,3 +45,51 @@ t_ast	*compound_insert(t_ast *compound, t_ast *new)
 	compound->compound_value = tmp;
 	return (compound);
 }
+
+void	visit_compound(t_ast *compound)
+{
+	int	i;
+
+	printf("compound -- size: %d\n", compound->compound_size);
+	i = -1;
+	while (++i < compound->compound_size)
+		visit_ast(compound->compound_value[i]);
+}
+void	visit_command(t_ast *command)
+{
+	printf("command: %s -- %s\n", command->command, command->string);
+}
+void	visit_label(t_ast *label)
+{
+	printf("label: %s\n", label->label);
+}
+void	visit_argument(t_ast *arg)
+{
+	printf("argument: %d -- %d\n", arg->arg_type, arg->arg_value);
+}
+void	visit_operation(t_ast *operation)
+{
+	int	i;
+
+	printf("operation: %d -- number of args %d\n", operation->operation + 1, operation->operation_n_args);
+	i = -1;
+	while (++i < operation->operation_n_args)
+		visit_argument(operation->operation_args[i]);
+}
+void	visit_empty(t_ast *empty)
+{
+	printf("empty\n");
+}
+void	visit_ast(t_ast *ast)
+{
+	if (ast->type == AST_COMPOUND)
+		visit_compound(ast);
+	else if (ast->type == AST_COMMAND)
+		visit_command(ast);
+	else if (ast->type == AST_LABEL)
+		visit_label(ast);
+	else if (ast->type == AST_OPERATION)
+		visit_operation(ast);
+	else
+		visit_empty(ast);		
+}
