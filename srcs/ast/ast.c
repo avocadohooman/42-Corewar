@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ast.h"
+#include <stdio.h>
 
 t_ast	*init_ast(int type)
 {
@@ -21,6 +22,7 @@ t_ast	*init_ast(int type)
 	ast->type = type;
 	ast->label = NULL;
 	ast->operation = 0;
+	ast->operation_n_args = 0;
 	ast->operation_args = NULL;
 	ast->arg_type = 0;
 	ast->arg_value = 0;

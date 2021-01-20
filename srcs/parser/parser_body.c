@@ -77,10 +77,7 @@ t_ast	*parser_parse_body_identifier(t_parser *parser)
 	parser_consume(parser, TOKEN_IDENTIFIER);
 	if (parser->current_token->type != TOKEN_COLON &&
 		lookup_opcode(parser->prev_token->value) >= 0)
-	{
-		opcode_parse(parser);
-		return (NULL);
-	}
+		return (opcode_parse(parser));
 	return (parser_parse_body_label(parser));
 }
 
@@ -96,10 +93,12 @@ t_ast	*parser_parse_body_statement(t_parser *parser)
 		return (NULL);
 	if (!(compound->compound_value[0] = parser_parse_body_identifier(parser)))
 		return (NULL);
+	compound->compound_size += 1;
 	if (parser->current_token->type == TOKEN_IDENTIFIER)
 	{
 		if (!(compound->compound_value[1] = parser_parse_body_identifier(parser)))
 			return (NULL);
+		compound->compound_size += 1;
 	}
 	return (compound);
 }
@@ -119,7 +118,9 @@ t_ast	*parser_parse_body_statements(t_parser *parser)
 	while (parser->current_token->type == TOKEN_NEWLINE)
 	{
 		parser_consume(parser, TOKEN_NEWLINE);
-		if (!(statement = parser_parse_body_statement(parser)))
+		if (parser->current_token->type == TOKEN_EOF)
+			break ;
+		if ((statement = parser_parse_body_statement(parser)))
 		{
 			if (!(compound_insert(compound, statement)))
 				return (NULL);

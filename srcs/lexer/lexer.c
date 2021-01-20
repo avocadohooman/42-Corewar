@@ -170,9 +170,9 @@ char			*char_to_string(char c)
 t_token			*lex_get_newline(t_lexer *lexer)
 {
 	lex_advance(lexer);
-	if (lexer->c != 10)
-		return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
-	lex_advance(lexer);
+	// if (lexer->c != 10)
+	// 	return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
+	// lex_advance(lexer);
 	lexer->line_number++;
 	lexer->column = 1;
 	return (init_token(TOKEN_NEWLINE, "\\n"));
@@ -196,9 +196,9 @@ t_token			*lex_get_operator(t_lexer *lexer)
 		return (lex_advance_with_token(lexer,
 				init_token(TOKEN_SEPARATOR, char_to_string(lexer->c))));
 	if (lexer->c == '\n')
-		return (lex_advance_with_token(lexer,
-				init_token(TOKEN_NEWLINE, char_to_string(lexer->c))));
-		// return (lex_get_newline(lexer));
+		return (lex_get_newline(lexer));
+		// return (lex_advance_with_token(lexer,
+		// 		init_token(TOKEN_NEWLINE, char_to_string(lexer->c))));
 	return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
 }
 

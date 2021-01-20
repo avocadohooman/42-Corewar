@@ -30,6 +30,7 @@ typedef struct		s_ast
 	int				type;
 	char			*label;
 	int				operation;
+	int				operation_n_args;
 	struct s_ast	**operation_args;
 	int				arg_type;
 	int				arg_value;

@@ -60,5 +60,6 @@ t_ast	*opcode_parse(t_parser *parser)
 			return (NULL);
 		i++;
 	}
+	operation->operation_n_args = code.argument_amount;
 	return (operation);
 }
