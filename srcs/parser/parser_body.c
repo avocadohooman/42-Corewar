@@ -67,7 +67,7 @@ t_ast	*parser_parse_body_label(t_parser *parser)
 
 	if (!(label = init_ast(AST_LABEL)))
 		return (NULL);
-	label->label = parser->current_token->value;
+	label->label = parser->prev_token->value;
 	parser_consume(parser, TOKEN_COLON);
 	return (label);
 }

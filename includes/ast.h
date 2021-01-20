@@ -43,5 +43,7 @@ typedef struct		s_ast
 t_ast				*init_ast(int type);
 t_ast				*compound_insert(t_ast *compound, t_ast *new);
 
+void				visit_ast(t_ast *ast);
+
 
 #endif
