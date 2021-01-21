@@ -66,7 +66,7 @@ t_ast	*parser_parse_body_registry(t_parser *parser)
 	arg->arg_type = T_REG;
 	if (!is_registry(parser->current_token->value))
 		parser_exit_with_message(ERROR_MALFORMATTED_ARG);
-	if ((arg->arg_value = ft_atoi(parser->current_token->value + 1) < 1))
+	if ((arg->arg_value = ft_atoi(parser->current_token->value + 1)) < 1)
 		parser_exit_with_message(ERROR_MALFORMATTED_ARG);
 	parser_consume(parser, TOKEN_IDENTIFIER);
 	return (arg);
