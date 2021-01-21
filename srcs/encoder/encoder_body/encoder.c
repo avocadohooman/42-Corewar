@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_t_dir_special_arguments.c                      :+:      :+:    :+:   */
+/*   encoder.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/06 15:43:04 by gmolin            #+#    #+#             */
-/*   Updated: 2021/01/21 12:54:15 by gmolin           ###   ########.fr       */
+/*   Created: 2021/01/21 12:08:38 by gmolin            #+#    #+#             */
+/*   Updated: 2021/01/21 12:58:15 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "encoder.h"
 #include "file.h"
 #include <stdio.h> // delete
-#include <limits.h>
+#include "encoder.h"
 
-int					handle_t_dir_label(t_ass *ass, t_statement *statement, char *t_dir_arg, int t_dir_size)
+void        encoding_hub(t_ast *root) 
 {
-	int bytes;
+	t_instruction 	instruction;
+    t_ass 			ass;
+	t_instruction   *tmp;
 
-	if (fetch_jmp(ass->track, t_dir_arg, statement->pos))
-		return bytes = fetch_jmp(ass->track, t_dir_arg, t_dir_size);
-	return 0;
+	visit_ast(root, &instruction);
 }

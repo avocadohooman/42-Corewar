@@ -6,11 +6,11 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 15:55:47 by seronen           #+#    #+#             */
-/*   Updated: 2021/01/21 11:14:49 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/01/21 12:54:18 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "encoder.h"
 
 void		trackadd(t_track **alst, t_track *new)
 {

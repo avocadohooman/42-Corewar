@@ -13,7 +13,8 @@
 #ifndef AST_H
 # define AST_H
 
-#include "libft.h"
+# include "libft.h"
+# include "asm.h"
 
 enum
 {
@@ -46,7 +47,7 @@ typedef struct		s_ast
 t_ast				*init_ast(int type);
 t_ast				*compound_insert(t_ast *compound, t_ast *new);
 
-void				visit_ast(t_ast *ast);
+void				visit_ast(t_ast *ast, t_instruction *instruction);
 
 
 #endif

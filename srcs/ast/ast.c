@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "ast.h"
-#include <stdio.h>
+#include "asm.h"
+#include <stdio.h> // delete
 
 t_ast	*init_ast(int type)
 {
@@ -49,19 +50,24 @@ t_ast	*compound_insert(t_ast *compound, t_ast *new)
 	return (compound);
 }
 
-void	visit_compound(t_ast *compound)
+void    instruction_insert(t_ast *data, t_instruction *instruction)
+{
+    if (data->label)
+}
+
+void	visit_compound(t_ast *compound, t_instruction *instruction)
 {
 	int	i;
 
-	printf("compound -- size: %d\n", compound->compound_size);
+	// printf("compound -- size: %d\n", compound->compound_size);
 	i = -1;
 	while (++i < compound->compound_size)
-		visit_ast(compound->compound_value[i]);
+		visit_ast(compound->compound_value[i], instruction);
 }
 
 void	visit_command(t_ast *command)
 {
-	printf("command: %s -- %s\n", command->command, command->string);
+	// printf("command: %s -- %s\n", command->command, command->string);
 }
 
 void	visit_label(t_ast *label)
@@ -69,12 +75,14 @@ void	visit_label(t_ast *label)
 	printf("label: %s\n", label->label);
 }
 
-void	visit_argument(t_ast *arg)
+void	visit_argument(t_ast *arg, t_instruction *instruction)
 {
+    if (arg->label)
+        printf("t_dir label: %s\n", arg->label);
 	printf("argument: %d -- %d\n", arg->arg_type, arg->arg_value);
 }
 
-void	visit_operation(t_ast *operation)
+void	visit_operation(t_ast *operation, t_instruction *instruction)
 {
 	int	i;
 
@@ -84,55 +92,24 @@ void	visit_operation(t_ast *operation)
 			operation->operation_size);
 	i = -1;
 	while (++i < operation->operation_n_args)
-		visit_argument(operation->operation_args[i]);
-}
-void	visit_empty(t_ast *empty)
-{
-	printf("empty\n");
+		visit_argument(operation->operation_args[i], instruction);
 }
 
-void	visit_ast(t_ast *ast)
+void	visit_empty(t_ast *empty)
+{
+	// printf("empty\n");
+}
+
+void	visit_ast(t_ast *ast, t_instruction *instruction)
 {
 	if (ast->type == AST_COMPOUND)
-		visit_compound(ast);
+		visit_compound(ast, instruction);
 	else if (ast->type == AST_COMMAND)
 		visit_command(ast);
 	else if (ast->type == AST_LABEL)
 		visit_label(ast);
 	else if (ast->type == AST_OPERATION)
-		visit_operation(ast);
+		visit_operation(ast, instruction);
 	else
 		visit_empty(ast);		
 }
-
-
-
-
-/*
-
-
-	l2:		0
-	live:	11
-_______________
-
-index:	0	l2
-		1
-		2	live
-		3
-		4
-
-
-
-
-index:	0	0
-		1	6
-		2	11
-		3	14
-
-6
-5
-3
-3
-
-
-*/

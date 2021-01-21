@@ -6,11 +6,11 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:58 by gmolin            #+#    #+#             */
-/*   Updated: 2021/01/19 17:19:57 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/01/21 12:54:04 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "encoder.h"
 #include "file.h"
 
 void		get_argument_type(t_ass *ass, t_instruction *instruction)

@@ -6,11 +6,11 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:27 by gmolin            #+#    #+#             */
-/*   Updated: 2020/12/05 17:04:17 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/01/21 12:54:12 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "encoder.h"
 #include "file.h"
 #include <stdio.h> // delete
 
