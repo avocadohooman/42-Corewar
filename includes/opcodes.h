@@ -39,7 +39,8 @@ typedef struct  s_opcode
     char        *literal;
     int         argument_amount;
     int         argument_types[3];
-    void        (*parse)(t_parser*);
+    int         argument_type;
+    int         dir_size;
 }               t_opcode;
 
 enum {
@@ -64,23 +65,23 @@ enum {
 
 static const t_opcode opcode_table[] = {
 
-	[LFORK_INDEX] = {LFORK_LITERAL, 1, {T_DIR}, NULL},
-	[STI_INDEX] = {STI_LITERAL, 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, NULL},
-	[FORK_INDEX] = {FORK_LITERAL, 1, {T_DIR}, NULL},
-	[LLD_INDEX] = {LLD_LITERAL, 2, {T_DIR | T_IND, T_REG}, NULL},
-	[LD_INDEX] = {LD_LITERAL, 2, {T_DIR | T_IND, T_REG}, NULL},
-	[ADD_INDEX] = {ADD_LITERAL, 3, {T_REG, T_REG, T_REG}, NULL},
-	[ZJMP_INDEX] = {ZJMP_LITERAL, 1, {T_DIR}, NULL},
-	[SUB_INDEX] = {SUB_LITERAL, 3, {T_REG, T_REG, T_REG}, NULL},
-	[LDI_INDEX] = {LDI_LITERAL, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, NULL},
-	[OR_INDEX] = {OR_LITERAL, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, NULL},
-	[ST_INDEX] = {ST_LITERAL, 2, {T_REG, T_IND | T_REG}, NULL},
-	[AFF_INDEX] = {AFF_LITERAL, 1, {T_REG}, NULL},
-    [LIVE_INDEX] = {LIVE_LITERAL, 1, {T_DIR}, NULL},
-	[XOR_INDEX] = {XOR_LITERAL, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, NULL},
-	[LLDI_INDEX] = {LLDI_LITERAL, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, NULL},
-	[AND_INDEX] = {AND_LITERAL, 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, NULL},
-	[NO_OPERATION] = {0, 0, 0, 0}
+	[LFORK_INDEX] = {LFORK_LITERAL, 1, {T_DIR}, 0, 2},
+	[STI_INDEX] = {STI_LITERAL, 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 1, 2},
+	[FORK_INDEX] = {FORK_LITERAL, 1, {T_DIR}, 0, 2},
+	[LLD_INDEX] = {LLD_LITERAL, 2, {T_DIR | T_IND, T_REG}, 1, 4},
+	[LD_INDEX] = {LD_LITERAL, 2, {T_DIR | T_IND, T_REG}, 1, 4},
+	[ADD_INDEX] = {ADD_LITERAL, 3, {T_REG, T_REG, T_REG}, 1, 4},
+	[ZJMP_INDEX] = {ZJMP_LITERAL, 1, {T_DIR}, 0, 2},
+	[SUB_INDEX] = {SUB_LITERAL, 3, {T_REG, T_REG, T_REG}, 1, 4},
+	[LDI_INDEX] = {LDI_LITERAL, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 1, 2},
+	[OR_INDEX] = {OR_LITERAL, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 1, 4},
+	[ST_INDEX] = {ST_LITERAL, 2, {T_REG, T_IND | T_REG}, 1, 4},
+	[AFF_INDEX] = {AFF_LITERAL, 1, {T_REG}, 1, 4},
+    [LIVE_INDEX] = {LIVE_LITERAL, 1, {T_DIR}, 0, 4},
+	[XOR_INDEX] = {XOR_LITERAL, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 1, 4},
+	[LLDI_INDEX] = {LLDI_LITERAL, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 1, 2},
+	[AND_INDEX] = {AND_LITERAL, 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 1, 4},
+	[NO_OPERATION] = {0, 0, 0, 0, 0}
 };
 
 int		lookup_opcode(char *str);

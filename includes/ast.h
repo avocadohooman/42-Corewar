@@ -29,9 +29,12 @@ typedef struct		s_ast
 {
 	int				type;
 	char			*label;
+	int				label_index;
 	int				operation;
 	int				operation_n_args;
 	struct s_ast	**operation_args;
+	int				arg_size;
+	int				operation_size;
 	int				arg_type;
 	int				arg_value;
 	char			*command;
