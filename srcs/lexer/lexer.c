@@ -186,6 +186,9 @@ t_token			*lex_advance_with_token(t_lexer *lexer, t_token *token)
 
 t_token			*lex_get_operator(t_lexer *lexer)
 {
+	if (!lexer->c)
+		return (lex_advance_with_token(lexer,
+				init_token(TOKEN_EOF, char_to_string(lexer->c))));
 	if (lexer->c == LABEL_CHAR)
 		return (lex_advance_with_token(lexer,
 				init_token(TOKEN_COLON, char_to_string(lexer->c))));

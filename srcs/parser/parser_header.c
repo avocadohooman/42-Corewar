@@ -58,7 +58,7 @@ t_ast	*parser_parse_command(t_parser *parser)
 		parser_exit_with_message(ERROR_UNKNOWN_COMMAND);
 }
 
-t_ast	*parser_parse_header_statement(t_parser *parser)
+t_ast	*parser_parse_header_instruction(t_parser *parser)
 {
 	t_type	type;
 
@@ -68,16 +68,16 @@ t_ast	*parser_parse_header_statement(t_parser *parser)
 	return (init_ast(AST_EMPTY));
 }
 
-t_ast	*parser_parse_header_statements(t_parser *parser)
+t_ast	*parser_parse_header_instructions(t_parser *parser)
 {
 	t_ast	*compound;
 	t_ast	*statement;
 
-	if (!(compound = init_ast(AST_COMPOUND)))
+	if (!(compound = init_ast(AST_HEADER)))
 		return (NULL);
 	if (!(compound->compound_value = ft_memalloc(sizeof(t_ast *))))
 		return (NULL);
-	if (!(compound->compound_value[0] = parser_parse_header_statement(parser)))
+	if (!(compound->compound_value[0] = parser_parse_header_instruction(parser)))
 		return (NULL);
 	compound->compound_size = 1;
 	while (parser->current_token->type == TOKEN_NEWLINE)
@@ -86,7 +86,7 @@ t_ast	*parser_parse_header_statements(t_parser *parser)
 		if (parser->current_token->type != TOKEN_COMMAND &&
 			parser->current_token->type != TOKEN_NEWLINE)
 			break ;
-		if ((statement = parser_parse_header_statement(parser)))
+		if ((statement = parser_parse_header_instruction(parser)))
 		{
 			if (!(compound_insert(compound, statement)))
 				return (NULL);

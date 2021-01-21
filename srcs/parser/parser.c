@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:29:37 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/19 19:08:59 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/01/21 13:44:04 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void			free_parser(t_parser **parser)
 	*parser = NULL;
 }
 
-t_ast			*parser_parse_statements(t_parser *parser)
+t_ast			*parser_parse_instructions(t_parser *parser)
 {
 	t_ast	*ast;
 
@@ -64,14 +64,14 @@ t_ast			*parser_parse_statements(t_parser *parser)
 	if (!(ast->compound_value = ft_memalloc(sizeof(t_ast *) * 2)))
 		return (NULL);
 	ast->compound_size = 2;
-	if (!(ast->compound_value[0] = parser_parse_header_statements(parser)))
+	if (!(ast->compound_value[0] = parser_parse_header_instructions(parser)))
 		return (NULL);
-	if (!(ast->compound_value[1] = parser_parse_body_statements(parser)))
+	if (!(ast->compound_value[1] = parser_parse_body_instructions(parser)))
 		return (NULL);
 	return (ast);
 }
 
 t_ast			*parser_parse(t_parser *parser)
 {
-	return (parser_parse_statements(parser));
+	return (parser_parse_instructions(parser));
 }
