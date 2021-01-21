@@ -48,16 +48,23 @@ t_ast	*opcode_parse(t_parser *parser)
 	if (!(operation = init_ast(AST_OPERATION)))
 		return (NULL);
 	operation->operation = opcode;
+	operation->operation_size = 1 + opcode_table[opcode].argument_type;
 	if (!(operation->operation_args = ft_memalloc(sizeof(t_ast *) * code.argument_amount)))
 		return (NULL);
 	if (!(operation->operation_args[0] = parser_parse_body_arg(parser, code.argument_types[0])))
 		return (NULL);
+	operation->operation_size += operation->operation_args[0]->arg_size;
+		if (operation->operation_args[0]->arg_type == T_DIR && code.dir_size == 4)
+			operation->operation_size += 2;
 	i = 1;
 	while (i < code.argument_amount)
 	{
 		parser_consume(parser, TOKEN_SEPARATOR);
 		if (!(operation->operation_args[i] = parser_parse_body_arg(parser, code.argument_types[i])))
 			return (NULL);
+		operation->operation_size += operation->operation_args[i]->arg_size;
+		if (operation->operation_args[i]->arg_type == T_DIR && code.dir_size == 4)
+			operation->operation_size += 2;
 		i++;
 	}
 	operation->operation_n_args = code.argument_amount;

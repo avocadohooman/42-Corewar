@@ -21,9 +21,12 @@ t_ast	*init_ast(int type)
 		return (NULL);
 	ast->type = type;
 	ast->label = NULL;
+	ast->label_index = 0;
 	ast->operation = 0;
+	ast->operation_size = 0;
 	ast->operation_n_args = 0;
 	ast->operation_args = NULL;
+	ast->arg_size = 0;
 	ast->arg_type = 0;
 	ast->arg_value = 0;
 	ast->command = NULL;
@@ -55,23 +58,30 @@ void	visit_compound(t_ast *compound)
 	while (++i < compound->compound_size)
 		visit_ast(compound->compound_value[i]);
 }
+
 void	visit_command(t_ast *command)
 {
 	printf("command: %s -- %s\n", command->command, command->string);
 }
+
 void	visit_label(t_ast *label)
 {
 	printf("label: %s\n", label->label);
 }
+
 void	visit_argument(t_ast *arg)
 {
 	printf("argument: %d -- %d\n", arg->arg_type, arg->arg_value);
 }
+
 void	visit_operation(t_ast *operation)
 {
 	int	i;
 
-	printf("operation: %d -- number of args %d\n", operation->operation + 1, operation->operation_n_args);
+	printf("operation: %d -- number of args %d -- total_size:%d\n",
+			operation->operation + 1,
+			operation->operation_n_args,
+			operation->operation_size);
 	i = -1;
 	while (++i < operation->operation_n_args)
 		visit_argument(operation->operation_args[i]);
@@ -80,6 +90,7 @@ void	visit_empty(t_ast *empty)
 {
 	printf("empty\n");
 }
+
 void	visit_ast(t_ast *ast)
 {
 	if (ast->type == AST_COMPOUND)
@@ -93,3 +104,35 @@ void	visit_ast(t_ast *ast)
 	else
 		visit_empty(ast);		
 }
+
+
+
+
+/*
+
+
+	l2:		0
+	live:	11
+_______________
+
+index:	0	l2
+		1
+		2	live
+		3
+		4
+
+
+
+
+index:	0	0
+		1	6
+		2	11
+		3	14
+
+6
+5
+3
+3
+
+
+*/
