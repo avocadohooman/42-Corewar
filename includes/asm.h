@@ -32,9 +32,9 @@ typedef enum e_ass_num
 
 typedef struct				s_track
 {
-	char			*label;
-	int				label_start;
-	struct s_track	*next;
+	char			        *label;
+	int				        label_start;
+	struct s_track	        *next;
 }							t_track;
 
 typedef struct				s_ass
@@ -50,13 +50,13 @@ typedef struct				s_ass
 typedef struct				s_statement 
 {
 	char					*opcode;
-    unsigned char           opcode;
+    unsigned char           statement_code;
 	char					**arguments;
 	bool					arg_type_req;
 	int						number_arg;
 	int						t_dir;
-    char                    *t_dir_jump;
 	int						pos;
+    int                     component_size;
 }							t_statement;
 
 typedef	struct				s_instruction

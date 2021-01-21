@@ -56,25 +56,14 @@ t_ast	*compound_insert(t_ast *compound, t_ast *new)
 	return (compound);
 }
 
-void    instruction_insert(t_ast *data, t_instruction *instruction)
-{
-    if (data->label)
-}
-
 void	visit_compound(t_ast *compound, t_instruction *instruction)
 {
 	int	i;
 
 	// printf("compound -- size: %d\n", compound->compound_size);
 	i = -1;
-	while (++i < compound->compound_size)
-		visit_ast(compound->compound_value[i], instruction);
-	// {
-	// 	if (compound->compound_value[i]->type == AST_LABEL)
-	// 	{}	// assing label
-	// 	else if (compound->compound_value[i]->type == AST_OPERATION)
-	// 	{}	// encode statement
-	// }
+	while (++i < compound->compound_size) 
+        visit_ast(compound->compound_value[i], instruction);
 	// encode
 	// return buf
 }
@@ -88,7 +77,7 @@ void	visit_header(t_ast *header, t_instruction *instruction)
 {
 	int	i;
 
-	printf("header -- size: %d\n", header->compound_size);
+	// printf("header -- size: %d\n", header->compound_size);
 	i = -1;
 	while (++i < header->compound_size)
 		visit_ast(header->compound_value[i], instruction);
@@ -97,43 +86,40 @@ void	visit_header(t_ast *header, t_instruction *instruction)
 void	visit_body(t_ast *body, t_instruction *instruction)
 {
 	int	i;
+    int amount_of_instructions;
 
-	printf("body -- size: %d\n", body->compound_size);
+    amount_of_instructions = 0;
+    amount_of_instructions = body->body_size;
+    instruction = (t_instruction *)malloc(sizeof(t_instruction) * amount_of_instructions);
+
+	// printf("body -- size: %d\n", body->compound_size);
 	i = -1;
 	while (++i < body->compound_size)
 		visit_ast(body->compound_value[i], instruction);
+    //
 }
 
-// void	visit_statement(t_ast *statement)
-// {
-// 	int	i;
-
-// 	printf("statement -- size: %d\n", statement->compound_size);
-// 	i = -1;
-// 	while (++i < statement->compound_size)
-// 		visit_ast(statement->compound_value[i]);
-// }
-
-void	visit_label(t_ast *label)
+void	visit_label(t_ast *label, t_instruction *instruction)
 {
-	printf("label: %s\n", label->label);
+    assign_encoding_data(label, instruction, 1);
+	// printf("label: %s\n", label->label);
 }
 
 void	visit_argument(t_ast *arg, t_instruction *instruction)
 {
-    if (arg->label)
-        printf("t_dir label: %s\n", arg->label);
-	printf("argument: %d -- %d\n", arg->arg_type, arg->arg_value);
+    // if (arg->label)
+    //     printf("t_dir label: %s\n", arg->label);
+	// printf("argument: %d -- %d\n", arg->arg_type, arg->arg_value);
 }
 
-void	visit_operation(t_ast *statement, t_instruction *instruction)
+void	visit_statement(t_ast *statement, t_instruction *instruction)
 {
 	int	i;
-
-	printf("statement: %d -- number of args %d -- total_size:%d\n",
-			statement->statement + 1,
-			statement->statement_n_args,
-			statement->statement_size);
+    assign_encoding_data(statement, instruction, 0);
+	// printf("statement: %d -- number of args %d -- total_size:%d\n",
+	// 		statement->statement + 1,
+	// 		statement->statement_n_args,
+	// 		statement->statement_size);
 	i = -1;
 	while (++i < statement->statement_n_args)
 		visit_argument(statement->statement_args[i], instruction);
@@ -156,10 +142,10 @@ void	visit_ast(t_ast *ast, t_instruction *instruction)
 		visit_body(ast, instruction);
 	else if (ast->type == AST_INSTRUCTION)
 		visit_compound(ast, instruction);
+    else if (ast->type == AST_LABEL)
+		visit_label(ast, instruction);
 	else if (ast->type == AST_STATEMENT)
-		visit_statement(ast);
-	else if (ast->type == AST_LABEL)
-		visit_label(ast);
+		visit_statement(ast, instruction);
 	else if (ast->type == AST_ARGUMENT)
 		visit_argument(ast, instruction);
 	else

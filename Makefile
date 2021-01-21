@@ -26,6 +26,7 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/encoder/encoder_body/get_statement.c srcs/encoder/encoder_body/track_jmps.c srcs/encoder/encoder_body/get_t_dir_special_arguments.c \
 		srcs/vm/args.c srcs/vm/read_files.c srcs/vm/arena.c \
 		srcs/ast/ast.c \
+		srcs/ast/assign_data_to_struct.c \
 		srcs/parser/parser.c srcs/parser/parser_header.c \
 		srcs/parser/parser_body.c srcs/parser/parser_args.c \
 		srcs/parser/parser_error.c \
