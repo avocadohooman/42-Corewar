@@ -19,10 +19,13 @@
 enum
 {
 	AST_LABEL,
-	AST_OPERATION,
+	AST_STATEMENT,
 	AST_ARGUMENT,
 	AST_COMMAND,
 	AST_COMPOUND,
+	AST_HEADER,
+	AST_BODY,
+	AST_INSTRUCTION,
 	AST_EMPTY
 };
 
@@ -31,15 +34,25 @@ typedef struct		s_ast
 	int				type;
 	char			*label;
 	int				label_index;
-	int				operation;
-	int				operation_n_args;
-	struct s_ast	**operation_args;
+	int				statement;
+	int				statement_n_args;
+	struct s_ast	**statement_args;
 	int				arg_size;
-	int				operation_size;
+	int				statement_size;
 	int				arg_type;
 	int				arg_value;
 	char			*command;
 	char			*string;
+
+	struct s_ast	**header_value;
+	int				header_size;
+
+	struct s_ast	**body_value;
+	int				body_size;
+
+	struct s_ast	**instruction_value;
+	int				instruction_size;	
+
 	struct s_ast	**compound_value;
 	int				compound_size;
 }					t_ast;

@@ -81,13 +81,13 @@ t_ast	*parser_parse_body_identifier(t_parser *parser)
 	return (parser_parse_body_label(parser));
 }
 
-t_ast	*parser_parse_body_statement(t_parser *parser)
+t_ast	*parser_parse_body_instruction(t_parser *parser)
 {
 	t_ast	*compound;
 
 	if (parser->current_token->type == TOKEN_NEWLINE)
 		return (init_ast(AST_EMPTY));
-	if (!(compound = init_ast(AST_COMPOUND)))
+	if (!(compound = init_ast(AST_INSTRUCTION)))
 		return (NULL);
 	if (!(compound->compound_value = ft_memalloc(sizeof(t_ast *) * 2)))
 		return (NULL);
@@ -103,16 +103,16 @@ t_ast	*parser_parse_body_statement(t_parser *parser)
 	return (compound);
 }
 
-t_ast	*parser_parse_body_statements(t_parser *parser)
+t_ast	*parser_parse_body_instructions(t_parser *parser)
 {
 	t_ast	*compound;
 	t_ast	*statement;
 
-	if (!(compound = init_ast(AST_COMPOUND)))
+	if (!(compound = init_ast(AST_BODY)))
 		return (NULL);
 	if (!(compound->compound_value = ft_memalloc(sizeof(t_ast *))))
 		return (NULL);
-	if (!(compound->compound_value[0] = parser_parse_body_statement(parser)))
+	if (!(compound->compound_value[0] = parser_parse_body_instruction(parser)))
 		return (NULL);
 	compound->compound_size += 1;
 	while (parser->current_token->type == TOKEN_NEWLINE)
@@ -120,7 +120,7 @@ t_ast	*parser_parse_body_statements(t_parser *parser)
 		parser_consume(parser, TOKEN_NEWLINE);
 		if (parser->current_token->type == TOKEN_EOF)
 			break ;
-		if ((statement = parser_parse_body_statement(parser)))
+		if ((statement = parser_parse_body_instruction(parser)))
 		{
 			if (!(compound_insert(compound, statement)))
 				return (NULL);

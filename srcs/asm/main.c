@@ -35,6 +35,7 @@ int			main(int argc, char **argv)
     encoding_hub(root);
 
 
+
 	// bytes = write_file(1, &input_file);
 	// printf("wrote %d bytes\n", bytes);
 
