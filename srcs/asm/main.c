@@ -32,6 +32,7 @@ int			main(int argc, char **argv)
 	root = parser_parse(parser);
 	visit_ast(root);
 
+
 	// bytes = write_file(1, &input_file);
 	// printf("wrote %d bytes\n", bytes);
 
