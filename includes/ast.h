@@ -60,7 +60,9 @@ typedef struct		s_ast
 t_ast				*init_ast(int type);
 t_ast				*compound_insert(t_ast *compound, t_ast *new);
 
-void				visit_ast(t_ast *ast, t_instruction *instruction);
-void                assign_encoding_data(t_ast *compound, t_instruction *instruction, int label);
+void	            visit_ast(t_ast *ast);
+char                *assign_arguments(t_ast *arg);
+
+// t_instruction       *assign_encoding_data(t_ast *compound, t_instruction *instruction, int label);
 
 #endif
