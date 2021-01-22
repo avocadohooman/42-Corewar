@@ -130,17 +130,20 @@ void	visit_body(t_ast *body)
         printf("----Instruction Start----\n");
         if (tmp->label)
             printf("LABEL: %s \n", tmp->label);
-        printf("opcode: %s ", tmp->statement->opcode);
-        i = 0;
-        while (i < tmp->statement->number_arg)
+        if (tmp->statement)
         {
-            printf("%s ",tmp->statement->arguments[i]);
-            i++;
+            printf("opcode: %s ", tmp->statement->opcode);
+            i = 0;
+            while (i < tmp->statement->number_arg)
+            {
+                printf("%s ",tmp->statement->arguments[i]);
+                i++;
+            }
+            printf("\n");
+            printf("comp size: %d\n", tmp->statement->component_size);
+            printf("statement code: %#.2x\n", tmp->statement->statement_code);
+            printf("----Instruction End----\n");
         }
-        printf("\n");
-        printf("comp size: %d\n", tmp->statement->component_size);
-        printf("statement code: %#.2x\n", tmp->statement->statement_code);
-        printf("----Instruction End----\n");
         tmp = tmp->next;
     }
     encoding_hub(instructions->next);
@@ -166,13 +169,11 @@ t_statement	    *visit_statement(t_ast *statement)
 	int	i;
     
     // instruction = assign_encoding_data(statement, instruction, 0);
-    printf("statement: %s\n", opcode_table[statement->statement].literal);
     new_statement = ft_memalloc(sizeof(t_statement));
     new_statement = (t_statement *)malloc(sizeof(t_statement));
     new_statement->number_arg = statement->statement_n_args;
     new_statement->component_size = statement->statement_size;
     new_statement->opcode = ft_strdup(opcode_table[statement->statement].literal);
-    printf("statement: %s\n", new_statement->opcode);
     new_statement->statement_code = opcode_table[statement->statement].statement_code;
     new_statement->arguments = (char **)malloc(sizeof(char *) * new_statement->number_arg + 1);
 	i = -1;

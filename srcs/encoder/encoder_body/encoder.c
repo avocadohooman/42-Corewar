@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:08:38 by gmolin            #+#    #+#             */
-/*   Updated: 2021/01/22 19:16:40 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/01/22 22:35:18 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,23 @@ void        encoding_hub(t_instruction *instruction)
 	track_jmps(&ass, instruction);
 	while (tmp)
 	{
-		write_component_size(&ass, tmp->statement);
-		get_argument_type(&ass, tmp);
-		printf("\nInstruction ByteCode: \n");
-		get_arguments(&ass, tmp->statement);
-		i = 0;
-		while (i < ass.buff_slot)
-		{
-			printf("%.2x ", ass.statement_buff[i]);
-			i++;
-		}
-		printf("\n------\n\n");
-		ass.buff_slot = 0;
+        if (tmp->statement)
+        {
+            write_component_size(&ass, tmp->statement);
+            get_argument_type(&ass, tmp);
+            printf("\nInstruction ByteCode: \n");
+            get_arguments(&ass, tmp->statement);
+            i = 0;
+            while (i < ass.buff_slot)
+            {
+                printf("%.2x ", ass.statement_buff[i]);
+                i++;
+            }
+            printf("\n------\n\n");
+            ass.buff_slot = 0;
+            write(fd, ass.statement_buff, ass.size);
+        }
 		tmp = tmp->next;
-		write(fd, ass.statement_buff, ass.size);
 	}
 	close(fd);
     return ;
