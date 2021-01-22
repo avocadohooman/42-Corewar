@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 15:55:47 by seronen           #+#    #+#             */
-/*   Updated: 2021/01/21 12:54:18 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/01/22 19:34:21 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void        track_jmps(t_ass *ass, t_instruction *ins)
 	tmp = ins;
 	while (tmp)
 	{
-		get_component_size(ass, tmp->statement, false);
+        ass->size = 0;
+		ass->size += tmp->statement->component_size;
 		if (tmp->label)
 			new_tracker(ass, tmp->label, pos);
 		tmp->statement->pos = pos;

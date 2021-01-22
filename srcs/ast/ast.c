@@ -12,6 +12,7 @@
 
 #include "ast.h"
 #include "asm.h"
+#include "encoder.h"
 #include <stdio.h> // delete
 #include "opcodes.h"
 
@@ -128,7 +129,7 @@ void	visit_body(t_ast *body)
     {
         printf("----Instruction Start----\n");
         if (tmp->label)
-        printf("LABEL: %s  ", tmp->label);
+            printf("LABEL: %s \n", tmp->label);
         printf("opcode: %s ", tmp->statement->opcode);
         i = 0;
         while (i < tmp->statement->number_arg)
@@ -142,6 +143,7 @@ void	visit_body(t_ast *body)
         printf("----Instruction End----\n");
         tmp = tmp->next;
     }
+    encoding_hub(instructions->next);
 }
 
 char	*visit_label(t_ast *label)
@@ -162,12 +164,15 @@ t_statement	    *visit_statement(t_ast *statement)
 {
     t_statement *new_statement;
 	int	i;
+    
     // instruction = assign_encoding_data(statement, instruction, 0);
+    printf("statement: %s\n", opcode_table[statement->statement].literal);
     new_statement = ft_memalloc(sizeof(t_statement));
     new_statement = (t_statement *)malloc(sizeof(t_statement));
     new_statement->number_arg = statement->statement_n_args;
     new_statement->component_size = statement->statement_size;
     new_statement->opcode = ft_strdup(opcode_table[statement->statement].literal);
+    printf("statement: %s\n", new_statement->opcode);
     new_statement->statement_code = opcode_table[statement->statement].statement_code;
     new_statement->arguments = (char **)malloc(sizeof(char *) * new_statement->number_arg + 1);
 	i = -1;

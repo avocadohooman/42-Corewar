@@ -32,7 +32,7 @@ int			main(int argc, char **argv)
 	lexer = init_lexer(input_file.data, input_file.used);
 	parser = new_parser(lexer);
 	root = parser_parse(parser);
-    encoding_hub(root);
+    visit_ast(root);
 
 
 
