@@ -124,28 +124,28 @@ void	visit_body(t_ast *body)
         tmp = tmp->next;
     }
     tmp = instructions->next;
-    i = 0;
-    while (tmp)
-    {
-        printf("----Instruction Start----\n");
-        if (tmp->label)
-            printf("LABEL: %s \n", tmp->label);
-        if (tmp->statement)
-        {
-            printf("opcode: %s ", tmp->statement->opcode);
-            i = 0;
-            while (i < tmp->statement->number_arg)
-            {
-                printf("%s ",tmp->statement->arguments[i]);
-                i++;
-            }
-            printf("\n");
-            printf("comp size: %d\n", tmp->statement->component_size);
-            printf("statement code: %#.2x\n", tmp->statement->statement_code);
-            printf("----Instruction End----\n");
-        }
-        tmp = tmp->next;
-    }
+    // i = 0;
+    // while (tmp)
+    // {
+    //     printf("----Instruction Start----\n");
+    //     if (tmp->label)
+    //         printf("LABEL: %s \n", tmp->label);
+    //     if (tmp->statement)
+    //     {
+    //         printf("opcode: %s ", tmp->statement->opcode);
+    //         i = 0;
+    //         while (i < tmp->statement->number_arg)
+    //         {
+    //             printf("%s ",tmp->statement->arguments[i]);
+    //             i++;
+    //         }
+    //         printf("\n");
+    //         printf("comp size: %d\n", tmp->statement->component_size);
+    //         printf("statement code: %#.2x\n", tmp->statement->statement_code);
+    //         printf("----Instruction End----\n");
+    //     }
+    //     tmp = tmp->next;
+    // }
     encoding_hub(instructions->next);
 }
 
