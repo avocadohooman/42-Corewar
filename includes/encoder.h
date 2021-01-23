@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:50:54 by gmolin            #+#    #+#             */
-/*   Updated: 2021/01/22 18:56:37 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/01/23 12:05:42 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void						write_component_size(t_ass *ass, t_statement *state);
 unsigned char 				get_statement(char *statement);
 int							fetch_jmp(t_track *head, char *key, int from);
 void        				track_jmps(t_ass *ass, t_instruction *ins);
+int                         find_next_statment(t_instruction *ins);
 
 #endif
