@@ -1,8 +1,10 @@
-.name "zork"
-.comment "I'M ALIIIIVE"
+.name "Batman"
+.comment "This city needs me"
 
-l2:		sti r1, %:live, %1
-		and r1, %0, r1
+loop:   
+        sti r1, %:live, %1
 
-live:	live %1
-		zjmp %:live
+live:   
+        live %0
+        ld %0, r2
+        zjmp %:loop

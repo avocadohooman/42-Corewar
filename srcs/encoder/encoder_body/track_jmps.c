@@ -6,11 +6,11 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 15:55:47 by seronen           #+#    #+#             */
-/*   Updated: 2021/01/17 17:53:25 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/01/23 12:16:05 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "encoder.h"
 
 void		trackadd(t_track **alst, t_track *new)
 {
@@ -52,6 +52,16 @@ int			fetch_jmp(t_track *head, char *key, int from)
 	return 0;
 }
 
+int         find_next_statment(t_instruction *ins)
+{
+    t_instruction *tmp;
+
+    tmp = ins;
+    while(!tmp->statement)
+        tmp = tmp->next;
+    return (tmp->statement->component_size);
+}
+
 void        track_jmps(t_ass *ass, t_instruction *ins)
 {
 	t_instruction *tmp;
@@ -61,11 +71,20 @@ void        track_jmps(t_ass *ass, t_instruction *ins)
 	tmp = ins;
 	while (tmp)
 	{
-		get_component_size(ass, tmp->statement, false);
-		if (tmp->label)
-			new_tracker(ass, tmp->label, pos);
-		tmp->statement->pos = pos;
-		pos += ass->size;
+        ass->size = 0;
+        if (tmp->statement)
+        {
+            ass->size += tmp->statement->component_size;
+            if (tmp->label)
+                new_tracker(ass, tmp->label, pos);
+            tmp->statement->pos = pos;
+            pos += ass->size;
+        }
+        else if (tmp->label && !tmp->statement)
+        {
+            ass->size += find_next_statment(tmp);
+            new_tracker(ass, tmp->label, pos);
+        }
 		tmp = tmp->next;
 	}
 }

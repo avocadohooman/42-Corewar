@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_t_dir_special_arguments.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 15:43:04 by gmolin            #+#    #+#             */
-/*   Updated: 2021/01/19 12:35:26 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/01/22 19:19:22 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "encoder.h"
 #include "file.h"
 #include <stdio.h> // delete
 #include <limits.h>

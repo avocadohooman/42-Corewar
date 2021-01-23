@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_component_size.c                               :+:      :+:    :+:   */
+/*   write_component_size.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:01 by gmolin            #+#    #+#             */
-/*   Updated: 2021/01/19 12:42:21 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/01/22 19:27:05 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "encoder.h"
 #include "file.h"
 #include <stdio.h> // delete
 
@@ -52,22 +52,22 @@ static int				fetch_index(unsigned char code)
 	return 100;
 }
 
-static int				component_type_size(char *arg, int dir_size)
-{
-	if (!arg)
-		return 0;
-	if (ft_strstr(arg, "%"))
-		return dir_size;
-	else if (ft_strstr(arg, "r"))
-		return 1;
-	else if (ft_strstr(arg, "-"))
-		return 2;
-	else
-		printf("asm/get_component_size.c : Could not fetch arg size for %s!", arg);
-		return 0;
-}
+// static int				component_type_size(char *arg, int dir_size)
+// {
+// 	if (!arg)
+// 		return 0;
+// 	if (ft_strstr(arg, "%"))
+// 		return dir_size;
+// 	else if (ft_strstr(arg, "r"))
+// 		return 1;
+// 	else if (ft_strstr(arg, "-"))
+// 		return 2;
+// 	else
+// 		printf("asm/get_component_size.c : Could not fetch arg size for %s!", arg);
+// 		return 0;
+// }
 
-void				get_component_size(t_ass *ass, t_statement *state, bool write)
+void				write_component_size(t_ass *ass, t_statement *state)
 {
 	int				dir_size;
 	unsigned char	statement;
@@ -75,32 +75,22 @@ void				get_component_size(t_ass *ass, t_statement *state, bool write)
 	int				i;
 
 	i = 0;
-	ass->size = 1;
-	statement = get_statement(state->opcode);
+	ass->size = 0;
+	statement = state->statement_code;
 	index = fetch_index(statement);
 	if (index == 100)
 		printf("Index not found for %s!\n", state->opcode);
-	ass->size += op_table_redefined[index][1];
+	// ass->size += op_table_redefined[index][1];
+    ass->size += state->component_size;
 	dir_size = op_table_redefined[index][2];
-
-	// Set dir size and need of arg type code
-
 	state->t_dir = dir_size;
 	if (op_table_redefined[index][1] == 1)
 		state->arg_type_req = true;
 	else
 		state->arg_type_req = false;
-	while (i < state->number_arg)
-	{
-		ass->size += component_type_size(state->arguments[i], dir_size);
-		i++;
-	}
-	if (write)
-	{
-		printf("Statement final size = %d\n", ass->size);
-		ass->statement_buff = (unsigned char*)malloc(sizeof(unsigned char) * ass->size);
-		ass->statement_buff[ass->buff_slot] = statement;
-		printf("Statement Bytecode = 0x%.2x\n", ass->statement_buff[ass->buff_slot]);
-		ass->buff_slot++;
-	}
+	printf("Statement final size = %d\n", ass->size);
+	ass->statement_buff = (unsigned char*)malloc(sizeof(unsigned char) * ass->size);
+	ass->statement_buff[ass->buff_slot] = statement;
+	printf("Statement Bytecode = 0x%.2x\n", ass->statement_buff[ass->buff_slot]);
+	ass->buff_slot++;
 }
