@@ -16,13 +16,13 @@
 # include "lexer.h"
 # include "ast.h"
 
-typedef enum	e_error
+typedef enum	e_parser_error
 {
 	ERROR_UNKNOWN_COMMAND,
 	ERROR_UNEXPECTED_ARG_TYPE,
 	ERROR_MALFORMATTED_ARG,
 	ERROR_UNKNOWN_STATEMENT
-}				t_error;
+}				t_parser_error;
 
 static const char *g_parser_error[] = {
 	[ERROR_UNKNOWN_COMMAND] = "Unknown command.",
@@ -51,6 +51,6 @@ t_ast			*parser_parse_body_arg(t_parser *parser, int opts);
 int				is_number(char *string);
 int				is_registry(char *string);
 
-void			parser_exit_with_message(t_error type);
+void			parser_exit_with_message(t_parser_error type);
 
 #endif

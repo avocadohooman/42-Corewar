@@ -27,13 +27,12 @@ t_file		read_file(char *filename)
 {
 	int			fd;
 	t_file		file;
-	size_t		s;
 	char		buf[512 + 1];
 	int			ret;
 
 	ft_bzero(buf, 512 + 1);
 	if (((fd = open(filename, O_RDONLY)) == -1))
-		print_error(INVALID_FILE);
+		file_exit_with_message(ERROR_INVALID_FILE);
 	new_file(&file, 1024);
 	while ((ret = read(fd, buf, 512)) > 0)
 	{
@@ -41,11 +40,9 @@ t_file		read_file(char *filename)
 		if (!insert_file(&file, buf, ret))
 		{
 			close(fd);
-			print_error(BUFFER);
+			file_exit_with_message(ERROR_ALLOCATION_FAIL);
 		}
 	}
 	close(fd);
-	if (s < 0)
-		print_error(GET_NEXT_LINE);
 	return (file);
 }

@@ -18,47 +18,53 @@
 
 int         is_registry(char *string) 
 {
-    int len;
+	if (*string == 'r' && ++string)
+		while (ft_isdigit(*string) && string++);
+	return (!*string);
+    // int len;
 
-    len = ft_strlen(string);
-    if (string[0] == 'r' && !ft_strchr(string, '-'))
-    {
-        if (len == 2 && string[1] != '0' && ft_isdigit(string[1]))
-            return (1);
-        else if (len == 3 && ft_atoi(&string[1]) != 0 && ft_atoi(&string[2]) != 0)
-            return (1);
-    }
-    return (0);
+    // len = ft_strlen(string);
+    // if (string[0] == 'r' && !ft_strchr(string, '-'))
+    // {
+    //     if (len == 2 && string[1] != '0' && ft_isdigit(string[1]))
+    //         return (1);
+    //     else if (len == 3 && ft_atoi(&string[1]) != 0 && ft_atoi(&string[2]) != 0)
+    //         return (1);
+    // }
+    // return (0);
 }
 
 int         is_number(char *string)
 {
-	int     i;
-	int     zeros;
-	int     len;
-	int     n_digits;
+	if (*string == '-' && ++string);
+	while (ft_isdigit(*string) && string++);
+	return (!*string);
+	// int     i;
+	// int     zeros;
+	// int     len;
+	// int     n_digits;
 
-	i = 0;
-	zeros = 0;
-	len = ft_strlen(string);
-	n_digits = ft_ndigits(ft_atoi(string));
-	while (string[i])
-	{
-		if (string[i] == '0')
-			zeros++;
-		if (string[i + 1] != '0')
-			break ;
-		i++;
-	}
-	if (string[0] == '-') 
-	{
-		len = ft_strlen(&string[1]);
-		if ((ft_atoi(string) && (len == zeros + n_digits)) || len == zeros)
-			return (1);
-	}
-	else if ((ft_atoi(string) && (len == zeros + n_digits)) || len == zeros)
-		return (1);
-	return (0);
+	// i = 0;
+	// zeros = 0;
+	// len = ft_strlen(string);
+	// n_digits = ft_ndigits(ft_atoi(string));
+	// while (string[i])
+	// {
+	// 	if (string[i] == '0')
+	// 		zeros++;
+	// 	if (string[i + 1] != '0')
+	// 		break ;
+	// 	i++;
+	// }
+	// if (string[0] == '-') 
+	// {
+	// 	len = ft_strlen(&string[1]);
+	// 	if ((ft_atoi(string) && (len == zeros + n_digits)) || len == zeros)
+	// 		return (1);
+	// }
+	// else if ((ft_atoi(string) && (len == zeros + n_digits)) || len == zeros)
+	// 	return (1);
+	// return (0);
 }
 
 t_ast	*parser_parse_body_label(t_parser *parser)

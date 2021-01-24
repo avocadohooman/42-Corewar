@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:08:55 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/19 12:23:14 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/01/22 21:50:22 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ typedef enum	e_type
 	TOKEN_STRING,
 
 	TOKEN_IDENTIFIER,
-	TOKEN_OPERATION,
-	TOKEN_REGISTRY,
-	TOKEN_NUMBER,
+	TOKEN_NEGATIVE,
 
 	TOKEN_COLON,
 	TOKEN_DIRECT,
