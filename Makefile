@@ -65,6 +65,6 @@ fclean:
 
 re: fclean all
 
-lexer-test: 
+lexer-test: $(SRCS) $(INCL) srcs/lexer/lexer_test/lexer_test.c
 	make -C $(LIBFT)
 	gcc -o $(LEXER_TEST_NAME) srcs/lexer/lexer_test/lexer_test.c $(SRCS) -I$(INCL) -L$(LIBFT) -lft -I$(LIBFTINCL)

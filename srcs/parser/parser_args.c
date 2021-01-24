@@ -17,7 +17,9 @@
 t_ast	*parser_parse_body_direct(t_parser *parser)
 {
 	t_ast	*arg;
+	int		sign;
 
+	sign = 1;
 	parser_consume(parser, TOKEN_DIRECT);
 	if (!(arg = init_ast(AST_ARGUMENT)))
 		return (NULL);
@@ -30,9 +32,14 @@ t_ast	*parser_parse_body_direct(t_parser *parser)
 		parser_consume(parser, TOKEN_IDENTIFIER);
 		return (arg);
 	}
+	if (parser->current_token->type == TOKEN_NEGATIVE)
+	{
+		sign = -1;
+		parser_consume(parser, TOKEN_NEGATIVE);
+	}
 	if (!is_number(parser->current_token->value))
 		parser_exit_with_message(ERROR_MALFORMATTED_ARG);
-	arg->arg_value = ft_atoi(parser->current_token->value);
+	arg->arg_value = ft_atoi(parser->current_token->value) * sign;
 	parser_consume(parser, TOKEN_IDENTIFIER);
 	return (arg);
 }
@@ -40,7 +47,9 @@ t_ast	*parser_parse_body_direct(t_parser *parser)
 t_ast	*parser_parse_body_indirect(t_parser *parser)
 {
 	t_ast	*arg;
+	int		sign;
 
+	sign = 1;
 	if (!(arg = init_ast(AST_ARGUMENT)))
 		return (NULL);
 	arg->arg_type = T_IND;
@@ -52,9 +61,14 @@ t_ast	*parser_parse_body_indirect(t_parser *parser)
 		parser_consume(parser, TOKEN_IDENTIFIER);
 		return (arg);
 	}
+	if (parser->current_token->type == TOKEN_NEGATIVE)
+	{
+		sign = -1;
+		parser_consume(parser, TOKEN_NEGATIVE);
+	}
 	if (!is_number(parser->current_token->value))
 		parser_exit_with_message(ERROR_MALFORMATTED_ARG);
-	arg->arg_value = ft_atoi(parser->current_token->value);
+	arg->arg_value = ft_atoi(parser->current_token->value) * sign;
 	parser_consume(parser, TOKEN_IDENTIFIER);
 	return (arg);
 }
@@ -62,6 +76,7 @@ t_ast	*parser_parse_body_indirect(t_parser *parser)
 t_ast	*parser_parse_body_registry(t_parser *parser)
 {
 	t_ast	*arg;
+	int		sign;
 
 	if (!(arg = init_ast(AST_ARGUMENT)))
 		return (NULL);

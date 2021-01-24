@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_error.c                                     :+:      :+:    :+:   */
+/*   file_test_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/18 11:36:40 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/21 21:58:13 by npimenof         ###   ########.fr       */
+/*   Created: 2021/01/21 22:56:29 by npimenof          #+#    #+#             */
+/*   Updated: 2021/01/21 23:07:16 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
 #include <stdio.h>
+#include "parser.h"
 
-void    parser_exit_with_message(t_parser_error type)
+const char	*g_test_table[] = {
+	"",
+	" ",
+	NULL
+};
+
+int		main(void)
 {
-    ft_putendl_fd(g_parser_error[type], 2);
-    exit(1);
+	
+
+
+	return (0);
 }

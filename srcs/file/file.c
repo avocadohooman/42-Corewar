@@ -43,3 +43,9 @@ void		free_file(t_file *f)
 	free(f->data);
 	f->data = NULL;
 }
+
+void		file_exit_with_message(t_file_error type)
+{
+	ft_putendl_fd(g_file_error[type], 2);
+	exit(1);
+}

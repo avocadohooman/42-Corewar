@@ -71,13 +71,13 @@ int				is_label_char(char c)
 
 void			lex_skip_whitespace(t_lexer *lexer)
 {
-	while (lexer->c == ' ' || lexer->c == '\t')
+	while (lexer->c == ' ' || lexer->c == '\t' || lexer->c == '\r')
 		lex_advance(lexer);
 }
 
 void			lex_skip_comment(t_lexer *lexer)
 {
-	while (lexer->c != 13)
+	while (lexer->c && lexer->c != '\n')
 		lex_advance(lexer);
 }
 
@@ -135,6 +135,16 @@ t_token			*lex_get_identifier(t_lexer *lexer)
 	return (init_token(TOKEN_IDENTIFIER, value));
 }
 
+char			*char_to_string(char c)
+{
+	char	*str;
+
+	if (!(str = ft_strnew(sizeof(char))))
+		return (NULL);
+	*str = c;
+	return str;
+}
+
 t_token			*lex_get_string(t_lexer *lexer)
 {
 	char	*value;
@@ -144,7 +154,7 @@ t_token			*lex_get_string(t_lexer *lexer)
 	lex_advance(lexer);
 	if (!(value = ft_memalloc(sizeof(char))))
 		return (NULL);
-	while (lexer->c != '"')
+	while (lexer->c && lexer->c != '"')
 	{
 		len = ft_strlen(value);
 		if (!(tmp = realloc(value, len + 2)))
@@ -153,18 +163,10 @@ t_token			*lex_get_string(t_lexer *lexer)
 		value = tmp;
 		lex_advance(lexer);
 	}
+	if (!lexer->c)
+		return (init_token(TOKEN_EOF, char_to_string(lexer->c)));
 	lex_advance(lexer);
 	return (init_token(TOKEN_STRING, value));
-}
-
-char			*char_to_string(char c)
-{
-	char	*str;
-
-	if (!(str = ft_strnew(sizeof(char))))
-		return (NULL);
-	*str = c;
-	return str;
 }
 
 t_token			*lex_get_newline(t_lexer *lexer)
@@ -180,6 +182,11 @@ t_token			*lex_get_newline(t_lexer *lexer)
 
 t_token			*lex_advance_with_token(t_lexer *lexer, t_token *token)
 {
+	if (lexer->c == '\n')
+	{
+		lexer->line_number++;
+		lexer->column = 1;
+	}
 	lex_advance(lexer);
 	return (token);
 }
@@ -198,10 +205,13 @@ t_token			*lex_get_operator(t_lexer *lexer)
 	if (lexer->c == SEPARATOR_CHAR)
 		return (lex_advance_with_token(lexer,
 				init_token(TOKEN_SEPARATOR, char_to_string(lexer->c))));
+	if (lexer->c == '-')
+		return (lex_advance_with_token(lexer,
+				init_token(TOKEN_NEGATIVE, char_to_string(lexer->c))));
 	if (lexer->c == '\n')
-		return (lex_get_newline(lexer));
-		// return (lex_advance_with_token(lexer,
-		// 		init_token(TOKEN_NEWLINE, char_to_string(lexer->c))));
+		return (lex_advance_with_token(lexer,
+				init_token(TOKEN_NEWLINE, char_to_string(lexer->c))));
+		// return (lex_get_newline(lexer));
 	return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
 }
 
@@ -217,7 +227,7 @@ t_token			*lex_get_next_token(t_lexer *lexer)
 {
 	while (lexer->c && lexer->index < lexer->size)
 	{
-		if (lexer->c == ' ' || lexer->c == '\t')
+		if (lexer->c == ' ' || lexer->c == '\t' || lexer->c == '\r')
 			lex_skip_whitespace(lexer);
 		if (lexer->c == COMMENT_CHAR)
 			lex_skip_comment(lexer);
