@@ -64,9 +64,14 @@ fclean:
 	rm -f $(VM_NAME)
 	rm -f $(ASM_NAME)
 	rm -f $(LEXER_TEST_NAME)
+	rm -f file_test
 
 re: fclean all
 
 lexer-test: $(SRCS) $(INCL) srcs/lexer/lexer_test/lexer_test.c
 	make -C $(LIBFT)
 	gcc -o $(LEXER_TEST_NAME) srcs/lexer/lexer_test/lexer_test.c $(SRCS) -I$(INCL) -L$(LIBFT) -lft -I$(LIBFTINCL)
+
+file-test: $(SRCS) $(INCL) srcs/file/file_test/file_test.c
+	make -C $(LIBFT)
+	gcc -o file-test srcs/file/file_test/file_test.c $(SRCS) -I$(INCL) -L$(LIBFT) -lft -I$(LIBFTINCL)

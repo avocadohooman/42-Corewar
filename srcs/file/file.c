@@ -27,7 +27,8 @@ t_file	*insert_file(t_file *f, char *data, size_t data_size)
 	
 	if (f->used + data_size >= f->size)
 	{
-		f->size *= 2;
+		while (f->size < (f->used + data_size))
+			f->size *= 2;
 		if (!(tmp = realloc(f->data, f->size * sizeof(char))))
 			return (NULL);
 		f->data = tmp;
