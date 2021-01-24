@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "asm.h"
+#include "ast.h"
+#include "encoder.h"
 #include "file.h"
 #include "parser.h"
 #include <stdio.h>
@@ -30,7 +32,8 @@ int			main(int argc, char **argv)
 	lexer = init_lexer(input_file.data, input_file.used);
 	parser = new_parser(lexer);
 	root = parser_parse(parser);
-	visit_ast(root);
+    visit_ast(root);
+
 
 
 	// bytes = write_file(1, &input_file);
