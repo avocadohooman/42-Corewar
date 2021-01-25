@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 22:56:29 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/24 22:50:15 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/01/25 10:31:58 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,20 @@ int		test_new_file(void)
 int		test_insert_file(void)
 {
 	t_file	file;
-	int		size;
 	char	*data = "hello world";
 	int		data_size;
+	char	*another = "another one";
 
-	size = 1;
 	data_size = ft_strlen(data);
-	new_file(&file, size);
+	new_file(&file, 1);
 	insert_file(&file, data, data_size);
 	if (file.used != data_size)
+		return (0);
+	if (ft_memcmp(file.data, data, file.used))
+		return (0);
+	insert_file(&file, another, ft_strlen(another));
+	data = ft_strjoin(data, another);
+	if (file.used != ft_strlen(data))
 		return (0);
 	if (ft_memcmp(file.data, data, file.used))
 		return (0);

@@ -64,7 +64,7 @@ fclean:
 	rm -f $(VM_NAME)
 	rm -f $(ASM_NAME)
 	rm -f $(LEXER_TEST_NAME)
-	rm -f file_test
+	rm -f file-test
 
 re: fclean all
 
