@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:08:55 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/22 21:50:22 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/01/25 09:31:06 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,19 @@ typedef enum	e_type
 
 	TOKEN_EOF,
 }				t_type;
+
+static const char	*g_token_literal[] = {
+	[TOKEN_ILLEGAL] = "ILLEGAL",
+	[TOKEN_COMMAND] = "COMMAND",
+	[TOKEN_STRING] = "STRING",
+	[TOKEN_IDENTIFIER] = "IDENTIFIER",
+	[TOKEN_NEGATIVE] = "NEGATIVE",
+	[TOKEN_COLON] = "INDIRECT",
+	[TOKEN_DIRECT] = "DIRECT",
+	[TOKEN_SEPARATOR] = "SEPARATOR",
+	[TOKEN_NEWLINE] = "NEWLINE",
+	[TOKEN_EOF] = "EOF",
+};
 
 typedef struct	s_token
 {
