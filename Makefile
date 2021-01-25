@@ -65,6 +65,7 @@ fclean:
 	rm -f $(ASM_NAME)
 	rm -f $(LEXER_TEST_NAME)
 	rm -f file-test
+	rm -f encoder-test
 
 re: fclean all
 
@@ -75,3 +76,7 @@ lexer-test: $(SRCS) $(INCL) srcs/lexer/lexer_test/lexer_test.c
 file-test: $(SRCS) $(INCL) srcs/file/file_test/file_test.c
 	make -C $(LIBFT)
 	gcc -o file-test srcs/file/file_test/file_test.c $(SRCS) -I$(INCL) -L$(LIBFT) -lft -I$(LIBFTINCL)
+
+encoder-test: $(SRCS) $(INCL) srcs/encoder/encoder_body/encoder_test/encoder_body_test_main.c
+	make -C $(LIBFT)
+	gcc -o encoder-test srcs/encoder/encoder_body/encoder_test/encoder_body_test_main.c $(SRCS) -I$(INCL) -L$(LIBFT) -lft -I$(LIBFTINCL)
