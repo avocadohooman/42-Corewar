@@ -17,6 +17,54 @@
 
 #include "ast.h"
 
+unsigned char *get_arg(t_ast *args, int size, unsigned char *buf) // Either generate buf in func or pass it as param
+{
+	// Assuming that buf is passed as param!
+	// Need to know the size of a arg = 2 || 4 bytes ===>>> struct->arg_size to the rescue!
+
+	// Gather arg data to a string which length is defined in param 'size'
+
+	int i;
+
+	i = size;
+	if (!buf)
+		buf = ft_memalloc(sizeof(char) * 4); // If !buf, malloc it to existence
+	while (i > 0)
+	{
+		*buf = ((unsigned char *)&args->arg_value)[i - 1];
+		buf++;
+		printf("Got index %d and char: %d\n", i - 1, ((unsigned char *)&args->arg_value)[i - 1]);
+		i--;
+	}
+	return (buf);
+}
+
+unsigned char get_arg_type_code(t_ast **args, int nb)
+{
+	// Generate arg type code using args and arg->type
+	// It's simple
+
+	unsigned char code;
+	int i;
+
+	i = -1;
+	code = 0;
+	while (++i < nb)
+		{
+			if (args[i]->arg_type == T_REG)		// previously 'r', correct if not t_reg
+				code |= 1UL << (6 - (i + i));
+			else if (args[i]->arg_type == T_DIR)	// previously '%', correct if not t_dir
+				code |= 1UL << (7 - (i + i));
+			else
+			{
+				code |= 1UL << (7 - (i + i));
+				code |= 1UL << (6 - (i + i));
+			}
+		}
+	return (code);
+}
+
+
 
 int			main(int argc, char **argv)
 {
@@ -47,6 +95,15 @@ int			main(int argc, char **argv)
 	arg_type = buf;
 	*buf = (char)statement->statement;
 	buf++;
+
+	printf("\nTEST ARGS WITH SIZE 4\n\n");
+	get_arg(statement->statement_args[0], 4, buf);
+	printf("\nTEST ARGS WITH SIZE 2\n\n");
+	get_arg(statement->statement_args[0], 2, buf);
+	printf("\nTEST ARGS WITH SIZE 1 (T_REG)\n\n");
+	get_arg(statement->statement_args[0], 1, buf);
+	return 0;
+
 	while (++i < statement->statement_n_args)
 	{
 		if (opcode_table[statement->statement - 1].argument_type)
