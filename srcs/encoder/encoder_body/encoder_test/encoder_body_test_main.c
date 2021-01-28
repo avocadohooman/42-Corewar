@@ -17,36 +17,122 @@
 
 #include "ast.h"
 
+static const t_ast    table[] = 
+{
+    {
+        .type = AST_STATEMENT,
+        .statement = 1,
+        .statement_n_args = 1,
+        .statement_size = 3,
+        .statement_args = (t_ast*[]){
+            &(t_ast){
+                .type = AST_ARGUMENT,
+                .arg_type = T_DIR,
+                .arg_value = 10,
+                .arg_size = 4
+            }
+        }
+    }
+};
+
+static t_ast    arg_table[] = 
+{
+	{
+		.type = AST_ARGUMENT,
+		.arg_type = T_DIR,
+		.arg_value = 10,
+		.arg_size = 4,
+	},
+	{
+		.type = AST_ARGUMENT,
+		.arg_type = T_REG,
+		.arg_value = 20,
+		.arg_size = 2,
+	}
+};
+
+unsigned char *encode_arg(t_ast *arg) // Either generate buf in func or pass it as param
+{
+	// Assuming that buf is passed as param!
+	// Need to know the size of a arg = 2 || 4 bytes ===>>> struct->arg_size to the rescue!
+
+	// Gather arg data to a string which length is defined in param 'size'
+	unsigned char *buf;
+	int i;
+
+	if (!arg)
+	{
+		printf("No arg!\n");
+		return (NULL);
+	}
+	i = arg->arg_size;
+	buf = ft_memalloc(sizeof(char) * arg->arg_size); // If !buf, malloc it to existence
+	while (i > 0)
+	{
+		*buf = ((unsigned char *)&arg->arg_value)[i - 1];
+		buf++;
+		printf("Got index %d and char: %d\n", i, ((unsigned char *)&arg->arg_value)[i - 1]);
+		i--;
+	}
+	return (buf);
+}
+
+unsigned char encode_arg_type(t_ast **args, int nb)
+{
+	// Generate arg type code using args and arg->type
+	// It's simple
+
+	unsigned char code;
+	int i;
+
+	i = -1;
+	code = 0;
+	while (++i < nb)
+		{
+			if (args[i]->arg_type == T_REG)		// previously 'r', correct if not t_reg
+				code |= 1UL << (6 - (i + i));
+			else if (args[i]->arg_type == T_DIR)	// previously '%', correct if not t_dir
+				code |= 1UL << (7 - (i + i));
+			else
+			{
+				code |= 1UL << (7 - (i + i));
+				code |= 1UL << (6 - (i + i));
+			}
+		}
+	return (code);
+};
+
+
 
 int			main(int argc, char **argv)
 {
 	t_ast			*statement;
 	unsigned char	*buf;
-	unsigned char*arg_type;
+	unsigned char	*arg_type;
 
-	statement = init_ast(AST_STATEMENT);
-	statement->statement = 1;
-	statement->statement_size = 5;
-	statement->statement_n_args = 1;
-	statement->statement_args = ft_memalloc(sizeof(t_ast *));
-	statement->statement_args[0] = init_ast(AST_ARGUMENT);
-	statement->statement_args[0]->arg_type = 2;
-	statement->statement_args[0]->arg_value = 10;
-	statement->statement_args[0]->arg_size = 4;
-
-	printf("type: %d\nstatement: %s\nsize: %d\nn_args:%d\n\targ_type: %d\n\targ_val: %d\n",
+/*	printf("type: %d\nstatement: %s\nsize: %d\nn_args:%d\n\targ_type: %d\n\targ_val: %d\n",
 			statement->type,
 			opcode_table[statement->statement - 1].literal,
 			statement->statement_size,
 			statement->statement_n_args,
 			statement->statement_args[0]->arg_type,
 			statement->statement_args[0]->arg_value
-			);
+			); */
 	int	i = -1;
-	buf = ft_memalloc(sizeof(char) * statement->statement_size);
-	arg_type = buf;
-	*buf = (char)statement->statement;
-	buf++;
+//	buf = ft_memalloc(sizeof(char) * statement->statement_size);
+//	arg_type = buf;
+//	*buf = (char)statement->statement;
+//	buf++;
+
+	i = 0;
+	while (i < 2)
+	{
+		encode_arg(&arg_table[i]);
+		printf("\n");
+		i++;
+	}
+	return 0;
+
 	while (++i < statement->statement_n_args)
 	{
 		if (opcode_table[statement->statement - 1].argument_type)
