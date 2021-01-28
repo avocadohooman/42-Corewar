@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:29:37 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/21 13:44:04 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/01/28 13:56:23 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ t_ast			*parser_parse_instructions(t_parser *parser)
 		return (NULL);
 	if (!(ast->compound_value[1] = parser_parse_body_instructions(parser)))
 		return (NULL);
+	ast->compound_value[0]->body_byte_size = ast->compound_value[1]->body_byte_size;
+	ast->body_byte_size = ast->compound_value[1]->body_byte_size;
 	return (ast);
 }
 
