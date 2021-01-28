@@ -31,6 +31,7 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/parser/parser_body.c srcs/parser/parser_args.c \
 		srcs/parser/parser_error.c \
 		srcs/opcode/opcode.c \
+		srcs/hash/hash.c srcs/hash/hashnode.c srcs/hash/labelnode.c \
 
 INCL = ./includes
 LIBFT = ./libft
@@ -66,6 +67,7 @@ fclean:
 	rm -f $(LEXER_TEST_NAME)
 	rm -f file-test
 	rm -f encoder-test
+	rm -f hash-test
 
 re: fclean all
 
@@ -80,3 +82,7 @@ file-test: $(SRCS) $(INCL) srcs/file/file_test/file_test.c
 encoder-test: $(SRCS) $(INCL) srcs/encoder/encoder_body/encoder_test/encoder_body_test_main.c
 	make -C $(LIBFT)
 	gcc -o encoder-test srcs/encoder/encoder_body/encoder_test/encoder_body_test_main.c $(SRCS) -I$(INCL) -L$(LIBFT) -lft -I$(LIBFTINCL)
+
+hash-test: $(SRCS) $(INCL) srcs/hash/hash_test/hash_test.c
+	make -C $(LIBFT)
+	gcc -o hash-test srcs/hash/hash_test/hash_test.c $(SRCS) -I$(INCL) -L$(LIBFT) -lft -I$(LIBFTINCL)
