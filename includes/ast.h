@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "asm.h"
+# include "hash.h"
 
 enum
 {
@@ -48,10 +49,11 @@ typedef struct		s_ast
 	int				header_size;
 
 	struct s_ast	**body_value;
-	int				body_size;
+	int				body_byte_size;
 
 	struct s_ast	**instruction_value;
-	int				instruction_size;	
+	int				instruction_size;
+	t_hash			*labels;
 
 	struct s_ast	**compound_value;
 	int				compound_size;

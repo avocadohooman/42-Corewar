@@ -54,8 +54,8 @@ t_ast	*opcode_parse(t_parser *parser)
 	if (!(statement->statement_args[0] = parser_parse_body_arg(parser, code.argument_types[0])))
 		return (NULL);
 	statement->statement_size += statement->statement_args[0]->arg_size;
-		if (statement->statement_args[0]->arg_type == T_DIR && code.dir_size == 4)
-			statement->statement_size += 2;
+	if (statement->statement_args[0]->arg_type == T_DIR && code.dir_size == 4)
+		statement->statement_size += 2;
 	i = 1;
 	while (i < code.argument_amount)
 	{

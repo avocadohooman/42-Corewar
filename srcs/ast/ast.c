@@ -40,7 +40,7 @@ t_ast	*init_ast(int type)
 	ast->header_value = NULL;
 	ast->header_size = 0;
 	ast->body_value = NULL;
-	ast->body_size = 0;
+	ast->body_byte_size = 0;
 	ast->instruction_value = NULL;
 	ast->instruction_size = 0;
 	ast->compound_value = NULL;
@@ -82,7 +82,7 @@ void	visit_header(t_ast *header)
 {
 	int	i;
 
-	// printf("header -- size: %d\n", header->compound_size);
+	// printf("header -- body_size: %d\n", header->body_byte_size);
 	i = -1;
 	while (++i < header->compound_size)
 		visit_ast(header->compound_value[i]);

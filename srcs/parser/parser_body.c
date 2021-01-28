@@ -99,11 +99,13 @@ t_ast	*parser_parse_body_instruction(t_parser *parser)
 		return (NULL);
 	if (!(compound->compound_value[0] = parser_parse_body_identifier(parser)))
 		return (NULL);
+	compound->statement_size += compound->compound_value[0]->statement_size;
 	compound->compound_size += 1;
 	if (parser->current_token->type == TOKEN_IDENTIFIER)
 	{
 		if (!(compound->compound_value[1] = parser_parse_body_identifier(parser)))
 			return (NULL);
+		compound->statement_size += compound->compound_value[1]->statement_size;
 		compound->compound_size += 1;
 	}
 	return (compound);
@@ -120,6 +122,7 @@ t_ast	*parser_parse_body_instructions(t_parser *parser)
 		return (NULL);
 	if (!(compound->compound_value[0] = parser_parse_body_instruction(parser)))
 		return (NULL);
+	compound->body_byte_size += compound->compound_value[0]->statement_size;
 	compound->compound_size += 1;
 	while (parser->current_token->type == TOKEN_NEWLINE)
 	{
@@ -130,6 +133,7 @@ t_ast	*parser_parse_body_instructions(t_parser *parser)
 		{
 			if (!(compound_insert(compound, statement)))
 				return (NULL);
+			compound->body_byte_size += statement->statement_size;
 		}
 	}
 	return (compound);
