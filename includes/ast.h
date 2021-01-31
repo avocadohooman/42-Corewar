@@ -35,7 +35,7 @@ typedef struct		s_ast
 	int				type;
 	char			*label;
 	int				label_index;
-	int				statement;
+	char			statement;
 	int				statement_n_args;
 	struct s_ast	**statement_args;
 	int				arg_size;
