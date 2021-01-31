@@ -24,7 +24,8 @@ typedef enum	e_error_type
 	GET_NEXT_LINE,
 	INVALID_ARG,
 	MALLOC,
-	INVALID_STATEMENT
+	INVALID_STATEMENT,
+	LONG_NAME_COMMENT
 }				t_error_type;
 
 void			print_error(int type);

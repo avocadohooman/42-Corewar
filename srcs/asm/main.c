@@ -19,12 +19,13 @@
 
 int			main(int argc, char **argv)
 {
-	t_file		input_file;
-	t_file		output_file;
-	t_lexer		*lexer;
-	t_parser	*parser;
-	t_ast		*root;
-	int			bytes;
+	t_file			input_file;
+	t_file			output_file;
+	t_lexer			*lexer;
+	t_parser		*parser;
+	t_ast			*root;
+	int				bytes;
+	unsigned char	*buf;
 	
 	if (argc != 2 || !file_extension(argv[1], FILE_EXT))
 		print_error(INVALID_FILE);
@@ -32,10 +33,8 @@ int			main(int argc, char **argv)
 	lexer = init_lexer(input_file.data, input_file.used);
 	parser = new_parser(lexer);
 	root = parser_parse(parser);
-    visit_ast(root);
-
-
-
+    buf = visit_ast(root);
+	
 	// bytes = write_file(1, &input_file);
 	// printf("wrote %d bytes\n", bytes);
 

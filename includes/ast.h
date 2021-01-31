@@ -61,8 +61,13 @@ typedef struct		s_ast
 
 t_ast				*init_ast(int type);
 t_ast				*compound_insert(t_ast *compound, t_ast *new);
+unsigned char		*visit_compound(t_ast *compound);
+unsigned char		*visit_header(t_ast *header);
+unsigned char		*visit_body(t_ast *body);
+char	        	*visit_label(t_ast *label);
+t_statement	    	*visit_statement(t_ast *statement);
 
-void	            visit_ast(t_ast *ast);
+unsigned char		*visit_ast(t_ast *ast);
 char                *assign_arguments(t_ast *arg);
 
 // t_instruction       *assign_encoding_data(t_ast *compound, t_instruction *instruction, int label);

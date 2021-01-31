@@ -12,12 +12,10 @@
 
 #include "ast.h"
 #include "asm.h"
+#include "error.h"
 #include "encoder.h"
 #include <stdio.h> // delete
 #include "opcodes.h"
-
-char	        *visit_label(t_ast *label);
-t_statement	    *visit_statement(t_ast *statement);
 
 t_ast	*init_ast(int type)
 {
@@ -61,16 +59,28 @@ t_ast	*compound_insert(t_ast *compound, t_ast *new)
 	return (compound);
 }
 
-void	visit_compound(t_ast *compound)
+unsigned char	*visit_compound(t_ast *compound)
 {
-	int	i;
+	int				i;
+	unsigned char	*header;
+	unsigned char	*body;
 
-	// printf("compound -- size: %d\n", compound->compound_size);
 	i = -1;
-	while (++i < compound->compound_size) 
-        visit_ast(compound->compound_value[i]);
-	// encode
-	// return buf
+	header = NULL;
+	body = NULL;
+	while (++i < compound->compound_size)
+	{
+		if (i == 0)
+    		header = visit_ast(compound->compound_value[i]);
+		else
+		{	
+			if (!(body = visit_ast(compound->compound_value[i])))
+				print_error(5);
+		}
+	}
+	header = realloc(header, (HEADER_SIZE + compound->body_byte_size));
+	ft_memmove((header + HEADER_SIZE), body, compound->body_byte_size);
+	return (header);
 }
 
 void	visit_command(t_ast *command)
@@ -78,14 +88,26 @@ void	visit_command(t_ast *command)
 	// printf("command: %s -- %s\n", command->command, command->string);
 }
 
-void	visit_header(t_ast *header)
+unsigned char	*visit_header(t_ast *header)
 {
-	int	i;
+	int				i;
+	unsigned char	*buf;
+	char			*name;
+	char			*comment;
 
-	// printf("header -- body_size: %d\n", header->body_byte_size);
+	// printf("header -- size: %d\n", header->compound_size);
 	i = -1;
 	while (++i < header->compound_size)
-		visit_ast(header->compound_value[i]);
+	{
+		if (header->compound_value[i]->command != NULL &&
+			!strcmp(header->compound_value[i]->command, ".name"))
+			name = header->compound_value[i]->string;
+		if (header->compound_value[i]->command != NULL &&
+			!strcmp(header->compound_value[i]->command, ".comment"))
+			comment = header->compound_value[i]->string;
+	}
+	buf = encode_output(name, comment, header->body_byte_size);
+	return (buf);
 }
 
 unsigned char *encode_arg(t_ast *arg) // Either generate buf in func or pass it as param
@@ -214,7 +236,7 @@ unsigned char       *visit_instruction(t_ast *body)
     return new_instruction; */
 }
 
-void	visit_body(t_ast *body)
+unsigned char	*visit_body(t_ast *body)
 {
 	int	i;
 	unsigned char *code;
@@ -222,6 +244,7 @@ void	visit_body(t_ast *body)
     
 	// printf("body -- size: %d\n", body->compound_size);
 	i = -1;
+	code = NULL;
 	while (++i < body->compound_size)
     {  
         if (body->compound_value[i]->type == AST_EMPTY)
@@ -252,6 +275,7 @@ void	visit_body(t_ast *body)
     //     tmp = tmp->next;
     // }
     //encoding_hub(instructions->next);
+	return (tmp);
 }
 
 char	*visit_label(t_ast *label)
@@ -266,16 +290,16 @@ void	visit_empty(t_ast *empty)
 	// printf("empty\n");
 }
 
-void	visit_ast(t_ast *ast)
+unsigned char	*visit_ast(t_ast *ast)
 {
 	if (ast->type == AST_COMPOUND)
-		visit_compound(ast);
+		return (visit_compound(ast));
 	else if (ast->type == AST_HEADER)
-		visit_header(ast);
+		return (visit_header(ast));
 	else if (ast->type == AST_COMMAND)
 		visit_command(ast);
 	else if (ast->type == AST_BODY)
-		visit_body(ast);
+		return (visit_body(ast));
 	else if (ast->type == AST_INSTRUCTION)
 		visit_instruction(ast);
     else if (ast->type == AST_LABEL)
@@ -286,4 +310,5 @@ void	visit_ast(t_ast *ast)
 		encode_arg(ast);
 	else
 		visit_empty(ast);
+	return (NULL);
 }

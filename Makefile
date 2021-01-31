@@ -32,6 +32,7 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/parser/parser_error.c \
 		srcs/opcode/opcode.c \
 		srcs/hash/hash.c srcs/hash/hashnode.c srcs/hash/labelnode.c \
+		srcs/encoder/encoder_header/encoder.c \
 
 INCL = ./includes
 LIBFT = ./libft

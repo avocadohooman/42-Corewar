@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 14:55:00 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/21 21:50:10 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/01/31 15:38:09 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static const char *g_file_error[] = {
 	[ERROR_ALLOCATION_FAIL] = "Allocation error.",
 };
 
-typedef struct	s_file
+typedef struct		s_file
 {
 	char		*data;
 	size_t		size;
