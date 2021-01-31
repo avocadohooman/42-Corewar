@@ -47,7 +47,7 @@ t_ast	*opcode_parse(t_parser *parser)
 	code = opcode_table[opcode];
 	if (!(statement = init_ast(AST_STATEMENT)))
 		return (NULL);
-	statement->statement = opcode;
+	statement->statement = (char)opcode;
 	statement->statement_size = 1 + opcode_table[opcode].argument_type;
 	if (!(statement->statement_args = ft_memalloc(sizeof(t_ast *) * code.argument_amount)))
 		return (NULL);
@@ -55,7 +55,11 @@ t_ast	*opcode_parse(t_parser *parser)
 		return (NULL);
 	statement->statement_size += statement->statement_args[0]->arg_size;
 	if (statement->statement_args[0]->arg_type == T_DIR && code.dir_size == 4)
+	{
+		printf("HELLOOOOOOOO]\n");
 		statement->statement_size += 2;
+		statement->statement_args[0]->arg_size = 4;
+	}
 	i = 1;
 	while (i < code.argument_amount)
 	{
@@ -64,7 +68,10 @@ t_ast	*opcode_parse(t_parser *parser)
 			return (NULL);
 		statement->statement_size += statement->statement_args[i]->arg_size;
 		if (statement->statement_args[i]->arg_type == T_DIR && code.dir_size == 4)
+		{
 			statement->statement_size += 2;
+			statement->statement_args[i]->arg_size = 4;
+		}
 		i++;
 	}
 	statement->statement_n_args = code.argument_amount;

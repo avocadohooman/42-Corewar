@@ -83,7 +83,11 @@ t_ast	*parser_parse_body_identifier(t_parser *parser)
 	parser_consume(parser, TOKEN_IDENTIFIER);
 	if (parser->current_token->type != TOKEN_COLON &&
 		lookup_opcode(parser->prev_token->value) >= 0)
-		return (opcode_parse(parser));
+		{
+			printf("%ld: PARSE CODE: %s\n", parser->lexer->line_number, parser->prev_token->value);
+			return (opcode_parse(parser));
+		}
+	printf("%ld: PARSE LABEL: %s\n", parser->lexer->line_number, parser->prev_token->value);
 	return (parser_parse_body_label(parser));
 }
 
