@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/01/19 12:23:26 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/02/02 16:26:01 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,6 @@ int     		read_files(t_vm *vm);
 unsigned char			*init_arena(t_vm *vm);
 
 #endif
-
-
-
-
-
-
-
-
-
 
 
 /*

@@ -13,26 +13,26 @@ live:
 l:
 	zjmp %:live
 	ld %25, r4
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
-	st r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
+	sti r4, -500
 	zjmp %:l
 l1:
 	live	%9999999
