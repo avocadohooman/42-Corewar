@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arguments.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:57:33 by gmolin            #+#    #+#             */
-/*   Updated: 2021/01/21 12:54:07 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/02/03 11:08:31 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@
 static void		handle_t_ind(t_ass *ass, char *t_ind_arg)
 {
 	short 	bytes;
-	char 	*trimmed_arg;
 
 	if (ft_strchr(t_ind_arg, ':'))
 	{
-		trimmed_arg = ft_strchr(t_ind_arg, ':');
 		bytes = ft_atoi(&t_ind_arg[1]);
 	}
 	else

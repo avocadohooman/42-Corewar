@@ -6,35 +6,24 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:54:25 by npimenof          #+#    #+#             */
-/*   Updated: 2021/02/03 09:58:47 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/02/03 11:32:21 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LABEL_H
 # define LABEL_H
-# include "hash.h"
+# include "libft.h"
 
-typedef struct	s_label1
+typedef struct	s_label
 {
 	t_list		nexxt;
 	char		*label;
 	int			value;
-	struct s_label1	*next;
-}				t_label1;
-
-typedef struct	s_label
-{
-	t_hashnode	node;
-	int			value;
+	struct s_label	*next;
 }				t_label;
 
-t_label			*new_label(char *label_key, int value);
-t_label			*label_upsert(t_hash **map, t_label *label);
-t_label			*label_findby_key(t_hash *map, char *key);
-
-t_label1		*new_label1(char *label);
-void			ft_labeladd(t_label1 **alst, t_label1 *new);
-int				label_value(t_label1 *head, char *label);
-void			push(t_label1 **list, t_label1 *label);
+t_label			*new_label(char *label);
+int				label_value(t_label *head, char *label);
+void			label_push(t_label **list, t_label *label);
 
 #endif

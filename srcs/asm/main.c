@@ -34,7 +34,6 @@ int			main(int argc, char **argv)
 	parser = new_parser(lexer);
 	root = parser_parse(parser);
     buf = visit_ast(root);
-	printf("done\n");
 	out = ft_memalloc(sizeof(char) * (ft_strlen(argv[1] + 2)));
 	ft_strcpy(out, ft_strrchr(argv[1], '/') + 1);
 	ft_strcpy(ft_strchr(out, '.'), ".cor");

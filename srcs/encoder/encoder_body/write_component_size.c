@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_component_size.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:01 by gmolin            #+#    #+#             */
-/*   Updated: 2021/01/22 19:27:05 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/02/03 11:17:27 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,7 @@ void				write_component_size(t_ass *ass, t_statement *state)
 	int				dir_size;
 	unsigned char	statement;
 	int				index;
-	int				i;
 
-	i = 0;
 	ass->size = 0;
 	statement = state->statement_code;
 	index = fetch_index(statement);

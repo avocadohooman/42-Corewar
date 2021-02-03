@@ -85,10 +85,10 @@ unsigned char	*visit_compound(t_ast *compound)
 	return (header);
 }
 
-void	visit_command(t_ast *command)
-{
-	// printf("command: %s -- %s\n", command->command, command->string);
-}
+// void	visit_command(t_ast *command)
+// {
+// 	// printf("command: %s -- %s\n", command->command, command->string);
+// }
 
 unsigned char	*visit_header(t_ast *header)
 {
@@ -111,7 +111,7 @@ unsigned char	*visit_header(t_ast *header)
 	return (buf);
 }
 
-unsigned char *encode_arg(t_ast *arg, t_label1 *labels)
+unsigned char *encode_arg(t_ast *arg, t_label *labels)
 {
 	unsigned char *encoded_arg;
 	unsigned char *buf;
@@ -126,7 +126,6 @@ unsigned char *encode_arg(t_ast *arg, t_label1 *labels)
 	}
 	else
 		value = arg->arg_value;
-	printf("value: %d\n", value);
 	i = arg->arg_size + 1;
 	encoded_arg = ft_memalloc(sizeof(char) * arg->arg_size);
 	buf = encoded_arg;
@@ -172,13 +171,12 @@ unsigned char	    *encode_statement(t_ast *stmt)
 	buf = encoded_statement;
 	*buf = stmt->statement + 1;
 	buf++;
-	if (opcode_table[stmt->statement].argument_type)
+	if (opcode_table[(int)stmt->statement].argument_type)
 	{
 		*buf = encode_arg_type(stmt->statement_args, stmt->statement_n_args);
 		buf++;
 	}
 	i = -1;
-	int j = 0;
 	while (++i < stmt->statement_n_args)
 	{
 		tmp = encode_arg(stmt->statement_args[i], stmt->label_list);
@@ -233,19 +231,12 @@ char	*visit_label(t_ast *label)
     return (label->label);
 }
 
-void	visit_empty(t_ast *empty)
-{
-	// printf("empty\n");
-}
-
 unsigned char	*visit_ast(t_ast *ast)
 {
 	if (ast->type == AST_COMPOUND)
 		return (visit_compound(ast));
 	else if (ast->type == AST_HEADER)
 		return (visit_header(ast));
-	else if (ast->type == AST_COMMAND)
-		visit_command(ast);
 	else if (ast->type == AST_BODY)
 		return (visit_body(ast));
 	else if (ast->type == AST_INSTRUCTION)
@@ -256,7 +247,7 @@ unsigned char	*visit_ast(t_ast *ast)
 		encode_statement(ast);
 	// else if (ast->type == AST_ARGUMENT)
 	// 	encode_arg(ast);
-	else
-		visit_empty(ast);
+	// else
+	// 	visit_empty(ast);
 	return (NULL);
 }
