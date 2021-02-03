@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/01/19 12:23:26 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/02/03 13:51:12 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,30 @@ typedef struct  s_player
 	unsigned char	*exec_code;
 }               t_player;
 
+typedef struct	s_statement
+{
+int					bytes_to_next_statement;
+unsigned char 		statement;
+unsigned char		arg_type;
+unsigned char		*arguments;
+}				t_statement;
+
+typedef struct	s_carry
+{
+	int				pos;
+	int				cycles_to_execution;
+	int				carry_flag;
+	int				regs[REG_NUMBER];
+	int				last_live;
+	t_statement		*statement;
+struct s_carry   *next;
+}				t_carry;
+
 typedef struct  s_vm
 {
 	int			dump;
 	int			player_nb;
+	t_carry		*carries;
 	t_player	*players[MAX_PLAYERS + 1];
 }               t_vm;
 
