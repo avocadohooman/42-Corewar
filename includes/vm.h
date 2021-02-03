@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/03 19:00:30 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/02/03 19:25:19 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct  s_vm
 int					get_players(t_vm *vm, char **args, int ac);
 int					read_files(t_vm *vm);
 unsigned char       *init_arena(t_vm *vm);
-void				set_carriage_positions(t_vm *vm);
+void				initiate_carriages(t_vm *vm);
 
 #endif
 
