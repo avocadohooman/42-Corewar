@@ -15,6 +15,7 @@
 #include "error.h"
 #include "op.h"
 #include <stdio.h>
+#include "label.h"
 
 int         is_registry(char *string) 
 {
@@ -67,47 +68,49 @@ int         is_number(char *string)
 	// return (0);
 }
 
-t_ast	*parser_parse_body_label(t_parser *parser)
+t_ast	*parser_parse_body_label(t_parser *parser, t_label1 **labels)
 {
-	t_ast	*label;
+	t_ast		*label;
+	t_label1	*new;
+	int			position;
 
 	if (!(label = init_ast(AST_LABEL)))
 		return (NULL);
 	label->label = parser->prev_token->value;
+	new = new_label1(label->label);
+	new->value = parser->bytes;
+	push(labels, new);
 	parser_consume(parser, TOKEN_COLON);
 	return (label);
 }
 
-t_ast	*parser_parse_body_identifier(t_parser *parser)
+t_ast	*parser_parse_body_identifier(t_parser *parser, t_label1 **labels)
 {
 	parser_consume(parser, TOKEN_IDENTIFIER);
 	if (parser->current_token->type != TOKEN_COLON &&
 		lookup_opcode(parser->prev_token->value) >= 0)
-		{
-			printf("%ld: PARSE CODE: %s\n", parser->lexer->line_number, parser->prev_token->value);
-			return (opcode_parse(parser));
-		}
-	printf("%ld: PARSE LABEL: %s\n", parser->lexer->line_number, parser->prev_token->value);
-	return (parser_parse_body_label(parser));
+			return (opcode_parse(parser, labels));
+	return (parser_parse_body_label(parser, labels));
 }
 
-t_ast	*parser_parse_body_instruction(t_parser *parser)
+t_ast	*parser_parse_body_instruction(t_parser *parser, t_label1 **labels)
 {
 	t_ast	*compound;
-
+	
 	if (parser->current_token->type == TOKEN_NEWLINE)
 		return (init_ast(AST_EMPTY));
 	if (!(compound = init_ast(AST_INSTRUCTION)))
 		return (NULL);
 	if (!(compound->compound_value = ft_memalloc(sizeof(t_ast *) * 2)))
 		return (NULL);
-	if (!(compound->compound_value[0] = parser_parse_body_identifier(parser)))
+	if (!(compound->compound_value[0] = parser_parse_body_identifier(parser, labels)))
 		return (NULL);
+	compound->label_list = *labels;
 	compound->statement_size += compound->compound_value[0]->statement_size;
 	compound->compound_size += 1;
 	if (parser->current_token->type == TOKEN_IDENTIFIER)
 	{
-		if (!(compound->compound_value[1] = parser_parse_body_identifier(parser)))
+		if (!(compound->compound_value[1] = parser_parse_body_identifier(parser, labels)))
 			return (NULL);
 		compound->statement_size += compound->compound_value[1]->statement_size;
 		compound->compound_size += 1;
@@ -119,26 +122,31 @@ t_ast	*parser_parse_body_instructions(t_parser *parser)
 {
 	t_ast	*compound;
 	t_ast	*statement;
+	t_label1 *labels;
 
+	labels = NULL;
 	if (!(compound = init_ast(AST_BODY)))
 		return (NULL);
 	if (!(compound->compound_value = ft_memalloc(sizeof(t_ast *))))
 		return (NULL);
-	if (!(compound->compound_value[0] = parser_parse_body_instruction(parser)))
+	if (!(compound->compound_value[0] = parser_parse_body_instruction(parser, &labels)))
 		return (NULL);
 	compound->body_byte_size += compound->compound_value[0]->statement_size;
+	parser->bytes = compound->body_byte_size;
 	compound->compound_size += 1;
 	while (parser->current_token->type == TOKEN_NEWLINE)
 	{
 		parser_consume(parser, TOKEN_NEWLINE);
 		if (parser->current_token->type == TOKEN_EOF)
 			break ;
-		if ((statement = parser_parse_body_instruction(parser)))
+		if ((statement = parser_parse_body_instruction(parser, &labels)))
 		{
 			if (!(compound_insert(compound, statement)))
 				return (NULL);
 			compound->body_byte_size += statement->statement_size;
+			parser->bytes = compound->body_byte_size;
 		}
 	}
+	compound->label_list = labels;
 	return (compound);
 }

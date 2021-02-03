@@ -16,6 +16,7 @@
 # include "op.h"
 # include "parser.h"
 # include "ast.h"
+# include "label.h"
  
 # define LFORK_LITERAL	"lfork"
 # define STI_LITERAL	"sti"
@@ -86,7 +87,7 @@ static const t_opcode opcode_table[] = {
 };
 
 int		lookup_opcode(char *str);
-t_ast	*opcode_parse(t_parser *parser);
+t_ast	*opcode_parse(t_parser *parser, t_label1 **labels);
 int		check_argument(int options, int received);
 
 #endif
