@@ -35,7 +35,7 @@ int		check_argument(int options, int received)
 	return (0);
 }
 
-t_ast	*opcode_parse(t_parser *parser, t_label1 **labels)
+t_ast	*opcode_parse(t_parser *parser, t_label **labels)
 {
 	int			opcode;
 	int			i;

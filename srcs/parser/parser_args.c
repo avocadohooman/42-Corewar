@@ -78,7 +78,6 @@ t_ast	*parser_parse_body_indirect(t_parser *parser)
 t_ast	*parser_parse_body_registry(t_parser *parser)
 {
 	t_ast	*arg;
-	int		sign;
 
 	if (!(arg = init_ast(AST_ARGUMENT)))
 		return (NULL);

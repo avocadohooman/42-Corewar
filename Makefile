@@ -14,7 +14,7 @@ VM_NAME = corewar
 ASM_NAME = asm
 
 LEXER_TEST_NAME = lexer-test
-# FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra
 VM_MAIN = srcs/vm/main.c
 ASM_MAIN = srcs/asm/main.c
 
@@ -31,7 +31,7 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/parser/parser_body.c srcs/parser/parser_args.c \
 		srcs/parser/parser_error.c \
 		srcs/opcode/opcode.c \
-		srcs/hash/hash.c srcs/hash/hashnode.c srcs/hash/labelnode.c \
+		srcs/label/label.c \
 		srcs/encoder/encoder_header/encoder.c \
 
 INCL = ./includes

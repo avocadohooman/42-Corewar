@@ -37,7 +37,7 @@ int         is_registry(char *string)
 
 int         is_number(char *string)
 {
-	if (*string == '-' && ++string);
+	if (*string == '-' && ++string){}
 	while (ft_isdigit(*string) && string++);
 	return (!*string);
 	// int     i;
@@ -68,23 +68,22 @@ int         is_number(char *string)
 	// return (0);
 }
 
-t_ast	*parser_parse_body_label(t_parser *parser, t_label1 **labels)
+t_ast	*parser_parse_body_label(t_parser *parser, t_label **labels)
 {
 	t_ast		*label;
-	t_label1	*new;
-	int			position;
+	t_label	*new;
 
 	if (!(label = init_ast(AST_LABEL)))
 		return (NULL);
 	label->label = parser->prev_token->value;
-	new = new_label1(label->label);
+	new = new_label(label->label);
 	new->value = parser->bytes;
-	push(labels, new);
+	label_push(labels, new);
 	parser_consume(parser, TOKEN_COLON);
 	return (label);
 }
 
-t_ast	*parser_parse_body_identifier(t_parser *parser, t_label1 **labels)
+t_ast	*parser_parse_body_identifier(t_parser *parser, t_label **labels)
 {
 	parser_consume(parser, TOKEN_IDENTIFIER);
 	if (parser->current_token->type != TOKEN_COLON &&
@@ -93,7 +92,7 @@ t_ast	*parser_parse_body_identifier(t_parser *parser, t_label1 **labels)
 	return (parser_parse_body_label(parser, labels));
 }
 
-t_ast	*parser_parse_body_instruction(t_parser *parser, t_label1 **labels)
+t_ast	*parser_parse_body_instruction(t_parser *parser, t_label **labels)
 {
 	t_ast	*compound;
 	
@@ -122,7 +121,7 @@ t_ast	*parser_parse_body_instructions(t_parser *parser)
 {
 	t_ast	*compound;
 	t_ast	*statement;
-	t_label1 *labels;
+	t_label *labels;
 
 	labels = NULL;
 	if (!(compound = init_ast(AST_BODY)))

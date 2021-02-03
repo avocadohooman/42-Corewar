@@ -83,11 +83,11 @@ static const t_opcode opcode_table[] = {
 	[XOR_INDEX] = {XOR_LITERAL, 0x08, 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 1, 4},
 	[LLDI_INDEX] = {LLDI_LITERAL, 0x0e, 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 1, 2},
 	[AND_INDEX] = {AND_LITERAL, 0x06, 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 1, 4},
-	[NO_OPERATION] = {0, 0, 0, 0, 0}
+	[NO_OPERATION] = {}
 };
 
 int		lookup_opcode(char *str);
-t_ast	*opcode_parse(t_parser *parser, t_label1 **labels);
+t_ast	*opcode_parse(t_parser *parser, t_label **labels);
 int		check_argument(int options, int received);
 
 #endif

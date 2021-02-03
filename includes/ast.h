@@ -15,8 +15,7 @@
 
 # include "libft.h"
 # include "asm.h"
-// # include "hash.h"
-#include "label.h"
+# include "label.h"
 
 enum
 {
@@ -35,8 +34,7 @@ typedef struct		s_ast
 {
 	int				type;
 	char			*label;
-	t_label1		*label_list;
-	// t_hash			*label_map;
+	t_label			*label_list;
 	int				label_index;
 	char			statement;
 	int				statement_position;
@@ -57,7 +55,6 @@ typedef struct		s_ast
 
 	struct s_ast	**instruction_value;
 	int				instruction_size;
-	t_hash			*labels;
 
 	struct s_ast	**compound_value;
 	int				compound_size;
