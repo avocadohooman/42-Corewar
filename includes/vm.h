@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/01/19 12:23:26 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/02/03 19:00:30 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,41 @@ typedef struct  s_player
 	unsigned char	*exec_code;
 }               t_player;
 
+typedef struct  s_carriage 
+{
+	int                 pos;
+	int                 cycles_to_execute;
+	int                 carry_flag;
+	int                 regs[REG_NUMBER];
+	int                 last_live;
+	// t_statement     *statement;
+	struct s_carriage  *next;
+}               t_carriage;
+
+typedef struct  s_statement
+{
+   int              bytes_to_next_statement;
+   //<something>    statment
+   //<something>    arguments;
+}               t_statement;
+
 typedef struct  s_vm
 {
 	int			dump;
 	int			player_nb;
 	t_player	*players[MAX_PLAYERS + 1];
+    t_carriage  *carriages;
 }               t_vm;
 
-int				get_players(t_vm *vm, char **args, int ac);
-int     		read_files(t_vm *vm);
-unsigned char			*init_arena(t_vm *vm);
+
+
+
+int					get_players(t_vm *vm, char **args, int ac);
+int					read_files(t_vm *vm);
+unsigned char       *init_arena(t_vm *vm);
+void				set_carriage_positions(t_vm *vm);
 
 #endif
-
-
-
-
-
-
-
-
-
 
 
 /*
