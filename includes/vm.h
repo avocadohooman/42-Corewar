@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
 /*   Updated: 2021/02/03 13:51:12 by seronen          ###   ########.fr       */
+=======
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
+/*   Updated: 2021/02/03 19:25:19 by gmolin           ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +41,7 @@ typedef struct  s_player
 	unsigned char	*exec_code;
 }               t_player;
 
+<<<<<<< HEAD
 typedef struct	s_statement
 {
 int					bytes_to_next_statement;
@@ -52,6 +60,25 @@ typedef struct	s_carry
 	t_statement		*statement;
 struct s_carry   *next;
 }				t_carry;
+=======
+typedef struct  s_carriage 
+{
+	int                 pos;
+	int                 cycles_to_execute;
+	int                 carry_flag;
+	int                 regs[REG_NUMBER];
+	int                 last_live;
+	// t_statement     *statement;
+	struct s_carriage  *next;
+}               t_carriage;
+
+typedef struct  s_statement
+{
+   int              bytes_to_next_statement;
+   //<something>    statment
+   //<something>    arguments;
+}               t_statement;
+>>>>>>> master
 
 typedef struct  s_vm
 {
@@ -59,22 +86,18 @@ typedef struct  s_vm
 	int			player_nb;
 	t_carry		*carries;
 	t_player	*players[MAX_PLAYERS + 1];
+    t_carriage  *carriages;
 }               t_vm;
 
-int				get_players(t_vm *vm, char **args, int ac);
-int     		read_files(t_vm *vm);
-unsigned char			*init_arena(t_vm *vm);
+
+
+
+int					get_players(t_vm *vm, char **args, int ac);
+int					read_files(t_vm *vm);
+unsigned char       *init_arena(t_vm *vm);
+void				initiate_carriages(t_vm *vm);
 
 #endif
-
-
-
-
-
-
-
-
-
 
 
 /*

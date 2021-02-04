@@ -45,6 +45,11 @@ void		free_file(t_file *f)
 	f->data = NULL;
 }
 
+static const char *g_file_error[] = {
+	[ERROR_INVALID_FILE] = "Invalid file.",
+	[ERROR_ALLOCATION_FAIL] = "Allocation error.",
+};
+
 void		file_exit_with_message(t_file_error type)
 {
 	ft_putendl_fd(g_file_error[type], 2);

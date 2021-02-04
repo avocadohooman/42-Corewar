@@ -85,6 +85,6 @@ int     main(int ac, char **av)
 	read_files(vm);
 	introduce_players(vm);
 	arena = init_arena(vm);
-	dump_arena(arena);
+	// dump_arena(arena);
 	return (0);
 }

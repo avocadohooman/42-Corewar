@@ -20,12 +20,12 @@
 int			main(int argc, char **argv)
 {
 	t_file			input_file;
-	t_file			output_file;
 	t_lexer			*lexer;
 	t_parser		*parser;
 	t_ast			*root;
-	int				bytes;
 	unsigned char	*buf;
+	int				fd;
+	char			*out;
 	
 	if (argc != 2 || !file_extension(argv[1], FILE_EXT))
 		print_error(INVALID_FILE);
@@ -34,12 +34,11 @@ int			main(int argc, char **argv)
 	parser = new_parser(lexer);
 	root = parser_parse(parser);
     buf = visit_ast(root);
-	
-	// bytes = write_file(1, &input_file);
-	// printf("wrote %d bytes\n", bytes);
-
-	// new_file(&output_file, 1024);
-	// insert_file(&output_file, "haha\n", 5);
-	// write_file(1, &output_file);
+	out = ft_memalloc(sizeof(char) * (ft_strlen(argv[1] + 2)));
+	ft_strcpy(out, ft_strrchr(argv[1], '/') + 1);
+	ft_strcpy(ft_strchr(out, '.'), ".cor");
+	if ((fd = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666)) < 0)
+		return (1);
+	write(fd, buf, root->body_byte_size + HEADER_SIZE);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arena.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 22:52:50 by seronen           #+#    #+#             */
-/*   Updated: 2021/01/15 16:06:18 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/03 19:24:57 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ unsigned char		*init_arena(t_vm *vm)
 	if (!(arena = malloc(sizeof(unsigned char) * MEM_SIZE)))
 		print_error(MALLOC);
 	place_players(vm, arena);
+	initiate_carriages(vm);
 	return (arena);
 }

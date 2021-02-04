@@ -25,8 +25,10 @@ t_ast	*init_ast(int type)
 		return (NULL);
 	ast->type = type;
 	ast->label = NULL;
+	ast->label_list = NULL;
 	ast->label_index = 0;
 	ast->statement = 0;
+	ast->statement_position = 0;
 	ast->statement_size = 0;
 	ast->statement_n_args = 0;
 	ast->statement_args = NULL;
@@ -80,19 +82,13 @@ unsigned char	*visit_compound(t_ast *compound)
 	}
 	header = realloc(header, (HEADER_SIZE + compound->body_byte_size));
 	ft_memmove((header + HEADER_SIZE), body, compound->body_byte_size);
-	i = 0;
-	while (i < compound->body_byte_size + HEADER_SIZE)
-	{
-		printf("%.2x ", header[i]);
-		i++;
-	}
 	return (header);
 }
 
-void	visit_command(t_ast *command)
-{
-	// printf("command: %s -- %s\n", command->command, command->string);
-}
+// void	visit_command(t_ast *command)
+// {
+// 	// printf("command: %s -- %s\n", command->command, command->string);
+// }
 
 unsigned char	*visit_header(t_ast *header)
 {
@@ -101,7 +97,6 @@ unsigned char	*visit_header(t_ast *header)
 	char			*name;
 	char			*comment;
 
-	// printf("header -- size: %d\n", header->compound_size);
 	i = -1;
 	while (++i < header->compound_size)
 	{
@@ -116,49 +111,37 @@ unsigned char	*visit_header(t_ast *header)
 	return (buf);
 }
 
-unsigned char *encode_arg(t_ast *arg) // Either generate buf in func or pass it as param
+unsigned char *encode_arg(t_ast *arg, t_label *labels)
 {
-	// Assuming that buf is passed as param!
-	// Need to know the size of a arg = 2 || 4 bytes ===>>> struct->arg_size to the rescue!
-
-	// Gather arg data to a string which length is defined in param 'size'
-	printf("Encode arg!\n");
 	unsigned char *encoded_arg;
 	unsigned char *buf;
 	int i;
+	int value;
 
-	if (!arg)
-	{
-		printf("No arg!\n");
-		return (NULL);
-	}
 	if (arg->label)
 	{
-//		arg->value = FETCH NBR OF BYTES TO JUMP
-		printf("encode arg encountered a label.\nConverting label '%s'.\n", arg->label);
+		if ((value = label_value(labels, arg->label)) < 0)
+			exit(1);
+		value -= arg->statement_position;
 	}
+	else
+		value = arg->arg_value;
 	i = arg->arg_size + 1;
-	printf("arg_type: %d -- size: %d\n", arg->arg_type, arg->arg_size);
-	encoded_arg = ft_memalloc(sizeof(char) * arg->arg_size); // If !buf, malloc it to existence
+	encoded_arg = ft_memalloc(sizeof(char) * arg->arg_size);
 	buf = encoded_arg;
 	while (--i > 0)
 	{
-		*buf = ((unsigned char *)&arg->arg_value)[i - 1];
+		*buf = ((unsigned char *)&value)[i - 1];
 		buf++;
-		printf("Got index %d and char: %d\n", i - 1, ((unsigned char *)&arg->arg_value)[i - 1]);
 	}
 	return (encoded_arg);
 }
 
 unsigned char encode_arg_type(t_ast **args, int nb)
 {
-	// Generate arg type code using args and arg->type
-	// It's simple
-
 	unsigned char code;
 	int i;
 
-	printf("Encode arg type!\n");
 	i = -1;
 	code = 0;
 	while (++i < nb)
@@ -183,46 +166,25 @@ unsigned char	    *encode_statement(t_ast *stmt)
 	unsigned char *buf;
 	unsigned char *tmp;
 
-	printf("Encode statement!\n");
 	if (!(encoded_statement = ft_memalloc(sizeof(char) * stmt->statement_size)))
 		return (NULL);
 	buf = encoded_statement;
 	*buf = stmt->statement + 1;
 	buf++;
-	if (opcode_table[stmt->statement].argument_type)
+	if (opcode_table[(int)stmt->statement].argument_type)
 	{
 		*buf = encode_arg_type(stmt->statement_args, stmt->statement_n_args);
 		buf++;
 	}
 	i = -1;
-	int j = 0;
 	while (++i < stmt->statement_n_args)
 	{
-		tmp = encode_arg(stmt->statement_args[i]);
-	// 	while (i < stmt->statement_size)
-	// {
-	// 	printf("%.2x ", encoded_statement[i]);
-	// 	i++;
-	// }
+		tmp = encode_arg(stmt->statement_args[i], stmt->label_list);
 		ft_memcpy(buf, tmp, stmt->statement_args[i]->arg_size);
 		buf += stmt->statement_args[i]->arg_size;
 		// free(tmp);	This should be done :)))
 	}
-	printf("Statement encoded successfully!\n");
-	// i = 0;
-	// while (i < stmt->statement_size)
-	// {
-	// 	printf("%.2x ", encoded_statement[i]);
-	// 	i++;
-	// }
     return (encoded_statement);
-	// printf("statement: %d -- number of args %d -- total_size:%d\n",
-	// 		statement->statement + 1,
-	// 		statement->statement_n_args,
-	// 		statement->statement_size);
-	// i = -1;
-	// while (++i < statement->statement_n_args)
-	// 	visit_argument(statement->statement_args[i], instruction);
 }
 
 unsigned char       *visit_instruction(t_ast *body)
@@ -230,35 +192,15 @@ unsigned char       *visit_instruction(t_ast *body)
 	int i;
 
 	i = -1;
-	// printf("Visit instruction!\n");
-	// printf("Compound size: %d\n", body->compound_size);
+
 	while (++i < body->compound_size)
     {
 		if (body->compound_value[i]->type == AST_STATEMENT)
 		{
-			printf("Going to encode statement!\n");
 			return (encode_statement(body->compound_value[i]));
 		}
-		else
-			printf("v_instr: type was: %d\n", body->compound_value[i]->type);
     }
-	printf("SIZE SHOULD BE 0: %d\n", body->compound_value[i - 1]->statement_size);
 	return ((unsigned char *)ft_strdup(""));
-	/*
-    int i;
-    t_instruction *new_instruction;
-
-    new_instruction = ft_memalloc(sizeof(t_instruction));
-
-    i = -1;
-    while (++i < body->compound_size)
-    {
-        if (body->compound_value[i]->type == AST_LABEL)
-            new_instruction->label = visit_label(body->compound_value[i]);
-        else if (body->compound_value[i]->type == AST_STATEMENT)
-            new_instruction->statement = visit_statement(body->compound_value[i]);
-    }
-    return new_instruction; */
 }
 
 unsigned char	*visit_body(t_ast *body)
@@ -267,8 +209,7 @@ unsigned char	*visit_body(t_ast *body)
 	unsigned char *code;
 	unsigned char *tmp;
 	unsigned char *encoded_statement;
-    
-	// printf("body -- size: %d\n", body->compound_size);
+
 	i = -1;
 	if  (!(code = ft_memalloc(sizeof(unsigned char) * body->body_byte_size)))
 		return (NULL);
@@ -281,44 +222,13 @@ unsigned char	*visit_body(t_ast *body)
 		ft_memcpy(tmp, encoded_statement, body->compound_value[i]->statement_size);
 		tmp += body->compound_value[i]->statement_size;
 		free(encoded_statement);
-		// Save code to dynamic buffer here!
     }
-    // i = 0;
-    // while (tmp)
-    // {
-    //     printf("----Instruction Start----\n");
-    //     if (tmp->label)
-    //         printf("LABEL: %s \n", tmp->label);
-    //     if (tmp->statement)
-    //     {
-    //         printf("opcode: %s ", tmp->statement->opcode);
-    //         i = 0;
-    //         while (i < tmp->statement->number_arg)
-    //         {
-    //             printf("%s ",tmp->statement->arguments[i]);
-    //             i++;
-    //         }
-    //         printf("\n");
-    //         printf("comp size: %d\n", tmp->statement->component_size);
-    //         printf("statement code: %#.2x\n", tmp->statement->statement_code);
-    //         printf("----Instruction End----\n");
-    //     }
-    //     tmp = tmp->next;
-    // }
-    //encoding_hub(instructions->next);
 	return (code);
 }
 
 char	*visit_label(t_ast *label)
 {
-    // instruction = assign_encoding_data(label, instruction, 1);
     return (label->label);
-	// printf("label: %s\n", label->label);
-}
-
-void	visit_empty(t_ast *empty)
-{
-	// printf("empty\n");
 }
 
 unsigned char	*visit_ast(t_ast *ast)
@@ -327,8 +237,6 @@ unsigned char	*visit_ast(t_ast *ast)
 		return (visit_compound(ast));
 	else if (ast->type == AST_HEADER)
 		return (visit_header(ast));
-	else if (ast->type == AST_COMMAND)
-		visit_command(ast);
 	else if (ast->type == AST_BODY)
 		return (visit_body(ast));
 	else if (ast->type == AST_INSTRUCTION)
@@ -337,9 +245,9 @@ unsigned char	*visit_ast(t_ast *ast)
 		visit_label(ast);
 	else if (ast->type == AST_STATEMENT)
 		encode_statement(ast);
-	else if (ast->type == AST_ARGUMENT)
-		encode_arg(ast);
-	else
-		visit_empty(ast);
+	// else if (ast->type == AST_ARGUMENT)
+	// 	encode_arg(ast);
+	// else
+	// 	visit_empty(ast);
 	return (NULL);
 }

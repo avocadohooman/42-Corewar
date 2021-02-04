@@ -14,7 +14,7 @@ VM_NAME = corewar
 ASM_NAME = asm
 
 LEXER_TEST_NAME = lexer-test
-# FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra
 VM_MAIN = srcs/vm/main.c
 ASM_MAIN = srcs/asm/main.c
 
@@ -24,14 +24,14 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/encoder/encoder_body/get_argument_type.c srcs/encoder/encoder_body/get_arguments.c srcs/encoder/encoder_body/write_component_size.c \
 		srcs/encoder/encoder_body/encoder.c \
 		srcs/encoder/encoder_body/get_statement.c srcs/encoder/encoder_body/track_jmps.c srcs/encoder/encoder_body/get_t_dir_special_arguments.c \
-		srcs/vm/args.c srcs/vm/read_files.c srcs/vm/arena.c \
+		srcs/vm/args.c srcs/vm/read_files.c srcs/vm/arena.c srcs/vm/initiate_carriage.c \
 		srcs/ast/ast.c \
 		srcs/ast/assign_data_to_struct.c \
 		srcs/parser/parser.c srcs/parser/parser_header.c \
 		srcs/parser/parser_body.c srcs/parser/parser_args.c \
 		srcs/parser/parser_error.c \
 		srcs/opcode/opcode.c \
-		srcs/hash/hash.c srcs/hash/hashnode.c srcs/hash/labelnode.c \
+		srcs/label/label.c \
 		srcs/encoder/encoder_header/encoder.c \
 
 INCL = ./includes

@@ -24,15 +24,16 @@ typedef enum	e_parser_error
 	ERROR_UNKNOWN_STATEMENT
 }				t_parser_error;
 
-static const char *g_parser_error[] = {
-	[ERROR_UNKNOWN_COMMAND] = "Unknown command.",
-	[ERROR_UNEXPECTED_ARG_TYPE] = "Unexpected argument type.",
-	[ERROR_MALFORMATTED_ARG] = "Malformatted argument",
-	[ERROR_UNKNOWN_STATEMENT] = "Unknown operation."
-};
+// static const char *g_parser_error[] = {
+// 	[ERROR_UNKNOWN_COMMAND] = "Unknown command.",
+// 	[ERROR_UNEXPECTED_ARG_TYPE] = "Unexpected argument type.",
+// 	[ERROR_MALFORMATTED_ARG] = "Malformatted argument",
+// 	[ERROR_UNKNOWN_STATEMENT] = "Unknown operation."
+// };
 
 typedef struct	s_parser
 {
+	int			bytes;
 	t_lexer		*lexer;
 	t_token		*prev_token;
 	t_token		*current_token;
