@@ -24,7 +24,7 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/encoder/encoder_body/get_argument_type.c srcs/encoder/encoder_body/get_arguments.c srcs/encoder/encoder_body/write_component_size.c \
 		srcs/encoder/encoder_body/encoder.c \
 		srcs/encoder/encoder_body/get_statement.c srcs/encoder/encoder_body/track_jmps.c srcs/encoder/encoder_body/get_t_dir_special_arguments.c \
-		srcs/vm/args.c srcs/vm/read_files.c srcs/vm/arena.c srcs/vm/initiate_carriage.c \
+		srcs/vm/args.c srcs/vm/read_files.c srcs/vm/arena.c srcs/vm/initiate_carriage.c srcs/vm/decrypt.c \
 		srcs/ast/ast.c \
 		srcs/ast/assign_data_to_struct.c \
 		srcs/parser/parser.c srcs/parser/parser_header.c \
@@ -46,7 +46,7 @@ $(VM_NAME): $(SRCS) $(INCL) $(VM_MAIN)
 		git submodule update --init; \
 	fi
 	make -C $(LIBFT)
-	gcc $(FLAGS) -o $(VM_NAME) $(VM_MAIN) -I$(INCL) $(SRCS)  \
+	gcc -o $(VM_NAME) $(VM_MAIN) -I$(INCL) $(SRCS)  \
 	-L$(LIBFT) -lft -I$(LIBFTINCL)
 
 $(ASM_NAME): $(SRCS) $(INCL) $(ASM_MAIN)
