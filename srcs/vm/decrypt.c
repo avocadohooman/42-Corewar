@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/04 23:58:41 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/05 00:03:35 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	init_stmt(t_carriage *carry)
 	stmt->statement = carry->pos[0];
 	stmt->arg_type = carry->pos[1];
 	ft_bzero(stmt->arg_types, sizeof(int) * 3);
-	stmt->cost = opcode_table[stmt->statement].cost;	// Set cost (how many cycles until execution)
+	stmt->cost = opcode_table[stmt->statement - 1].cost;	// Set cost (how many cycles until execution)
 	carry->stmt = stmt;
 }
 
@@ -124,6 +124,7 @@ int     form_statement(t_carriage *carry)
 	carry->pos += get_args(carry, pos);		// Update carriage "PC" to the next statement
 	printf("Next statement code: %02x\n", carry->pos[0]);
 	printf("Statement code: %02x, numerical: %d\n", carry->stmt->statement, carry->stmt->statement);
+	printf("Cycles until execution (cost): %d\n", carry->stmt->cost);
 	printf("Arguments and types:\n");
 	int i = 0;
 	while (i < 3)
