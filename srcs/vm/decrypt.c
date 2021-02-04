@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/04 23:15:27 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/04 23:58:41 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	init_stmt(t_carriage *carry)
 	stmt->statement = carry->pos[0];
 	stmt->arg_type = carry->pos[1];
 	ft_bzero(stmt->arg_types, sizeof(int) * 3);
+	stmt->cost = opcode_table[stmt->statement].cost;	// Set cost (how many cycles until execution)
 	carry->stmt = stmt;
 }
 
