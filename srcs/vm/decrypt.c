@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/05 00:03:35 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/05 00:43:31 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	init_stmt(t_carriage *carry)
 	stmt->statement = carry->pos[0];
 	stmt->arg_type = carry->pos[1];
 	ft_bzero(stmt->arg_types, sizeof(int) * 3);
-	stmt->cost = opcode_table[stmt->statement - 1].cost;	// Set cost (how many cycles until execution)
 	carry->stmt = stmt;
 }
 
@@ -122,9 +121,10 @@ int     form_statement(t_carriage *carry)
 		carry->stmt->arg_types[0] = T_DIR;	// Resolve single arg issue when no arg type present
 											// Only case when no arg_type_code is when first and only arg is T_DIR
 	carry->pos += get_args(carry, pos);		// Update carriage "PC" to the next statement
+	carry->cycles_to_execute = opcode_table[carry->stmt->statement - 1].cost; // Set "cost" (cycles to pass until execution can happen)
 	printf("Next statement code: %02x\n", carry->pos[0]);
 	printf("Statement code: %02x, numerical: %d\n", carry->stmt->statement, carry->stmt->statement);
-	printf("Cycles until execution (cost): %d\n", carry->stmt->cost);
+	printf("Cycles until execution (cost): %d\n", carry->cycles_to_execute);
 	printf("Arguments and types:\n");
 	int i = 0;
 	while (i < 3)

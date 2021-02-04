@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/04 23:04:55 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/05 00:42:14 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,11 @@ typedef struct  s_player
 
 typedef struct  s_stmt
 {
-   int              bytes_to_next_statement;
-   int				cost;
-   unsigned char	statement;
-   unsigned char	arg_type;
+	unsigned char	statement;
+	unsigned char	arg_type;
 
-   int				arg_types[3];
-   int				args[3];
+	int				arg_types[3];
+	int				args[3];
 }               t_stmt;
 
 typedef struct  s_carriage 
