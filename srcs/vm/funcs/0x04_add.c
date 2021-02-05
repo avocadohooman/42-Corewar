@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add.c                                              :+:      :+:    :+:   */
+/*   0x04_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:48:11 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/05 15:52:43 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/05 15:33:21 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    add(t_carriage *carriage, unsigned char *arena)
+void    op_add(t_carriage *carriage, t_vm *vm, unsigned char *arena)
 {
     if (!carriage->carry_flag)
     {
