@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   live.c                                             :+:      :+:    :+:   */
+/*   0x13_lld.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/03 13:26:34 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/03 13:37:50 by seronen          ###   ########.fr       */
+/*   Created: 2021/02/06 15:09:22 by seronen           #+#    #+#             */
+/*   Updated: 2021/02/06 15:13:27 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    live(t_carry *carry)
+void    op_lld(t_carriage *carriage, t_vm *vm, unsigned char *arena)
 {
-    if (!carry->carry_flag)
-    {
-        printf("Hello!\n");
-    }
+	
 }
