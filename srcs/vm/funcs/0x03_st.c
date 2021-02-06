@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:48:06 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/06 15:01:24 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/06 15:33:32 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void    op_st(t_carriage *carriage)
     if (carriage->stmt->arg_type[1] == 1)
         carriage->regs[reg_slot2] = arg_value;
     else if (carriage->stmt->arg_type[1] == 4)
-        carriage->regs[reg_slot2] = arg_idx_value;
+        carriage->regs[reg_slot2] = (short)arg_idx_value;
 }
