@@ -33,6 +33,7 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/opcode/opcode.c \
 		srcs/label/label.c \
 		srcs/encoder/encoder_header/encoder.c \
+		srcs/vm/battle_loop.c \
 
 INCL = ./includes
 LIBFT = ./libft

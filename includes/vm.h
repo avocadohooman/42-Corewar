@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/06 14:51:38 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/06 16:18:40 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct  s_vm
 {
 	int			dump;
 	int			player_nb;
+	int			carry_nbr;
 	t_player	*players[MAX_PLAYERS + 1];
     t_carriage  *carriages;
 }               t_vm;
@@ -70,6 +71,7 @@ typedef struct	s_loop
 	int			cycle_to_die;
 	int			ctd_reset;
 	int			nbr_checks;
+	t_carriage	*head;
 }				t_loop;
 
 

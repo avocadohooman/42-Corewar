@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/06 14:49:32 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/06 16:18:42 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		initiate_carriages(t_vm *vm, unsigned char *arena)
 	{
 		carriage_pos = (vm->players[i]->id - 1) * (MEM_SIZE / vm->player_nb);
 		head = create_carriage(head, vm->players[i]->id, &arena[carriage_pos]);
+		vm->carry_nbr++;
         printf("r1: %d\n", head->regs[0]);
 		form_statement(head);
 		i++;

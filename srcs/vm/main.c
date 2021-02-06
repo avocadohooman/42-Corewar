@@ -80,6 +80,7 @@ int     main(int ac, char **av)
 
 	vm = malloc(sizeof(t_vm));
 	vm->dump = 0;
+	vm->carry_nbr = 0;
 	bzero(vm->players, sizeof(t_player) * MAX_PLAYERS + 1);
 	get_players(vm, av, ac);
 	read_files(vm);

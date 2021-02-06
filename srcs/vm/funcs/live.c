@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   live.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 13:26:34 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/03 13:37:50 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/06 14:56:48 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    live(t_carry *carry)
+void    live(t_carriage *carry)
 {
     if (!carry->carry_flag)
     {

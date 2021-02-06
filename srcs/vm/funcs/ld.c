@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ld.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 13:37:30 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/03 13:38:15 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/06 14:56:50 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    ld(t_carry *carry)
+void    ld(t_carriage *carry)
 {
     
 }
