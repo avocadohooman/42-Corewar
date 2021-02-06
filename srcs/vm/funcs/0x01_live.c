@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   live.c                                             :+:      :+:    :+:   */
+/*   0x01_live.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 13:26:34 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/03 13:37:50 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/06 15:01:03 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    live(t_carry *carry)
+void    op_live(t_carriage *carriage, t_vm *vm)
 {
-    if (!carry->carry_flag)
+    int player_id;
+
+    player_id = carriage->stmt->args[0];
+    if (player_id <= vm->player_nb)
     {
-        printf("Hello!\n");
+        carriage->last_live = carriage->cycle;
+        printf("Player %d '%s' is alive\n", player_id, vm->players[player_id]->name);
     }
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initiate_carriage.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/04 22:52:55 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/05 15:55:21 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_carriage		*create_carriage(t_carriage *next, int player_id, unsigned char *pos
 	carriage->cycles_to_execute = -1;
 	carriage->last_live = -1;
 	carriage->carry_flag = 0;
+	carriage->cycle = 0;
 	carriage->next = next;
 	return (carriage);
 }
@@ -43,6 +44,7 @@ void		initiate_carriages(t_vm *vm, unsigned char *arena)
 		head = create_carriage(head, vm->players[i]->id, &arena[carriage_pos]);
         printf("r1: %d\n", head->regs[0]);
 		form_statement(head);
+		op_ld(head, vm, arena);
 		i++;
 	}
 	vm->carriages = head;
