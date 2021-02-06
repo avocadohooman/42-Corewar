@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/05 00:42:14 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/06 15:02:04 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct  s_carriage
 	int                 carry_flag;
 	int                 regs[REG_NUMBER];
 	int                 last_live;
+	int					cycle;
 	t_stmt     			*stmt;
 	struct s_carriage  *next;
 }               t_carriage;
@@ -70,6 +71,20 @@ int					read_files(t_vm *vm);
 unsigned char       *init_arena(t_vm *vm);
 void				initiate_carriages(t_vm *vm, unsigned char *arena);
 int     			form_statement(t_carriage *carry);
+int					convert_4_bytes(unsigned char *data);
+
+
+/** OP_FUNCTIONS **/
+
+void				op_live(t_carriage *carriage, t_vm *vm, unsigned char *arena);
+void				op_ld(t_carriage *carriage);
+void				op_st(t_carriage *carriage);
+void				op_add(t_carriage *carriage);
+void				op_sub(t_carriage *carriage);
+void				op_and(t_carriage *carriage);
+void				op_or(t_carriage *carriage);
+void				op_xor(t_carriage *carriage);
+int      			get_arg_value(t_carriage *carriage, int arg_value, int i);
 
 #endif
 
