@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 13:37:30 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/06 15:33:24 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/06 15:38:23 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void    op_ld(t_carriage *carriage)
     int     arg_value_idx;
 
     reg_slot = carriage->stmt->args[1];
-    arg_value_idx = carriage->stmt->args[0] % IDX_MOD;
+    arg_value_idx = (short)carriage->stmt->args[0] % IDX_MOD;
     if (carrage->stmt->arg_types[0] == 2)
         carriage->regs[reg_slot] = carrage->stmt->args[0];
     else if (carriage->stmt->arg_types[0] === 4)
-        carriage->regs[reg_slot] = convert_4_bytes(&carriage->pos[(short)arg_value_idx])
+        carriage->regs[reg_slot] = convert_4_bytes(&carriage->pos[arg_value_idx])
     if (carrage->stmt->args[0] == 0)
         carriage->carry_flag = 1;
     else 
