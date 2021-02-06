@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/05 00:42:14 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/06 14:51:38 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct  s_stmt
 typedef struct  s_carriage 
 {
 	unsigned char		*pos;
+	int					cycle;
 	int                 cycles_to_execute;
 	int                 carry_flag;
 	int                 regs[REG_NUMBER];
@@ -62,6 +63,14 @@ typedef struct  s_vm
     t_carriage  *carriages;
 }               t_vm;
 
+typedef struct	s_loop
+{
+	int			cycle;
+	int			nbr_live;
+	int			cycle_to_die;
+	int			ctd_reset;
+	int			nbr_checks;
+}				t_loop;
 
 
 
@@ -70,6 +79,7 @@ int					read_files(t_vm *vm);
 unsigned char       *init_arena(t_vm *vm);
 void				initiate_carriages(t_vm *vm, unsigned char *arena);
 int     			form_statement(t_carriage *carry);
+void				battle_loop(t_vm *vm, unsigned char *arena);
 
 #endif
 

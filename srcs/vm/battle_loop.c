@@ -6,20 +6,11 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/05 18:47:10 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/06 14:51:36 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-typedef struct	s_loop
-{
-	int			cycle;
-	int			nbr_live;
-	int			cycle_to_die;
-	int			ctd_reset;
-	int			nbr_checks;
-}				t_loop;
 
 void		more_execute_statements(t_carriage *carriage, t_vm *vm, unsigned char *arena)
 {
@@ -103,14 +94,14 @@ void		check_carriages(t_vm *vm, t_loop *loop)
 	}
 }
 
-void		init_battle_loop(t_vm *vm, t_loop *loop)
+void		init_battle_loop(t_vm *vm, t_loop *loop, unsigned char *arena)
 {
 	loop->cycle = 0;
 	loop->nbr_live = 0;
 	loop->cycle_to_die = CYCLE_TO_DIE;
 	loop->ctd_reset = CYCLE_TO_DIE;
 	loop->nbr_checks = 0;
-	initiate_carriages(vm);
+	initiate_carriages(vm, arena);
 }
 
 void		battle_loop(t_vm *vm, unsigned char *arena)
@@ -118,7 +109,7 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 	t_loop		loop;
 	t_carriage	*tmp;
 
-	init_battle_loop(vm, &loop);
+	init_battle_loop(vm, &loop, arena);
 	while (vm->carriages != NULL)
 	{
 		tmp = vm->carriages;
