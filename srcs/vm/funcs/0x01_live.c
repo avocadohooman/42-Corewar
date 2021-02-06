@@ -6,15 +6,14 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 13:26:34 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/05 15:49:03 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/06 15:01:03 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_live(t_carriage *carriage, t_vm *vm, unsigned char *arena)
+void    op_live(t_carriage *carriage, t_vm *vm)
 {
-    arena = arena;
     int player_id;
 
     player_id = carriage->stmt->args[0];
