@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   decrypt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/05 00:43:31 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/07 11:50:11 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int     form_statement(t_carriage *carry)
 		carry->stmt->arg_types[0] = T_DIR;	// Resolve single arg issue when no arg type present
 											// Only case when no arg_type_code is when first and only arg is T_DIR
 	carry->pos += get_args(carry, pos);		// Update carriage "PC" to the next statement
+	carry->offset = carry->pos;
 	carry->cycles_to_execute = opcode_table[carry->stmt->statement - 1].cost; // Set "cost" (cycles to pass until execution can happen)
 	printf("Next statement code: %02x\n", carry->pos[0]);
 	printf("Statement code: %02x, numerical: %d\n", carry->stmt->statement, carry->stmt->statement);

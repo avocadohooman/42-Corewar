@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:48:06 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/07 11:41:31 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/07 12:27:01 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ void    op_st(t_carriage *carriage)
     reg_slot_1 = carriage->stmt->args[0] - 1;
     reg_slot_2 = carriage->stmt->args[1] - 1;
     arg_value = carriage->regs[reg_slot_1];
-    arg_idx_value = (short)arg_value % IDX_MOD;
     if (carriage->stmt->arg_types[1] == 1)
         carriage->regs[reg_slot_2] = arg_value;
     else if (carriage->stmt->arg_types[1] == 4)
     {
+        arg_idx_value = (short)arg_value % IDX_MOD;
+        arg_idx_value = apply_offset(carriage, arg_idx_value);
         arg_value = convert_4_bytes(&carriage->pos[arg_idx_value]);
         carriage->regs[reg_slot_2] = arg_value;
     }

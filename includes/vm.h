@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/07 10:42:17 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/07 12:39:44 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct  s_stmt
 typedef struct  s_carriage 
 {
 	unsigned char		*pos;
+	int					offset;
 	int                 cycles_to_execute;
 	int                 carry_flag;
 	int                 regs[REG_NUMBER];
@@ -76,6 +77,7 @@ int					convert_4_bytes(unsigned char *data);
 /** OP_HELPER_FUNCTIONS **/
 
 int      			get_arg_value(t_carriage *carriage, int arg_value, int i);
+int					apply_offset(t_carriage *carriage, int arg_idx_value);
 
 /** OP_FUNCTIONS **/
 
@@ -88,7 +90,13 @@ void				op_and(t_carriage *carriage);
 void				op_or(t_carriage *carriage);
 void				op_xor(t_carriage *carriage);
 void    			op_zjmp(t_carriage *carriage);
-
+void				op_ldi(t_carriage *carriage);
+void				op_sti(t_carriage *carriage);
+void				op_fork(t_carriage *carriage);
+void				op_lld(t_carriage *carriage);
+void				op_lldi(t_carriage *carriage);
+void				op_lfork(t_carriage *carriage);
+void				op_aff(t_carriage *carriage);
 
 
 #endif

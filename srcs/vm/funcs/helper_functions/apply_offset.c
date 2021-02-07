@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x09_zjmp.c                                        :+:      :+:    :+:   */
+/*   check_offset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/06 15:02:48 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/07 12:29:01 by Gerhard          ###   ########.fr       */
+/*   Created: 2021/02/07 12:19:11 by Gerhard           #+#    #+#             */
+/*   Updated: 2021/02/07 12:28:51 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_zjmp(t_carriage *carriage)
+int         apply_offset(t_carriage *carriage, int arg_idx_value)
 {
-    short           arg_idx_value;
-
-	if (carriage->carry_flag)
-    {
-        arg_idx_value = (short)carriage->stmt->args[0] % IDX_MOD;
-        arg_idx_value = apply_offset(carriage, arg_idx_value);
-        carriage->pos = &carriage->pos[arg_idx_value];
-    }
+    if (arg_idx_value >= 0) 
+        arg_idx_value -= carriage->offset;
+    else
+        arg_idx_value += carriage->offset;
+    return (arg_idx_value);
 }
