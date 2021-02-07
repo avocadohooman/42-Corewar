@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x04_add.c                                         :+:      :+:    :+:   */
+/*   0x09_zjmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/05 15:48:11 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/06 15:48:32 by Gerhard          ###   ########.fr       */
+/*   Created: 2021/02/06 15:02:48 by seronen           #+#    #+#             */
+/*   Updated: 2021/02/07 10:40:15 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_add(t_carriage *carriage)
+void    op_zjmp(t_carriage *carriage)
 {
-    int     sum;
+    int     arg_idx_value;
 
-    sum += carriage->regs[carriage->stmt->args[0]];
-    sum += carriage->regs[carriage->stmt->args[1]];
-    carriage->regs[carriage->stmt->args[2]] = sum;
-    if (sum == 0)
-        carriage->carry_flag = 1;
-    else 
-        carriage->carry_flag = 0;
+	if (carriage->carry_flag)
+    {
+        arg_idx_value = carriage->stmt->args[0] % IDX_MOD;
+        printf("IDX VALIE: %d\n", carriage->stmt->args[0] % IDX_MOD);
+    }
 }

@@ -2,7 +2,7 @@
 .comment "This city needs me"
 
 loop:   
-        st r7, r11
+        zjmp %-19
 live:   
         live %0
         ld %0, r2
