@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/05 15:55:21 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/07 10:33:28 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		initiate_carriages(t_vm *vm, unsigned char *arena)
 		head = create_carriage(head, vm->players[i]->id, &arena[carriage_pos]);
         printf("r1: %d\n", head->regs[0]);
 		form_statement(head);
-		op_ld(head, vm, arena);
+		op_zjmp(head);
 		i++;
 	}
 	vm->carriages = head;
