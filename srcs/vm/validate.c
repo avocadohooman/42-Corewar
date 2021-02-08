@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x09_zjmp.c                                        :+:      :+:    :+:   */
+/*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/06 15:02:48 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/09 00:10:08 by seronen          ###   ########.fr       */
+/*   Created: 2021/02/08 20:18:19 by seronen           #+#    #+#             */
+/*   Updated: 2021/02/08 21:17:32 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_zjmp(t_carriage *carriage, unsigned char *arena)
-{
-	short           arg_idx_value;
+/*
+**	Validate filename
+**
+**	if filename doesn't end with .cor,
+**	throw error and exit immediately!
+*/
 
-	if (carriage->carry_flag)
+int		validate_filename(t_player *player)
+{
+	if (ft_strcmp(&player->file_name[ft_strlen(player->file_name) - 4], ".cor"))
 	{
-		arg_idx_value = (short)carriage->stmt->args[0] % IDX_MOD;
-		carriage->pos = fetch_position(arena, carriage, arg_idx_value);
-		carriage->abs_pos += arg_idx_value - 3; 
+		printf("Invalid player: %s\n", player->file_name);
+		printf("DIFF: %s ––VS––– %s\n", &player->file_name[ft_strlen(player->file_name) - 4], ".cor");
+		exit(-1);
 	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/04 19:33:55 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/08 20:29:22 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int     read_files(t_vm *vm)
 	i = 0;
 	while (i < vm->player_nb)
 	{
+		validate_filename(vm->players[i]);
 		file = read_file(vm->players[i]->file_name);
 		gather_data(vm->players[i], file.data, file.used);
 		i++;
