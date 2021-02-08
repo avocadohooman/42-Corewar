@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/07 10:42:17 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/08 15:49:48 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct  s_stmt
 typedef struct  s_carriage 
 {
 	unsigned char		*pos;
+	unsigned char		*statement_pos;
 	int                 cycles_to_execute;
 	int                 carry_flag;
 	int                 regs[REG_NUMBER];
@@ -59,12 +60,10 @@ typedef struct  s_vm
 {
 	int			dump;
 	int			player_nb;
+	int			carry_nbr;
 	t_player	*players[MAX_PLAYERS + 1];
     t_carriage  *carriages;
 }               t_vm;
-
-
-
 
 int					get_players(t_vm *vm, char **args, int ac);
 int					read_files(t_vm *vm);
@@ -72,10 +71,14 @@ unsigned char       *init_arena(t_vm *vm);
 void				initiate_carriages(t_vm *vm, unsigned char *arena);
 int     			form_statement(t_carriage *carry);
 int					convert_4_bytes(unsigned char *data);
+t_carriage			*create_carriage(t_carriage *next, int player_id, unsigned char *position);
 
 /** OP_HELPER_FUNCTIONS **/
 
 int      			get_arg_value(t_carriage *carriage, int arg_value, int i);
+int					apply_offset(t_carriage *carriage, int arg_idx_value);
+void				write_bytes(unsigned char *where, int what, int size);
+void        		copy_carriage(t_vm *vm, t_carriage *current, unsigned char *pos);
 
 /** OP_FUNCTIONS **/
 
@@ -88,7 +91,13 @@ void				op_and(t_carriage *carriage);
 void				op_or(t_carriage *carriage);
 void				op_xor(t_carriage *carriage);
 void    			op_zjmp(t_carriage *carriage);
-
+void				op_ldi(t_carriage *carriage);
+void				op_sti(t_carriage *carriage);
+void				op_fork(t_carriage *carriage, t_vm *vm);
+void				op_lld(t_carriage *carriage);
+void				op_lldi(t_carriage *carriage);
+void				op_lfork(t_carriage *carriage, t_vm *vm);
+void				op_aff(t_carriage *carriage);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/05 00:43:31 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/08 14:57:48 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int     form_statement(t_carriage *carry)
 	int pos;
 
     init_stmt(carry);		// Init statement, mallocs and sets the statement
+	carry->statement_pos = carry->pos;
 	pos = 1;
 	if (opcode_table[carry->stmt->statement - 1].argument_type) // If arg_type is true
 	{

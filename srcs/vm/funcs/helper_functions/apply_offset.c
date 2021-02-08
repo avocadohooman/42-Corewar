@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x12_fork.c                                        :+:      :+:    :+:   */
+/*   check_offset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/06 15:09:25 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/08 15:34:18 by Gerhard          ###   ########.fr       */
+/*   Created: 2021/02/07 12:19:11 by Gerhard           #+#    #+#             */
+/*   Updated: 2021/02/07 12:28:51 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_fork(t_carriage *carriage, t_vm *vm)
+int         apply_offset(t_carriage *carriage, int arg_idx_value)
 {
-	int               arg_value_1;
-    unsigned char     *position;
-
-    arg_value_1 = carriage->stmt->args[0];
-    position = &carriage->statement_pos[arg_value_1 % IDX_MOD];
-    copy_carriage(vm, carriage, position);
-    vm->carry_nbr += 1;
+    if (arg_idx_value >= 0) 
+        arg_idx_value -= carriage->offset;
+    else
+        arg_idx_value += carriage->offset;
+    return (arg_idx_value);
 }

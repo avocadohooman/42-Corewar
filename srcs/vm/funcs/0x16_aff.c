@@ -6,13 +6,19 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 15:09:13 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/06 15:50:24 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/08 15:34:58 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_aff(t_carriage *carriage, t_vm *vm, unsigned char *arena)
+void    op_aff(t_carriage *carriage)
 {
-	
+	char	a;
+
+	if (carriage->stmt->arg_types[0] == 1)
+	{
+		a = (char)carriage->stmt->args[0];
+		write(1, &a, 1);
+	}
 }
