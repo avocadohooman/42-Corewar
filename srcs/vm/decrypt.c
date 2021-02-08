@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/08 18:04:10 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/08 18:53:41 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int		convert_4_bytes(unsigned char *data)
 	// Converts 4 individual bytes to an int, counting for endianness
 	// Big endian to little endian
 
-	return ((data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3]);
+//	return ((data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3]);
+	return (0);
 }
 
 void	decrypt_arg_type(t_stmt *stmt, int counter)

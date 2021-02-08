@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 15:02:48 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/08 18:04:26 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/08 18:19:33 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ void    op_zjmp(t_carriage *carriage)
 		arg_idx_value = (short)carriage->stmt->args[0] % IDX_MOD;
 //      arg_idx_value = apply_offset(carriage, arg_idx_value);
 		carriage->pos = &carriage->statement_pos[arg_idx_value];
+		printf("Value %02x, arg_idx_value %d\n", carriage->pos[0], arg_idx_value);
 	}
 }

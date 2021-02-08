@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/08 16:13:06 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/08 18:53:40 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,21 @@ void		execute_statement(t_carriage *carriage, t_vm *vm, t_loop *loop)
 	else if (carriage->stmt->statement == 8)
 		op_xor(carriage);
 	else if (carriage->stmt->statement == 9)
-		op_zjump(carriage);
+	{
+		printf("Jumping!\n");
+		op_zjmp(carriage);
+	}
 	more_execute_statements(carriage, vm);
 }
 
 t_carriage		*kill_carriage(t_carriage *carriage, t_carriage *prev, t_carriage *next) // This needs to be fixed after the op-functions are done.
 {
-//	if (prev != NULL)
-//		prev->next = next;
-//	if (carriage && carriage->stmt)
-//		free(carriage->stmt);
-//	free(carriage);
-//	carriage = NULL;
+	if (prev != NULL)
+		prev->next = next;
+	if (carriage != NULL && carriage->stmt)
+		free(carriage->stmt);
+	free(carriage);
+	carriage = NULL;
 	return (next);
 }
 
@@ -94,6 +97,7 @@ void		check_carriages(t_vm *vm, t_loop *loop)
 			prev = tmp;
 			tmp = next;
 		}
+		carry++;
 	}
 	if (loop->nbr_live >= NBR_LIVE || ++loop->nbr_checks >= MAX_CHECKS)
 	{
@@ -131,25 +135,25 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		{
 			if (tmp->stmt == NULL)
 				form_statement(tmp);
-			if (tmp->cycles_to_execute == 0)
+			if (tmp->cycles_to_execute == 1)
 			{
 				execute_statement(tmp, vm, &loop);
 				free(tmp->stmt);
 				tmp->stmt = NULL;
 				form_statement(tmp);
 			}
-			else if (tmp->cycles_to_execute > 0)
+			else if (tmp->cycles_to_execute > 1)
 				tmp->cycles_to_execute--;
 			tmp->cycle++;
 			tmp = tmp->next;
 			carry++;
 		}
 		loop.cycle++;	// The cycle is one higher than it actually is while in the check_carriages function, keep that in mind.
-		if (loop.cycle_to_die == 0)
+		if (loop.cycle_to_die <= 0)
 			check_carriages(vm, &loop);
 		loop.cycle_to_die--;
 		printf("Cycle %d\n", loop.cycle);
-//		if (loop.cycle == 150)
+//		if (loop.cycle == 60)
 //			exit(1);
 	}
 }
