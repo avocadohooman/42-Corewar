@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/08 15:05:21 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/08 15:32:07 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_carriage		*create_carriage(t_carriage *next, int player_id, unsigned char *pos
 	t_carriage     *carriage;
 
 	if (!(carriage = (t_carriage*)ft_memalloc(sizeof(t_carriage))))
-        return (NULL);
+        print_error(7);
 	if (player_id <= REG_NUMBER)
 		carriage->regs[0] = player_id * -1;
 	carriage->pos = position;
@@ -43,6 +43,7 @@ void		initiate_carriages(t_vm *vm, unsigned char *arena)
 	{
 		carriage_pos = (vm->players[i]->id - 1) * (MEM_SIZE / vm->player_nb);
 		head = create_carriage(head, vm->players[i]->id, &arena[carriage_pos]);
+		vm->carry_nbr++;
         printf("r1: %d\n", head->regs[0]);
 		form_statement(head);
 		op_zjmp(head);
