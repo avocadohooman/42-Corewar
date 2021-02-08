@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/08 15:38:15 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/08 15:49:48 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ unsigned char       *init_arena(t_vm *vm);
 void				initiate_carriages(t_vm *vm, unsigned char *arena);
 int     			form_statement(t_carriage *carry);
 int					convert_4_bytes(unsigned char *data);
+t_carriage			*create_carriage(t_carriage *next, int player_id, unsigned char *position);
 
 /** OP_HELPER_FUNCTIONS **/
 
