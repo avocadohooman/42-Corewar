@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   decrypt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/07 12:51:42 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/08 14:57:48 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int     form_statement(t_carriage *carry)
 	int pos;
 
     init_stmt(carry);		// Init statement, mallocs and sets the statement
+	carry->statement_pos = carry->pos;
 	pos = 1;
 	if (opcode_table[carry->stmt->statement - 1].argument_type) // If arg_type is true
 	{
@@ -121,7 +122,6 @@ int     form_statement(t_carriage *carry)
 		carry->stmt->arg_types[0] = T_DIR;	// Resolve single arg issue when no arg type present
 											// Only case when no arg_type_code is when first and only arg is T_DIR
 	carry->pos += get_args(carry, pos);		// Update carriage "PC" to the next statement
-	carry->offset = convert_4_bytes(carry->pos);
 	carry->cycles_to_execute = opcode_table[carry->stmt->statement - 1].cost; // Set "cost" (cycles to pass until execution can happen)
 	printf("Next statement code: %02x\n", carry->pos[0]);
 	printf("Statement code: %02x, numerical: %d\n", carry->stmt->statement, carry->stmt->statement);

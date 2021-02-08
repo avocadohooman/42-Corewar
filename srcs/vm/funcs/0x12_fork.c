@@ -6,13 +6,13 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 15:09:25 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/06 15:13:20 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/08 15:07:10 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_fork(t_carriage *carriage, t_vm *vm, unsigned char *arena)
+void    op_fork(t_carriage *carriage)
 {
 	
 }

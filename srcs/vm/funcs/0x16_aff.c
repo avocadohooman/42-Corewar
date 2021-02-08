@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   0x16_aff.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 15:09:13 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/06 15:50:24 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/08 15:06:54 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_aff(t_carriage *carriage, t_vm *vm, unsigned char *arena)
+void    op_aff(t_carriage *carriage)
 {
 	
 }

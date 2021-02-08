@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg_value.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:50:25 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/07 13:01:55 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/08 15:07:51 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int      get_arg_value(t_carriage *carriage, int arg_value, int i)
     else 
     {
         arg_idx_value = (short)carriage->stmt->args[i] % IDX_MOD;
-        arg_idx_value = apply_offset(carriage, arg_idx_value);
-        arg_value = convert_4_bytes(&carriage->pos[arg_idx_value]);
+        arg_value = convert_4_bytes(&carriage->statement_pos[arg_idx_value]);
     }
     return (arg_value);
 }
