@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:51:56 by orantane          #+#    #+#             */
-/*   Updated: 2021/01/31 15:47:02 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/08 16:10:52 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static unsigned char	*encode_string(unsigned char *out, int i,
 	while (text && text[index])
 	{
 		if (type == 1 && index == PROG_NAME_LENGTH)
-			print_error(9);
+			print_error(8);
 		if (type == 2 && index == COMMENT_LENGTH)
-			print_error(9);
+			print_error(8);
 		out[i + index] = (unsigned char)text[index];
 		index++;
 	}

@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/08 14:29:56 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/08 16:13:06 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 void		more_execute_statements(t_carriage *carriage, t_vm *vm)
 {
 	if (carriage->stmt->statement == 10)
-		op_ldi(carriage, vm);
+		op_ldi(carriage);
 	else if (carriage->stmt->statement == 11)
-		op_sti(carriage, vm);
+		op_sti(carriage);
 	else if (carriage->stmt->statement == 12)
 		op_fork(carriage, vm);
 	else if (carriage->stmt->statement == 13)
-		op_lld(carriage, vm);
+		op_lld(carriage);
 	else if (carriage->stmt->statement == 14)
-		op_lldi(carriage, vm);
+		op_lldi(carriage);
 	else if (carriage->stmt->statement == 15)
 		op_lfork(carriage, vm);
 	else if (carriage->stmt->statement == 16)
-		op_aff(carriage, vm);
+		op_aff(carriage);
 }
 
 void		execute_statement(t_carriage *carriage, t_vm *vm, t_loop *loop)
@@ -129,6 +129,8 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		carry = 0;
 		while (carry < vm->carry_nbr)
 		{
+			if (tmp->stmt == NULL)
+				form_statement(tmp);
 			if (tmp->cycles_to_execute == 0)
 			{
 				execute_statement(tmp, vm, &loop);
