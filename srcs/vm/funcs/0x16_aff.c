@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0x16_aff.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 15:09:13 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/08 15:25:47 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/08 15:34:58 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    op_aff(t_carriage *carriage)
 {
 	char	a;
 
-	if (carriage->stmt->arg_types[0] = 1)
+	if (carriage->stmt->arg_types[0] == 1)
 	{
 		a = (char)carriage->stmt->args[0];
 		write(1, &a, 1);

@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/08 15:21:13 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/08 15:38:15 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,6 @@ typedef struct  s_vm
     t_carriage  *carriages;
 }               t_vm;
 
-
-
-
 int					get_players(t_vm *vm, char **args, int ac);
 int					read_files(t_vm *vm);
 unsigned char       *init_arena(t_vm *vm);
@@ -80,7 +77,7 @@ int					convert_4_bytes(unsigned char *data);
 int      			get_arg_value(t_carriage *carriage, int arg_value, int i);
 int					apply_offset(t_carriage *carriage, int arg_idx_value);
 void				write_bytes(unsigned char *where, int what, int size);
-void        		copy_carriage(t_carriage *current, t_vm *vm, unsigned char *pos);
+void        		copy_carriage(t_vm *vm, t_carriage *current, unsigned char *pos);
 
 /** OP_FUNCTIONS **/
 
