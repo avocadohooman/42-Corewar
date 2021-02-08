@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x16_aff.c                                         :+:      :+:    :+:   */
+/*   check_offset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/06 15:09:13 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/08 18:04:01 by orantane         ###   ########.fr       */
+/*   Created: 2021/02/07 12:19:11 by Gerhard           #+#    #+#             */
+/*   Updated: 2021/02/07 12:28:51 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_aff(t_carriage *carriage)
+int         apply_offset(t_carriage *carriage, int arg_idx_value)
 {
-	char	a;
-
-	if (carriage->stmt->arg_types[0] == 1)
-	{
-		a = (char)carriage->stmt->args[0];
-		write(1, &a, 1);
-	}
+    if (arg_idx_value >= 0) 
+        arg_idx_value -= carriage->offset;
+    else
+        arg_idx_value += carriage->offset;
+    return (arg_idx_value);
 }

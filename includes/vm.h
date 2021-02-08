@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/08 14:27:07 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/08 18:04:14 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct  s_stmt
 typedef struct  s_carriage 
 {
 	unsigned char		*pos;
-	int					cycle;
+	unsigned char		*statement_pos;
 	int                 cycles_to_execute;
 	int                 carry_flag;
 	int                 regs[REG_NUMBER];
@@ -65,24 +65,41 @@ typedef struct  s_vm
     t_carriage  *carriages;
 }               t_vm;
 
-typedef struct	s_loop
-{
-	int			cycle;
-	int			nbr_live;
-	int			cycle_to_die;
-	int			ctd_reset;
-	int			nbr_checks;
-	t_carriage	*head;
-}				t_loop;
-
-
-
 int					get_players(t_vm *vm, char **args, int ac);
 int					read_files(t_vm *vm);
 unsigned char       *init_arena(t_vm *vm);
 void				initiate_carriages(t_vm *vm, unsigned char *arena);
 int     			form_statement(t_carriage *carry);
 void				battle_loop(t_vm *vm, unsigned char *arena);
+int					convert_4_bytes(unsigned char *data);
+t_carriage			*create_carriage(t_carriage *next, int player_id, unsigned char *position);
+
+/** OP_HELPER_FUNCTIONS **/
+
+int      			get_arg_value(t_carriage *carriage, int arg_value, int i);
+int					apply_offset(t_carriage *carriage, int arg_idx_value);
+void				write_bytes(unsigned char *where, int what, int size);
+void        		copy_carriage(t_vm *vm, t_carriage *current, unsigned char *pos);
+
+/** OP_FUNCTIONS **/
+
+void				op_live(t_carriage *carriage, t_vm *vm);
+void				op_ld(t_carriage *carriage);
+void				op_st(t_carriage *carriage);
+void				op_add(t_carriage *carriage);
+void				op_sub(t_carriage *carriage);
+void				op_and(t_carriage *carriage);
+void				op_or(t_carriage *carriage);
+void				op_xor(t_carriage *carriage);
+void    			op_zjmp(t_carriage *carriage);
+void				op_ldi(t_carriage *carriage);
+void				op_sti(t_carriage *carriage);
+void				op_fork(t_carriage *carriage, t_vm *vm);
+void				op_lld(t_carriage *carriage);
+void				op_lldi(t_carriage *carriage);
+void				op_lfork(t_carriage *carriage, t_vm *vm);
+void				op_aff(t_carriage *carriage);
+
 
 #endif
 
