@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/08 13:55:31 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/08 14:29:56 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		more_execute_statements(t_carriage *carriage, t_vm *vm)
 {
-/*	if (carriage->stmt->statement == 10)
+	if (carriage->stmt->statement == 10)
 		op_ldi(carriage, vm);
 	else if (carriage->stmt->statement == 11)
 		op_sti(carriage, vm);
@@ -27,12 +27,12 @@ void		more_execute_statements(t_carriage *carriage, t_vm *vm)
 	else if (carriage->stmt->statement == 15)
 		op_lfork(carriage, vm);
 	else if (carriage->stmt->statement == 16)
-		op_aff(carriage, vm); */
+		op_aff(carriage, vm);
 }
 
 void		execute_statement(t_carriage *carriage, t_vm *vm, t_loop *loop)
 {
-/*	if (carriage->stmt->statement == 1)
+	if (carriage->stmt->statement == 1)
 	{
 		loop->nbr_live++;
 		op_live(carriage, vm);
@@ -48,11 +48,11 @@ void		execute_statement(t_carriage *carriage, t_vm *vm, t_loop *loop)
 	else if (carriage->stmt->statement == 6)
 		op_and(carriage);
 	else if (carriage->stmt->statement == 7)
-		op_or(carriage,);
+		op_or(carriage);
 	else if (carriage->stmt->statement == 8)
 		op_xor(carriage);
 	else if (carriage->stmt->statement == 9)
-		op_zjump(carriage); */
+		op_zjump(carriage);
 	more_execute_statements(carriage, vm);
 }
 
