@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ld.c                                               :+:      :+:    :+:   */
+/*   0x13_lld.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/03 13:37:30 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/06 14:56:50 by orantane         ###   ########.fr       */
+/*   Created: 2021/02/06 15:09:22 by seronen           #+#    #+#             */
+/*   Updated: 2021/02/06 15:13:27 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    ld(t_carriage *carry)
+void    op_lld(t_carriage *carriage, t_vm *vm, unsigned char *arena)
 {
-    
+	
 }

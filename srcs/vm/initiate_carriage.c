@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   initiate_carriage.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
 /*   Updated: 2021/02/06 16:18:42 by orantane         ###   ########.fr       */
+=======
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
+/*   Updated: 2021/02/07 10:33:28 by Gerhard          ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +33,7 @@ t_carriage		*create_carriage(t_carriage *next, int player_id, unsigned char *pos
 	carriage->cycles_to_execute = -1;
 	carriage->last_live = -1;
 	carriage->carry_flag = 0;
+	carriage->cycle = 0;
 	carriage->next = next;
 	return (carriage);
 }
@@ -45,6 +53,7 @@ void		initiate_carriages(t_vm *vm, unsigned char *arena)
 		vm->carry_nbr++;
         printf("r1: %d\n", head->regs[0]);
 		form_statement(head);
+		op_zjmp(head);
 		i++;
 	}
 	vm->carriages = head;

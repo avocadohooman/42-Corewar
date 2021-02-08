@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   live.c                                             :+:      :+:    :+:   */
+/*   0x15_lfork.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/03 13:26:34 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/06 14:56:48 by orantane         ###   ########.fr       */
+/*   Created: 2021/02/06 15:09:16 by seronen           #+#    #+#             */
+/*   Updated: 2021/02/06 15:48:50 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    live(t_carriage *carry)
+void    op_lfork(t_carriage *carriage, t_vm *vm, unsigned char *arena)
 {
-    if (!carry->carry_flag)
-    {
-        printf("Hello!\n");
-    }
+	
 }
