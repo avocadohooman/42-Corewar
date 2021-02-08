@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/07 12:39:44 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/08 11:20:46 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int					convert_4_bytes(unsigned char *data);
 
 int      			get_arg_value(t_carriage *carriage, int arg_value, int i);
 int					apply_offset(t_carriage *carriage, int arg_idx_value);
+void				write_bytes(unsigned char *where, int what, int size);
 
 /** OP_FUNCTIONS **/
 
