@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/07 10:33:28 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/08 15:05:21 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_carriage		*create_carriage(t_carriage *next, int player_id, unsigned char *pos
 	carriage->carry_flag = 0;
 	carriage->cycle = 0;
 	carriage->next = next;
+	carriage->stmt = NULL;
 	return (carriage);
 }
 
