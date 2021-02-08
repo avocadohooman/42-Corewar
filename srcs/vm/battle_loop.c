@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/06 16:37:09 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/08 13:55:31 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		execute_statement(t_carriage *carriage, t_vm *vm, t_loop *loop)
 	more_execute_statements(carriage, vm);
 }
 
-t_carriage		*kill_carriage(t_carriage *carriage, t_carriage *prev, t_carriage *next)
+t_carriage		*kill_carriage(t_carriage *carriage, t_carriage *prev, t_carriage *next) // This needs to be fixed after the op-functions are done.
 {
 //	if (prev != NULL)
 //		prev->next = next;
@@ -147,7 +147,7 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 			check_carriages(vm, &loop);
 		loop.cycle_to_die--;
 		printf("Cycle %d\n", loop.cycle);
-		if (loop.cycle == 11150)
-			exit(1);
+//		if (loop.cycle == 150)
+//			exit(1);
 	}
 }
