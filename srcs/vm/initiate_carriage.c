@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initiate_carriage.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/09 14:04:03 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/09 15:49:11 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ t_carriage		*create_carriage(t_carriage *next, int player_id, unsigned char *pos
         print_error(7);
 	if (player_id <= REG_NUMBER)
 		carriage->regs[0] = player_id * -1;
+	printf("Player id = %d\n", carriage->regs[0]);
 	carriage->pos = position;
+	carriage->cycle = 0;
 	carriage->next_statement = 0;
 	carriage->cycles_to_execute = -1;
 	carriage->last_live = -1;

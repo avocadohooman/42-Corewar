@@ -40,6 +40,15 @@
 
 */
 
+void	announce_winner(t_vm *vm)
+{
+	ft_putstr("Player ");
+	ft_putnbr(vm->last_live->id);
+	ft_putstr(" (");
+	ft_putstr(vm->last_live->name);
+	ft_putendl(") won");
+}
+
 void	dump_arena(unsigned char *arena)
 {
 	int i;
@@ -80,11 +89,14 @@ int     main(int ac, char **av)
 
 	vm = malloc(sizeof(t_vm));
 	vm->dump = 0;
+	vm->carry_nbr = 0;
 	bzero(vm->players, sizeof(t_player) * MAX_PLAYERS + 1);
 	get_players(vm, av, ac);
 	read_files(vm);
 	introduce_players(vm);
 	arena = init_arena(vm);
+	battle_loop(vm, arena);
+	announce_winner(vm);
 	// dump_arena(arena);
 	return (0);
 }

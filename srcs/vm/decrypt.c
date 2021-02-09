@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   decrypt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/09 00:18:28 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/09 16:21:52 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		convert_4_bytes(unsigned char *data)
 	// Big endian to little endian
 
 	return ((data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3]);
+	return (0);
 }
 
 void	decrypt_arg_type(t_stmt *stmt, int counter)

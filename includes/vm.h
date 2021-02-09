@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/09 00:18:17 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/09 18:00:01 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,28 @@ typedef struct  s_vm
 	int			dump;
 	int			player_nb;
 	int			carry_nbr;
+	t_player	*last_live;
 	t_player	*players[MAX_PLAYERS + 1];
     t_carriage  *carriages;
 }               t_vm;
+
+typedef struct s_loop
+{
+	int			cycle;
+	int			nbr_live;
+	int			cycle_to_die;
+	int			ctd_reset;
+	int			nbr_checks;
+	t_carriage	*head;
+}				t_loop;
+
 
 int					get_players(t_vm *vm, char **args, int ac);
 int					read_files(t_vm *vm);
 int					validate_filename(t_player *player);
 unsigned char       *init_arena(t_vm *vm);
 void				initiate_carriages(t_vm *vm, unsigned char *arena);
+void				battle_loop(t_vm *vm, unsigned char *arena);
 int     			form_statement(t_carriage *carry, unsigned char *arena);
 int					convert_4_bytes(unsigned char *data);
 t_carriage			*create_carriage(t_carriage *next, int player_id, unsigned char *position);
