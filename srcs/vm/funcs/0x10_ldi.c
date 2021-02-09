@@ -3,16 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   0x10_ldi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 15:09:30 by seronen           #+#    #+#             */
 /*   Updated: 2021/02/08 18:04:27 by orantane         ###   ########.fr       */
+=======
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/06 15:09:30 by seronen           #+#    #+#             */
+/*   Updated: 2021/02/08 23:42:05 by seronen          ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_ldi(t_carriage *carriage)
+void    op_ldi(t_carriage *carriage, unsigned char *arena)
 {
 	int         arg_value_1;
 	int         arg_value_2;
@@ -20,9 +27,8 @@ void    op_ldi(t_carriage *carriage)
 	int         reg_slot;
 
 	reg_slot = carriage->stmt->args[2] - 1;
-	arg_value_1 = get_arg_value(carriage, arg_value_1, 0);
-	arg_value_2 = get_arg_value(carriage, arg_value_2, 1);
+	arg_value_1 = get_arg_value(carriage, 0, arena);
+	arg_value_2 = get_arg_value(carriage, 1, arena);
 	args_idx_value = (arg_value_1 + arg_value_2) % IDX_MOD;
-//  args_idx_value = apply_offset(carriage, args_idx_value);
-	carriage->regs[reg_slot] = convert_4_bytes(&carriage->statement_pos[args_idx_value]);
+	carriage->regs[reg_slot] = read_bytes(arena, (carriage->abs_pos + args_idx_value) % IDX_MOD, 4);
 }

@@ -6,7 +6,11 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:48:14 by Gerhard           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/02/08 18:04:21 by orantane         ###   ########.fr       */
+=======
+/*   Updated: 2021/02/09 00:50:44 by seronen          ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +20,7 @@ void    op_sub(t_carriage *carriage)
 {
 	int     sum;
 
-	sum += carriage->regs[carriage->stmt->args[0]];
+	sum = carriage->regs[carriage->stmt->args[0]];
 	sum -= carriage->regs[carriage->stmt->args[1]];
 	carriage->regs[carriage->stmt->args[2]] = sum;
 	if (sum == 0)

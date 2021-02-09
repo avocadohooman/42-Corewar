@@ -3,41 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   write_bytes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:04 by seronen           #+#    #+#             */
 /*   Updated: 2021/02/08 18:04:28 by orantane         ###   ########.fr       */
+=======
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/07 14:04:04 by seronen           #+#    #+#             */
+/*   Updated: 2021/02/09 14:14:27 by seronen          ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
 /*
-** Takes a pointer to memspace (where)
-** Takes a numeric value (what)
-** Takes a size (size)
+**	write_bytes	(MEMSPACE GUARDIAN)
 **
-** Writes the numeric value to memspace byte by byte
+**	Takes the whole memspace (arena)
+**	Takes a index to memspace (where)
+**	Takes a numeric value (what)
+**	Takes a size (size)
 **
-** NOTES:
-** 		Remember to apply offset to carry->pos pointer when dealing with addresses in memspace (arena)!
-**			carry->pos pointer is always current statement size ahead. Offset amount is stored in carry->offset.
+**	Writes the numeric value to memspace byte by byte
+**	while wrapping to index 0 if index > MEM_SIZE
+**	this is achieved using modulo MEM_SIZE to index
+**
+**	NOTES:
+**
 **		Tested with value -19 and size 2, wrote ff ed. All should be good.
+**		Tested with also with max index, and wrote to index 0 onwards, so wrapping works.
 ** 		If you are writing a registry value, size is always 4 as REG_SIZE implicates in op.h
+**
+**	Retuns nothing
 */
 
-void	write_bytes(unsigned char *where, int what, int size)
+void	write_bytes(unsigned char *arena, int where, int what, int size)
 {
-	int pos;
 	unsigned char *buf;
 
-//	if (size == 2)
-//		printf("write_bytes: Value recieved: int: %d VS short: %hd\n", what, (short)what);
-	pos = 0;
 	buf = (unsigned char *)&what;
+	if (where < 0)
+		where += MEM_SIZE;
 	while (size > 0)
 	{
-		where[pos] = buf[size - 1];
-		pos++;
+		where %= MEM_SIZE;
+		arena[where] = buf[size - 1];
 		size--;
+		where++;
 	}
 }

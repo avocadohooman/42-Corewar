@@ -6,7 +6,11 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/02/08 18:53:41 by orantane         ###   ########.fr       */
+=======
+/*   Updated: 2021/02/09 00:18:28 by seronen          ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +73,11 @@ void	init_stmt(t_carriage *carry)
 		exit(-42);
 	}
 	stmt->statement = carry->pos[0];
+	if (stmt->statement > 16 || stmt->statement < 1)
+	{
+		printf("Invalid statement code detected!\nExiting...\n");
+		exit(0);
+	}
 	stmt->arg_type = carry->pos[1];
 	ft_bzero(stmt->arg_types, sizeof(int) * 3);
 	carry->stmt = stmt;
@@ -107,13 +116,13 @@ int		get_args(t_carriage *carry, int pos)
 	return (pos);
 }
 
-int     form_statement(t_carriage *carry)
+int     form_statement(t_carriage *carry, unsigned char *arena)
 {
 	int pos;
 
     init_stmt(carry);		// Init statement, mallocs and sets the statement
-	carry->statement_pos = carry->pos;
 	pos = 1;
+	carry->abs_pos += carry->next_statement;
 	if (opcode_table[carry->stmt->statement - 1].argument_type) // If arg_type is true
 	{
 		decrypt_arg_type(carry->stmt, 0); // zero param is just a counter :) saves lines!
@@ -122,11 +131,18 @@ int     form_statement(t_carriage *carry)
 	else
 		carry->stmt->arg_types[0] = T_DIR;	// Resolve single arg issue when no arg type present
 											// Only case when no arg_type_code is when first and only arg is T_DIR
-	carry->pos += get_args(carry, pos);		// Update carriage "PC" to the next statement
+	pos = get_args(carry, pos);				// Store args in carry->stmt->args[3], return how many bytes args took
+	carry->next_statement = pos;					// Update how far next statement is
+	carry->pos = fetch_position(arena, carry, pos);		// Update carriage "PC" to the next statement
 	carry->cycles_to_execute = opcode_table[carry->stmt->statement - 1].cost; // Set "cost" (cycles to pass until execution can happen)
-	printf("Next statement code: %02x\n", carry->pos[0]);
-	printf("Statement code: %02x, numerical: %d\n", carry->stmt->statement, carry->stmt->statement);
+
+	// End of code -> Printing
+	
+	printf("Absolute index of carry: %d\n", carry->abs_pos);
+	printf("Statement code: %s\n", opcode_table[carry->stmt->statement - 1].literal);
 	printf("Cycles until execution (cost): %d\n", carry->cycles_to_execute);
+	if (carry->pos[0] > 0 && carry->pos[0] < 17)
+		printf("Next statement code: %s\n", opcode_table[carry->pos[0] - 1].literal);
 	printf("Arguments and types:\n");
 	int i = 0;
 	while (i < 3)

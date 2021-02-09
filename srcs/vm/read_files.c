@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/04 19:33:55 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/09 13:38:56 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ int     read_files(t_vm *vm)
 	i = 0;
 	while (i < vm->player_nb)
 	{
+		if (!file_extension(vm->players[i]->file_name, ".cor"))
+		{
+			printf("Unsupported file extension for player: %s!\n", vm->players[i]->file_name);
+			exit(0);
+		}
 		file = read_file(vm->players[i]->file_name);
 		gather_data(vm->players[i], file.data, file.used);
 		i++;
