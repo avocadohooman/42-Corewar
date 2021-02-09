@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   decrypt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/09 16:21:52 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/09 20:34:20 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ void	init_stmt(t_carriage *carry)
 	if (stmt->statement > 16 || stmt->statement < 1)
 	{
 		printf("Invalid statement code detected!\nExiting...\n");
+		printf("Code was - 2: %02x\n", carry->pos[0] - 2);
+		printf("Code was - 1: %02x\n", carry->pos[0] - 1);
+		printf("Code was [0]: %02x\n", carry->pos[0]);
+		printf("Code was + 1: %02x\n", carry->pos[0] + 1);
+		printf("Code was + 2: %02x\n", carry->pos[0] + 2);
 		exit(0);
 	}
 	stmt->arg_type = carry->pos[1];
@@ -98,8 +103,9 @@ int		get_args(t_carriage *carry, int pos)
 	{
 		if (!carry->stmt->arg_types[i])		// Dont read if no arg, no arg type so no arg...
 			break ;
-		carry->stmt->args[i] = read_arg(carry->pos,
-			carry->stmt->arg_types[i], pos, carry->stmt->statement); 	// read arg and save it to args array
+		carry->stmt->args[i] = read_arg(carry->pos,carry->stmt->arg_types[i], pos, carry->stmt->statement);
+		if ((carry->stmt->arg_types[i] == T_DIR && opcode_table[carry->stmt->statement - 1].dir_size == 2) || carry->stmt->arg_types[i] == T_IND)
+			carry->stmt->args[i] = (short)read_arg(carry->pos,carry->stmt->arg_types[i], pos, carry->stmt->statement);
 		if (carry->stmt->arg_types[i] == T_REG)		// increment position
 			pos += 1;
 		else if (carry->stmt->arg_types[i] == T_DIR &&
@@ -118,6 +124,7 @@ int     form_statement(t_carriage *carry, unsigned char *arena)
 
     init_stmt(carry);		// Init statement, mallocs and sets the statement
 	pos = 1;
+	printf("Absolute index of carry: %d\n", carry->abs_pos);
 	carry->abs_pos += carry->next_statement;
 	if (opcode_table[carry->stmt->statement - 1].argument_type) // If arg_type is true
 	{

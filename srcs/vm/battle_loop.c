@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   battle_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/09 17:52:00 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/09 20:35:41 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 	{
 		tmp = vm->carriages;
 		carry = 0;
-		while (carry < vm->carry_nbr)
+		int tmp_nbr = vm->carry_nbr;	// Assign a tmp value to carry_nbr if it changes (f.ex. when fork is executed)
+		while (carry < tmp_nbr)
 		{
 			if (tmp->stmt == NULL)
 				form_statement(tmp, arena);

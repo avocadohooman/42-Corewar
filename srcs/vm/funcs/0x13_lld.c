@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0x13_lld.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 15:09:22 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/09 15:35:40 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/09 20:32:22 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    op_lld(t_carriage *carriage, unsigned char *arena)
 		carriage->regs[reg_slot] = carriage->stmt->args[0];
 	else if (carriage->stmt->arg_types[0] == T_IND)
 	{
-		arg_idx_value = (short)carriage->stmt->args[0] % MEM_SIZE;
+		arg_idx_value = carriage->stmt->args[0] % MEM_SIZE;
 		carriage->regs[reg_slot] = read_bytes(arena, carriage->abs_pos + arg_idx_value, 4);
 	}
 	if (carriage->stmt->args[0] == 0)
