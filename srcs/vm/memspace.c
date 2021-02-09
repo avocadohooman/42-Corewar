@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:55:54 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/08 23:09:34 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/09 14:13:58 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 **	MEMSPACE GUARDIAN
 **
 **	fetch_position
+**
 **	Args:
 **		– Memspace in whole (arena)
 **		– Carriage (we will be using the carry->abs_pos)

@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/09 00:18:43 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/09 14:04:03 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,30 +47,7 @@ void		initiate_carriages(t_vm *vm, unsigned char *arena)
 		head->abs_pos = carriage_pos;
 		vm->carry_nbr++;
         printf("r1: %d\n", head->regs[0]);
-		
 		form_statement(head, arena);
-		op_sti(head, arena); 
-		free(head->stmt);
-		head->stmt = NULL;
-		
-		form_statement(head, arena);
-		op_live(head, vm);
-		free(head->stmt);
-		head->stmt = NULL;
-		
-		form_statement(head, arena);
-		op_ld(head, arena);
-		free(head->stmt);
-		head->stmt = NULL;
-		printf("Carry flag is %d\n", head->carry_flag);
-
-		form_statement(head, arena);
-		op_zjmp(head, arena);
-		free(head->stmt);
-		head->stmt = NULL;
-
-		form_statement(head, arena);
-		printf("Player DONE\n\n\n");
 		i++;
 	}
 	vm->carriages = head;

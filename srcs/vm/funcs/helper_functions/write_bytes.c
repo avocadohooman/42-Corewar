@@ -6,12 +6,15 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/09 02:16:09 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/09 14:14:27 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
 /*
+**	write_bytes	(MEMSPACE GUARDIAN)
+**
 **	Takes the whole memspace (arena)
 **	Takes a index to memspace (where)
 **	Takes a numeric value (what)
@@ -26,6 +29,8 @@
 **		Tested with value -19 and size 2, wrote ff ed. All should be good.
 **		Tested with also with max index, and wrote to index 0 onwards, so wrapping works.
 ** 		If you are writing a registry value, size is always 4 as REG_SIZE implicates in op.h
+**
+**	Retuns nothing
 */
 
 void	write_bytes(unsigned char *arena, int where, int what, int size)
