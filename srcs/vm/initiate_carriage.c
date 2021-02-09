@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initiate_carriage.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/08 18:04:08 by orantane         ###   ########.fr       */
-=======
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/09 14:04:03 by seronen          ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2021/02/09 15:49:11 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +21,10 @@ t_carriage		*create_carriage(t_carriage *next, int player_id, unsigned char *pos
         print_error(7);
 	if (player_id <= REG_NUMBER)
 		carriage->regs[0] = player_id * -1;
+	printf("Player id = %d\n", carriage->regs[0]);
 	carriage->pos = position;
-<<<<<<< HEAD
 	carriage->cycle = 0;
-=======
 	carriage->next_statement = 0;
->>>>>>> master
 	carriage->cycles_to_execute = -1;
 	carriage->last_live = -1;
 	carriage->carry_flag = 0;

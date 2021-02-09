@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/08 18:11:36 by orantane         ###   ########.fr       */
-=======
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/09 00:18:17 by seronen          ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2021/02/09 18:00:01 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +62,7 @@ typedef struct  s_vm
 	int			dump;
 	int			player_nb;
 	int			carry_nbr;
+	t_player	*last_live;
 	t_player	*players[MAX_PLAYERS + 1];
     t_carriage  *carriages;
 }               t_vm;
@@ -89,12 +83,8 @@ int					read_files(t_vm *vm);
 int					validate_filename(t_player *player);
 unsigned char       *init_arena(t_vm *vm);
 void				initiate_carriages(t_vm *vm, unsigned char *arena);
-<<<<<<< HEAD
-int     			form_statement(t_carriage *carry);
 void				battle_loop(t_vm *vm, unsigned char *arena);
-=======
 int     			form_statement(t_carriage *carry, unsigned char *arena);
->>>>>>> master
 int					convert_4_bytes(unsigned char *data);
 t_carriage			*create_carriage(t_carriage *next, int player_id, unsigned char *position);
 

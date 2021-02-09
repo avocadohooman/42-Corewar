@@ -40,6 +40,15 @@
 
 */
 
+void	announce_winner(t_vm *vm)
+{
+	ft_putstr("Player ");
+	ft_putnbr(vm->last_live->id);
+	ft_putstr(" (");
+	ft_putstr(vm->last_live->name);
+	ft_putendl(") won");
+}
+
 void	dump_arena(unsigned char *arena)
 {
 	int i;
@@ -87,6 +96,7 @@ int     main(int ac, char **av)
 	introduce_players(vm);
 	arena = init_arena(vm);
 	battle_loop(vm, arena);
+	announce_winner(vm);
 	// dump_arena(arena);
 	return (0);
 }

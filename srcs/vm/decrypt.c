@@ -6,11 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/02/08 18:53:41 by orantane         ###   ########.fr       */
-=======
-/*   Updated: 2021/02/09 00:18:28 by seronen          ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2021/02/09 16:21:52 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +19,7 @@ int		convert_4_bytes(unsigned char *data)
 	// Converts 4 individual bytes to an int, counting for endianness
 	// Big endian to little endian
 
-//	return ((data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3]);
+	return ((data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3]);
 	return (0);
 }
 

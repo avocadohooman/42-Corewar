@@ -6,11 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 13:26:34 by seronen           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/02/08 18:04:09 by orantane         ###   ########.fr       */
-=======
-/*   Updated: 2021/02/09 00:14:36 by seronen          ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2021/02/09 18:00:54 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +17,10 @@ void    op_live(t_carriage *carriage, t_vm *vm)
 	int player_id;
 
 	player_id = carriage->stmt->args[0] * -1;
+	printf("id %d, carry_nbr %d, cycle %d\n", player_id, vm->carry_nbr, carriage->cycle);
 	if (player_id <= vm->player_nb && player_id > 0)
 	{
+		vm->last_live = vm->players[player_id - 1];
 		carriage->last_live = carriage->cycle;
 		printf("Player %d '%s' is alive\n", player_id, vm->players[player_id - 1]->name);
 	}
