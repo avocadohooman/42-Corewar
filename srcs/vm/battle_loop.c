@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/08 18:53:40 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/09 14:58:36 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ t_carriage		*kill_carriage(t_carriage *carriage, t_carriage *prev, t_carriage *n
 {
 	if (prev != NULL)
 		prev->next = next;
-	if (carriage != NULL && carriage->stmt)
-		free(carriage->stmt);
-	free(carriage);
+//	if (carriage != NULL && carriage->stmt)
+//		free(carriage->stmt);
+//	free(carriage);
 	carriage = NULL;
 	return (next);
 }
