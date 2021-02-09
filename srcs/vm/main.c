@@ -87,10 +87,10 @@ int     main(int ac, char **av)
 	t_vm *vm;
 	unsigned char *arena;
 
-	vm = malloc(sizeof(t_vm));
+	vm = ft_memalloc(sizeof(t_vm));
 	vm->dump = 0;
 	vm->carry_nbr = 0;
-	bzero(vm->players, sizeof(t_player) * MAX_PLAYERS + 1);
+	bzero(vm->players, sizeof(t_player *) * MAX_PLAYERS + 1);
 	get_players(vm, av, ac);
 	read_files(vm);
 	introduce_players(vm);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/09 13:38:56 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/09 22:56:16 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int		gather_data(t_player *player, char *data, size_t total_size)
 	if (!player->exec_size)
 		player->exec_size = total_size - 2192;						// If exec_size unpresent in bytecode, calculate the exact size yourself
 	player->exec_code = malloc(sizeof(char) * player->exec_size + 1);
-	bzero(&player->exec_code, sizeof(char) * player->exec_size + 1);
-	ft_memcpy(&player->exec_code, &data[2192], player->exec_size);	// index is validated to be 2192! by hackerman
+	bzero(player->exec_code, sizeof(char) * player->exec_size + 1);
+	ft_memcpy(player->exec_code, &data[2192], player->exec_size);	// index is validated to be 2192! by hackerman
 	//printf("hex first index of bcode: %x\n", data[2192]);
 	validate_player(player);
 	return (0);
@@ -68,7 +68,7 @@ int     read_files(t_vm *vm)
 
 	i = 0;
 	while (i < vm->player_nb)
-	{
+	{		
 		if (!file_extension(vm->players[i]->file_name, ".cor"))
 		{
 			printf("Unsupported file extension for player: %s!\n", vm->players[i]->file_name);

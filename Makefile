@@ -14,7 +14,7 @@ VM_NAME = corewar
 ASM_NAME = asm
 
 LEXER_TEST_NAME = lexer-test
-FLAGS = -Wall -Werror -Wextra
+# FLAGS = -Wall -Werror -Wextra
 VM_MAIN = srcs/vm/main.c
 ASM_MAIN = srcs/asm/main.c
 

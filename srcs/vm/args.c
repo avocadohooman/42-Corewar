@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:46:01 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/08 14:27:51 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/09 22:57:26 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ static void			new_player(t_vm *vm, int id, char *name)
 	if (!(new = malloc(sizeof(t_player))))
 		print_error(MALLOC);
 	new->id = id;
+	ft_putendl(name);
 	new->file_name = name;
-	bzero(&new->name, PROG_NAME_LENGTH + 1);
-	bzero(&new->comment, COMMENT_LENGTH + 1);
+	bzero(&(new->name), PROG_NAME_LENGTH + 1);
+	bzero(&(new->comment), COMMENT_LENGTH + 1);
 	new->exec_code = NULL;
 	vm->players[id - 1] = new;
 }
@@ -39,7 +40,7 @@ static int			add_first(t_vm *vm, int player, char **args, int ac)
 			i += 2;
 		else if (args[i])
 		{
-			new_player(vm ,player, ft_strdup(args[i]));
+			new_player(vm, player, ft_strdup(args[i]));
 			args[i] = NULL;
 			return (0);
 		}
