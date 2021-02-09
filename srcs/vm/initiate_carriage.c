@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initiate_carriage.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/08 15:41:17 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/09 14:04:03 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_carriage		*create_carriage(t_carriage *next, int player_id, unsigned char *pos
 	if (player_id <= REG_NUMBER)
 		carriage->regs[0] = player_id * -1;
 	carriage->pos = position;
+	carriage->next_statement = 0;
 	carriage->cycles_to_execute = -1;
 	carriage->last_live = -1;
 	carriage->carry_flag = 0;
@@ -43,10 +44,10 @@ void		initiate_carriages(t_vm *vm, unsigned char *arena)
 	{
 		carriage_pos = (vm->players[i]->id - 1) * (MEM_SIZE / vm->player_nb);
 		head = create_carriage(head, vm->players[i]->id, &arena[carriage_pos]);
+		head->abs_pos = carriage_pos;
 		vm->carry_nbr++;
         printf("r1: %d\n", head->regs[0]);
-		form_statement(head);
-		op_zjmp(head);
+		form_statement(head, arena);
 		i++;
 	}
 	vm->carriages = head;
