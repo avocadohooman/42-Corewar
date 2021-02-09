@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 21:26:21 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/09 01:39:27 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/09 02:16:35 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int		read_bytes(unsigned char *arena, int where, int size)
 	unsigned char buf[4];
 
 	index = 0;
+	if (where < 0)
+		where += MEM_SIZE;
 	ft_memset(buf, 0, 4);
 	index = 4 - size;
 	while (size > 0)

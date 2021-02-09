@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/08 21:56:14 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/09 02:16:09 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	write_bytes(unsigned char *arena, int where, int what, int size)
 	unsigned char *buf;
 
 	buf = (unsigned char *)&what;
+	if (where < 0)
+		where += MEM_SIZE;
 	while (size > 0)
 	{
 		where %= MEM_SIZE;
