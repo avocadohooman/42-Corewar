@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arena.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 22:52:50 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/08 18:04:07 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/10 13:41:40 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			place_players(t_vm *vm, unsigned char *arena)
 	{
 		if ((a_index + vm->players[player]->exec_size) > MEM_SIZE)
 			print_error(MALLOC);
-		ft_memcpy(&arena[a_index], &vm->players[player]->exec_code, vm->players[player]->exec_size);
+		ft_memcpy(&arena[a_index], vm->players[player]->exec_code, vm->players[player]->exec_size);
 		a_index += MEM_SIZE / vm->player_nb;
 		player++;
 	}
