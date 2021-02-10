@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   initiate_carriage.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/09 15:49:11 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/10 13:28:52 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include <stdio.h> // remove
 
-t_carriage		*create_carriage(t_carriage *next, int player_id, unsigned char *position) 
+t_carriage		*create_carriage(t_vm *vm, t_carriage *next, int player_id, unsigned char *position) 
 {
 	t_carriage     *carriage;
 
@@ -23,6 +23,8 @@ t_carriage		*create_carriage(t_carriage *next, int player_id, unsigned char *pos
 		carriage->regs[0] = player_id * -1;
 	printf("Player id = %d\n", carriage->regs[0]);
 	carriage->pos = position;
+	carriage->id = vm->id_tracker;
+	vm->id_tracker++;
 	carriage->cycle = 0;
 	carriage->next_statement = 0;
 	carriage->cycles_to_execute = -1;
@@ -42,10 +44,11 @@ void		initiate_carriages(t_vm *vm, unsigned char *arena)
 	
 	i = 0;
 	head = NULL;
+	vm->id_tracker = 0;
 	while (i < vm->player_nb)
 	{
 		carriage_pos = (vm->players[i]->id - 1) * (MEM_SIZE / vm->player_nb);
-		head = create_carriage(head, vm->players[i]->id, &arena[carriage_pos]);
+		head = create_carriage(vm, head, vm->players[i]->id, &arena[carriage_pos]);
 		head->abs_pos = carriage_pos;
 		vm->carry_nbr++;
         printf("r1: %d\n", head->regs[0]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/09 18:00:01 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/10 13:26:24 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct  s_stmt
 typedef struct  s_carriage 
 {
 	int					abs_pos;
+	int					id;
 	int					next_statement;
 	unsigned char		*pos;
 	int                 cycles_to_execute;
@@ -62,6 +63,7 @@ typedef struct  s_vm
 	int			dump;
 	int			player_nb;
 	int			carry_nbr;
+	int			id_tracker;
 	t_player	*last_live;
 	t_player	*players[MAX_PLAYERS + 1];
     t_carriage  *carriages;
@@ -86,7 +88,7 @@ void				initiate_carriages(t_vm *vm, unsigned char *arena);
 void				battle_loop(t_vm *vm, unsigned char *arena);
 int     			form_statement(t_carriage *carry, unsigned char *arena);
 int					convert_4_bytes(unsigned char *data);
-t_carriage			*create_carriage(t_carriage *next, int player_id, unsigned char *position);
+t_carriage			*create_carriage(t_vm *vm, t_carriage *next, int player_id, unsigned char *position);
 
 /** MEMSPACE GUARDIANS **/
 unsigned char   	*fetch_position(unsigned char *arena, t_carriage *carry, int how_far);
