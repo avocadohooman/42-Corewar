@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/10 04:50:42 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/02/10 06:09:20 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		convert_exec_size(char *data)
 	int				value;
 	unsigned char	*d;
 
-	d = data;
+	d = (unsigned char*)data;
 	value = (d[0] << 24) | (d[1] << 16) | (d[2] << 8) | d[3];
 	return (value);
 }

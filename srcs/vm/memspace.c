@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memspace.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:55:54 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/09 20:34:54 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/10 19:29:24 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,23 @@
 **	Super useful I promise!
 */
 
-unsigned char   *fetch_position(unsigned char *arena, t_carriage *carry, int how_far)
+int				real_modulo(int value, int modulo)
+{
+	int res;
+
+	res = value % modulo;
+	if (value >= modulo)
+		res = value - modulo;
+	else if (value < 0)
+		value = value + modulo;
+	return (value);
+}
+
+unsigned char   *fetch_position(unsigned char *arena, int where, int modulo)
 {
 	int new;
 
-	if ((carry->abs_pos + how_far) >= MEM_SIZE)
-		new = (carry->abs_pos + how_far) - MEM_SIZE;
-	else if ((carry->abs_pos + how_far) < 0)
-		new = (carry->abs_pos + how_far) + MEM_SIZE;
-	else
-		new = carry->abs_pos + how_far;
+	new = real_modulo(where, modulo);
+//	printf("New position: %d\n", new);
 	return (&arena[new]);
 }

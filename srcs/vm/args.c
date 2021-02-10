@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:46:01 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/09 22:57:26 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/02/10 15:46:15 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ static int			get_player_amount(t_vm *vm, char **args, int ac)
 			amount++;
 		i++;
 	}
-	if (amount < 2)
+	if (amount < MIN_PLAYERS)
 		print_error(INVALID_ARG);
 	return (amount);
 }
