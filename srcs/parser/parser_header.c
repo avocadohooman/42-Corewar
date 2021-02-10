@@ -21,11 +21,11 @@ t_ast	*parser_parse_command_name(t_parser *parser)
 
 	if (!(command_name = init_ast(AST_COMMAND)))
 		return (NULL);
-	command_name->command = parser->current_token->value;
+	command_name->command = ft_strdup(parser->current_token->value);
 	parser_consume(parser, TOKEN_COMMAND);
 	while (parser->current_token->type == TOKEN_NEWLINE)
 		parser_consume(parser, TOKEN_NEWLINE);
-	command_name->string = parser->current_token->value;
+	command_name->string = ft_strdup(parser->current_token->value);
 	parser_consume(parser, TOKEN_STRING);
 	return (command_name);
 }
@@ -36,23 +36,20 @@ t_ast	*parser_parse_command_comment(t_parser *parser)
 
 	if (!(command_comment = init_ast(AST_COMMAND)))
 		return (NULL);
-	command_comment->command = parser->current_token->value;
+	command_comment->command = ft_strdup(parser->current_token->value);
 	parser_consume(parser, TOKEN_COMMAND);
 	while (parser->current_token->type == TOKEN_NEWLINE)
 		parser_consume(parser, TOKEN_NEWLINE);
-	command_comment->string = parser->current_token->value;
+	command_comment->string = ft_strdup(parser->current_token->value);
 	parser_consume(parser, TOKEN_STRING);
 	return (command_comment);
 }
 
 t_ast	*parser_parse_command(t_parser *parser)
 {
-	char	*value;
-	
-	value = parser->current_token->value;
-	if (ft_strequ(value, NAME_CMD_STRING))
+	if (ft_strequ(parser->current_token->value, NAME_CMD_STRING))
 		return (parser_parse_command_name(parser));
-	else if (ft_strequ(value, COMMENT_CMD_STRING))
+	else if (ft_strequ(parser->current_token->value, COMMENT_CMD_STRING))
 		return (parser_parse_command_comment(parser));
     parser_exit_with_message(ERROR_UNKNOWN_COMMAND);
     return (NULL);

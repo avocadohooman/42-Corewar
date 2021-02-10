@@ -67,9 +67,9 @@ unsigned char	*visit_compound(t_ast *compound)
 	unsigned char	*header;
 	unsigned char	*body;
 
-	i = -1;
 	header = NULL;
 	body = NULL;
+	i = -1;
 	while (++i < compound->compound_size)
 	{
 		if (i == 0)
@@ -84,11 +84,6 @@ unsigned char	*visit_compound(t_ast *compound)
 	ft_memmove((header + HEADER_SIZE), body, compound->body_byte_size);
 	return (header);
 }
-
-// void	visit_command(t_ast *command)
-// {
-// 	// printf("command: %s -- %s\n", command->command, command->string);
-// }
 
 unsigned char	*visit_header(t_ast *header)
 {
@@ -146,9 +141,9 @@ unsigned char encode_arg_type(t_ast **args, int nb)
 	code = 0;
 	while (++i < nb)
 		{
-			if (args[i]->arg_type == T_REG)		// previously 'r', correct if not t_reg
+			if (args[i]->arg_type == T_REG)
 				code |= 1UL << (6 - (i + i));
-			else if (args[i]->arg_type == T_DIR)	// previously '%', correct if not t_dir
+			else if (args[i]->arg_type == T_DIR)
 				code |= 1UL << (7 - (i + i));
 			else
 			{
@@ -182,7 +177,7 @@ unsigned char	    *encode_statement(t_ast *stmt)
 		tmp = encode_arg(stmt->statement_args[i], stmt->label_list);
 		ft_memcpy(buf, tmp, stmt->statement_args[i]->arg_size);
 		buf += stmt->statement_args[i]->arg_size;
-		// free(tmp);	This should be done :)))
+		ft_strdel((char **)&tmp);
 	}
     return (encoded_statement);
 }
@@ -221,7 +216,7 @@ unsigned char	*visit_body(t_ast *body)
     	encoded_statement = visit_instruction(body->compound_value[i]);
 		ft_memcpy(tmp, encoded_statement, body->compound_value[i]->statement_size);
 		tmp += body->compound_value[i]->statement_size;
-		free(encoded_statement);
+		ft_strdel((char **)&encoded_statement);
     }
 	return (code);
 }

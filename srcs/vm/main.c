@@ -93,6 +93,7 @@ int     main(int ac, char **av)
 	bzero(vm->players, sizeof(t_player *) * MAX_PLAYERS + 1);
 	get_players(vm, av, ac);
 	read_files(vm);
+	exit(0);
 	introduce_players(vm);
 	arena = init_arena(vm);
 	battle_loop(vm, arena);
