@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   decrypt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/09 20:34:20 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/10 13:30:30 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	init_stmt(t_carriage *carry)
 	if (stmt->statement > 16 || stmt->statement < 1)
 	{
 		printf("Invalid statement code detected!\nExiting...\n");
+		printf("Carriage ID: %d\nPlayer: %d\n", carry->id, carry->regs[0] * -1);
 		printf("Code was - 2: %02x\n", carry->pos[0] - 2);
 		printf("Code was - 1: %02x\n", carry->pos[0] - 1);
 		printf("Code was [0]: %02x\n", carry->pos[0]);
