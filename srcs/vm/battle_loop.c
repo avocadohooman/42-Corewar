@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/10 13:14:17 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/10 15:20:03 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void		execute_statement(t_carriage *carriage, t_vm *vm, t_loop *loop, unsigned c
 		op_xor(carriage, arena);
 	else if (carriage->stmt->statement == 9)
 	{
-		printf("Jumping!\n");
+		// printf("Jumping!\n");
 		op_zjmp(carriage, arena);
 	}
 	more_execute_statements(carriage, vm, arena);
@@ -78,7 +78,7 @@ void		check_carriages(t_vm *vm, t_loop *loop)
 	del = 0;
 	prev = NULL;
 	tmp = vm->carriages;
-	printf("Starting carriage check!\n");
+	// printf("Starting carriage check!\n");
 	while (tmp != NULL)
 	{
 		if (tmp)
@@ -89,8 +89,8 @@ void		check_carriages(t_vm *vm, t_loop *loop)
 				loop->head = tmp->next;
 			if (prev && prev->next)
 				prev->next = tmp->next;
-			printf("Carriage for player %d was killed, RIP!\n", (tmp->regs[0] * -1));
-			kill_carriage(tmp);
+			// printf("Carriage for player %d was killed, RIP!\n", (tmp->regs[0] * -1));
+			// kill_carriage(tmp);
 			tmp = next;
 			vm->carry_nbr--;
 		}
@@ -103,14 +103,14 @@ void		check_carriages(t_vm *vm, t_loop *loop)
 	if (loop->nbr_live >= NBR_LIVE || ++loop->nbr_checks >= MAX_CHECKS)
 	{
 		loop->ctd_reset -= CYCLE_DELTA;
-		printf("Cycle to die is lowered, new value is %d\n", loop->ctd_reset);
+		// printf("Cycle to die is lowered, new value is %d\n", loop->ctd_reset);
 		loop->cycle_to_die = loop->ctd_reset;
 		loop->nbr_checks = 0;
 		loop->nbr_live = 0;
 	}
 	else
 		loop->cycle_to_die = loop->ctd_reset;
-	printf("Carriage check done!\n");
+	// printf("Carriage check done!\n");
 }
 
 void		init_battle_loop(t_vm *vm, t_loop *loop)
@@ -156,8 +156,8 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		if (loop.cycle_to_die <= 0 && vm->carry_nbr > 0)
 			check_carriages(vm, &loop);
 		loop.cycle_to_die--;
-		printf("Cycle %d\n", loop.cycle);
-//		if (loop.cycle == 10000)
-//			exit(1);
+		// printf("Cycle %d\n", loop.cycle);
+		// if (loop.cycle == 10000)
+		// 	exit(1);
 	}
 }

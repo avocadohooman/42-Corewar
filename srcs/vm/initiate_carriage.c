@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/10 13:28:52 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/10 15:19:16 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ t_carriage		*create_carriage(t_vm *vm, t_carriage *next, int player_id, unsigned
 
 	if (!(carriage = (t_carriage*)ft_memalloc(sizeof(t_carriage))))
         print_error(7);
+	if (player_id > 0) 
+		player_id *= -1;
 	if (player_id <= REG_NUMBER)
-		carriage->regs[0] = player_id * -1;
-	printf("Player id = %d\n", carriage->regs[0]);
+		carriage->regs[0] = player_id;
+	// printf("Player id = %d\n", carriage->regs[0]);
 	carriage->pos = position;
 	carriage->id = vm->id_tracker;
 	vm->id_tracker++;

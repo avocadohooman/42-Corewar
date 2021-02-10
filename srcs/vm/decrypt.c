@@ -6,7 +6,7 @@
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/10 13:30:30 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/10 15:15:09 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,17 @@ void	init_stmt(t_carriage *carry)
 		exit(-42);
 	}
 	stmt->statement = carry->pos[0];
-	if (stmt->statement > 16 || stmt->statement < 1)
-	{
-		printf("Invalid statement code detected!\nExiting...\n");
-		printf("Carriage ID: %d\nPlayer: %d\n", carry->id, carry->regs[0] * -1);
-		printf("Code was - 2: %02x\n", carry->pos[0] - 2);
-		printf("Code was - 1: %02x\n", carry->pos[0] - 1);
-		printf("Code was [0]: %02x\n", carry->pos[0]);
-		printf("Code was + 1: %02x\n", carry->pos[0] + 1);
-		printf("Code was + 2: %02x\n", carry->pos[0] + 2);
-		exit(0);
-	}
+	// if (stmt->statement > 16 || stmt->statement < 1)
+	// {
+	// 	printf("Invalid statement code detected!\nExiting...\n");
+	// 	printf("Carriage ID: %d\nPlayer: %d\n", carry->id, carry->regs[0] * -1);
+	// 	printf("Code was - 2: %02x\n", carry->pos[0] - 2);
+	// 	printf("Code was - 1: %02x\n", carry->pos[0] - 1);
+	// 	printf("Code was [0]: %02x\n", carry->pos[0]);
+	// 	printf("Code was + 1: %02x\n", carry->pos[0] + 1);
+	// 	printf("Code was + 2: %02x\n", carry->pos[0] + 2);
+	// 	exit(0);
+	// }
 	stmt->arg_type = carry->pos[1];
 	ft_bzero(stmt->arg_types, sizeof(int) * 3);
 	carry->stmt = stmt;
@@ -125,7 +125,7 @@ int     form_statement(t_carriage *carry, unsigned char *arena)
 
     init_stmt(carry);		// Init statement, mallocs and sets the statement
 	pos = 1;
-	printf("Absolute index of carry: %d\n", carry->abs_pos);
+	// printf("Absolute index of carry: %d\n", carry->abs_pos);
 	carry->abs_pos += carry->next_statement;
 	if (opcode_table[carry->stmt->statement - 1].argument_type) // If arg_type is true
 	{
@@ -142,21 +142,21 @@ int     form_statement(t_carriage *carry, unsigned char *arena)
 
 	// End of code -> Printing
 	
-	printf("Absolute index of carry: %d\n", carry->abs_pos);
-	printf("Statement code: %s\n", opcode_table[carry->stmt->statement - 1].literal);
-	printf("Cycles until execution (cost): %d\n", carry->cycles_to_execute);
-	if (carry->pos[0] > 0 && carry->pos[0] < 17)
-		printf("Next statement code: %s\n", opcode_table[carry->pos[0] - 1].literal);
-	printf("Arguments and types:\n");
-	int i = 0;
-	while (i < 3)
-	{
-		if (carry->stmt->arg_types[i])
-			printf("ARG %d == type %d –– value: %d\n", i + 1, carry->stmt->arg_types[i], carry->stmt->args[i]);
-		else
-			printf("No arg %d!\n", i + 1);
-		i++;
-	}
-	printf("\n");
+	// printf("Absolute index of carry: %d\n", carry->abs_pos);
+	// printf("Statement code: %s\n", opcode_table[carry->stmt->statement - 1].literal);
+	// printf("Cycles until execution (cost): %d\n", carry->cycles_to_execute);
+	// if (carry->pos[0] > 0 && carry->pos[0] < 17)
+	// 	printf("Next statement code: %s\n", opcode_table[carry->pos[0] - 1].literal);
+	// printf("Arguments and types:\n");
+	// int i = 0;
+	// while (i < 3)
+	// {
+	// 	if (carry->stmt->arg_types[i])
+	// 		printf("ARG %d == type %d –– value: %d\n", i + 1, carry->stmt->arg_types[i], carry->stmt->args[i]);
+	// 	else
+	// 		printf("No arg %d!\n", i + 1);
+	// 	i++;
+	// }
+	// printf("\n");
 	return (0);
 }
