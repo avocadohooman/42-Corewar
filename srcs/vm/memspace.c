@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memspace.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:55:54 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/10 18:54:53 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/10 19:29:24 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ unsigned char   *fetch_position(unsigned char *arena, int where, int modulo)
 	int new;
 
 	new = real_modulo(where, modulo);
-	printf("New position: %d\n", new);
+//	printf("New position: %d\n", new);
 	return (&arena[new]);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   decrypt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/10 17:37:48 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/10 19:28:32 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ void	init_stmt(t_carriage *carry)
 		exit(-42);
 	}
 	stmt->statement = carry->pos[0];
-	if (stmt->statement > 16 || stmt->statement < 1)
+/*	if (stmt->statement > 16 || stmt->statement < 1)
 	{
 		printf("Invalid stmt code!\n");
 		exit(0);
-	}
+	}*/
 	stmt->arg_type = carry->pos[1];
 	ft_bzero(stmt->arg_types, sizeof(int) * 3);
 	carry->stmt = stmt;
