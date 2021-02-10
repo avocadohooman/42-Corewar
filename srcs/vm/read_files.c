@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/10 13:16:05 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/10 02:14:39 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int		convert_exec_size(char *data)
 {
-	int value;
+	int				value;
+	unsigned char	*d;
 
-	value = (data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3];
+	d = data;
+	value = (d[0] << 24) | (d[1] << 16) | (d[2] << 8) | d[3];
 	return (value);
 }
 
@@ -51,8 +53,12 @@ int		gather_data(t_player *player, char *data, size_t total_size)
 	ft_memcpy(&player->name, &data[4], 128);
 	ft_memcpy(&player->comment, &data[140], 2048);
 	player->exec_size = convert_exec_size(&data[136]);
+	printf("exec_size: %d\n", player->exec_size);
 	if (!player->exec_size)
+	{
+		printf("!player->exec_size: %d -- total: %ld\n", player->exec_size, total_size);
 		player->exec_size = total_size - 2192;						// If exec_size unpresent in bytecode, calculate the exact size yourself
+	}
 	player->exec_code = malloc(sizeof(char) * player->exec_size + 1);
 	bzero(player->exec_code, sizeof(char) * player->exec_size + 1);
 	ft_memcpy(player->exec_code, &data[2192], player->exec_size);	// index is validated to be 2192! by hackerman
