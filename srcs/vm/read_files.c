@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/10 18:20:11 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/10 06:09:20 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int     read_files(t_vm *vm)
 		}
 		file = read_file(vm->players[i]->file_name);
 		gather_data(vm->players[i], file.data, file.used);
+		free(file.data);
 		i++;
 	}
 	return (0);
