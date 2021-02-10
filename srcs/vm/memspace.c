@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:55:54 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/10 18:24:18 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/10 18:54:53 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,23 @@
 **	Super useful I promise!
 */
 
+int				real_modulo(int value, int modulo)
+{
+	int res;
+
+	res = value % modulo;
+	if (value >= modulo)
+		res = value - modulo;
+	else if (value < 0)
+		value = value + modulo;
+	return (value);
+}
+
 unsigned char   *fetch_position(unsigned char *arena, int where, int modulo)
 {
 	int new;
 
-	if ((where) >= modulo)
-		new = (where) - modulo;
-	else if ((where) < 0)
-		new = (where) + modulo;
-	else
-		new = where;
+	new = real_modulo(where, modulo);
+	printf("New position: %d\n", new);
 	return (&arena[new]);
 }
