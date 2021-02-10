@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:55:54 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/09 20:34:54 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/10 18:24:18 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@
 **	Super useful I promise!
 */
 
-unsigned char   *fetch_position(unsigned char *arena, t_carriage *carry, int how_far)
+unsigned char   *fetch_position(unsigned char *arena, int where, int modulo)
 {
 	int new;
 
-	if ((carry->abs_pos + how_far) >= MEM_SIZE)
-		new = (carry->abs_pos + how_far) - MEM_SIZE;
-	else if ((carry->abs_pos + how_far) < 0)
-		new = (carry->abs_pos + how_far) + MEM_SIZE;
+	if ((where) >= modulo)
+		new = (where) - modulo;
+	else if ((where) < 0)
+		new = (where) + modulo;
 	else
-		new = carry->abs_pos + how_far;
+		new = where;
 	return (&arena[new]);
 }

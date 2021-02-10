@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/10 13:26:24 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/10 16:14:44 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define MIN_PLAYERS 2
+# define MIN_PLAYERS 1
 
 typedef struct  s_player
 {
@@ -91,7 +91,7 @@ int					convert_4_bytes(unsigned char *data);
 t_carriage			*create_carriage(t_vm *vm, t_carriage *next, int player_id, unsigned char *position);
 
 /** MEMSPACE GUARDIANS **/
-unsigned char   	*fetch_position(unsigned char *arena, t_carriage *carry, int how_far);
+unsigned char   	*fetch_position(unsigned char *arena, int where, int fork);
 
 
 /** OP_HELPER_FUNCTIONS **/

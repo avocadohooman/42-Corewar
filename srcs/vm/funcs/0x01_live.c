@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0x01_live.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 13:26:34 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/09 18:00:54 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/10 18:27:56 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void    op_live(t_carriage *carriage, t_vm *vm)
 	int player_id;
 
 	player_id = carriage->stmt->args[0] * -1;
-	printf("id %d, carry_nbr %d, cycle %d\n", player_id, vm->carry_nbr, carriage->cycle);
+//	printf("id %d, carry_nbr %d, cycle %d\n", player_id, vm->carry_nbr, carriage->cycle);
 	if (player_id <= vm->player_nb && player_id > 0)
 	{
 		vm->last_live = vm->players[player_id - 1];
 		carriage->last_live = carriage->cycle;
-		printf("Player %d '%s' is alive\n", player_id, vm->players[player_id - 1]->name);
+//		printf("Player %d '%s' is alive\n", player_id, vm->players[player_id - 1]->name);
 	}
 }
