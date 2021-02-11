@@ -40,28 +40,6 @@ void			lex_advance(t_lexer *lexer)
 	}
 }
 
-void			lex_retreat(t_lexer *lexer)
-{
-	if (lexer->index > 0)
-	{
-		lexer->index--;
-		lexer->c = lexer->data[lexer->index];
-		lexer->column--;
-	}
-}
-
-int				lex_lookahead(t_lexer *lexer, char c)
-{
-	char	next;
-
-	lex_advance(lexer);
-	next = lexer->c;
-	lex_retreat(lexer);
-	if (c == next)
-		return (1);
-	return (0);
-}
-
 int				is_label_char(char c)
 {
 	if (ft_strchr(LABEL_CHARS, c))
@@ -103,18 +81,6 @@ t_token			*lex_get_command(t_lexer *lexer)
 	return (init_token(TOKEN_COMMAND, value));
 }
 
-// t_token			*lex_get_keyword(char *value, size_t size)
-// {
-// 	int		i;
-
-// 	i = 0;
-// 	if (lookup_opcode(value) >= 0)
-// 		return (init_token(TOKEN_OPERATION, value));
-// 	return (init_token(TOKEN_IDENTIFIER, value));
-// }
-
-// might need to exclude capital chars here.. if label
-// and identifier is supposed to be the same thing..?? 
 t_token			*lex_get_identifier(t_lexer *lexer)
 {
 	char	*value;
@@ -169,17 +135,6 @@ t_token			*lex_get_string(t_lexer *lexer)
 	return (init_token(TOKEN_STRING, value));
 }
 
-t_token			*lex_get_newline(t_lexer *lexer)
-{
-	lex_advance(lexer);
-	// if (lexer->c != 10)
-	// 	return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
-	// lex_advance(lexer);
-	lexer->line_number++;
-	lexer->column = 1;
-	return (init_token(TOKEN_NEWLINE, "\\n"));
-}
-
 t_token			*lex_advance_with_token(t_lexer *lexer, t_token *token)
 {
 	if (lexer->c == '\n')
@@ -211,7 +166,6 @@ t_token			*lex_get_operator(t_lexer *lexer)
 	if (lexer->c == '\n')
 		return (lex_advance_with_token(lexer,
 				init_token(TOKEN_NEWLINE, char_to_string(lexer->c))));
-		// return (lex_get_newline(lexer));
 	return (init_token(TOKEN_ILLEGAL, char_to_string(lexer->c)));
 }
 
@@ -239,11 +193,16 @@ t_token			*lex_get_next_token(t_lexer *lexer)
 			return (lex_get_command(lexer));
 		return (lex_get_operator(lexer));
 	}
-	return (init_token(TOKEN_EOF, "\0"));
+	return (init_token(TOKEN_EOF, char_to_string(lexer->c)));
 }
 
 void			free_lexer(t_lexer **lexer)
 {
-	free(*lexer);
-	*lexer = NULL;
+	if (*lexer)
+	{
+		free((*lexer)->data);
+		(*lexer)->data = NULL;
+		free(*lexer);
+		*lexer = NULL;
+	}
 }

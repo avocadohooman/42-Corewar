@@ -35,10 +35,13 @@ int			main(int argc, char **argv)
 	root = parser_parse(parser);
     buf = visit_ast(root);
 	out = ft_memalloc(sizeof(char) * (ft_strlen(argv[1] + 2)));
+
+
 	ft_strcpy(out, ft_strrchr(argv[1], '/') + 1);
 	ft_strcpy(ft_strchr(out, '.'), ".cor");
 	if ((fd = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666)) < 0)
 		return (1);
 	write(fd, buf, root->body_byte_size + HEADER_SIZE);
+	exit(0);
 	return (0);
 }

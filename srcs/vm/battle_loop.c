@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   battle_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/10 15:20:03 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/11 17:28:15 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ void		execute_statement(t_carriage *carriage, t_vm *vm, t_loop *loop, unsigned c
 	else if (carriage->stmt->statement == 8)
 		op_xor(carriage, arena);
 	else if (carriage->stmt->statement == 9)
-	{
-		// printf("Jumping!\n");
 		op_zjmp(carriage, arena);
-	}
 	more_execute_statements(carriage, vm, arena);
 }
 
@@ -78,7 +75,7 @@ void		check_carriages(t_vm *vm, t_loop *loop)
 	del = 0;
 	prev = NULL;
 	tmp = vm->carriages;
-	// printf("Starting carriage check!\n");
+	printf("Starting carriage check!\n");
 	while (tmp != NULL)
 	{
 		if (tmp)
@@ -86,11 +83,14 @@ void		check_carriages(t_vm *vm, t_loop *loop)
 		if (tmp->last_live <= (tmp->cycle - loop->ctd_reset))
 		{
 			if (tmp == loop->head)
+			{
 				loop->head = tmp->next;
+				vm->carriages = tmp->next;
+			}
 			if (prev && prev->next)
 				prev->next = tmp->next;
-			// printf("Carriage for player %d was killed, RIP!\n", (tmp->regs[0] * -1));
-			// kill_carriage(tmp);
+//			printf("Carriage for player %d was killed, RIP!\n", (tmp->regs[0] * -1));
+			kill_carriage(tmp);
 			tmp = next;
 			vm->carry_nbr--;
 		}
@@ -103,14 +103,14 @@ void		check_carriages(t_vm *vm, t_loop *loop)
 	if (loop->nbr_live >= NBR_LIVE || ++loop->nbr_checks >= MAX_CHECKS)
 	{
 		loop->ctd_reset -= CYCLE_DELTA;
-		// printf("Cycle to die is lowered, new value is %d\n", loop->ctd_reset);
+		printf("Cycle to die is lowered, new value is %d\n", loop->ctd_reset);
 		loop->cycle_to_die = loop->ctd_reset;
 		loop->nbr_checks = 0;
 		loop->nbr_live = 0;
 	}
 	else
 		loop->cycle_to_die = loop->ctd_reset;
-	// printf("Carriage check done!\n");
+	printf("Carriage check done!\n");
 }
 
 void		init_battle_loop(t_vm *vm, t_loop *loop)
@@ -128,13 +128,14 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 	t_loop		loop;
 	t_carriage	*tmp;
 	int			carry;
+	int 		tmp_nbr;
 
 	init_battle_loop(vm, &loop);
 	while (vm->carriages != NULL && vm->carry_nbr > 0)
 	{
 		tmp = vm->carriages;
 		carry = 0;
-		int tmp_nbr = vm->carry_nbr;	// Assign a tmp value to carry_nbr if it changes (f.ex. when fork is executed)
+		tmp_nbr = vm->carry_nbr;	// Assign a tmp value to carry_nbr if it changes (f.ex. when fork is executed)
 		while (carry < tmp_nbr)
 		{
 			if (tmp->stmt == NULL)
@@ -142,6 +143,7 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 			if (tmp->cycles_to_execute == 1)
 			{
 				execute_statement(tmp, vm, &loop, arena);
+				loop.head = vm->carriages;
 				free(tmp->stmt);
 				tmp->stmt = NULL;
 				form_statement(tmp, arena);
@@ -156,8 +158,9 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		if (loop.cycle_to_die <= 0 && vm->carry_nbr > 0)
 			check_carriages(vm, &loop);
 		loop.cycle_to_die--;
-		// printf("Cycle %d\n", loop.cycle);
-		// if (loop.cycle == 10000)
-		// 	exit(1);
+//		printf("Cycle %d\n", loop.cycle);
+//		if (loop.cycle == 7800)
+//			exit(1);
 	}
+	printf("Cycle %d\n", loop.cycle);
 }

@@ -23,10 +23,13 @@ t_token			*init_token(t_type type, char *value)
 	return (token);
 }
 
-void			free_token(t_token **token)
+void			token_free(t_token **token)
 {
-	free((*token)->value);
-	(*token)->value = NULL;
-	free(*token);
-	*token = NULL;
+	if (*token)
+	{
+		free((*token)->value);
+		(*token)->value = NULL;
+		free(*token);
+		*token = NULL;
+	}
 }

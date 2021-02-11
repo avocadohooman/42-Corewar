@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:08:55 by npimenof          #+#    #+#             */
-/*   Updated: 2021/02/03 10:43:41 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/02/10 04:59:18 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct	s_token
 }				t_token;
 
 t_token			*init_token(t_type type, char *value);
-void			free_token(t_token **token);
+void			token_free(t_token **token);
 
 int				is_opcode(t_type type);
 

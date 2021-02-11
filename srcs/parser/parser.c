@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:29:37 by npimenof          #+#    #+#             */
-/*   Updated: 2021/02/01 05:36:51 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/02/10 05:24:41 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_parser		*new_parser(t_lexer *lexer)
 	token = lex_get_next_token(lexer);
 	parser->lexer = lexer;
 	parser->current_token = token;
-	parser->prev_token = token;
+	parser->prev_token = NULL;
 	return (parser);
 }
 
@@ -32,6 +32,7 @@ void			parser_consume(t_parser *parser, t_type type)
 {
 	if (parser->current_token->type == type)
 	{
+		token_free(&parser->prev_token);
 		parser->prev_token = parser->current_token;
 		parser->current_token = lex_get_next_token(parser->lexer);
 	}
@@ -48,8 +49,8 @@ void			parser_consume(t_parser *parser, t_type type)
 
 void			free_parser(t_parser **parser)
 {
-	free_token(&((*parser)->prev_token));
-	free_token(&((*parser)->current_token));
+	token_free(&((*parser)->prev_token));
+	token_free(&((*parser)->current_token));
 	free_lexer(&((*parser)->lexer));
 	free(*parser);
 	*parser = NULL;

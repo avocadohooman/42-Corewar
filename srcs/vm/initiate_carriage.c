@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initiate_carriage.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/10 15:19:16 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/02/11 17:27:17 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_carriage		*create_carriage(t_vm *vm, t_carriage *next, int player_id, unsigned
 	if (player_id > 0) 
 		player_id *= -1;
 	if (player_id <= REG_NUMBER)
-		carriage->regs[0] = player_id;
-	// printf("Player id = %d\n", carriage->regs[0]);
+		carriage->regs[0] = player_id * -1;
+//	printf("Player id = %d\n", carriage->regs[0]);
 	carriage->pos = position;
 	carriage->id = vm->id_tracker;
 	vm->id_tracker++;
@@ -53,7 +53,7 @@ void		initiate_carriages(t_vm *vm, unsigned char *arena)
 		head = create_carriage(vm, head, vm->players[i]->id, &arena[carriage_pos]);
 		head->abs_pos = carriage_pos;
 		vm->carry_nbr++;
-        printf("r1: %d\n", head->regs[0]);
+//		printf("r1: %d\n", head->regs[0]);
 		form_statement(head, arena);
 		i++;
 	}
