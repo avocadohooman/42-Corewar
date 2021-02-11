@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/10 18:54:09 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/11 21:10:10 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ int					convert_4_bytes(unsigned char *data);
 t_carriage			*create_carriage(t_vm *vm, t_carriage *next, int player_id, unsigned char *position);
 
 /** MEMSPACE GUARDIANS **/
-unsigned char   	*fetch_position(unsigned char *arena, int where, int fork);
-int					real_modulo(int value, int modulo);
+unsigned char   	*fetch_position(unsigned char *arena,int pos, int where, int modulo);
+int					real_modulo(int position, int value, int modulo);
 
 
 /** OP_HELPER_FUNCTIONS **/
