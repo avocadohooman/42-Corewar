@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/11 21:22:30 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/11 23:49:31 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		init_stmt(t_carriage *carry)
 		printf("Carriage ID: %d & pos: %d\n", carry->id, carry->abs_pos);
 		free(stmt);
 		carry->stmt = NULL;
+		carry->dead = 1;
 		return (1);
 	}
 	stmt->arg_type = carry->pos[1];

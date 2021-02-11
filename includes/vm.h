@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/11 21:10:10 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/11 23:48:32 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct  s_stmt
 
 typedef struct  s_carriage 
 {
+	int					dead;
 	int					abs_pos;
 	int					id;
 	int					next_statement;
