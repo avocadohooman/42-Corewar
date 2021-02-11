@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:29:37 by npimenof          #+#    #+#             */
-/*   Updated: 2021/02/10 05:24:41 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/02/11 14:00:42 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,13 @@ void			parser_consume(t_parser *parser, t_type type)
 
 void			free_parser(t_parser **parser)
 {
-	token_free(&((*parser)->prev_token));
-	token_free(&((*parser)->current_token));
-	free_lexer(&((*parser)->lexer));
-	free(*parser);
-	*parser = NULL;
+	if (*parser)
+	{
+		token_free(&((*parser)->prev_token));
+		token_free(&((*parser)->current_token));
+		free(*parser);
+		*parser = NULL;
+	}
 }
 
 t_ast			*parser_parse_instructions(t_parser *parser)

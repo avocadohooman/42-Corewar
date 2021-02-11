@@ -200,8 +200,6 @@ void			free_lexer(t_lexer **lexer)
 {
 	if (*lexer)
 	{
-		free((*lexer)->data);
-		(*lexer)->data = NULL;
 		free(*lexer);
 		*lexer = NULL;
 	}

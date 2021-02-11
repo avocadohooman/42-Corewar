@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/10 06:09:20 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/02/11 09:18:17 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		gather_data(t_player *player, char *data, size_t total_size)
 int     read_files(t_vm *vm)
 {
 	int i;
-	t_file file;
+	t_buf file;
 
 	i = 0;
 	while (i < vm->player_nb)
@@ -80,7 +80,7 @@ int     read_files(t_vm *vm)
 			printf("Unsupported file extension for player: %s!\n", vm->players[i]->file_name);
 			exit(0);
 		}
-		file = read_file(vm->players[i]->file_name);
+		file = buf_read(vm->players[i]->file_name);
 		gather_data(vm->players[i], file.data, file.used);
 		free(file.data);
 		i++;
