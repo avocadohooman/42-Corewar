@@ -12,8 +12,8 @@
 
 #include "file.h"
 
-int		write_file(int fd, t_file *file)
+int		buf_write(t_buf *buf, int fd)
 {
-	write(fd, file->data, file->used);
-	return (file->used);
+	write(fd, buf->data, buf->used);
+	return (buf->used);
 }

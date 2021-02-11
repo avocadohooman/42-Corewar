@@ -16,6 +16,7 @@
 #include "encoder.h"
 #include <stdio.h> // delete
 #include "opcodes.h"
+#include "file.h"
 
 t_ast	*init_ast(int type)
 {
@@ -61,37 +62,47 @@ t_ast	*compound_insert(t_ast *compound, t_ast *new)
 	return (compound);
 }
 
-unsigned char	*visit_compound(t_ast *compound)
+t_buf	*visit_compound(t_ast *compound)
 {
 	int				i;
-	unsigned char	*header;
-	unsigned char	*body;
+	t_buf			*buf;
+	t_buf			*data;
 
-	header = NULL;
-	body = NULL;
+	if (!(buf = ft_memalloc(sizeof(t_buf))))
+		return (NULL);
 	i = -1;
 	while (++i < compound->compound_size)
 	{
-		if (i == 0)
-    		header = visit_ast(compound->compound_value[i]);
-		else
+		if (compound->compound_value[i]->type == AST_HEADER)
+		{
+			if (!(data = visit_header(compound->compound_value[i])))
+				return (NULL);
+			if (!(buf_insert(buf, data->data, data->used)))
+				return (NULL);
+			buf_free(&data);
+		}
+		else if (compound->compound_value[i]->type == AST_BODY)
 		{	
-			if (!(body = visit_ast(compound->compound_value[i])))
-				print_error(5);
+			if (!(data = visit_body(compound->compound_value[i])))
+				return (NULL);
+			if (!(buf_insert(buf, data->data, data->used)))
+				return (NULL);
+			buf_free(&data);
 		}
 	}
-	header = realloc(header, (HEADER_SIZE + compound->body_byte_size));
-	ft_memmove((header + HEADER_SIZE), body, compound->body_byte_size);
-	return (header);
+	return (buf);
 }
 
-unsigned char	*visit_header(t_ast *header)
+t_buf	*visit_header(t_ast *header)
 {
 	int				i;
 	unsigned char	*buf;
 	char			*name;
 	char			*comment;
+	t_buf			*bufio;
 
+	if (!(bufio = ft_memalloc(sizeof(t_buf))))
+		return (NULL);
 	i = -1;
 	while (++i < header->compound_size)
 	{
@@ -103,7 +114,11 @@ unsigned char	*visit_header(t_ast *header)
 			comment = header->compound_value[i]->string;
 	}
 	buf = encode_output(name, comment, header->body_byte_size);
-	return (buf);
+	if (!(buf_insert(bufio, buf, HEADER_SIZE)))
+		return (NULL);
+	free(buf);
+	buf = NULL;
+	return (bufio);
 }
 
 unsigned char *encode_arg(t_ast *arg, t_label *labels)
@@ -113,6 +128,8 @@ unsigned char *encode_arg(t_ast *arg, t_label *labels)
 	int i;
 	int value;
 
+	if (!(encoded_arg = ft_memalloc(sizeof(char) * arg->arg_size)))
+		return (NULL);
 	if (arg->label)
 	{
 		if ((value = label_value(labels, arg->label)) < 0)
@@ -122,7 +139,6 @@ unsigned char *encode_arg(t_ast *arg, t_label *labels)
 	else
 		value = arg->arg_value;
 	i = arg->arg_size + 1;
-	encoded_arg = ft_memalloc(sizeof(char) * arg->arg_size);
 	buf = encoded_arg;
 	while (--i > 0)
 	{
@@ -152,97 +168,76 @@ unsigned char encode_arg_type(t_ast **args, int nb)
 			}
 		}
 	return (code);
-};
+}
 
-unsigned char	    *encode_statement(t_ast *stmt)
+t_buf	    *encode_statement(t_ast *stmt)
 {
-	int	i;
-	unsigned char	*encoded_statement;
-	unsigned char *buf;
-	unsigned char *tmp;
+	int				i;
+	unsigned char	byte;
+	unsigned char	*argument;
+	t_buf			*buf_statement;
 
-	if (!(encoded_statement = ft_memalloc(sizeof(char) * stmt->statement_size)))
+	if (!(buf_statement = ft_memalloc(sizeof(t_buf))))
 		return (NULL);
-	buf = encoded_statement;
-	*buf = stmt->statement + 1;
-	buf++;
+	byte = stmt->statement + 1;
+	if (!(buf_insert(buf_statement, &byte, 1)))
+		return (NULL);
 	if (opcode_table[(int)stmt->statement].argument_type)
 	{
-		*buf = encode_arg_type(stmt->statement_args, stmt->statement_n_args);
-		buf++;
+		byte = encode_arg_type(stmt->statement_args, stmt->statement_n_args);
+		if (!(buf_insert(buf_statement, &byte, 1)))
+			return (NULL);
 	}
 	i = -1;
 	while (++i < stmt->statement_n_args)
 	{
-		tmp = encode_arg(stmt->statement_args[i], stmt->label_list);
-		ft_memcpy(buf, tmp, stmt->statement_args[i]->arg_size);
-		buf += stmt->statement_args[i]->arg_size;
-		ft_strdel((char **)&tmp);
+		if (!(argument = encode_arg(stmt->statement_args[i], stmt->label_list)))
+			return (NULL);
+		if (!(buf_insert(buf_statement, argument, stmt->statement_args[i]->arg_size)))
+			return (NULL);
+		ft_strdel((char **)&argument);
 	}
-    return (encoded_statement);
+    return (buf_statement);
 }
 
-unsigned char       *visit_instruction(t_ast *body)
+t_buf       *visit_instruction(t_ast *instruction)
 {
 	int i;
 
 	i = -1;
-
-	while (++i < body->compound_size)
+	while (++i < instruction->compound_size)
     {
-		if (body->compound_value[i]->type == AST_STATEMENT)
-		{
-			return (encode_statement(body->compound_value[i]));
-		}
+		if (instruction->compound_value[i]->type == AST_STATEMENT)
+			return (encode_statement(instruction->compound_value[i]));
     }
-	return ((unsigned char *)ft_strdup(""));
+	return ((t_buf *)ft_memalloc(sizeof(t_buf)));
 }
 
-unsigned char	*visit_body(t_ast *body)
+t_buf	*visit_body(t_ast *body)
 {
-	int	i;
-	unsigned char *code;
-	unsigned char *tmp;
-	unsigned char *encoded_statement;
+	int		i;
+	t_buf	*buf_body;
+	t_buf	*buf_instruction;
 
-	i = -1;
-	if  (!(code = ft_memalloc(sizeof(unsigned char) * body->body_byte_size)))
+	if (!(buf_body = ft_memalloc(sizeof(t_buf))))
 		return (NULL);
-	tmp = code;
+	i = -1;
 	while (++i < body->compound_size)
     {  
         if (body->compound_value[i]->type == AST_EMPTY)
             continue ;
-    	encoded_statement = visit_instruction(body->compound_value[i]);
-		ft_memcpy(tmp, encoded_statement, body->compound_value[i]->statement_size);
-		tmp += body->compound_value[i]->statement_size;
-		ft_strdel((char **)&encoded_statement);
+		if (!(buf_instruction = visit_instruction(body->compound_value[i])))
+			return (NULL);
+		if (!(buf_insert(buf_body, buf_instruction->data, buf_instruction->used)))
+			return (NULL);
+		buf_free(&buf_instruction);
     }
-	return (code);
+	return (buf_body);
 }
 
-char	*visit_label(t_ast *label)
-{
-    return (label->label);
-}
-
-unsigned char	*visit_ast(t_ast *ast)
+t_buf	*visit_ast(t_ast *ast)
 {
 	if (ast->type == AST_COMPOUND)
 		return (visit_compound(ast));
-	else if (ast->type == AST_HEADER)
-		return (visit_header(ast));
-	else if (ast->type == AST_BODY)
-		return (visit_body(ast));
-	else if (ast->type == AST_INSTRUCTION)
-		visit_instruction(ast);
-    else if (ast->type == AST_LABEL)
-		visit_label(ast);
-	else if (ast->type == AST_STATEMENT)
-		encode_statement(ast);
-	// else if (ast->type == AST_ARGUMENT)
-	// 	encode_arg(ast);
-	// else
-	// 	visit_empty(ast);
 	return (NULL);
 }
