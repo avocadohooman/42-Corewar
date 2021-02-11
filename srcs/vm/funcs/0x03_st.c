@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:48:06 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/11 17:57:35 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/02/11 18:06:16 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void    op_st(t_carriage *carriage, unsigned char *arena)
 		carriage->regs[arg_2 - 1] = arg_value;
 	else if (carriage->stmt->arg_types[1] == T_IND)
 	{
-		arg_idx_value = arg_2 % IDX_MOD;
+		arg_idx_value = arg_2;
 		write_bytes(arena, real_modulo((carriage->abs_pos + arg_idx_value), IDX_MOD), arg_value, 4);
 	}
 }
