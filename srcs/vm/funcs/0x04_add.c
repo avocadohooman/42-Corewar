@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0x04_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:48:11 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/09 15:35:58 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/11 17:45:36 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 void    op_add(t_carriage *carriage)
 {
 	int     sum;
+    int     reg_slot_1;
+    int     reg_slot_2;
+    int     reg_slot_3;
 
-	sum = carriage->regs[carriage->stmt->args[0]];
-	sum += carriage->regs[carriage->stmt->args[1]];
-	carriage->regs[carriage->stmt->args[2]] = sum;
+    reg_slot_1 = carriage->stmt->args[0] - 1;
+    reg_slot_2 = carriage->stmt->args[1] - 1;
+    reg_slot_3 = carriage->stmt->args[2] - 1;
+	sum = carriage->regs[reg_slot_1];
+	sum += carriage->regs[reg_slot_2];
+	carriage->regs[reg_slot_3] = sum;
 	if (sum == 0)
 		carriage->carry_flag = 1;
 	else 
