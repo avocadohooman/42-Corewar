@@ -12,37 +12,61 @@
 
 #include "file.h"
 
-t_file	*new_file(t_file *f, size_t s)
+t_buf	*buf_new(t_buf *buf, size_t s)
 {
-    if (!(f->data = ft_memalloc(s)))
+    if (!(buf->data = ft_memalloc(s)))
         return (NULL);
-    f->size = s;
-    f->used = 0;
-    return (f);
+    buf->size = s;
+    buf->used = 0;
+    return (buf);
 }
 
-t_file	*insert_file(t_file *f, char *data, size_t data_size)
+t_buf	*buf_insert(t_buf *buf, char *data, size_t size)
 {
 	char	*tmp;
 	
-	if (f->used + data_size >= f->size)
+	if (!buf || !data)
+		return (buf);
+	if (buf->used + size >= buf->size)
 	{
-		while (f->size < (f->used + data_size))
-			f->size *= 2;
-		if (!(tmp = realloc(f->data, f->size * sizeof(char))))
+		while (buf->size < (buf->used + size))
+			buf->size = (buf->size + 1) * 2;
+		if (!(tmp = realloc(buf->data, buf->size * sizeof(char))))
 			return (NULL);
-		f->data = tmp;
-		ft_memset(f->data + f->used, 0, f->size - f->used);
+		buf->data = tmp;
+		ft_memset(buf->data + buf->used, 0, buf->size - buf->used);
 	}
-	ft_memcpy(f->data + f->used, data, data_size);
-	f->used += data_size;
-	return (f);
+	ft_memcpy(buf->data + buf->used, data, size);
+	buf->used += size;
+	return (buf);
 }
 
-void		free_file(t_file *f)
+t_buf	*buf_join(t_buf *buf1, t_buf *buf2)
 {
-	free(f->data);
-	f->data = NULL;
+	t_buf	*new;
+
+	if (!buf1 || !buf2)
+		return (NULL);
+	if (!(new = ft_memalloc(sizeof(t_buf))))
+		return (NULL);
+	if (!(buf_new(new, buf1->used + buf2->used)))
+		return (NULL);
+	if (!(buf_insert(new, buf1->data, buf1->used)))
+		return (NULL);
+	if (!(buf_insert(new, buf2->data, buf2->used)))
+		return (NULL);
+	return (new);
+}
+
+void	buf_free(t_buf **buf)
+{
+	if (*buf)
+	{
+		free((*buf)->data);
+		(*buf)->data = NULL;
+		free(*buf);
+		*buf = NULL;
+	}
 }
 
 static const char *g_file_error[] = {
@@ -50,7 +74,7 @@ static const char *g_file_error[] = {
 	[ERROR_ALLOCATION_FAIL] = "Allocation error.",
 };
 
-void		file_exit_with_message(t_file_error type)
+void		buf_exit_with_message(t_buf_error type)
 {
 	ft_putendl_fd(g_file_error[type], 2);
 	exit(1);
