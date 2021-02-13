@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:50:25 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/13 19:07:06 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/02/13 20:00:49 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int      get_arg_value(t_carriage *carriage, int i, unsigned char *arena)
     {
         // arg_idx_value = (short)carriage->stmt->args[i] % IDX_MOD;
         arg_idx_value = real_modulo(carriage->abs_pos, (short)carriage->stmt->args[i], IDX_MOD);
-        arg_value = (short)read_bytes(arena, arg_idx_value, 4);
+        arg_value = read_bytes(arena, arg_idx_value, 4);
     }
     return (arg_value);
 }
