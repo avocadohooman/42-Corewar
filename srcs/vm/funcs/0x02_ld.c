@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 13:37:30 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/10 19:03:18 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/11 21:53:00 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void    op_ld(t_carriage *carriage, unsigned char *arena)
 		carriage->regs[reg_slot] = carriage->stmt->args[0];
 	else if (carriage->stmt->arg_types[0] == T_IND)
 	{
-		arg_idx_value = carriage->stmt->args[0];
-		carriage->regs[reg_slot] = read_bytes(arena, real_modulo((carriage->abs_pos + arg_idx_value), IDX_MOD), 4);
+		arg_idx_value = carriage->stmt->args[0] % IDX_MOD;
+		carriage->regs[reg_slot] = read_bytes(arena, carriage->abs_pos + arg_idx_value, 4);
 	}
 	if (carriage->regs[reg_slot] == 0)
 		carriage->carry_flag = 1;

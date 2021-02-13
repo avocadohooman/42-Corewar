@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/10 18:26:03 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/11 23:48:50 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_carriage		*create_carriage(t_vm *vm, t_carriage *next, int player_id, unsigned
 	carriage->last_live = -1;
 	carriage->carry_flag = 0;
 	carriage->cycle = 0;
+	carriage->dead = 0;
 	carriage->next = next;
 	carriage->stmt = NULL;
 	return (carriage);

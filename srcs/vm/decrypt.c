@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   decrypt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/10 19:28:32 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/11 23:49:31 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,29 @@ void	decrypt_arg_type(t_stmt *stmt, int counter)
 	}
 }
 
-void	init_stmt(t_carriage *carry)
+int		init_stmt(t_carriage *carry)
 {
 	t_stmt *stmt;
 
 	if (!(stmt = (t_stmt*)malloc(sizeof(t_stmt))))
 	{
 		printf("MALLOC ERROR!!!!! vm/init_stmt\n");
-		exit(-42);
+		return (1);
 	}
 	stmt->statement = carry->pos[0];
-/*	if (stmt->statement > 16 || stmt->statement < 1)
+	if (stmt->statement > 16 || stmt->statement < 1)
 	{
 		printf("Invalid stmt code!\n");
-		exit(0);
-	}*/
+		printf("Carriage ID: %d & pos: %d\n", carry->id, carry->abs_pos);
+		free(stmt);
+		carry->stmt = NULL;
+		carry->dead = 1;
+		return (1);
+	}
 	stmt->arg_type = carry->pos[1];
 	ft_bzero(stmt->arg_types, sizeof(int) * 3);
 	carry->stmt = stmt;
+	return (0);
 }
 
 int		read_arg(unsigned char *mem, int type, int pos, unsigned char stmt)
@@ -117,7 +122,8 @@ int     form_statement(t_carriage *carry, unsigned char *arena)
 {
 	int pos;
 
-    init_stmt(carry);		// Init statement, mallocs and sets the statement
+    if (init_stmt(carry))
+		return (0);		// Init statement, mallocs and sets the statement
 	pos = 1;
 	carry->abs_pos += carry->next_statement;
 	if (opcode_table[carry->stmt->statement - 1].argument_type) // If arg_type is true
@@ -132,11 +138,11 @@ int     form_statement(t_carriage *carry, unsigned char *arena)
 	carry->next_statement = pos;					// Update how far next statement is
 //	printf("Position increase: %d\n", pos);
 //	printf("Current index of carry: %d\n", carry->abs_pos);
-	carry->pos = fetch_position(arena, carry->abs_pos + pos, MEM_SIZE);		// Update carriage "PC" to the next statement
+	carry->pos = fetch_position(arena, carry->abs_pos, pos, MEM_SIZE);		// Update carriage "PC" to the next statement
 	carry->cycles_to_execute = opcode_table[carry->stmt->statement - 1].cost; // Set "cost" (cycles to pass until execution can happen)
 
 	// End of code -> Printing
-/*	
+	/*
 	printf("\nCarriage ID: %d\nPlayer: %d\n", carry->id, carry->regs[0] * -1);
 	printf("Absolute index of carry: %d\n", carry->abs_pos);
 	printf("Statement code: %s\n", opcode_table[carry->stmt->statement - 1].literal);

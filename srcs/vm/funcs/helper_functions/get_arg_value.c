@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg_value.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 14:50:25 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/11 17:41:57 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/02/11 21:52:49 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int      get_arg_value(t_carriage *carriage, int i, unsigned char *arena)
         arg_value = carriage->stmt->args[i];
     else 
     {
-        arg_idx_value = carriage->stmt->args[i];
-        arg_value = read_bytes(arena, real_modulo((carriage->abs_pos + arg_idx_value), IDX_MOD), 4);
+        arg_idx_value = carriage->stmt->args[i] % IDX_MOD;
+        arg_value = read_bytes(arena, carriage->abs_pos + arg_idx_value, 4);
     }
     return (arg_value);
 }

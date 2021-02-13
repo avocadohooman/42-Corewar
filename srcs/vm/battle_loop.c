@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   battle_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/10 19:26:46 by orantane         ###   ########.fr       */
+/*   Updated: 2021/02/11 23:50:01 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void		check_carriages(t_vm *vm, t_loop *loop)
 			if (prev && prev->next)
 				prev->next = tmp->next;
 //			printf("Carriage for player %d was killed, RIP!\n", (tmp->regs[0] * -1));
-			kill_carriage(tmp);
+//			kill_carriage(tmp);
 			tmp = next;
 			vm->carry_nbr--;
 		}
@@ -138,9 +138,9 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		tmp_nbr = vm->carry_nbr;	// Assign a tmp value to carry_nbr if it changes (f.ex. when fork is executed)
 		while (carry < tmp_nbr)
 		{
-			if (tmp->stmt == NULL)
+			if (tmp->stmt == NULL && !tmp->dead)
 				form_statement(tmp, arena);
-			if (tmp->cycles_to_execute == 1)
+			if (tmp->cycles_to_execute == 1 && !tmp->dead)
 			{
 				execute_statement(tmp, vm, &loop, arena);
 				loop.head = vm->carriages;
