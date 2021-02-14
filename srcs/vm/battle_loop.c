@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   battle_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/13 17:10:13 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/02/14 16:25:42 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void		check_carriages(t_vm *vm, t_loop *loop)
 	del = 0;
 	prev = NULL;
 	tmp = vm->carriages;
-	// printf("Starting carriage check!\n");
+	printf("Starting carriage check!\n");
 	while (tmp != NULL)
 	{
 		if (tmp)
@@ -103,14 +103,15 @@ void		check_carriages(t_vm *vm, t_loop *loop)
 	if (loop->nbr_live >= NBR_LIVE || ++loop->nbr_checks >= MAX_CHECKS)
 	{
 		loop->ctd_reset -= CYCLE_DELTA;
-		// printf("Cycle to die is lowered, new value is %d\n", loop->ctd_reset);
+		printf("Cycle to die is lowered, new value is %d\n", loop->ctd_reset);
 		loop->cycle_to_die = loop->ctd_reset;
 		loop->nbr_checks = 0;
 		loop->nbr_live = 0;
 	}
 	else
 		loop->cycle_to_die = loop->ctd_reset;
-	// printf("Carriage check done!\n");
+	printf("Cycle to die is %d\n", loop->ctd_reset);
+	printf("Carriage check done!\n");
 }
 
 void		init_battle_loop(t_vm *vm, t_loop *loop)
@@ -158,6 +159,8 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		if (loop.cycle_to_die <= 0 && vm->carry_nbr > 0)
 			check_carriages(vm, &loop);
 		loop.cycle_to_die--;
+		if (!vm->carriages)
+			printf("vm->carriages was null!\n");
 //		printf("Cycle %d\n", loop.cycle);
 //		if (loop.cycle == 7800)
 //			exit(1);
