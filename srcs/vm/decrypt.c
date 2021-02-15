@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/14 19:18:05 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/15 20:17:30 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int		init_stmt(t_carriage *carry)
 		// printf("Carriage ID: %d & pos: %d\n", carry->id, carry->abs_pos);
 		free(stmt);
 		carry->stmt = NULL;
-		carry->dead = 1;
 		return (1);
 	}
 	stmt->arg_type = carry->pos[1];
@@ -123,7 +122,11 @@ int     form_statement(t_carriage *carry, unsigned char *arena)
 	int pos;
 
     if (init_stmt(carry))
-		return (0);		// Init statement, mallocs and sets the statement
+	{
+		carry->pos = fetch_position(arena, carry->abs_pos, pos, MEM_SIZE);
+		carry->abs_pos = real_modulo(carry->abs_pos, 1, MEM_SIZE);
+		return (0);
+	}
 	pos = 1;
 	carry->abs_pos += carry->next_statement;
 	if (opcode_table[carry->stmt->statement - 1].argument_type) // If arg_type is true
