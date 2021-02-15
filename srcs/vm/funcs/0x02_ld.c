@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0x02_ld.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 13:37:30 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/13 18:50:28 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/02/15 19:33:03 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void    op_ld(t_carriage *carriage, unsigned char *arena)
 {
 	int         reg_slot;
-	short       arg_idx_value;
+	int      	arg_idx_value;
 
 	reg_slot = carriage->stmt->args[1] - 1;
 	if (carriage->stmt->arg_types[0] == T_DIR)

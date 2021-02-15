@@ -42,11 +42,14 @@
 
 void	announce_winner(t_vm *vm)
 {
-	ft_putstr("Player ");
-	ft_putnbr(vm->last_live->id);
-	ft_putstr(" (");
-	ft_putstr(vm->last_live->name);
-	ft_putendl(") won");
+	if (vm->last_live)
+	{
+		ft_putstr("Player ");
+		ft_putnbr(vm->last_live->id);
+		ft_putstr(" (");
+		ft_putstr(vm->last_live->name);
+		ft_putendl(") won");
+	}
 }
 
 void	dump_arena(unsigned char *arena)
@@ -58,7 +61,7 @@ void	dump_arena(unsigned char *arena)
 	while (i < MEM_SIZE)
 	{
 		line = 0;
-		while (line < 32)
+		while (line < 64)
 		{
 			printf("%02x ", arena[i + line]);
 			line++;
@@ -97,6 +100,5 @@ int     main(int ac, char **av)
 	arena = init_arena(vm);
 	battle_loop(vm, arena);
 	announce_winner(vm);
-//	dump_arena(arena);
 	return (0);
 }

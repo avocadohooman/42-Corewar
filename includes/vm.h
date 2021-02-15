@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/13 17:09:16 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/02/15 19:42:24 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_loop
 
 int					get_players(t_vm *vm, char **args, int ac);
 int					read_files(t_vm *vm);
+void				dump_arena(unsigned char *arena);
 int					validate_filename(t_player *player);
 unsigned char       *init_arena(t_vm *vm);
 void				initiate_carriages(t_vm *vm, unsigned char *arena);

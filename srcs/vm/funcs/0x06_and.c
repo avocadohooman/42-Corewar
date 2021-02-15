@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   0x06_and.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:48:17 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/11 17:41:48 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/02/15 19:17:15 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void    op_and(t_carriage *carriage, unsigned char *arena)
 	reg_slot = carriage->stmt->args[2] - 1;
 	arg_one_value = get_arg_value(carriage, 0, arena);
 	arg_two_value = get_arg_value(carriage, 1, arena);
-	carriage->regs[reg_slot] = arg_one_value | arg_two_value;
-	carriage->carry_flag = !(arg_one_value | arg_two_value);
+	carriage->regs[reg_slot] = arg_one_value & arg_two_value;
+	carriage->carry_flag = !(arg_one_value & arg_two_value);
 }

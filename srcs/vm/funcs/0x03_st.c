@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:48:06 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/14 13:51:00 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/15 19:33:18 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void    op_st(t_carriage *carriage, unsigned char *arena)
 {
 	int         arg_value;
-	short       arg_idx_value;
+	int      	arg_idx_value;
 	int         arg_1;
 	int         arg_2;
 

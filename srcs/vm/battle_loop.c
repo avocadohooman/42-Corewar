@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   battle_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/15 17:11:53 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/02/15 19:42:57 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void		check_carriages(t_vm *vm, t_loop *loop)
 			if (prev && prev->next)
 				prev->next = tmp->next;
 //			printf("Carriage for player %d was killed, RIP!\n", (tmp->regs[0] * -1));
-//			kill_carriage(tmp);
+			kill_carriage(tmp);
 			tmp = next;
 			vm->carry_nbr--;
 		}
@@ -132,6 +132,7 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 	int 		tmp_nbr;
 
 	init_battle_loop(vm, &loop);
+	vm->last_live = vm->players[vm->carry_nbr - 1];
 	while (vm->carriages != NULL && vm->carry_nbr > 0)
 	{
 		tmp = vm->carriages;
@@ -161,6 +162,11 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		loop.cycle_to_die--;
 		if (!vm->carriages)
 			printf("vm->carriages was null!\n");
+		if (loop.cycle == vm->dump)
+		{
+			dump_arena(arena);
+			exit(42);
+		}
 //		printf("Cycle %d\n", loop.cycle);
 //		if (loop.cycle == 7800)
 //			exit(1);
