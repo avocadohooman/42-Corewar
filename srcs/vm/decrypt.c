@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/15 20:17:30 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/15 23:35:49 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,27 @@ int		convert_4_bytes(unsigned char *data)
 	return (0);
 }
 
-void	decrypt_arg_type(t_stmt *stmt, int counter)
+int		calc_argtype_size(t_stmt *stmt)
+{
+	int i;
+	int size;
+
+	size = 0;
+	i = 0;
+	while (i < 3)
+	{
+		if (stmt->arg_types[i] == T_REG)
+			size += 1;
+		else if (stmt->arg_types[i] == T_DIR && opcode_table[stmt->statement - 1].dir_size == 4)
+			size += 4;
+		else
+			size += 2;
+		i++;
+	}
+	return (size);
+}
+
+int		decrypt_arg_type(t_stmt *stmt, int counter)
 {
 	// Cycles through bits in arg_type_code and finds arg types for each arg
 	// Includes types in arg_types array carriage->arg_types[3]
@@ -57,111 +77,42 @@ void	decrypt_arg_type(t_stmt *stmt, int counter)
 		z >>= 1;	// next bit
 		counter++;	// counter to keep up with carriage->arg_types[3] array
 	}
+	return (calc_argtype_size(stmt));
 }
 
-int		init_stmt(t_carriage *carry)
+int		validate_arg_type(t_stmt *stmt, int i)
 {
-	t_stmt *stmt;
+	int val;
+	int aim;
 
-	if (!(stmt = (t_stmt*)malloc(sizeof(t_stmt))))
+	while (i < 3)
 	{
-		printf("MALLOC ERROR!!!!! vm/init_stmt\n");
-		return (1);
+		val = stmt->arg_types[i];
+		aim = opcode_table[stmt->statement - 1].argument_types[i];
+		if ((val & aim) != val)
+			return (1);
+		i++;
 	}
-	stmt->statement = carry->pos[0];
-	if (stmt->statement > 16 || stmt->statement < 1)
-	{
-		// printf("Invalid stmt code!\n");
-		// printf("Carriage ID: %d & pos: %d\n", carry->id, carry->abs_pos);
-		free(stmt);
-		carry->stmt = NULL;
-		return (1);
-	}
-	stmt->arg_type = carry->pos[1];
-	ft_bzero(stmt->arg_types, sizeof(int) * 3);
-	carry->stmt = stmt;
 	return (0);
 }
 
-int		read_arg(unsigned char *mem, int type, int pos, unsigned char stmt)
+int		decrypt(t_carriage *carry, unsigned char *arena)
 {
-	if (type == T_REG)
-		return ((int)mem[pos]);						// convert 1 byte to an int
-	else if (type == T_DIR && opcode_table[stmt - 1].dir_size == 4)
-		return (convert_4_bytes(&mem[pos]));			// convert 4 bytes to an int
+	int size;
+
+	size = 1;
+	if (opcode_table[carry->stmt->statement - 1].argument_type)
+		size += decrypt_arg_type(carry->stmt, 0) + 1;
 	else
-		return ((mem[pos] << 8) + mem[pos + 1]);		// convert 2 bytes to an int
-}
-
-int		get_args(t_carriage *carry, int pos)
-{
-	int i;
-
-	i = 0;
-	while (i < 3)
 	{
-		if (!carry->stmt->arg_types[i])		// Dont read if no arg, no arg type so no arg...
-			break ;
-		carry->stmt->args[i] = read_arg(carry->pos,carry->stmt->arg_types[i], pos, carry->stmt->statement);
-		if ((carry->stmt->arg_types[i] == T_DIR && opcode_table[carry->stmt->statement - 1].dir_size == 2) || carry->stmt->arg_types[i] == T_IND)
-			carry->stmt->args[i] = (short)read_arg(carry->pos,carry->stmt->arg_types[i], pos, carry->stmt->statement);
-		if (carry->stmt->arg_types[i] == T_REG)		// increment position
-			pos += 1;
-		else if (carry->stmt->arg_types[i] == T_DIR &&
-			opcode_table[carry->stmt->statement - 1].dir_size == 4) 		// increment position
-			pos += 4;
-		else
-			pos += 2;			// increment position
-		i++;
+		carry->stmt->arg_types[0] = T_DIR;
+		return (4);
 	}
-	return (pos);
-}
-
-int     form_statement(t_carriage *carry, unsigned char *arena)
-{
-	int pos;
-
-    if (init_stmt(carry))
+	if (validate_arg_type(carry->stmt, 0))
 	{
-		carry->pos = fetch_position(arena, carry->abs_pos, pos, MEM_SIZE);
-		carry->abs_pos = real_modulo(carry->abs_pos, 1, MEM_SIZE);
-		return (0);
+		printf("Gosh darnit! Didn't pass chex!\n");
+		return (stmt_error(carry, size, arena));
 	}
-	pos = 1;
-	carry->abs_pos += carry->next_statement;
-	if (opcode_table[carry->stmt->statement - 1].argument_type) // If arg_type is true
-	{
-		decrypt_arg_type(carry->stmt, 0); // zero param is just a counter :) saves lines!
-		pos++;
-	}
-	else
-		carry->stmt->arg_types[0] = T_DIR;	// Resolve single arg issue when no arg type present
-											// Only case when no arg_type_code is when first and only arg is T_DIR
-	pos = get_args(carry, pos);				// Store args in carry->stmt->args[3], return how many bytes args took
-	carry->next_statement = pos;					// Update how far next statement is
-//	printf("Position increase: %d\n", pos);
-//	printf("Current index of carry: %d\n", carry->abs_pos);
-	carry->pos = fetch_position(arena, carry->abs_pos, pos, MEM_SIZE);		// Update carriage "PC" to the next statement
-	carry->cycles_to_execute = opcode_table[carry->stmt->statement - 1].cost; // Set "cost" (cycles to pass until execution can happen)
-
-	// End of code -> Printing
-	/*
-	printf("\nCarriage ID: %d\nPlayer: %d\n", carry->id, carry->regs[0] * -1);
-	printf("Absolute index of carry: %d\n", carry->abs_pos);
-	printf("Statement code: %s\n", opcode_table[carry->stmt->statement - 1].literal);
-	printf("Cycles until execution (cost): %d\n", carry->cycles_to_execute);
-	if (carry->pos[0] > 0 && carry->pos[0] < 17)
-		printf("Next statement code: %s\n", opcode_table[carry->pos[0] - 1].literal);
-	printf("Arguments and types:\n");
-	int i = 0;
-	while (i < 3)
-	{
-		if (carry->stmt->arg_types[i])
-			printf("ARG %d == type %d –– value: %d\n", i + 1, carry->stmt->arg_types[i], carry->stmt->args[i]);
-		else
-			printf("No arg %d!\n", i + 1);
-		i++;
-	}
-	printf("\n"); */
-	return (0);
+	printf("Stmt size: %d\n", size);
+	return (size);
 }

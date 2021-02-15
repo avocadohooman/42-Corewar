@@ -26,7 +26,7 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/encoder/encoder_body/get_statement.c srcs/encoder/encoder_body/track_jmps.c srcs/encoder/encoder_body/get_t_dir_special_arguments.c \
 		srcs/vm/args.c srcs/vm/read_files.c srcs/vm/arena.c srcs/vm/initiate_carriage.c srcs/vm/decrypt.c \
 		srcs/vm/funcs/helper_functions/get_arg_value.c srcs/vm/funcs/helper_functions/write_bytes.c srcs/vm/funcs/helper_functions/read_bytes.c\
-		srcs/vm/funcs/helper_functions/copy_carriage.c srcs/vm/memspace.c \
+		srcs/vm/funcs/helper_functions/copy_carriage.c srcs/vm/memspace.c srcs/vm/statement.c srcs/vm/statement_args.c \
 		srcs/vm/funcs/0x01_live.c srcs/vm/funcs/0x02_ld.c  srcs/vm/funcs/0x03_st.c  srcs/vm/funcs/0x04_add.c \
 		srcs/vm/funcs/0x05_sub.c srcs/vm/funcs/0x06_and.c  srcs/vm/funcs/0x07_or.c  srcs/vm/funcs/0x08_xor.c \
 		srcs/vm/funcs/0x09_zjmp.c srcs/vm/funcs/0x10_ldi.c  srcs/vm/funcs/0x11_sti.c  srcs/vm/funcs/0x12_fork.c \

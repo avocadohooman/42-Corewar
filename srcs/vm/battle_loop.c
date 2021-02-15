@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/15 20:17:03 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/15 23:38:42 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,9 +140,9 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		tmp_nbr = vm->carry_nbr;	// Assign a tmp value to carry_nbr if it changes (f.ex. when fork is executed)
 		while (carry < tmp_nbr)
 		{
-			if (tmp->stmt == NULL && !tmp->dead)
+			if (tmp->stmt == NULL)
 				form_statement(tmp, arena);
-			else if (tmp->cycles_to_execute == 1 && !tmp->dead)
+			else if (tmp->cycles_to_execute == 1)
 			{
 				execute_statement(tmp, vm, &loop, arena);
 				loop.head = vm->carriages;
@@ -161,7 +161,7 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		loop.cycle_to_die--;
 		if (!vm->carriages)
 			printf("vm->carriages was null!\n");
-		if (loop.cycle == vm->dump)
+		if (vm->dump != 0 && loop.cycle == vm->dump)
 		{
 			dump_arena(arena);
 			exit(42);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memspace.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:55:54 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/14 20:48:16 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/02/15 23:23:47 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ int				real_modulo(int position, int value, int modulo)
 	int res;
 
 	res = (value % modulo) + position;
-	if (res >= MEM_SIZE)
-		res = res - MEM_SIZE;
-	else if (res < 0)
-		res = res + MEM_SIZE;
+	res = res < 0 ? res + MEM_SIZE : res;
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/15 19:42:24 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/15 23:11:33 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 
 # define MIN_PLAYERS 1
+# define OPCODE_AMOUNT 16
 
 typedef struct  s_player
 {
@@ -45,7 +46,6 @@ typedef struct  s_stmt
 
 typedef struct  s_carriage 
 {
-	int					dead;
 	int					abs_pos;
 	int					id;
 	int					next_statement;
@@ -88,11 +88,17 @@ int					validate_filename(t_player *player);
 unsigned char       *init_arena(t_vm *vm);
 void				initiate_carriages(t_vm *vm, unsigned char *arena);
 void				battle_loop(t_vm *vm, unsigned char *arena);
+
 int     			form_statement(t_carriage *carry, unsigned char *arena);
+int					get_args(t_carriage *carry, int pos);
+int     			stmt_error(t_carriage *carry, int step, unsigned char *arena);
+int					decrypt(t_carriage *carry, unsigned char *arena);
 int					convert_4_bytes(unsigned char *data);
+
 t_carriage			*create_carriage(t_vm *vm, t_carriage *next, int player_id, unsigned char *position);
 
 /** MEMSPACE GUARDIANS **/
+
 unsigned char   	*fetch_position(unsigned char *arena,int pos, int where, int modulo);
 int					real_modulo(int position, int value, int modulo);
 
