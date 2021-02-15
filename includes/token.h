@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:08:55 by npimenof          #+#    #+#             */
-/*   Updated: 2021/02/10 04:59:18 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/02/15 12:44:31 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ typedef enum	e_type
 	TOKEN_EOF,
 }				t_type;
 
-// static const char	*g_token_literal[] = {
-// 	[TOKEN_ILLEGAL] = "ILLEGAL",
-// 	[TOKEN_COMMAND] = "COMMAND",
-// 	[TOKEN_STRING] = "STRING",
-// 	[TOKEN_IDENTIFIER] = "IDENTIFIER",
-// 	[TOKEN_NEGATIVE] = "NEGATIVE",
-// 	[TOKEN_COLON] = "INDIRECT",
-// 	[TOKEN_DIRECT] = "DIRECT",
-// 	[TOKEN_SEPARATOR] = "SEPARATOR",
-// 	[TOKEN_NEWLINE] = "NEWLINE",
-// 	[TOKEN_EOF] = "EOF",
-// };
+static const char	*g_token_literal[] = {
+	[TOKEN_ILLEGAL] = "ILLEGAL",
+	[TOKEN_COMMAND] = "COMMAND",
+	[TOKEN_STRING] = "STRING",
+	[TOKEN_IDENTIFIER] = "IDENTIFIER",
+	[TOKEN_NEGATIVE] = "NEGATIVE",
+	[TOKEN_COLON] = "LABEL",
+	[TOKEN_DIRECT] = "DIRECT",
+	[TOKEN_SEPARATOR] = "SEPARATOR",
+	[TOKEN_NEWLINE] = "NEWLINE",
+	[TOKEN_EOF] = "EOF",
+};
 
 typedef struct	s_token
 {

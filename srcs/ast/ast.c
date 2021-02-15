@@ -133,7 +133,10 @@ unsigned char *encode_arg(t_ast *arg, t_label *labels)
 	if (arg->label)
 	{
 		if ((value = label_value(labels, arg->label)) < 0)
+		{
+			printf("label not found: %s\n", arg->label);
 			exit(1);
+		}
 		value -= arg->statement_position;
 	}
 	else

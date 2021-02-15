@@ -75,7 +75,7 @@ t_ast	*parser_parse_body_label(t_parser *parser, t_label **labels)
 
 	if (!(label = init_ast(AST_LABEL)))
 		return (NULL);
-	label->label = parser->prev_token->value;
+	label->label = ft_strdup(parser->prev_token->value);
 	new = new_label(label->label);
 	new->value = parser->bytes;
 	label_push(labels, new);
@@ -104,7 +104,6 @@ t_ast	*parser_parse_body_instruction(t_parser *parser, t_label **labels)
 		return (NULL);
 	if (!(compound->compound_value[0] = parser_parse_body_identifier(parser, labels)))
 		return (NULL);
-	compound->label_list = *labels;
 	compound->statement_size += compound->compound_value[0]->statement_size;
 	compound->compound_size += 1;
 	if (parser->current_token->type == TOKEN_IDENTIFIER)
@@ -114,6 +113,7 @@ t_ast	*parser_parse_body_instruction(t_parser *parser, t_label **labels)
 		compound->statement_size += compound->compound_value[1]->statement_size;
 		compound->compound_size += 1;
 	}
+	compound->label_list = *labels;
 	return (compound);
 }
 
@@ -123,7 +123,7 @@ t_ast	*parser_parse_body_instructions(t_parser *parser)
 	t_ast	*statement;
 	t_label *labels;
 
-	labels = NULL;
+	labels = new_label("");
 	if (!(compound = init_ast(AST_BODY)))
 		return (NULL);
 	if (!(compound->compound_value = ft_memalloc(sizeof(t_ast *))))
@@ -133,6 +133,7 @@ t_ast	*parser_parse_body_instructions(t_parser *parser)
 	compound->body_byte_size += compound->compound_value[0]->statement_size;
 	parser->bytes = compound->body_byte_size;
 	compound->compound_size += 1;
+	// printf("token type: %s\n", g_token_literal[parser->current_token->type]);
 	while (parser->current_token->type == TOKEN_NEWLINE)
 	{
 		parser_consume(parser, TOKEN_NEWLINE);
@@ -145,7 +146,9 @@ t_ast	*parser_parse_body_instructions(t_parser *parser)
 			compound->body_byte_size += statement->statement_size;
 			parser->bytes = compound->body_byte_size;
 		}
+		// printf("token type: %s\n", g_token_literal[parser->prev_token->type]);
 	}
+	parser_consume(parser, TOKEN_EOF);
 	compound->label_list = labels;
 	return (compound);
 }
