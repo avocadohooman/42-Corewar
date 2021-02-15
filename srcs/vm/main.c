@@ -61,6 +61,7 @@ void	dump_arena(unsigned char *arena)
 	while (i < MEM_SIZE)
 	{
 		line = 0;
+		printf("%#06x : ", i);
 		while (line < 64)
 		{
 			printf("%02x ", arena[i + line]);

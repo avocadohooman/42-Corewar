@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 21:29:33 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/15 23:36:44 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/16 01:09:06 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,13 @@ int     form_statement(t_carriage *carry, unsigned char *arena)
 
 	carry->abs_pos += carry->next_statement;
 	if (init_stmt(carry))
+	{
+		printf("Invalid statement code: %02x\n", carry->pos[0]);
+		printf("Abs pos: %d\n", carry->abs_pos);
 		return (stmt_error(carry, 1, arena));
+	}
+	printf("Valid statement code: %02x\n", carry->pos[0]);
+	printf("Abs pos: %d\n", carry->abs_pos);
 	size = decrypt(carry, arena);
 	if (!size)
 		return (0);

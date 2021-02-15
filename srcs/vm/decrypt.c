@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/15 23:35:49 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/16 01:07:44 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		calc_argtype_size(t_stmt *stmt)
 	i = 0;
 	while (i < 3)
 	{
+		if (!stmt->arg_types[i])
+			break ;
 		if (stmt->arg_types[i] == T_REG)
 			size += 1;
 		else if (stmt->arg_types[i] == T_DIR && opcode_table[stmt->statement - 1].dir_size == 4)
@@ -106,13 +108,13 @@ int		decrypt(t_carriage *carry, unsigned char *arena)
 	else
 	{
 		carry->stmt->arg_types[0] = T_DIR;
-		return (4);
+		size += opcode_table[carry->stmt->statement - 1].dir_size;
+		return (size);
 	}
 	if (validate_arg_type(carry->stmt, 0))
 	{
-		printf("Gosh darnit! Didn't pass chex!\n");
+		printf("Invalid argument type code!\n");
 		return (stmt_error(carry, size, arena));
 	}
-	printf("Stmt size: %d\n", size);
 	return (size);
 }
