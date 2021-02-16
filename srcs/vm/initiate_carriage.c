@@ -6,14 +6,14 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/15 23:37:04 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/16 20:09:34 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include <stdio.h> // remove
 
-t_carriage		*create_carriage(t_vm *vm, t_carriage *next, int player_id, unsigned char *position) 
+t_carriage		*create_carriage(t_vm *vm, t_carriage *next, int player_id) 
 {
 	t_carriage     *carriage;
 
@@ -21,7 +21,6 @@ t_carriage		*create_carriage(t_vm *vm, t_carriage *next, int player_id, unsigned
         print_error(7);
 	if (player_id <= REG_NUMBER)
 		carriage->regs[0] = player_id * -1;
-	carriage->pos = position;
 	carriage->id = vm->id_tracker;
 	vm->id_tracker++;
 	carriage->cycle = 0;
@@ -46,7 +45,7 @@ void		initiate_carriages(t_vm *vm, unsigned char *arena)
 	while (i < vm->player_nb)
 	{
 		carriage_pos = (vm->players[i]->id - 1) * (MEM_SIZE / vm->player_nb);
-		head = create_carriage(vm, head, vm->players[i]->id, &arena[carriage_pos]);
+		head = create_carriage(vm, head, vm->players[i]->id);
 		head->abs_pos = carriage_pos;
 		vm->carry_nbr++;
 		form_statement(head, arena);

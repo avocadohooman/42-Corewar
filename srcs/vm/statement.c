@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 21:29:33 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/16 15:06:26 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/16 20:13:28 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int     stmt_error(t_carriage *carry, int step, unsigned char *arena)
 	free(carry->stmt);
 	carry->stmt = NULL;
 	carry->next_statement = 0;
-	carry->pos = fetch_position(arena, carry->abs_pos, step, MEM_SIZE);
 	carry->abs_pos = real_modulo(carry->abs_pos, step, MEM_SIZE);
 	return (0);
 }
@@ -38,17 +37,17 @@ int		validate_regs(t_carriage *carry, unsigned char *arena, int i, int size)
 	return (0);
 }
 
-int		init_stmt(t_carriage *carry)
+int		init_stmt(t_carriage *carry, unsigned char *arena)
 {
 	t_stmt *stmt;
 
 	if (!(stmt = (t_stmt*)malloc(sizeof(t_stmt))))
 		print_error(MALLOC);
 	carry->stmt = stmt;
-	carry->stmt->statement = carry->pos[0];
+	carry->stmt->statement = arena[carry->abs_pos];
 	if (carry->stmt->statement > OPCODE_AMOUNT || carry->stmt->statement < 1)
 		return (1);
-	carry->stmt->arg_type = carry->pos[1];
+	carry->stmt->arg_type = arena[real_modulo(carry->abs_pos, 1, MEM_SIZE)];
 	ft_bzero(carry->stmt->arg_types, sizeof(int) * 3);
 	ft_bzero(carry->stmt->args, sizeof(int) * 3);
 	return (0);
@@ -59,22 +58,22 @@ int     form_statement(t_carriage *carry, unsigned char *arena)
 	int size;
 
 	carry->abs_pos += carry->next_statement;
-	if (init_stmt(carry))
+	if (init_stmt(carry, arena))
 	{
-//		printf("Invalid statement code: %02x\n", carry->pos[0]);
 //		printf("Abs pos: %d\n", carry->abs_pos);
 		return (stmt_error(carry, 1, arena));
 	}
-//	printf("Valid statement code: %02x\n", carry->pos[0]);
 //	printf("Abs pos: %d\n", carry->abs_pos);
 	size = decrypt(carry, arena);
 	if (!size)
 		return (0);
-	get_args(carry, 1);
+	if (opcode_table[carry->stmt->statement - 1].argument_type)
+		get_args(carry, arena, real_modulo(carry->abs_pos, 2, MEM_SIZE));
+	else
+		get_args(carry, arena, real_modulo(carry->abs_pos, 1, MEM_SIZE));
 	if (validate_regs(carry, arena, 0, size))
 		return (0);
 	carry->cycles_to_execute = opcode_table[carry->stmt->statement - 1].cost;
-	carry->pos = fetch_position(arena, carry->abs_pos, size, MEM_SIZE);
 	carry->next_statement = size;
 
 	// End of code -> Printing

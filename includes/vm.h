@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/16 15:05:23 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/16 20:11:02 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct  s_carriage
 	int					abs_pos;
 	int					id;
 	int					next_statement;
-	unsigned char		*pos;
 	int                 cycles_to_execute;
 	int                 carry_flag;
 	int                 regs[REG_NUMBER];
@@ -90,12 +89,12 @@ void				initiate_carriages(t_vm *vm, unsigned char *arena);
 void				battle_loop(t_vm *vm, unsigned char *arena);
 
 int     			form_statement(t_carriage *carry, unsigned char *arena);
-int					get_args(t_carriage *carry, int pos);
+int					get_args(t_carriage *carry, unsigned char *arena, int pos);
 int     			stmt_error(t_carriage *carry, int step, unsigned char *arena);
 int					decrypt(t_carriage *carry, unsigned char *arena);
 int					convert_4_bytes(unsigned char *data);
 
-t_carriage			*create_carriage(t_vm *vm, t_carriage *next, int player_id, unsigned char *position);
+t_carriage			*create_carriage(t_vm *vm, t_carriage *next, int player_id);
 
 /** MEMSPACE GUARDIANS **/
 
@@ -109,7 +108,7 @@ int      			get_arg_value(t_carriage *carriage, int i, unsigned char *arena);
 int					apply_offset(t_carriage *carriage, int arg_idx_value);
 void				write_bytes(unsigned char *arena, int where, int what, int size);
 int					read_bytes(unsigned char *arena, int where, int size);
-void        		copy_carriage(t_vm *vm, t_carriage *current, unsigned char *pos);
+void        		copy_carriage(t_vm *vm, t_carriage *current);
 
 /** OP_FUNCTIONS **/
 

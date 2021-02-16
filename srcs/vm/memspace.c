@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:55:54 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/15 23:23:47 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/16 20:13:05 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int				real_modulo(int position, int value, int modulo)
 	int res;
 
 	res = (value % modulo) + position;
+	res = res > MEM_SIZE ? res - MEM_SIZE : res;
 	res = res < 0 ? res + MEM_SIZE : res;
 	return (res);
 }

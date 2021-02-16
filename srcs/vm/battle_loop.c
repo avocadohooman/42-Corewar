@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/16 15:06:14 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/16 19:31:01 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,14 +142,14 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		{
 			if (tmp->stmt == NULL)
 				form_statement(tmp, arena);
-			else if (tmp->cycles_to_execute == 1)
+			else if (tmp->cycles_to_execute == 2)
 			{
 				execute_statement(tmp, vm, &loop, arena);
 				loop.head = vm->carriages;
 				free(tmp->stmt);
 				tmp->stmt = NULL;
 			}
-			else if (tmp->cycles_to_execute > 1)
+			else if (tmp->cycles_to_execute > 2)
 				tmp->cycles_to_execute--;
 			tmp->cycle++;
 			tmp = tmp->next;
