@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/16 02:46:46 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/16 15:07:03 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ void	write_bytes(unsigned char *arena, int where, int what, int size)
 		arena[where] = buf[size - 1];
 		size--;
 		where++;
+//		printf("Wrote %02x to arena[%d]\n", arena[where - 1], where - 1);
 	}
+	printf("\n");
 }
