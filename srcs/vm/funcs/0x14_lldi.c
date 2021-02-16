@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 15:09:19 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/14 16:48:16 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/16 02:36:09 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,8 @@ void    op_lldi(t_carriage *carriage, unsigned char *arena)
 	arg_value_2 = get_arg_value(carriage, 1, arena);
 	args_idx_value = real_modulo(carriage->abs_pos, (arg_value_1 + arg_value_2), MEM_SIZE);
 	carriage->regs[reg_slot] = read_bytes(arena, args_idx_value, 4);
+	if (carriage->regs[reg_slot] == 0)
+		carriage->carry_flag = 1;
+	else 
+		carriage->carry_flag = 0;
 }

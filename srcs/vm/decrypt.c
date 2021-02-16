@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/16 01:07:44 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/16 03:16:51 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,13 @@ int		validate_arg_type(t_stmt *stmt, int i)
 	{
 		val = stmt->arg_types[i];
 		aim = opcode_table[stmt->statement - 1].argument_types[i];
-		if ((val & aim) != val)
+		if ((!val && aim) || (!aim && val))
 			return (1);
+		if (aim)
+		{
+			if ((val & aim) != val)
+				return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -112,9 +117,6 @@ int		decrypt(t_carriage *carry, unsigned char *arena)
 		return (size);
 	}
 	if (validate_arg_type(carry->stmt, 0))
-	{
-		printf("Invalid argument type code!\n");
 		return (stmt_error(carry, size, arena));
-	}
 	return (size);
 }
