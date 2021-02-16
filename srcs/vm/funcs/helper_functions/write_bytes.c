@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_bytes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 14:04:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/16 15:07:03 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/16 16:15:01 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,4 @@ void	write_bytes(unsigned char *arena, int where, int what, int size)
 		where++;
 //		printf("Wrote %02x to arena[%d]\n", arena[where - 1], where - 1);
 	}
-	printf("\n");
 }

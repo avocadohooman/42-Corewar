@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:46:01 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/10 15:46:15 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/16 16:26:51 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static int			add_first(t_vm *vm, int player, char **args, int ac)
 	{
 		if (args[i] && !ft_strcmp(args[i], "-n"))
 			i += 2;
+		if (args[i] && !ft_strcmp(args[i], "-dump"))
+			i++;
 		else if (args[i])
 		{
 			new_player(vm, player, ft_strdup(args[i]));
