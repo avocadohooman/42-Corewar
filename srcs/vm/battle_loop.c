@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/16 19:31:01 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/19 16:49:11 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void		check_carriages(t_vm *vm, t_loop *loop)
 			}
 			if (prev && prev->next)
 				prev->next = tmp->next;
-//			printf("Carriage for player %d was killed, RIP!\n", (tmp->regs[0] * -1));
 			kill_carriage(tmp);
 			tmp = next;
 			vm->carry_nbr--;
@@ -141,13 +140,16 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		while (carry < tmp_nbr)
 		{
 			if (tmp->stmt == NULL)
-				form_statement(tmp, arena);
-			else if (tmp->cycles_to_execute == 2)
+				init_stmt(tmp, arena);
+			else if (tmp->stmt && tmp->cycles_to_execute == 2)
 			{
-				execute_statement(tmp, vm, &loop, arena);
-				loop.head = vm->carriages;
-				free(tmp->stmt);
-				tmp->stmt = NULL;
+				if (!(form_statement(tmp, arena)))
+				{
+					execute_statement(tmp, vm, &loop, arena);
+					loop.head = vm->carriages;
+					free(tmp->stmt);
+					tmp->stmt = NULL;
+				}
 			}
 			else if (tmp->cycles_to_execute > 2)
 				tmp->cycles_to_execute--;

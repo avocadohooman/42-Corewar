@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/16 20:11:02 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/19 16:31:01 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int					apply_offset(t_carriage *carriage, int arg_idx_value);
 void				write_bytes(unsigned char *arena, int where, int what, int size);
 int					read_bytes(unsigned char *arena, int where, int size);
 void        		copy_carriage(t_vm *vm, t_carriage *current);
+int					init_stmt(t_carriage *carry, unsigned char *arena);
 
 /** OP_FUNCTIONS **/
 

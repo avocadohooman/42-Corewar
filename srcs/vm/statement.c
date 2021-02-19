@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 21:29:33 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/16 20:13:28 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/19 16:47:51 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int     stmt_error(t_carriage *carry, int step, unsigned char *arena)
 	free(carry->stmt);
 	carry->stmt = NULL;
 	carry->next_statement = 0;
+	carry->cycles_to_execute = 0;
 	carry->abs_pos = real_modulo(carry->abs_pos, step, MEM_SIZE);
 	return (0);
 }
@@ -39,15 +40,19 @@ int		validate_regs(t_carriage *carry, unsigned char *arena, int i, int size)
 
 int		init_stmt(t_carriage *carry, unsigned char *arena)
 {
-	t_stmt *stmt;
+	t_stmt *new;
 
-	if (!(stmt = (t_stmt*)malloc(sizeof(t_stmt))))
+	if (!(new = (t_stmt*)malloc(sizeof(t_stmt))))
 		print_error(MALLOC);
-	carry->stmt = stmt;
+	carry->abs_pos += carry->next_statement;
+	carry->stmt = new;
 	carry->stmt->statement = arena[carry->abs_pos];
 	if (carry->stmt->statement > OPCODE_AMOUNT || carry->stmt->statement < 1)
+	{
+		stmt_error(carry, 1, arena);
 		return (1);
-	carry->stmt->arg_type = arena[real_modulo(carry->abs_pos, 1, MEM_SIZE)];
+	}
+	carry->cycles_to_execute = opcode_table[carry->stmt->statement - 1].cost;
 	ft_bzero(carry->stmt->arg_types, sizeof(int) * 3);
 	ft_bzero(carry->stmt->args, sizeof(int) * 3);
 	return (0);
@@ -57,23 +62,16 @@ int     form_statement(t_carriage *carry, unsigned char *arena)
 {
 	int size;
 
-	carry->abs_pos += carry->next_statement;
-	if (init_stmt(carry, arena))
-	{
-//		printf("Abs pos: %d\n", carry->abs_pos);
-		return (stmt_error(carry, 1, arena));
-	}
-//	printf("Abs pos: %d\n", carry->abs_pos);
+	carry->stmt->arg_type = arena[real_modulo(carry->abs_pos, 1, MEM_SIZE)];
 	size = decrypt(carry, arena);
 	if (!size)
-		return (0);
+		return (1);
 	if (opcode_table[carry->stmt->statement - 1].argument_type)
 		get_args(carry, arena, real_modulo(carry->abs_pos, 2, MEM_SIZE));
 	else
 		get_args(carry, arena, real_modulo(carry->abs_pos, 1, MEM_SIZE));
 	if (validate_regs(carry, arena, 0, size))
-		return (0);
-	carry->cycles_to_execute = opcode_table[carry->stmt->statement - 1].cost;
+		return (1);
 	carry->next_statement = size;
 
 	// End of code -> Printing

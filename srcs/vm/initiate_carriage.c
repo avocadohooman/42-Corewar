@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/16 20:09:34 by seronen          ###   ########.fr       */
+/*   Updated: 2021/02/19 16:49:04 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void		initiate_carriages(t_vm *vm, unsigned char *arena)
 		head = create_carriage(vm, head, vm->players[i]->id);
 		head->abs_pos = carriage_pos;
 		vm->carry_nbr++;
-		form_statement(head, arena);
 		i++;
 	}
 	vm->carriages = head;
