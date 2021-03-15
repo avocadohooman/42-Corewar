@@ -18,12 +18,16 @@
 int			create_file(char *name)
 {
 	char	*out;
+	char	*tmp;
 	int		fd;
 
 	if (!(out = ft_memalloc(sizeof(char) * (ft_strlen(name) + 2))))
 		exit(1);
-	ft_strcpy(out, ft_strrchr(name, '/') + 1);
-	ft_strcpy(ft_strchr(out, '.'), ".cor");
+	if (!(tmp = ft_strrchr(name, '/')))
+		tmp = name;
+	ft_strcpy(out, tmp + 1);
+	ft_strcpy(ft_strrchr(out, '.'), ".cor");
+	printf("%s\n", out);
 	if ((fd = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666)) < 0)
 		exit(1);
 	free(out);
@@ -57,7 +61,7 @@ int			main(int argc, char **argv)
 		print_error(INVALID_FILE);
 	input_file = buf_read(argv[1]);
 	if (!(root = asm_parse(&input_file)))
-		return (1); // asm_exit_with_message(...); ???
+		return (1);
 	output_file = visit_ast(root);
 	fd = create_file(argv[1]);
 	buf_write(output_file, fd);
