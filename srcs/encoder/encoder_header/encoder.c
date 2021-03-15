@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   encoder.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:51:56 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/08 16:10:52 by orantane         ###   ########.fr       */
+/*   Updated: 2021/03/15 20:22:15 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static unsigned char	*encode_int(unsigned char *out, int i, int champ_size)
 	else if (champ_size == -1)
 		nbr = &magic;
 	else if (champ_size == 0)
-		nbr = 0;
+		return (out);
 	while (--len >= 0)
 	{
 		out[i + j] = *(((unsigned char*)nbr) + len);
