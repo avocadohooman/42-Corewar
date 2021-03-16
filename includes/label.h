@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   label.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:54:25 by npimenof          #+#    #+#             */
-/*   Updated: 2021/02/03 11:32:21 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/16 19:33:42 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 typedef struct	s_label
 {
-	t_list		nexxt;
-	char		*label;
-	int			value;
+	t_list			nexxt;
+	char			*label;
+	int				value;
 	struct s_label	*next;
 }				t_label;
 

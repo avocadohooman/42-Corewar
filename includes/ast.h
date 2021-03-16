@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 13:43:24 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/13 16:05:14 by npimenof         ###   ########.fr       */
+/*   Created: 2021/03/16 19:21:19 by gmolin            #+#    #+#             */
+/*   Updated: 2021/03/16 19:21:31 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,10 @@ t_ast				*compound_insert(t_ast *compound, t_ast *new);
 t_buf				*visit_compound(t_ast *compound);
 t_buf				*visit_header(t_ast *header);
 t_buf				*visit_body(t_ast *body);
-char	        	*visit_label(t_ast *label);
-t_statement	    	*visit_statement(t_ast *statement);
+char				*visit_label(t_ast *label);
+t_statement			*visit_statement(t_ast *statement);
 
 t_buf				*visit_ast(t_ast *ast);
-char                *assign_arguments(t_ast *arg);
-
-// t_instruction       *assign_encoding_data(t_ast *compound, t_instruction *instruction, int label);
+char				*assign_arguments(t_ast *arg);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/01 21:24:30 by npimenof          #+#    #+#             */
-/*   Updated: 2020/12/01 21:29:49 by npimenof         ###   ########.fr       */
+/*   Created: 2021/03/16 19:37:49 by gmolin            #+#    #+#             */
+/*   Updated: 2021/03/16 19:37:56 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@ typedef enum	e_parser_error
 	ERROR_MALFORMATTED_ARG,
 	ERROR_UNKNOWN_STATEMENT
 }				t_parser_error;
-
-// static const char *g_parser_error[] = {
-// 	[ERROR_UNKNOWN_COMMAND] = "Unknown command.",
-// 	[ERROR_UNEXPECTED_ARG_TYPE] = "Unexpected argument type.",
-// 	[ERROR_MALFORMATTED_ARG] = "Malformatted argument",
-// 	[ERROR_UNKNOWN_STATEMENT] = "Unknown operation."
-// };
 
 typedef struct	s_parser
 {

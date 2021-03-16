@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 14:55:00 by npimenof          #+#    #+#             */
-/*   Updated: 2021/02/11 10:37:41 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/16 19:31:51 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct	s_buf
 	size_t		size;
 	size_t		used;
 }				t_buf;
-
 
 t_buf			*buf_new(t_buf *buf, size_t s);
 t_buf			*buf_insert(t_buf *buf, char *data, size_t size);
