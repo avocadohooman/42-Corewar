@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:21:19 by gmolin            #+#    #+#             */
-/*   Updated: 2021/03/16 19:21:31 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/03/16 20:31:36 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "asm.h"
 # include "label.h"
 # include "file.h"
+# include "stdio.h" //remove
 
 enum
 {

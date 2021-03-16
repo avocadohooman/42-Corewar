@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:54:25 by npimenof          #+#    #+#             */
-/*   Updated: 2021/03/16 19:18:07 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/03/16 20:31:31 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "libft.h"
 # include "op.h"
 # include <stdbool.h>
+# include "stdio.h" //remove
 
 # define FILE_EXT ".s"
 
