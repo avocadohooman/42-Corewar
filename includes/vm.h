@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/16 20:12:08 by orantane         ###   ########.fr       */
+/*   Updated: 2021/03/16 20:27:14 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ typedef struct			s_loop
 int						get_players(t_vm *vm, char **args, int ac);
 int						read_files(t_vm *vm);
 void					dump_arena(unsigned char *arena);
+int						get_player_amount(t_vm *vm, char **args, int ac);
+void					new_player(t_vm *vm, int id, char *name);
 int						validate_filename(t_player *player);
 unsigned char			*init_arena(t_vm *vm);
 void					initiate_carriages(t_vm *vm, unsigned char *arena);
@@ -132,6 +134,7 @@ void					write_bytes(unsigned char *arena, int where, int what,
 int						read_bytes(unsigned char *arena, int where, int size);
 void					copy_carriage(t_vm *vm, t_carriage *current);
 int						init_stmt(t_carriage *carry, unsigned char *arena);
+int						validate_nb(char *str, int player);
 
 /*
 ** OP_FUNCTIONS

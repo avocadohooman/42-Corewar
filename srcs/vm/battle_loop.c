@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/16 20:06:26 by orantane         ###   ########.fr       */
+/*   Updated: 2021/03/16 20:27:29 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void		carriage_loop(t_vm *vm, t_loop *loop, unsigned char *arena)
 		{
 			if (!(form_statement(loop->tmp, arena)))
 			{
-				execute_statement(loop->tmp, vm, &loop, arena);
+				execute_statement(loop->tmp, vm, loop, arena);
 				loop->head = vm->carriages;
 				free(loop->tmp->stmt);
 				loop->tmp->stmt = NULL;

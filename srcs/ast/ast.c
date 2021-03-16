@@ -114,7 +114,7 @@ t_buf	*visit_header(t_ast *header)
 			comment = header->compound_value[i]->string;
 	}
 	buf = encode_output(name, comment, header->body_byte_size);
-	if (!(buf_insert(bufio, buf, HEADER_SIZE)))
+	if (!(buf_insert(bufio, buf, (PROG_NAME_LENGTH + COMMENT_LENGTH + 16))))
 		return (NULL);
 	free(buf);
 	buf = NULL;

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:46:01 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/16 17:38:18 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/16 20:23:32 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <vm.h>
+#include "vm.h"
 
 static int			add_first(t_vm *vm, int player, char **args, int ac)
 {

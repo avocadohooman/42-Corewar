@@ -40,6 +40,7 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/label/label.c \
 		srcs/encoder/encoder_header/encoder.c \
 		srcs/vm/battle_loop.c \
+		srcs/vm/carriage_check.c \
 
 INCL = ./includes
 LIBFT = ./libft
