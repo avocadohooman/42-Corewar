@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x15_lfork.c                                       :+:      :+:    :+:   */
+/*   aff.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/06 15:09:16 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/15 17:51:15 by seronen          ###   ########.fr       */
+/*   Created: 2021/02/06 15:09:13 by seronen           #+#    #+#             */
+/*   Updated: 2021/03/16 18:09:49 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_lfork(t_carriage *carriage, t_vm *vm, unsigned char *arena)
+void	op_aff(t_carriage *carriage)
 {
-	int					arg_value_1;
-	int					arg_idx_value;
+	char	a;
 
-	arg_value_1 = carriage->stmt->args[0];
-	arg_idx_value = real_modulo(carriage->abs_pos, arg_value_1, MEM_SIZE);
-	copy_carriage(vm, carriage);
-	vm->carriages->abs_pos = arg_idx_value % MEM_SIZE;
-	vm->carry_nbr += 1;
+	if (carriage->stmt->arg_types[0] == 1)
+	{
+		a = (char)carriage->regs[carriage->stmt->args[0]];
+		write(1, &a, 1);
+	}
 }

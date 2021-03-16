@@ -6,12 +6,11 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/16 14:02:54 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/16 17:22:54 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-#include "opcodes.h"
 
 void		more_execute_statements(t_carriage *carriage, t_vm *vm, unsigned char *arena)
 {
@@ -133,12 +132,16 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		tmp = vm->carriages;
 		carry = 0;
 		tmp_nbr = vm->carry_nbr;
+		if (vm->dump != 0 && loop.cycle == vm->dump - 1)
+		{
+			dump_arena(arena);
+			exit(0);
+		}
 		while (carry < tmp_nbr)
 		{
 			if (tmp->stmt == NULL)
 				init_stmt(tmp, arena);
 			tmp->cycles_to_execute--;
-	//		printf("Cycles to exec: %d\n", tmp->cycles_to_execute);
 			if (tmp->stmt && tmp->cycles_to_execute == 0)
 			{
 				if (!(form_statement(tmp, arena)))
@@ -158,10 +161,5 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		loop.cycle++;
 		if (loop.cycle_to_die <= 0 && vm->carry_nbr > 0)
 			check_carriages(vm, &loop);
-		if (vm->dump != 0 && loop.cycle == vm->dump)
-		{
-			dump_arena(arena);
-			exit(0);
-		}
 	}
 }

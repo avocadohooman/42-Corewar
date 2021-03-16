@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x13_lld.c                                         :+:      :+:    :+:   */
+/*   ld.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/06 15:09:22 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/15 15:59:56 by seronen          ###   ########.fr       */
+/*   Created: 2021/02/03 13:37:30 by seronen           #+#    #+#             */
+/*   Updated: 2021/03/16 18:11:56 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_lld(t_carriage *carriage, unsigned char *arena)
+void	op_ld(t_carriage *carriage, unsigned char *arena)
 {
-	int         reg_slot;
-	short       arg_idx_value;
+	int		reg_slot;
+	int		arg_idx_value;
 
 	reg_slot = carriage->stmt->args[1] - 1;
 	if (carriage->stmt->arg_types[0] == T_DIR)
 		carriage->regs[reg_slot] = carriage->stmt->args[0];
 	else if (carriage->stmt->arg_types[0] == T_IND)
 	{
-        arg_idx_value = real_modulo(carriage->abs_pos, carriage->stmt->args[0], MEM_SIZE);
-		carriage->regs[reg_slot] = (short)read_bytes(arena, arg_idx_value, 2);
+		arg_idx_value = real_modulo(carriage->abs_pos,
+			(short)carriage->stmt->args[0], IDX_MOD);
+		carriage->regs[reg_slot] = read_bytes(arena, arg_idx_value, 4);
 	}
 	if (carriage->regs[reg_slot] == 0)
 		carriage->carry_flag = 1;
-	else 
+	else
 		carriage->carry_flag = 0;
 }

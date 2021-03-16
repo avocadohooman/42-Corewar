@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/16 14:06:42 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/16 17:48:08 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ typedef struct s_loop
 
 
 int					get_players(t_vm *vm, char **args, int ac);
+int					get_player_amount(t_vm *vm, char **args, int ac);
+void        		new_player(t_vm *vm, int id, char *name);
+int					validate_nb(char *str, int player);
 int					read_files(t_vm *vm);
 void				dump_arena(unsigned char *arena);
 int					validate_filename(t_player *player);
@@ -98,7 +101,7 @@ t_carriage			*create_carriage(t_vm *vm, t_carriage *next, int player_id);
 
 /** MEMSPACE GUARDIANS **/
 
-unsigned char   	*fetch_position(unsigned char *arena,int pos, int where, int modulo);
+unsigned char   	*fetch_position(unsigned char *ar, int pos, int where, int mod);
 int					real_modulo(int position, int value, int modulo);
 
 
