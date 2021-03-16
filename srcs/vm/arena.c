@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 22:52:50 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/19 16:47:00 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/15 14:57:28 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int			place_players(t_vm *vm, unsigned char *arena)
 	a_index = 0;
 	while (player < vm->player_nb)
 	{
-		printf("a_index: %d, player: %d\n", a_index, player);
 		if ((a_index + vm->players[player]->exec_size) > MEM_SIZE)
 			print_error(MALLOC);
 		ft_memcpy(&arena[a_index], vm->players[player]->exec_code, vm->players[player]->exec_size);

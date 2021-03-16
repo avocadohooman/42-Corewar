@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/16 20:13:14 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/16 14:00:27 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,13 @@ int		calc_argtype_size(t_stmt *stmt)
 
 	size = 0;
 	i = 0;
-	while (i < 3)
+	while (i < opcode_table[stmt->statement - 1].nb_args)
 	{
-		if (!stmt->arg_types[i])
-			break ;
 		if (stmt->arg_types[i] == T_REG)
 			size += 1;
 		else if (stmt->arg_types[i] == T_DIR && opcode_table[stmt->statement - 1].dir_size == 4)
 			size += 4;
-		else
+		else if (stmt->arg_types[i])
 			size += 2;
 		i++;
 	}
@@ -87,17 +85,14 @@ int		validate_arg_type(t_stmt *stmt, int i)
 	int val;
 	int aim;
 
-	while (i < 3)
+	while (i < opcode_table[stmt->statement - 1].nb_args)
 	{
 		val = stmt->arg_types[i];
 		aim = opcode_table[stmt->statement - 1].argument_types[i];
-		if ((!val && aim) || (!aim && val))
+		if (!val)
 			return (1);
-		if (aim)
-		{
-			if ((val & aim) != val)
-				return (1);
-		}
+		if ((val & aim) != val)
+			return (1);
 		i++;
 	}
 	return (0);

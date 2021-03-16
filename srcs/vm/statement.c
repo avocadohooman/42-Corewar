@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 21:29:33 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/19 16:47:51 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/16 14:05:02 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int     stmt_error(t_carriage *carry, int step, unsigned char *arena)
 	free(carry->stmt);
 	carry->stmt = NULL;
 	carry->next_statement = 0;
-	carry->cycles_to_execute = 0;
+	carry->cycles_to_execute = -1;
 	carry->abs_pos = real_modulo(carry->abs_pos, step, MEM_SIZE);
 	return (0);
 }
@@ -28,11 +28,13 @@ int		validate_regs(t_carriage *carry, unsigned char *arena, int i, int size)
 	while (i < 3)
 	{
 		if (carry->stmt->arg_types[i] == T_REG)
+		{
 			if (carry->stmt->args[i] < 1 || carry->stmt->args[i] > 16)
 			{
 				stmt_error(carry, size, arena);
 				return (1);
 			}
+		}
 		i++;
 	}
 	return (0);
@@ -44,7 +46,7 @@ int		init_stmt(t_carriage *carry, unsigned char *arena)
 
 	if (!(new = (t_stmt*)malloc(sizeof(t_stmt))))
 		print_error(MALLOC);
-	carry->abs_pos += carry->next_statement;
+	carry->abs_pos = real_modulo(carry->abs_pos, carry->next_statement, MEM_SIZE);
 	carry->stmt = new;
 	carry->stmt->statement = arena[carry->abs_pos];
 	if (carry->stmt->statement > OPCODE_AMOUNT || carry->stmt->statement < 1)
