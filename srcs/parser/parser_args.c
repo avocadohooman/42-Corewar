@@ -59,7 +59,7 @@ t_ast	*parser_parse_body_indirect(t_parser *parser)
 	if (parser->current_token->type == TOKEN_COLON)
 	{
 		parser_consume(parser, TOKEN_COLON);
-		arg->label = parser->current_token->value;
+		arg->label = ft_strdup(parser->current_token->value);
 		parser_consume(parser, TOKEN_IDENTIFIER);
 		return (arg);
 	}

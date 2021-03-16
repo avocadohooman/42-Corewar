@@ -25,9 +25,10 @@ int			create_file(char *name)
 		exit(1);
 	if (!(tmp = ft_strrchr(name, '/')))
 		tmp = name;
-	ft_strcpy(out, tmp + 1);
+	else
+		tmp + 1;
+	ft_strcpy(out, tmp);
 	ft_strcpy(ft_strrchr(out, '.'), ".cor");
-	printf("%s\n", out);
 	if ((fd = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666)) < 0)
 		exit(1);
 	free(out);
@@ -62,7 +63,8 @@ int			main(int argc, char **argv)
 	input_file = buf_read(argv[1]);
 	if (!(root = asm_parse(&input_file)))
 		return (1);
-	output_file = visit_ast(root);
+	if (!(output_file = encode_ast(root)))
+		return (1);
 	fd = create_file(argv[1]);
 	buf_write(output_file, fd);
 	close(fd);
