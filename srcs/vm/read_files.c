@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/16 17:50:10 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/16 18:51:16 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ int		validate_player(t_player *player)
 	if (!player->magic)
 	{
 		printf("No exec magic for player '%s'!\n", player->file_name);
-		exit(0);
-	}
-	if (!player->name[0])
-	{
-		printf("Failed to fetch name for champion %s!\n", player->name);
 		exit(0);
 	}
 	if (player->exec_size > CHAMP_MAX_SIZE)
