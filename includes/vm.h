@@ -6,20 +6,18 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/16 19:56:59 by orantane         ###   ########.fr       */
+/*   Updated: 2021/03/16 20:06:27 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VM_H
 # define VM_H
-
 # include "op.h"
 # include "libft.h"
 # include "error.h"
 # include "file.h"
 # include <unistd.h>
 # include <fcntl.h>
-
 # define MIN_PLAYERS 1
 # define OPCODE_AMOUNT 16
 

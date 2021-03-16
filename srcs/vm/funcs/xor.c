@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x08_xor.c                                         :+:      :+:    :+:   */
+/*   xor.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:48:21 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/09 15:36:10 by orantane         ###   ########.fr       */
+/*   Updated: 2021/03/16 18:17:26 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_xor(t_carriage *carriage, unsigned char *arena)
+void	op_xor(t_carriage *carriage, unsigned char *arena)
 {
-	int     arg_one_value;
-	int     arg_two_value;
-	int     reg_slot;
+	int		arg_one_value;
+	int		arg_two_value;
+	int		reg_slot;
 
 	reg_slot = carriage->stmt->args[2] - 1;
 	arg_one_value = get_arg_value(carriage, 0, arena);

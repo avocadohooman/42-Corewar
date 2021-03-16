@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:03:11 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/19 15:39:12 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/03/16 19:35:03 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct	s_lexer
 {
-	char 		*data;
+	char		*data;
 	char		c;
 	size_t		size;
 	size_t		index;
@@ -32,4 +32,3 @@ t_token			*lex_get_next_token(t_lexer *lexer);
 void			lex_advance(t_lexer *lexer);
 
 #endif
-

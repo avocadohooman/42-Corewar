@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 17:55:54 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/16 14:04:46 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/16 17:47:47 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,16 @@ int				real_modulo(int position, int value, int modulo)
 	int res;
 
 	res = position + (value % modulo);
-//	printf("mod res: %d, res bef trunc: %d\n", value % modulo, res);
 	res %= MEM_SIZE;
 	res = res >= MEM_SIZE ? res - MEM_SIZE : res;
 	res = res < 0 ? res + MEM_SIZE : res;
-//	printf("res: %d\n", res);
 	return (res);
 }
 
-unsigned char   *fetch_position(unsigned char *arena, int pos, int where, int modulo)
+unsigned char	*fetch_position(unsigned char *ar, int pos, int where, int mod)
 {
 	int new;
 
-	new = real_modulo(pos, where, modulo);
-	return (&arena[new]);
+	new = real_modulo(pos, where, mod);
+	return (&ar[new]);
 }

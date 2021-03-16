@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_offset.c                                     :+:      :+:    :+:   */
+/*   live.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/07 12:19:11 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/07 12:28:51 by Gerhard          ###   ########.fr       */
+/*   Created: 2021/02/03 13:26:34 by seronen           #+#    #+#             */
+/*   Updated: 2021/03/16 18:13:31 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int         apply_offset(t_carriage *carriage, int arg_idx_value)
+void	op_live(t_carriage *carriage, t_vm *vm)
 {
-    if (arg_idx_value >= 0) 
-        arg_idx_value -= carriage->offset;
-    else
-        arg_idx_value += carriage->offset;
-    return (arg_idx_value);
+	int player_id;
+
+	player_id = (int)carriage->stmt->args[0];
+	player_id *= -1;
+	carriage->last_live = carriage->cycle;
+	if (player_id <= vm->player_nb && player_id > 0)
+		vm->last_live = vm->players[player_id - 1];
 }

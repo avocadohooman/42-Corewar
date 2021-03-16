@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x01_live.c                                        :+:      :+:    :+:   */
+/*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/03 13:26:34 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/15 17:05:57 by seronen          ###   ########.fr       */
+/*   Created: 2021/02/06 15:09:25 by seronen           #+#    #+#             */
+/*   Updated: 2021/03/16 18:10:55 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_live(t_carriage *carriage, t_vm *vm)
+void	op_fork(t_carriage *carriage, t_vm *vm, unsigned char *arena)
 {
-	int player_id;
+	int		arg_value_1;
 
-	player_id = (int)carriage->stmt->args[0];
-	player_id *= -1;
-	carriage->last_live = carriage->cycle;
-	if (player_id <= vm->player_nb && player_id > 0)
-		vm->last_live = vm->players[player_id - 1];
+	arg_value_1 = real_modulo(carriage->abs_pos,
+		carriage->stmt->args[0], IDX_MOD);
+	copy_carriage(vm, carriage);
+	vm->carriages->abs_pos = arg_value_1 % MEM_SIZE;
+	vm->carry_nbr += 1;
 }

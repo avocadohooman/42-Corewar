@@ -6,12 +6,11 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/16 19:30:24 by orantane         ###   ########.fr       */
+/*   Updated: 2021/03/16 20:06:26 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-#include "opcodes.h"
 
 void		more_execute_statements(t_carriage *carriage, t_vm *vm,
 									unsigned char *arena)

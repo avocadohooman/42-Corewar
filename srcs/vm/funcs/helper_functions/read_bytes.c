@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 21:26:21 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/09 14:14:12 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/16 17:58:23 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@
 **		Uses a buffer to store the bytes read.
 **
 **	NOTES:
-**		Tested with different values, including reading 4 bytes at index MEM_SIZE -2, All should be good.
+**		Tested with different values,
+**		including reading 4 bytes at index MEM_SIZE -2, All should be good.
 **		In case the (where) is between 0 & MEM_SIZE, bytes are read normally.
 **
 **	Returns a integer formed from the bytes read.
@@ -38,8 +39,8 @@
 
 int		read_bytes(unsigned char *arena, int where, int size)
 {
-	int index;
-	unsigned char buf[4];
+	int				index;
+	unsigned char	buf[4];
 
 	index = 0;
 	if (where < 0)

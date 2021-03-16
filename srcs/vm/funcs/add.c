@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x12_fork.c                                        :+:      :+:    :+:   */
+/*   add.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/06 15:09:25 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/16 13:58:26 by seronen          ###   ########.fr       */
+/*   Created: 2021/02/05 15:48:11 by Gerhard           #+#    #+#             */
+/*   Updated: 2021/03/16 18:02:31 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_fork(t_carriage *carriage, t_vm *vm, unsigned char *arena)
+void	op_add(t_carriage *carriage)
 {
-	int               arg_value_1;
+	int		sum;
+	int		reg_slot_1;
+	int		reg_slot_2;
+	int		reg_slot_3;
 
-    arg_value_1 = real_modulo(carriage->abs_pos, carriage->stmt->args[0], IDX_MOD);
-	copy_carriage(vm, carriage);
-	vm->carriages->abs_pos = arg_value_1 % MEM_SIZE;
-	vm->carry_nbr += 1;
+	reg_slot_1 = carriage->stmt->args[0] - 1;
+	reg_slot_2 = carriage->stmt->args[1] - 1;
+	reg_slot_3 = carriage->stmt->args[2] - 1;
+	sum = carriage->regs[reg_slot_1];
+	sum += carriage->regs[reg_slot_2];
+	carriage->regs[reg_slot_3] = sum;
+	if (sum == 0)
+		carriage->carry_flag = 1;
+	else
+		carriage->carry_flag = 0;
 }

@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x06_and.c                                         :+:      :+:    :+:   */
+/*   ldi.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/05 15:48:17 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/16 15:06:02 by seronen          ###   ########.fr       */
+/*   Created: 2021/02/06 15:09:30 by seronen           #+#    #+#             */
+/*   Updated: 2021/03/16 18:12:38 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_and(t_carriage *carriage, unsigned char *arena)
+void		op_ldi(t_carriage *carriage, unsigned char *arena)
 {
-	int     arg_one_value;
-	int     arg_two_value;
-	int     reg_slot;
+	int		arg_value_1;
+	int		arg_value_2;
+	int		args_idx_value;
+	int		reg_slot;
 
 	reg_slot = carriage->stmt->args[2] - 1;
-	arg_one_value = get_arg_value(carriage, 0, arena);
-	arg_two_value = get_arg_value(carriage, 1, arena);
-	carriage->regs[reg_slot] = arg_one_value & arg_two_value;
-	carriage->carry_flag = !(arg_one_value & arg_two_value);
+	arg_value_1 = get_arg_value(carriage, 0, arena);
+	arg_value_2 = get_arg_value(carriage, 1, arena);
+	args_idx_value = real_modulo(carriage->abs_pos,
+		(arg_value_1 + arg_value_2), IDX_MOD);
+	carriage->regs[reg_slot] = read_bytes(arena, args_idx_value, 4);
 }

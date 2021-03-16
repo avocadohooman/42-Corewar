@@ -54,7 +54,7 @@ init:	ld %57672703,r3
 	sti r1,%:gen22,%1
 	sti r1,%:deflv,%1
 	sti r1,%:slide1,%1
-	ld :deflv,r2
+	ld %:deflv,r2
 	ldi %:deflv,%4,r4
 	ld %0,r5
 
