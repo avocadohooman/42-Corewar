@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:51:56 by orantane          #+#    #+#             */
-/*   Updated: 2021/02/08 16:10:52 by orantane         ###   ########.fr       */
+/*   Updated: 2021/03/16 20:14:46 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static unsigned char	*encode_int(unsigned char *out, int i, int champ_size)
 	else if (champ_size == -1)
 		nbr = &magic;
 	else if (champ_size == 0)
-		nbr = 0;
+		return (out);
 	while (--len >= 0)
 	{
 		out[i + j] = *(((unsigned char*)nbr) + len);
@@ -60,13 +60,14 @@ static unsigned char	*encode_string(unsigned char *out, int i,
 	return (out);
 }
 
-unsigned char			*encode_output(char *name, char *comment, int champ_size)
+unsigned char			*encode_output(char *name, char *comment, 
+										int champ_size)
 {
 	unsigned char	*out;
 	int				i;
 
 	i = 0;
-	out = ft_memalloc(HEADER_SIZE);
+	out = ft_memalloc(PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
 	out = encode_int(out, i, -1);
 	i += sizeof(int);
 	out = encode_string(out, i, name, 1);

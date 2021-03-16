@@ -6,7 +6,7 @@
 /*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/16 20:06:27 by orantane         ###   ########.fr       */
+/*   Updated: 2021/03/16 20:12:08 by orantane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "error.h"
 # include "file.h"
+# include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # define MIN_PLAYERS 1
