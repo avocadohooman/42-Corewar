@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_argument_type.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:58 by gmolin            #+#    #+#             */
-/*   Updated: 2021/01/22 19:01:02 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/03/16 20:30:51 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		get_argument_type(t_ass *ass, t_instruction *instruction)
 			i++;
 		}
 		ass->statement_buff[ass->buff_slot] = ass->argument_type;
-		printf("Argument Type Bytecode: 0x%x\n", ass->statement_buff[ass->buff_slot]);
+//		printf("Argument Type Bytecode: 0x%x\n", ass->statement_buff[ass->buff_slot]);
 		ass->buff_slot++;
 	}
 }

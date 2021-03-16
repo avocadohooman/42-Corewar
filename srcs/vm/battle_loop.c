@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   battle_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/16 20:27:29 by orantane         ###   ########.fr       */
+/*   Updated: 2021/03/17 01:04:50 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		loop.tmp = vm->carriages;
 		loop.carry = 0;
 		loop.tmp_nbr = vm->carry_nbr;
-		if (vm->dump != 0 && loop.cycle == vm->dump)
+		if (vm->dump != 0 && loop.cycle == vm->dump - 1)
 		{
 			dump_arena(arena);
 			exit(0);
