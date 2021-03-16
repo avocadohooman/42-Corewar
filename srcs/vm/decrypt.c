@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/16 14:00:27 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/16 16:27:00 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		calc_argtype_size(t_stmt *stmt)
 
 	size = 0;
 	i = 0;
-	while (i < opcode_table[stmt->statement - 1].nb_args)
+	while (i < opcode_table[stmt->statement - 1].argument_amount)
 	{
 		if (stmt->arg_types[i] == T_REG)
 			size += 1;
@@ -85,7 +85,7 @@ int		validate_arg_type(t_stmt *stmt, int i)
 	int val;
 	int aim;
 
-	while (i < opcode_table[stmt->statement - 1].nb_args)
+	while (i < opcode_table[stmt->statement - 1].argument_amount)
 	{
 		val = stmt->arg_types[i];
 		aim = opcode_table[stmt->statement - 1].argument_types[i];
