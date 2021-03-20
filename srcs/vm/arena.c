@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 22:52:50 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/16 17:32:06 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/17 18:13:22 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void				dump_arena(unsigned char *arena)
 	while (i < MEM_SIZE)
 	{
 		line = 0;
-		printf("%#06x : ", i);
+		printf("%#04x : ", i);
 		while (line < 64)
 		{
 			printf("%02x ", arena[i + line]);
