@@ -19,7 +19,9 @@ VM_MAIN = srcs/vm/main.c
 ASM_MAIN = srcs/asm/main.c
 
 SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
-		srcs/lexer/lexer.c srcs/token/token.c \
+		srcs/lexer/lexer.c srcs/lexer/init_lexer.c srcs/lexer/lex_get_command.c srcs/lexer/lex_get_identifier.c srcs/lexer/lex_get_operator.c \
+		srcs/lexer/lex_get_string.c srcs/lexer/lex_skip_comment.c srcs/lexer/lex_skip_whitespaces.c srcs/lexer/lexer_helper.c \
+		srcs/token/token.c \
 		srcs/error.c \
 		srcs/encoder/encoder_body/get_argument_type.c srcs/encoder/encoder_body/get_arguments.c srcs/encoder/encoder_body/write_component_size.c \
 		srcs/encoder/encoder_body/encoder.c \
