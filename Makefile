@@ -31,7 +31,8 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/vm/funcs/sub.c srcs/vm/funcs/and.c  srcs/vm/funcs/or.c  srcs/vm/funcs/xor.c \
 		srcs/vm/funcs/zjmp.c srcs/vm/funcs/ldi.c  srcs/vm/funcs/sti.c  srcs/vm/funcs/fork.c \
 		srcs/vm/funcs/lld.c srcs/vm/funcs/lldi.c  srcs/vm/funcs/lfork.c  srcs/vm/funcs/aff.c \
-		srcs/ast/ast.c \
+		srcs/ast/ast.c srcs/ast/compound_insert.c srcs/ast/encode_statement.c srcs/ast/init_ast.c srcs/ast/visit_body.c srcs/ast/visit_compound.c \
+		srcs/ast/visit_header.c  srcs/ast/visit_instruction.c \
 		srcs/ast/assign_data_to_struct.c \
 		srcs/parser/parser.c srcs/parser/parser_header.c \
 		srcs/parser/parser_body.c srcs/parser/parser_args.c \

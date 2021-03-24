@@ -5,3 +5,10 @@ corewar
 .icloud
 vm_champs/
 memtrace
+resources
+*.cor
+*.icloud
+asm
+corewar
+corewar_orig
+corewar_2

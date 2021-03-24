@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:21:19 by gmolin            #+#    #+#             */
-/*   Updated: 2021/03/16 20:31:36 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/03/24 11:29:13 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ t_buf				*visit_header(t_ast *header);
 t_buf				*visit_body(t_ast *body);
 char				*visit_label(t_ast *label);
 t_statement			*visit_statement(t_ast *statement);
-
+t_buf				*visit_instruction(t_ast *instruction);
 t_buf				*visit_ast(t_ast *ast);
+t_buf				*encode_statement(t_ast *stmt);
 char				*assign_arguments(t_ast *arg);
 
 #endif

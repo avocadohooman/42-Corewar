@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast.c                                              :+:      :+:    :+:   */
+/*   compound_insert.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/24 11:36:40 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/03/24 11:36:42 by Gerhard          ###   ########.fr       */
+/*   Created: 2021/03/24 11:15:35 by Gerhard           #+#    #+#             */
+/*   Updated: 2021/03/24 12:26:44 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,15 @@
 #include "opcodes.h"
 #include "file.h"
 
-t_buf	*visit_ast(t_ast *ast)
+t_ast	*compound_insert(t_ast *compound, t_ast *new)
 {
-	if (ast->type == AST_COMPOUND)
-		return (visit_compound(ast));
-	return (NULL);
+	t_ast	**tmp;
+
+	compound->compound_size += 1;
+	if (!(tmp = realloc(compound->compound_value,
+					compound->compound_size * sizeof(t_ast *))))
+		return (NULL);
+	tmp[compound->compound_size - 1] = new;
+	compound->compound_value = tmp;
+	return (compound);
 }
