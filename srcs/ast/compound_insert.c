@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assign_data_to_struct.c                            :+:      :+:    :+:   */
+/*   compound_insert.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/21 17:00:15 by gmolin            #+#    #+#             */
-/*   Updated: 2021/03/24 11:32:16 by Gerhard          ###   ########.fr       */
+/*   Created: 2021/03/24 11:15:35 by Gerhard           #+#    #+#             */
+/*   Updated: 2021/03/24 12:26:44 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast.h"
 #include "asm.h"
+#include "error.h"
+#include "encoder.h"
 #include "opcodes.h"
+#include "file.h"
 
-char	*assign_arguments(t_ast *arg)
+t_ast	*compound_insert(t_ast *compound, t_ast *new)
 {
-	if (arg->arg_type == 1)
-		return (ft_strjoin("r", ft_itoa(arg->arg_value)));
-	else if (arg->arg_type == 2)
-	{
-		if (arg->label)
-			return (ft_strjoin("%:", arg->label));
-		else
-			return (ft_strjoin("%", ft_itoa(arg->arg_value)));
-	}
-	else
-	{
-		if (arg->label)
-			return (ft_strjoin(":", arg->label));
-		else
-			return (ft_strdup(ft_itoa(arg->arg_value)));
-	}
+	t_ast	**tmp;
+
+	compound->compound_size += 1;
+	if (!(tmp = realloc(compound->compound_value,
+					compound->compound_size * sizeof(t_ast *))))
+		return (NULL);
+	tmp[compound->compound_size - 1] = new;
+	compound->compound_value = tmp;
+	return (compound);
 }

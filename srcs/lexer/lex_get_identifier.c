@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assign_data_to_struct.c                            :+:      :+:    :+:   */
+/*   lex_get_identifier.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/21 17:00:15 by gmolin            #+#    #+#             */
-/*   Updated: 2021/03/24 11:32:16 by Gerhard          ###   ########.fr       */
+/*   Created: 2021/03/24 13:24:10 by Gerhard           #+#    #+#             */
+/*   Updated: 2021/03/24 13:57:04 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ast.h"
-#include "asm.h"
+#include "lexer.h"
 #include "opcodes.h"
+#include "op.h"
 
-char	*assign_arguments(t_ast *arg)
+t_token			*lex_get_identifier(t_lexer *lexer)
 {
-	if (arg->arg_type == 1)
-		return (ft_strjoin("r", ft_itoa(arg->arg_value)));
-	else if (arg->arg_type == 2)
+	char	*value;
+	char	*tmp;
+	int		len;
+
+	if (!(value = ft_memalloc(sizeof(char))))
+		return (NULL);
+	while (ft_isalnum(lexer->c) || lexer->c == '_')
 	{
-		if (arg->label)
-			return (ft_strjoin("%:", arg->label));
-		else
-			return (ft_strjoin("%", ft_itoa(arg->arg_value)));
+		len = ft_strlen(value);
+		if (!(tmp = realloc(value, len + 2)))
+			return (NULL);
+		ft_strlcat(tmp, &lexer->c, len + 2);
+		value = tmp;
+		lex_advance(lexer);
 	}
-	else
-	{
-		if (arg->label)
-			return (ft_strjoin(":", arg->label));
-		else
-			return (ft_strdup(ft_itoa(arg->arg_value)));
-	}
+	return (init_token(TOKEN_IDENTIFIER, value));
 }

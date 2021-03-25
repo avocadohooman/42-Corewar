@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/11 09:18:17 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/16 18:51:16 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ int		validate_player(t_player *player)
 		printf("No exec magic for player '%s'!\n", player->file_name);
 		exit(0);
 	}
-	if (!player->name[0] || !player->comment[0])
-	{
-		printf("Failed to fetch name for champion %s!\n", player->name);
-		exit(0);
-	}
 	if (player->exec_size > CHAMP_MAX_SIZE)
 	{
 		printf("Exec code size over limit for player '%s'!\n", player->name);
@@ -53,31 +48,27 @@ int		gather_data(t_player *player, char *data, size_t total_size)
 	ft_memcpy(&player->name, &data[4], 128);
 	ft_memcpy(&player->comment, &data[140], 2048);
 	player->exec_size = convert_exec_size(&data[136]);
-	printf("exec_size: %d\n", player->exec_size);
 	if (!player->exec_size)
-	{
-		printf("!player->exec_size: %d -- total: %ld\n", player->exec_size, total_size);
-		player->exec_size = total_size - 2192;						// If exec_size unpresent in bytecode, calculate the exact size yourself
-	}
+		player->exec_size = total_size - 2192;
 	player->exec_code = malloc(sizeof(char) * player->exec_size + 1);
 	bzero(player->exec_code, sizeof(char) * player->exec_size + 1);
-	ft_memcpy(player->exec_code, &data[2192], player->exec_size);	// index is validated to be 2192! by hackerman
-	//printf("hex first index of bcode: %x\n", data[2192]);
+	ft_memcpy(player->exec_code, &data[2192], player->exec_size);
 	validate_player(player);
 	return (0);
 }
 
-int     read_files(t_vm *vm)
+int		read_files(t_vm *vm)
 {
-	int i;
-	t_buf file;
+	int		i;
+	t_buf	file;
 
 	i = 0;
 	while (i < vm->player_nb)
-	{		
+	{
 		if (!file_extension(vm->players[i]->file_name, ".cor"))
 		{
-			printf("Unsupported file extension for player: %s!\n", vm->players[i]->file_name);
+			printf("Unsupported file extension for player: %s!\n",
+				vm->players[i]->file_name);
 			exit(0);
 		}
 		file = buf_read(vm->players[i]->file_name);

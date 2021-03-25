@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 13:43:24 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/13 16:05:14 by npimenof         ###   ########.fr       */
+/*   Created: 2021/03/16 19:21:19 by gmolin            #+#    #+#             */
+/*   Updated: 2021/03/25 16:18:45 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ typedef struct		s_ast
 
 t_ast				*init_ast(int type);
 t_ast				*compound_insert(t_ast *compound, t_ast *new);
+
 t_buf				*encode_compound(t_ast *compound);
 t_buf				*encode_header(t_ast *header);
 t_buf				*encode_body(t_ast *body);
 char				*encode_label(t_ast *label);
-t_buf				*encode_statement(t_ast *statement);
-
+t_buf				*encode_instruction(t_ast *instruction);
 t_buf				*encode_ast(t_ast *ast);
+t_buf				*encode_statement(t_ast *stmt);
 char				*assign_arguments(t_ast *arg);
 
 #endif

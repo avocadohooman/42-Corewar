@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x07_or.c                                          :+:      :+:    :+:   */
+/*   sub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/05 15:48:19 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/15 19:17:23 by seronen          ###   ########.fr       */
+/*   Created: 2021/02/05 15:48:14 by Gerhard           #+#    #+#             */
+/*   Updated: 2021/03/16 18:16:59 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_or(t_carriage *carriage, unsigned char *arena)
+void	op_sub(t_carriage *carriage)
 {
-	int     arg_one_value;
-	int     arg_two_value;
-	int     reg_slot;
+	int		sum;
+	int		reg_slot_1;
+	int		reg_slot_2;
+	int		reg_slot_3;
 
-	reg_slot = carriage->stmt->args[2] - 1;
-	arg_one_value = get_arg_value(carriage, 0, arena);
-	arg_two_value = get_arg_value(carriage, 1, arena);
-	carriage->regs[reg_slot] = arg_one_value | arg_two_value;
-	carriage->carry_flag = !(arg_one_value | arg_two_value);
+	reg_slot_1 = carriage->stmt->args[0] - 1;
+	reg_slot_2 = carriage->stmt->args[1] - 1;
+	reg_slot_3 = carriage->stmt->args[2] - 1;
+	sum = carriage->regs[reg_slot_1];
+	sum -= carriage->regs[reg_slot_2];
+	carriage->regs[reg_slot_3] = sum;
+	if (sum == 0)
+		carriage->carry_flag = 1;
+	else
+		carriage->carry_flag = 0;
 }

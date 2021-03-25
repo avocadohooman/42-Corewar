@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/01 14:26:33 by orantane          #+#    #+#             */
-/*   Updated: 2020/12/01 14:2826 by seronen          ###   ########.fr       */
+/*   Created: 2021/03/16 19:31:29 by gmolin            #+#    #+#             */
+/*   Updated: 2021/03/16 20:31:58 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
 # include "libft.h"
+# include "stdio.h" //remove
 
 typedef enum	e_error_type
 {

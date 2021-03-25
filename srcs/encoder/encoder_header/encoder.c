@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:51:56 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/16 17:30:28 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/25 13:27:28 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ static unsigned char	*encode_string(unsigned char *out, int i,
 	return (out);
 }
 
-unsigned char			*encode_output(char *name, char *comment, int champ_size)
+unsigned char			*encode_output(char *name, char *comment, 
+										int champ_size)
 {
 	unsigned char	*out;
 	int				i;

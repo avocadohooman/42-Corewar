@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_offset.c                                     :+:      :+:    :+:   */
+/*   init_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/07 12:19:11 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/07 12:28:51 by Gerhard          ###   ########.fr       */
+/*   Created: 2021/03/24 13:29:53 by Gerhard           #+#    #+#             */
+/*   Updated: 2021/03/24 13:46:16 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "lexer.h"
+#include "opcodes.h"
+#include "op.h"
 
-int         apply_offset(t_carriage *carriage, int arg_idx_value)
+t_lexer			*init_lexer(char *data, size_t size)
 {
-    if (arg_idx_value >= 0) 
-        arg_idx_value -= carriage->offset;
-    else
-        arg_idx_value += carriage->offset;
-    return (arg_idx_value);
+	t_lexer *lexer;
+
+	if (!(lexer = ft_memalloc(sizeof(t_lexer))))
+		return (NULL);
+	lexer->data = data;
+	lexer->size = size;
+	lexer->index = 0;
+	lexer->c = data[0];
+	lexer->line_number = 1;
+	lexer->column = 1;
+	return (lexer);
 }

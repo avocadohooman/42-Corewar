@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:03:11 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/19 15:39:12 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/03/25 15:22:14 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
-# include "libft.h"
 # include "token.h"
+# include "op.h"
 
 typedef struct	s_lexer
 {
-	char 		*data;
+	char		*data;
 	char		c;
 	size_t		size;
 	size_t		index;
@@ -31,5 +31,12 @@ void			free_lexer(t_lexer **lexer);
 t_token			*lex_get_next_token(t_lexer *lexer);
 void			lex_advance(t_lexer *lexer);
 
-#endif
+void			lex_skip_whitespace(t_lexer *lexer);
+void			lex_skip_comment(t_lexer *lexer);
+t_token			*lex_get_identifier(t_lexer *lexer);
+t_token			*lex_get_string(t_lexer *lexer);
+t_token			*lex_get_command(t_lexer *lexer);
+t_token			*lex_get_operator(t_lexer *lexer);
+void			free_lexer(t_lexer **lexer);
 
+#endif

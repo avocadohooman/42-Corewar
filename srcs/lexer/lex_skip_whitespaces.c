@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x16_aff.c                                         :+:      :+:    :+:   */
+/*   lex_skip_whitespaces.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/06 15:09:13 by seronen           #+#    #+#             */
-/*   Updated: 2021/02/16 17:33:24 by seronen          ###   ########.fr       */
+/*   Created: 2021/03/24 13:20:43 by Gerhard           #+#    #+#             */
+/*   Updated: 2021/03/24 13:57:40 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "lexer.h"
+#include "opcodes.h"
+#include "op.h"
 
-void    op_aff(t_carriage *carriage)
+void			lex_skip_whitespace(t_lexer *lexer)
 {
-	char	a;
-
-	if (carriage->stmt->arg_types[0] == 1)
-	{
-		a = (char)carriage->regs[carriage->stmt->args[0]];
-		write(1, &a, 1);
-	}
+	while (lexer->c == ' ' || lexer->c == '\t' || lexer->c == '\r')
+		lex_advance(lexer);
 }

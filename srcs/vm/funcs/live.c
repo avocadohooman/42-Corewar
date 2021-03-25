@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   copy_carriage.c                                    :+:      :+:    :+:   */
+/*   live.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 15:11:47 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/03/16 17:56:35 by seronen          ###   ########.fr       */
+/*   Created: 2021/02/03 13:26:34 by seronen           #+#    #+#             */
+/*   Updated: 2021/03/16 18:13:31 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	copy_carriage(t_vm *vm, t_carriage *current)
+void	op_live(t_carriage *carriage, t_vm *vm)
 {
-	int	reg_slot;
+	int player_id;
 
-	reg_slot = 0;
-	vm->carriages = create_carriage(vm, vm->carriages, current->regs[0]);
-	vm->carriages->carry_flag = current->carry_flag;
-	vm->carriages->last_live = current->last_live;
-	vm->carriages->cycle = current->cycle;
-	while (reg_slot < REG_NUMBER)
-	{
-		vm->carriages->regs[reg_slot] = current->regs[reg_slot];
-		reg_slot++;
-	}
+	player_id = (int)carriage->stmt->args[0];
+	player_id *= -1;
+	carriage->last_live = carriage->cycle;
+	if (player_id <= vm->player_nb && player_id > 0)
+		vm->last_live = vm->players[player_id - 1];
 }

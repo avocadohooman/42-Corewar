@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   copy_carriage.c                                    :+:      :+:    :+:   */
+/*   lfork.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 15:11:47 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/03/16 17:56:35 by seronen          ###   ########.fr       */
+/*   Created: 2021/02/06 15:09:16 by seronen           #+#    #+#             */
+/*   Updated: 2021/03/16 18:13:09 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	copy_carriage(t_vm *vm, t_carriage *current)
+void		op_lfork(t_carriage *carriage, t_vm *vm, unsigned char *arena)
 {
-	int	reg_slot;
+	int			arg_value_1;
+	int			arg_idx_value;
 
-	reg_slot = 0;
-	vm->carriages = create_carriage(vm, vm->carriages, current->regs[0]);
-	vm->carriages->carry_flag = current->carry_flag;
-	vm->carriages->last_live = current->last_live;
-	vm->carriages->cycle = current->cycle;
-	while (reg_slot < REG_NUMBER)
-	{
-		vm->carriages->regs[reg_slot] = current->regs[reg_slot];
-		reg_slot++;
-	}
+	arg_value_1 = carriage->stmt->args[0];
+	arg_idx_value = real_modulo(carriage->abs_pos, arg_value_1, MEM_SIZE);
+	copy_carriage(vm, carriage);
+	vm->carriages->abs_pos = arg_idx_value % MEM_SIZE;
+	vm->carry_nbr += 1;
 }

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   0x06_and.c                                         :+:      :+:    :+:   */
+/*   zjmp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/05 15:48:17 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/02/16 15:06:02 by seronen          ###   ########.fr       */
+/*   Created: 2021/02/06 15:02:48 by seronen           #+#    #+#             */
+/*   Updated: 2021/03/16 18:18:54 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void    op_and(t_carriage *carriage, unsigned char *arena)
+void	op_zjmp(t_carriage *carriage, unsigned char *arena)
 {
-	int     arg_one_value;
-	int     arg_two_value;
-	int     reg_slot;
+	int		arg_idx_value;
 
-	reg_slot = carriage->stmt->args[2] - 1;
-	arg_one_value = get_arg_value(carriage, 0, arena);
-	arg_two_value = get_arg_value(carriage, 1, arena);
-	carriage->regs[reg_slot] = arg_one_value & arg_two_value;
-	carriage->carry_flag = !(arg_one_value & arg_two_value);
+	if (carriage->carry_flag)
+	{
+		arg_idx_value = real_modulo(carriage->abs_pos,
+			carriage->stmt->args[0], IDX_MOD);
+		carriage->abs_pos = real_modulo(arg_idx_value, -3, MEM_SIZE);
+	}
 }

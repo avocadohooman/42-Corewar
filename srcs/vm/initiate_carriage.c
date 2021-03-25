@@ -6,19 +6,18 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/19 16:49:04 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/16 17:42:32 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-#include <stdio.h> // remove
 
-t_carriage		*create_carriage(t_vm *vm, t_carriage *next, int player_id) 
+t_carriage		*create_carriage(t_vm *vm, t_carriage *next, int player_id)
 {
-	t_carriage     *carriage;
+	t_carriage		*carriage;
 
 	if (!(carriage = (t_carriage*)ft_memalloc(sizeof(t_carriage))))
-        print_error(7);
+		print_error(7);
 	if (player_id <= REG_NUMBER)
 		carriage->regs[0] = player_id * -1;
 	carriage->id = vm->id_tracker;
@@ -33,12 +32,12 @@ t_carriage		*create_carriage(t_vm *vm, t_carriage *next, int player_id)
 	return (carriage);
 }
 
-void		initiate_carriages(t_vm *vm, unsigned char *arena)
+void			initiate_carriages(t_vm *vm, unsigned char *arena)
 {
 	t_carriage	*head;
-	int         i;
-	int         carriage_pos;
-	
+	int			i;
+	int			carriage_pos;
+
 	i = 0;
 	head = NULL;
 	vm->id_tracker = 0;
