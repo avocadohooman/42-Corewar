@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:51:56 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/15 20:22:15 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/16 17:30:28 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,11 @@ unsigned char			*encode_output(char *name, char *comment, int champ_size)
 	unsigned char	*out;
 	int				i;
 
+	if (!name || !comment)
+		return (NULL);
 	i = 0;
-	out = ft_memalloc(HEADER_SIZE);
+	if (!(out = ft_memalloc(PROG_NAME_LENGTH + COMMENT_LENGTH + 16)))
+		return (NULL);
 	out = encode_int(out, i, -1);
 	i += sizeof(int);
 	out = encode_string(out, i, name, 1);
