@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 02:22:20 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/25 16:21:08 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/25 22:12:16 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_opcode
 
 int		lookup_opcode(char *str);
 int		check_argument(int options, int received);
+int		is_label_char(char c);
 
 enum {
 	LIVE_INDEX,

@@ -34,3 +34,11 @@ int		check_argument(int options, int received)
 		return (1);
 	return (0);
 }
+
+int				is_label_char(char c)
+{
+	if (ft_strchr(LABEL_CHARS, c))
+		return (1);
+	return (0);
+}
+

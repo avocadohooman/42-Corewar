@@ -6,14 +6,14 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:03:11 by npimenof          #+#    #+#             */
-/*   Updated: 2021/03/25 15:22:14 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/25 22:22:09 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 # include "token.h"
-# include "op.h"
+# include "opcodes.h"
 
 typedef struct	s_lexer
 {
