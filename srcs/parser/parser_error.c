@@ -6,12 +6,11 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:36:40 by npimenof          #+#    #+#             */
-/*   Updated: 2021/02/03 10:42:40 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/25 15:59:03 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include <stdio.h>
 
 static const char *g_parser_error[] = {
 	[ERROR_UNKNOWN_COMMAND] = "Unknown command.",
@@ -20,8 +19,31 @@ static const char *g_parser_error[] = {
 	[ERROR_UNKNOWN_STATEMENT] = "Unknown operation."
 };
 
-void    parser_exit_with_message(t_parser_error type)
+void    parser_exit_with_message(t_parser *parser, t_parser_error type)
 {
+	ft_putstr_fd("Error [", 2);
+	ft_putnbr(parser->lexer->line_number);
+	ft_putstr_fd(":", 2);
+	ft_putnbr(parser->lexer->column);
+	ft_putstr_fd("]", 2);
+	ft_putstr_fd(": ", 2);
     ft_putendl_fd(g_parser_error[type], 2);
     exit(1);
+}
+
+void	parser_exit_consume_error(t_parser *parser, t_type type)
+{
+	ft_putstr_fd("Error [", 2);
+	ft_putnbr(parser->lexer->line_number);
+	ft_putstr_fd(":", 2);
+	ft_putnbr(parser->lexer->column);
+	ft_putstr_fd("]", 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd("Expected ", 2);
+	ft_putstr_fd(g_token_literal[type], 2);
+	ft_putstr_fd(", got type ", 2);
+	ft_putstr_fd(g_token_literal[parser->current_token->type], 2);
+	ft_putstr_fd(" with value ", 2);
+	ft_putendl_fd(parser->current_token->value, 2);
+	exit(1);
 }

@@ -17,9 +17,9 @@
 #include "opcodes.h"
 #include "file.h"
 
-t_buf	*visit_ast(t_ast *ast)
+t_buf	*encode_ast(t_ast *ast)
 {
 	if (ast->type == AST_COMPOUND)
-		return (visit_compound(ast));
+		return (encode_compound(ast));
 	return (NULL);
 }

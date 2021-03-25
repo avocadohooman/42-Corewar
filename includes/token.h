@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:08:55 by npimenof          #+#    #+#             */
-/*   Updated: 2021/03/16 19:38:15 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/03/25 13:28:03 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,5 @@ typedef struct	s_token
 
 t_token			*init_token(t_type type, char *value);
 void			token_free(t_token **token);
-
-int				is_opcode(t_type type);
 
 #endif

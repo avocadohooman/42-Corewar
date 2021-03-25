@@ -6,12 +6,11 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:01:08 by npimenof          #+#    #+#             */
-/*   Updated: 2021/02/15 13:42:38 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/25 16:26:58 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "label.h"
-#include <stdio.h>
 
 t_label	*new_label(char *label)
 {

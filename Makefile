@@ -19,13 +19,20 @@ VM_MAIN = srcs/vm/main.c
 ASM_MAIN = srcs/asm/main.c
 
 SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
-		srcs/lexer/lexer.c srcs/lexer/init_lexer.c srcs/lexer/lex_get_command.c srcs/lexer/lex_get_identifier.c srcs/lexer/lex_get_operator.c \
-		srcs/lexer/lex_get_string.c srcs/lexer/lex_skip_comment.c srcs/lexer/lex_skip_whitespaces.c srcs/lexer/lexer_helper.c \
+		srcs/lexer/lexer.c srcs/lexer/lex_get_command.c \
+		srcs/lexer/lex_get_identifier.c srcs/lexer/lex_get_operator.c \
+		srcs/lexer/lex_get_string.c srcs/lexer/lex_skip_comment.c \
+		srcs/lexer/lex_skip_whitespace.c \
 		srcs/token/token.c \
 		srcs/error.c \
-		srcs/encoder/encoder_body/get_argument_type.c srcs/encoder/encoder_body/get_arguments.c srcs/encoder/encoder_body/write_component_size.c \
+		srcs/encoder/encoder_body/get_argument_type.c \
+		srcs/encoder/encoder_body/get_arguments.c \
+		srcs/encoder/encoder_body/write_component_size.c \
 		srcs/encoder/encoder_body/encoder.c \
-		srcs/encoder/encoder_body/get_statement.c srcs/encoder/encoder_body/track_jmps.c srcs/encoder/encoder_body/get_t_dir_special_arguments.c \
+		srcs/encoder/encoder_header/encoder.c \
+		srcs/encoder/encoder_body/get_statement.c \
+		srcs/encoder/encoder_body/track_jmps.c \
+		srcs/encoder/encoder_body/get_t_dir_special_arguments.c \
 		srcs/vm/args.c srcs/vm/read_files.c srcs/vm/arena.c srcs/vm/initiate_carriage.c srcs/vm/decrypt.c srcs/vm/player.c \
 		srcs/vm/funcs/helper_functions/get_arg_value.c srcs/vm/funcs/helper_functions/write_bytes.c srcs/vm/funcs/helper_functions/read_bytes.c\
 		srcs/vm/funcs/helper_functions/copy_carriage.c srcs/vm/memspace.c srcs/vm/statement.c srcs/vm/statement_args.c \
@@ -33,17 +40,19 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/vm/funcs/sub.c srcs/vm/funcs/and.c  srcs/vm/funcs/or.c  srcs/vm/funcs/xor.c \
 		srcs/vm/funcs/zjmp.c srcs/vm/funcs/ldi.c  srcs/vm/funcs/sti.c  srcs/vm/funcs/fork.c \
 		srcs/vm/funcs/lld.c srcs/vm/funcs/lldi.c  srcs/vm/funcs/lfork.c  srcs/vm/funcs/aff.c \
-		srcs/ast/ast.c srcs/ast/compound_insert.c srcs/ast/encode_statement.c srcs/ast/init_ast.c srcs/ast/visit_body.c srcs/ast/visit_compound.c \
-		srcs/ast/visit_header.c  srcs/ast/visit_instruction.c \
+		srcs/ast/ast.c srcs/ast/compound_insert.c srcs/ast/encode_statement.c \
+		srcs/ast/init_ast.c srcs/ast/encode_body.c srcs/ast/encode_compound.c \
+		srcs/ast/encode_header.c  srcs/ast/encode_instruction.c \
 		srcs/ast/assign_data_to_struct.c \
-		srcs/parser/parser.c srcs/parser/parser_header.c \
-		srcs/parser/parser_body.c srcs/parser/parser_args.c \
+		srcs/parser/parser.c srcs/parser/parser_header.c srcs/parser/parser_body_statement.c\
+		srcs/parser/parser_body.c srcs/parser/parser_body_args.c \
+		srcs/parser/parser_body_args_inner.c \
 		srcs/parser/parser_error.c \
 		srcs/opcode/opcode.c \
 		srcs/label/label.c \
-		srcs/encoder/encoder_header/encoder.c \
 		srcs/vm/battle_loop.c \
 		srcs/vm/carriage_check.c \
+		srcs/op.c \
 
 INCL = ./includes
 LIBFT = ./libft
@@ -57,7 +66,7 @@ $(VM_NAME): $(SRCS) $(INCL) $(VM_MAIN)
 		git submodule update --init; \
 	fi
 	make -C $(LIBFT)
-	gcc -o $(VM_NAME) $(VM_MAIN) -I$(INCL) $(SRCS)  \
+	gcc -g -o $(VM_NAME) $(VM_MAIN) -I$(INCL) $(SRCS)  \
 	-L$(LIBFT) -lft -I$(LIBFTINCL)
 
 $(ASM_NAME): $(SRCS) $(INCL) $(ASM_MAIN)
@@ -66,7 +75,7 @@ $(ASM_NAME): $(SRCS) $(INCL) $(ASM_MAIN)
 		git submodule update --init; \
 	fi
 	make -C $(LIBFT)
-	gcc $(FLAGS) -o $(ASM_NAME) $(ASM_MAIN) $(SRCS) -I$(INCL) \
+	gcc -g -o $(ASM_NAME) $(ASM_MAIN) -I$(INCL) $(SRCS)  \
 	-L$(LIBFT) -lft -I$(LIBFTINCL)
 
 clean:

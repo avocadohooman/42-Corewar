@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:03:11 by npimenof          #+#    #+#             */
-/*   Updated: 2021/03/24 13:33:59 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/03/25 15:22:14 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
-# include "libft.h"
 # include "token.h"
+# include "op.h"
 
 typedef struct	s_lexer
 {
@@ -38,8 +38,5 @@ t_token			*lex_get_string(t_lexer *lexer);
 t_token			*lex_get_command(t_lexer *lexer);
 t_token			*lex_get_operator(t_lexer *lexer);
 void			free_lexer(t_lexer **lexer);
-int				is_operator(char c);
-char			*char_to_string(char c);
-int				is_label_char(char c);
 
 #endif

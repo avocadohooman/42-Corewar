@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 19:37:49 by gmolin            #+#    #+#             */
-/*   Updated: 2021/03/16 19:37:56 by gmolin           ###   ########.fr       */
+/*   Created: 2020/12/01 21:24:30 by npimenof          #+#    #+#             */
+/*   Updated: 2020/12/01 21:29:49 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
-# include "libft.h"
 # include "lexer.h"
 # include "ast.h"
+# include "opcodes.h"
 
 typedef enum	e_parser_error
 {
@@ -40,11 +40,15 @@ void			parser_consume(t_parser *parser, t_type type);
 t_ast			*parser_parse(t_parser *parser);
 t_ast			*parser_parse_header_instructions(t_parser *parser);
 t_ast			*parser_parse_body_instructions(t_parser *parser);
+t_ast			*parser_parse_body_statement(
+					t_parser *parser, t_label **labels);
 t_ast			*parser_parse_body_arg(t_parser *parser, int opts);
+t_ast			*parser_parse_body_arg_inner(t_parser *parser, t_ast *arg);
 
 int				is_number(char *string);
 int				is_registry(char *string);
 
-void			parser_exit_with_message(t_parser_error type);
+void			parser_exit_with_message(t_parser *parser, t_parser_error type);
+void			parser_exit_consume_error(t_parser *parser, t_type type);
 
 #endif

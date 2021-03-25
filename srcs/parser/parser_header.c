@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "error.h"
-#include "op.h"
-#include <stdio.h>
 
 t_ast	*parser_parse_command_name(t_parser *parser)
 {
@@ -51,7 +48,7 @@ t_ast	*parser_parse_command(t_parser *parser)
 		return (parser_parse_command_name(parser));
 	else if (ft_strequ(parser->current_token->value, COMMENT_CMD_STRING))
 		return (parser_parse_command_comment(parser));
-    parser_exit_with_message(ERROR_UNKNOWN_COMMAND);
+    parser_exit_with_message(parser, ERROR_UNKNOWN_COMMAND);
     return (NULL);
 }
 

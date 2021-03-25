@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opcodes.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 02:22:20 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/25 02:26:41 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/25 16:21:08 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define OPCODES_H
 
 # include "op.h"
-# include "parser.h"
-# include "ast.h"
-# include "label.h"
 
 # define LFORK_LITERAL	"lfork"
 # define STI_LITERAL	"sti"
@@ -45,6 +42,9 @@ typedef struct	s_opcode
 	int			dir_size;
 	int			cost;
 }				t_opcode;
+
+int		lookup_opcode(char *str);
+int		check_argument(int options, int received);
 
 enum {
 	LIVE_INDEX,
@@ -92,9 +92,5 @@ static const t_opcode opcode_table[] = {
 		{T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 1, 4, 6},
 	[NO_OPERATION] = {0, 0, 0, {0}, 0, 0, 0}
 };
-
-int		lookup_opcode(char *str);
-t_ast	*opcode_parse(t_parser *parser, t_label **labels);
-int		check_argument(int options, int received);
 
 #endif

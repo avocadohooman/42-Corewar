@@ -3,18 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   lex_get_operator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 13:26:37 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/03/24 13:52:53 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/03/25 15:23:45 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-#include "opcodes.h"
-#include "op.h"
 
-t_token		*lex_advance_with_token(t_lexer *lexer, t_token *token)
+static char		*char_to_string(char c)
+{
+	char	*str;
+
+	if (!(str = ft_strnew(sizeof(char))))
+		return (NULL);
+	*str = c;
+	return (str);
+}
+
+static t_token	*lex_advance_with_token(t_lexer *lexer, t_token *token)
 {
 	if (lexer->c == '\n')
 	{
@@ -25,7 +33,7 @@ t_token		*lex_advance_with_token(t_lexer *lexer, t_token *token)
 	return (token);
 }
 
-t_token		*lex_get_operator(t_lexer *lexer)
+t_token			*lex_get_operator(t_lexer *lexer)
 {
 	if (!lexer->c)
 		return (lex_advance_with_token(lexer,

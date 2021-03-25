@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visit_header.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 11:14:00 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/03/24 12:28:07 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/03/25 13:42:40 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "opcodes.h"
 #include "file.h"
 
-t_buf	*visit_header(t_ast *header)
+t_buf	*encode_header(t_ast *header)
 {
 	int				i;
 	unsigned char	*buf;

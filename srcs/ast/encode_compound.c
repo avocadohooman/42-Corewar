@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visit_compound.c                                   :+:      :+:    :+:   */
+/*   encode_compound.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 11:13:11 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/03/24 12:29:29 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/03/25 13:47:34 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "opcodes.h"
 #include "file.h"
 
-t_buf	*visit_compound(t_ast *compound)
+t_buf	*encode_compound(t_ast *compound)
 {
 	int				i;
 	t_buf			*buf;
@@ -30,14 +30,14 @@ t_buf	*visit_compound(t_ast *compound)
 	{
 		if (compound->compound_value[i]->type == AST_HEADER)
 		{
-			if (!(data = visit_header(compound->compound_value[i])) ||
+			if (!(data = encode_header(compound->compound_value[i])) ||
 				!(buf_insert(buf, data->data, data->used)))
 				return (NULL);
 			buf_free(&data);
 		}
 		else if (compound->compound_value[i]->type == AST_BODY)
 		{
-			if (!(data = visit_body(compound->compound_value[i])) ||
+			if (!(data = encode_body(compound->compound_value[i])) ||
 				!(buf_insert(buf, data->data, data->used)))
 				return (NULL);
 			buf_free(&data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visit_instruction.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 11:16:41 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/03/24 12:27:47 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/03/25 13:42:52 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "opcodes.h"
 #include "file.h"
 
-t_buf	*visit_instruction(t_ast *instruction)
+t_buf	*encode_instruction(t_ast *instruction)
 {
 	int i;
 
