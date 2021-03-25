@@ -57,7 +57,7 @@ int			main(int argc, char **argv)
 	t_buf			*output_file;
 	t_ast			*root;
 	int				fd;
-	
+
 	if (argc != 2 || !file_extension(argv[1], FILE_EXT))
 		print_error(INVALID_FILE);
 	input_file = buf_read(argv[1]);

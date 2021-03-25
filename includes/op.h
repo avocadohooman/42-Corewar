@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2021/03/25 14:34:33 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/25 22:14:13 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@
 # define NEWLINE_CHAR		'\n'
 
 # define LABEL_CHARS		"abcdefghijklmnopqrstuvwxyz_0123456789"
-int					is_label_char(char c);
 
 # define NAME_CMD_STRING	".name"
 # define COMMENT_CMD_STRING	".comment"
