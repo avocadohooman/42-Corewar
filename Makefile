@@ -23,6 +23,7 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/error.c \
 		srcs/encoder/encoder_body/get_argument_type.c srcs/encoder/encoder_body/get_arguments.c srcs/encoder/encoder_body/write_component_size.c \
 		srcs/encoder/encoder_body/encoder.c \
+		srcs/encoder/encoder_header/encoder.c \
 		srcs/encoder/encoder_body/get_statement.c srcs/encoder/encoder_body/track_jmps.c srcs/encoder/encoder_body/get_t_dir_special_arguments.c \
 		srcs/vm/args.c srcs/vm/read_files.c srcs/vm/arena.c srcs/vm/initiate_carriage.c srcs/vm/decrypt.c \
 		srcs/vm/funcs/helper_functions/get_arg_value.c srcs/vm/funcs/helper_functions/write_bytes.c srcs/vm/funcs/helper_functions/read_bytes.c\
@@ -33,12 +34,12 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/vm/funcs/0x13_lld.c srcs/vm/funcs/0x14_lldi.c  srcs/vm/funcs/0x15_lfork.c  srcs/vm/funcs/0x16_aff.c \
 		srcs/ast/ast.c \
 		srcs/ast/assign_data_to_struct.c \
-		srcs/parser/parser.c srcs/parser/parser_header.c \
-		srcs/parser/parser_body.c srcs/parser/parser_args.c \
+		srcs/parser/parser.c srcs/parser/parser_header.c srcs/parser/parser_body_statement.c\
+		srcs/parser/parser_body.c srcs/parser/parser_body_args.c \
+		srcs/parser/parser_body_args_inner.c \
 		srcs/parser/parser_error.c \
 		srcs/opcode/opcode.c \
 		srcs/label/label.c \
-		srcs/encoder/encoder_header/encoder.c \
 		srcs/vm/battle_loop.c \
 
 INCL = ./includes
@@ -53,7 +54,7 @@ $(VM_NAME): $(SRCS) $(INCL) $(VM_MAIN)
 		git submodule update --init; \
 	fi
 	make -C $(LIBFT)
-	gcc -o $(VM_NAME) $(VM_MAIN) -I$(INCL) $(SRCS)  \
+	gcc -g -o $(VM_NAME) $(VM_MAIN) -I$(INCL) $(SRCS)  \
 	-L$(LIBFT) -lft -I$(LIBFTINCL)
 
 $(ASM_NAME): $(SRCS) $(INCL) $(ASM_MAIN)
@@ -62,7 +63,7 @@ $(ASM_NAME): $(SRCS) $(INCL) $(ASM_MAIN)
 		git submodule update --init; \
 	fi
 	make -C $(LIBFT)
-	gcc $(FLAGS) -o $(ASM_NAME) $(ASM_MAIN) $(SRCS) -I$(INCL) \
+	gcc -g -o $(ASM_NAME) $(ASM_MAIN) -I$(INCL) $(SRCS)  \
 	-L$(LIBFT) -lft -I$(LIBFTINCL)
 
 clean:
