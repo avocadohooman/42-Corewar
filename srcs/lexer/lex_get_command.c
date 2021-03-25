@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lex_get_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 13:25:36 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/03/24 13:54:19 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/03/25 15:24:35 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-#include "opcodes.h"
-#include "op.h"
 
 t_token			*lex_get_command(t_lexer *lexer)
 {
