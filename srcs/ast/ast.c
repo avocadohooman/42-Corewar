@@ -25,27 +25,6 @@ t_ast	*init_ast(int type)
 	if (!(ast = ft_memalloc(sizeof(t_ast))))
 		return (NULL);
 	ast->type = type;
-	ast->label = NULL;
-	ast->label_list = NULL;
-	ast->label_index = 0;
-	ast->statement = 0;
-	ast->statement_position = 0;
-	ast->statement_size = 0;
-	ast->statement_n_args = 0;
-	ast->statement_args = NULL;
-	ast->arg_size = 0;
-	ast->arg_type = 0;
-	ast->arg_value = 0;
-	ast->command = NULL;
-	ast->string = NULL;
-	ast->header_value = NULL;
-	ast->header_size = 0;
-	ast->body_value = NULL;
-	ast->body_byte_size = 0;
-	ast->instruction_value = NULL;
-	ast->instruction_size = 0;
-	ast->compound_value = NULL;
-	ast->compound_size = 0;
 	return (ast);
 }
 
@@ -62,7 +41,7 @@ t_ast	*compound_insert(t_ast *compound, t_ast *new)
 	return (compound);
 }
 
-t_buf	*visit_compound(t_ast *compound)
+t_buf	*encode_compound(t_ast *compound)
 {
 	int				i;
 	t_buf			*buf;
@@ -75,7 +54,7 @@ t_buf	*visit_compound(t_ast *compound)
 	{
 		if (compound->compound_value[i]->type == AST_HEADER)
 		{
-			if (!(data = visit_header(compound->compound_value[i])))
+			if (!(data = encode_header(compound->compound_value[i])))
 				return (NULL);
 			if (!(buf_insert(buf, data->data, data->used)))
 				return (NULL);
@@ -83,7 +62,7 @@ t_buf	*visit_compound(t_ast *compound)
 		}
 		else if (compound->compound_value[i]->type == AST_BODY)
 		{	
-			if (!(data = visit_body(compound->compound_value[i])))
+			if (!(data = encode_body(compound->compound_value[i])))
 				return (NULL);
 			if (!(buf_insert(buf, data->data, data->used)))
 				return (NULL);
@@ -93,7 +72,7 @@ t_buf	*visit_compound(t_ast *compound)
 	return (buf);
 }
 
-t_buf	*visit_header(t_ast *header)
+t_buf	*encode_header(t_ast *header)
 {
 	int				i;
 	unsigned char	*buf;
@@ -101,19 +80,22 @@ t_buf	*visit_header(t_ast *header)
 	char			*comment;
 	t_buf			*bufio;
 
-	if (!(bufio = ft_memalloc(sizeof(t_buf))))
-		return (NULL);
 	i = -1;
+	name = NULL;
+	comment = NULL;
 	while (++i < header->compound_size)
 	{
-		if (header->compound_value[i]->command != NULL &&
-			!strcmp(header->compound_value[i]->command, ".name"))
+		if (!(header->compound_value[i]->type == AST_COMMAND))
+			continue ;
+		if (!name && !ft_strcmp(header->compound_value[i]->command, ".name"))
 			name = header->compound_value[i]->string;
-		if (header->compound_value[i]->command != NULL &&
-			!strcmp(header->compound_value[i]->command, ".comment"))
+		else if (!comment && !ft_strcmp(header->compound_value[i]->command, ".comment"))
 			comment = header->compound_value[i]->string;
 	}
-	buf = encode_output(name, comment, header->body_byte_size);
+	if (!(buf = encode_output(name, comment, header->body_byte_size)))
+		return (NULL);
+	if (!(bufio = ft_memalloc(sizeof(t_buf))))
+		return (NULL);
 	if (!(buf_insert(bufio, buf, HEADER_SIZE)))
 		return (NULL);
 	free(buf);
@@ -203,7 +185,7 @@ t_buf	    *encode_statement(t_ast *stmt)
     return (buf_statement);
 }
 
-t_buf       *visit_instruction(t_ast *instruction)
+t_buf       *encode_instruction(t_ast *instruction)
 {
 	int i;
 
@@ -216,7 +198,7 @@ t_buf       *visit_instruction(t_ast *instruction)
 	return ((t_buf *)ft_memalloc(sizeof(t_buf)));
 }
 
-t_buf	*visit_body(t_ast *body)
+t_buf	*encode_body(t_ast *body)
 {
 	int		i;
 	t_buf	*buf_body;
@@ -229,7 +211,7 @@ t_buf	*visit_body(t_ast *body)
     {  
         if (body->compound_value[i]->type == AST_EMPTY)
             continue ;
-		if (!(buf_instruction = visit_instruction(body->compound_value[i])))
+		if (!(buf_instruction = encode_instruction(body->compound_value[i])))
 			return (NULL);
 		if (!(buf_insert(buf_body, buf_instruction->data, buf_instruction->used)))
 			return (NULL);
@@ -238,9 +220,9 @@ t_buf	*visit_body(t_ast *body)
 	return (buf_body);
 }
 
-t_buf	*visit_ast(t_ast *ast)
+t_buf	*encode_ast(t_ast *ast)
 {
 	if (ast->type == AST_COMPOUND)
-		return (visit_compound(ast));
+		return (encode_compound(ast));
 	return (NULL);
 }
