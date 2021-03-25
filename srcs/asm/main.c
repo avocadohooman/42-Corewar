@@ -26,7 +26,7 @@ int			create_file(char *name)
 	if (!(tmp = ft_strrchr(name, '/')))
 		tmp = name;
 	else
-		tmp + 1;
+		tmp += 1;
 	ft_strcpy(out, tmp);
 	ft_strcpy(ft_strrchr(out, '.'), ".cor");
 	if ((fd = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666)) < 0)
