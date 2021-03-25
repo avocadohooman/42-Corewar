@@ -13,7 +13,6 @@
 #include "parser.h"
 #include "error.h"
 #include "op.h"
-#include <stdio.h>
 
 t_ast	*parser_parse_command_name(t_parser *parser)
 {
