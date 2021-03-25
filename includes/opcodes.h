@@ -46,6 +46,9 @@ typedef struct  s_opcode
     int         cost;
 }               t_opcode;
 
+int		lookup_opcode(char *str);
+int		check_argument(int options, int received);
+
 enum {
     LIVE_INDEX,
     LD_INDEX,
@@ -67,7 +70,6 @@ enum {
 };
 
 static const t_opcode opcode_table[] = {
-
 	[LFORK_INDEX] = {LFORK_LITERAL, 0x0f, 1, {T_DIR}, 0, 2, 1000},
 	[STI_INDEX] = {STI_LITERAL, 0x0b, 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 1, 2, 25},
 	[FORK_INDEX] = {FORK_LITERAL, 0x0c, 1, {T_DIR}, 0, 2, 800},
@@ -86,9 +88,5 @@ static const t_opcode opcode_table[] = {
 	[AND_INDEX] = {AND_LITERAL, 0x06, 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 1, 4, 6},
 	[NO_OPERATION] = {}
 };
-
-int		lookup_opcode(char *str);
-t_ast	*opcode_parse(t_parser *parser, t_label **labels);
-int		check_argument(int options, int received);
 
 #endif

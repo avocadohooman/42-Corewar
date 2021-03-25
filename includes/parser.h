@@ -47,7 +47,9 @@ void			parser_consume(t_parser *parser, t_type type);
 t_ast			*parser_parse(t_parser *parser);
 t_ast			*parser_parse_header_instructions(t_parser *parser);
 t_ast			*parser_parse_body_instructions(t_parser *parser);
+t_ast			*parser_parse_body_statement(t_parser *parser, t_label **labels);
 t_ast			*parser_parse_body_arg(t_parser *parser, int opts);
+t_ast			*parser_parse_body_arg_inner(t_parser *parser, t_ast *arg);
 
 int				is_number(char *string);
 int				is_registry(char *string);
