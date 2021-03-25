@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 17:46:02 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/16 17:46:45 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/25 04:19:49 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,26 @@ void	introduce_players(t_vm *vm)
 	printf("\n");
 }
 
+t_vm	*init_game(void)
+{
+	t_vm *vm;
+
+	vm = ft_memalloc(sizeof(t_vm));
+	if (!vm)
+		print_error(MALLOC);
+	vm->carry_nbr = 0;
+	ft_bzero(vm->players, sizeof(t_player *) * MAX_PLAYERS);
+	ft_bzero(vm->options, sizeof(int) * OPT_AMOUNT);
+	return (vm);
+}
+
 int		main(int ac, char **av)
 {
 	t_vm			*vm;
 	unsigned char	*arena;
 
-	vm = ft_memalloc(sizeof(t_vm));
-	vm->dump = 0;
-	vm->carry_nbr = 0;
-	bzero(vm->players, sizeof(t_player *) * MAX_PLAYERS + 1);
-	get_players(vm, av, ac);
+	vm = init_game();
+	parse_args(vm, &av[1], ac - 1);
 	read_files(vm);
 	introduce_players(vm);
 	arena = init_arena(vm);

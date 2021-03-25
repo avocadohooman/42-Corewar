@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orantane <orantane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:46:01 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/16 20:23:32 by orantane         ###   ########.fr       */
+/*   Updated: 2021/03/25 04:10:35 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ static int			add_first(t_vm *vm, int player, char **args, int ac)
 {
 	int i;
 
-	i = 1;
+	i = 0;
 	while (i < ac)
 	{
-		if (args[i] && !ft_strcmp(args[i], "-n"))
+		if (args[i] && !ft_strcmp(args[i], PLAYERNB_LITERAL))
 			i += 2;
-		if (args[i] && !ft_strcmp(args[i], "-dump"))
-			i++;
 		else if (args[i])
 		{
 			new_player(vm, player, ft_strdup(args[i]));
@@ -40,7 +38,7 @@ int					validate_nb(char *str, int player)
 	int nb;
 
 	i = 0;
-	if (!str)
+	if (!str || !player)
 		print_error(MISSING_ARG);
 	while (str[i])
 	{
@@ -49,11 +47,7 @@ int					validate_nb(char *str, int player)
 		i++;
 	}
 	nb = ft_atoi(str);
-	if (!player)
-		return (nb + 1);
-	if (nb < 1)
-		print_error(INVALID_ARG);
-	if (player && (nb < player || nb > MAX_PLAYERS))
+	if (nb < 1 || nb < player || nb > MAX_PLAYERS)
 		print_error(INVALID_ARG);
 	return (nb);
 }
@@ -64,31 +58,32 @@ static int			arguments(t_vm *vm, int player, char **args, int ac)
 	int pos;
 
 	i = 0;
-	while (i++ < ac)
+	while (i < ac)
 	{
-		if (args[i] && (!ft_strcmp(args[i], "-n")))
+		if (args[i] && (!ft_strcmp(args[i], PLAYERNB_LITERAL)))
 		{
 			pos = validate_nb(args[i + 1], player);
 			if (pos == player)
 			{
 				new_player(vm, player, ft_strdup(args[i + 2]));
-				bzero(&args[i], sizeof(char*) * 3);
+				ft_bzero(&args[i], sizeof(char *) * 3);
 				return (0);
 			}
-			else
-				i += 2;
+			i += 2;
 		}
+		i++;
 	}
 	return (add_first(vm, player, args, ac));
 }
 
-int					get_players(t_vm *vm, char **args, int ac)
+int					parse_args(t_vm *vm, char **args, int ac)
 {
 	int player;
 
 	player = 0;
 	if (!args || ac < 2)
 		print_error(INVALID_ARG);
+	args = parse_options(vm, args, ac);
 	vm->player_nb = get_player_amount(vm, args, ac);
 	if (vm->player_nb > MAX_PLAYERS || vm->player_nb < MIN_PLAYERS)
 		print_error(INVALID_ARG);

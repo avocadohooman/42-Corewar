@@ -6,12 +6,11 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/16 17:40:51 by seronen          ###   ########.fr       */
+/*   Updated: 2021/03/25 02:36:32 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-#include <stdio.h>
 #include "opcodes.h"
 
 int		convert_4_bytes(unsigned char *data)

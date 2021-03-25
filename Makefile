@@ -29,7 +29,7 @@ SRCS = 	srcs/file/file.c srcs/file/read.c srcs/file/write.c \
 		srcs/vm/args.c srcs/vm/read_files.c srcs/vm/arena.c srcs/vm/initiate_carriage.c srcs/vm/decrypt.c srcs/vm/player.c \
 		srcs/vm/funcs/helper_functions/get_arg_value.c srcs/vm/funcs/helper_functions/write_bytes.c srcs/vm/funcs/helper_functions/read_bytes.c\
 		srcs/vm/funcs/helper_functions/copy_carriage.c srcs/vm/memspace.c srcs/vm/statement.c srcs/vm/statement_args.c \
-		srcs/vm/funcs/live.c srcs/vm/funcs/ld.c  srcs/vm/funcs/st.c  srcs/vm/funcs/add.c \
+		srcs/vm/parse_options.c srcs/vm/funcs/live.c srcs/vm/funcs/ld.c  srcs/vm/funcs/st.c  srcs/vm/funcs/add.c \
 		srcs/vm/funcs/sub.c srcs/vm/funcs/and.c  srcs/vm/funcs/or.c  srcs/vm/funcs/xor.c \
 		srcs/vm/funcs/zjmp.c srcs/vm/funcs/ldi.c  srcs/vm/funcs/sti.c  srcs/vm/funcs/fork.c \
 		srcs/vm/funcs/lld.c srcs/vm/funcs/lldi.c  srcs/vm/funcs/lfork.c  srcs/vm/funcs/aff.c \

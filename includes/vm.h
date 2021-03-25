@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/16 20:31:56 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/03/25 03:34:30 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "error.h"
 # include "file.h"
+# include "options.h"
 # include <stdio.h> //remove
 # include <unistd.h>
 # include <fcntl.h>
@@ -58,13 +59,13 @@ typedef struct			s_carriage
 
 typedef struct			s_vm
 {
-	int					dump;
 	int					player_nb;
 	int					carry_nbr;
 	int					id_tracker;
 	t_player			*last_live;
 	t_player			*players[MAX_PLAYERS + 1];
 	t_carriage			*carriages;
+	int					options[OPT_AMOUNT];
 }						t_vm;
 
 typedef struct			s_loop
@@ -82,7 +83,8 @@ typedef struct			s_loop
 	t_carriage			*prev;
 }						t_loop;
 
-int						get_players(t_vm *vm, char **args, int ac);
+int						parse_args(t_vm *vm, char **args, int ac);
+char					**parse_options(t_vm *vm, char **args, int ac);
 int						read_files(t_vm *vm);
 void					dump_arena(unsigned char *arena);
 int						get_player_amount(t_vm *vm, char **args, int ac);

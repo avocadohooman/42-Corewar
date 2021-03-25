@@ -5,15 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/20 02:52:13 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/20 02:54:52 by seronen          ###   ########.fr       */
+/*   Created: 2021/03/25 02:29:03 by seronen           #+#    #+#             */
+/*   Updated: 2021/03/25 04:16:56 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
+#ifndef OPTIONS_H
+# define OPTIONS_H
+
+# define DUMP_LITERAL "-dump"
+# define PLAYERNB_LITERAL "-n"
+# define LLDFIX_LITERAL "-lldfix"
+# define DEBUG_LITERAL "-debug"
+
+# define OPT_AMOUNT 4
 
 enum {
-    PRINT_SOMETHING,
-    FIX_LLD_BUG
+	NONE,
+	DUMP,
+	LLD_FIX,
+	DEBUG
 };
 
+#endif
