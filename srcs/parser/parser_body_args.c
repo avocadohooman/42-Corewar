@@ -46,9 +46,9 @@ t_ast	*parser_parse_body_registry(t_parser *parser)
 	arg->arg_size = 1;
 	arg->statement_position = parser->bytes;
 	if (!is_registry(parser->current_token->value))
-		parser_exit_with_message(ERROR_MALFORMATTED_ARG);
+		parser_exit_with_message(parser, ERROR_MALFORMATTED_ARG);
 	if ((arg->arg_value = ft_atoi(parser->current_token->value + 1)) < 1)
-		parser_exit_with_message(ERROR_MALFORMATTED_ARG);
+		parser_exit_with_message(parser, ERROR_MALFORMATTED_ARG);
 	parser_consume(parser, TOKEN_IDENTIFIER);
 	return (arg);
 }
@@ -57,7 +57,7 @@ t_ast	*parser_parse_argtype(int opts, int recieved,
 							t_ast *(*type)(t_parser*), t_parser *parser)
 {
 	if (!check_argument(opts, recieved))
-		parser_exit_with_message(ERROR_UNEXPECTED_ARG_TYPE);
+		parser_exit_with_message(parser, ERROR_UNEXPECTED_ARG_TYPE);
 	return (type(parser));
 }
 

@@ -11,11 +11,6 @@
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "opcodes.h"
-#include "error.h"
-#include "op.h"
-#include <stdio.h>
-#include "label.h"
 
 t_ast	*parser_parse_body_label(t_parser *parser, t_label **labels)
 {
