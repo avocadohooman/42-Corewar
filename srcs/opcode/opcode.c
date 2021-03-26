@@ -12,7 +12,6 @@
 
 #include "libft.h"
 #include "opcodes.h"
-// #include <stdio.h>
 
 int		lookup_opcode(char *str)
 {
@@ -37,6 +36,8 @@ int		check_argument(int options, int received)
 
 int				is_label_char(char c)
 {
+	if (!c)
+		return (0);
 	if (ft_strchr(LABEL_CHARS, c))
 		return (1);
 	return (0);

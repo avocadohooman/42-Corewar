@@ -65,7 +65,6 @@ t_ast	*parser_parse_body_instruction(t_parser *parser, t_label **labels)
 	return (instr);
 }
 
-
 t_ast	*parser_parse_body_instructions(t_parser *parser)
 {
 	t_ast	*compound;
