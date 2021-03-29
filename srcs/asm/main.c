@@ -21,7 +21,7 @@ int			create_file(char *name)
 	char	*tmp;
 	int		fd;
 
-	if (!(out = ft_memalloc(sizeof(char) * (ft_strlen(name) + 2))))
+	if (!(out = ft_memalloc(sizeof(char) * (ft_strlen(name) + 3))))
 		exit(1);
 	if (!(tmp = ft_strrchr(name, '/')))
 		tmp = name;

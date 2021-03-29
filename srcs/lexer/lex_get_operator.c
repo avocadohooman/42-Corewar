@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 13:26:37 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/03/25 15:23:45 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/29 08:32:24 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,6 @@ static char		*char_to_string(char c)
 		return (NULL);
 	*str = c;
 	return (str);
-}
-
-static t_token	*lex_advance_with_token(t_lexer *lexer, t_token *token)
-{
-	if (lexer->c == '\n')
-	{
-		lexer->line_number++;
-		lexer->column = 1;
-	}
-	lex_advance(lexer);
-	return (token);
 }
 
 t_token			*lex_get_operator(t_lexer *lexer)
