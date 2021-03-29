@@ -8,7 +8,7 @@ memtrace
 resources
 *.cor
 *.icloud
-asm
+.asm
 corewar
 corewar_orig
 corewar_2
