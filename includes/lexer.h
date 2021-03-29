@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:03:11 by npimenof          #+#    #+#             */
-/*   Updated: 2021/03/25 22:22:09 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/29 08:32:50 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void			free_lexer(t_lexer **lexer);
 
 t_token			*lex_get_next_token(t_lexer *lexer);
 void			lex_advance(t_lexer *lexer);
+t_token			*lex_advance_with_token(t_lexer *lexer, t_token *token);
 
 void			lex_skip_whitespace(t_lexer *lexer);
 void			lex_skip_comment(t_lexer *lexer);

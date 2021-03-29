@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 13:54:49 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/03/25 15:24:10 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/29 08:34:29 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,17 @@ void	lex_advance(t_lexer *lexer)
 		lexer->c = lexer->data[lexer->index];
 		lexer->column++;
 	}
+}
+
+t_token	*lex_advance_with_token(t_lexer *lexer, t_token *token)
+{
+	if (lexer->c == '\n')
+	{
+		lexer->line_number++;
+		lexer->column = 1;
+	}
+	lex_advance(lexer);
+	return (token);
 }
 
 t_token	*lex_get_next_token(t_lexer *lexer)

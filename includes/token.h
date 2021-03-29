@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:08:55 by npimenof          #+#    #+#             */
-/*   Updated: 2021/03/25 13:28:03 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/29 08:47:52 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef enum	e_type
 	TOKEN_STRING,
 
 	TOKEN_IDENTIFIER,
+	TOKEN_LABEL,
 	TOKEN_NEGATIVE,
 
 	TOKEN_COLON,
@@ -36,8 +37,9 @@ static const char	*g_token_literal[] = {
 	[TOKEN_COMMAND] = "COMMAND",
 	[TOKEN_STRING] = "STRING",
 	[TOKEN_IDENTIFIER] = "IDENTIFIER",
+	[TOKEN_LABEL] = "LABEL",
 	[TOKEN_NEGATIVE] = "NEGATIVE",
-	[TOKEN_COLON] = "LABEL",
+	[TOKEN_COLON] = "LABEL CHAR",
 	[TOKEN_DIRECT] = "DIRECT",
 	[TOKEN_SEPARATOR] = "SEPARATOR",
 	[TOKEN_NEWLINE] = "NEWLINE",

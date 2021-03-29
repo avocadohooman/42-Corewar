@@ -6,7 +6,7 @@
 /*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 13:24:10 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/03/25 15:24:31 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/03/29 08:33:44 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ t_token			*lex_get_identifier(t_lexer *lexer)
 		value = tmp;
 		lex_advance(lexer);
 	}
+	if (lexer->c == LABEL_CHAR)
+		return (lex_advance_with_token(lexer, init_token(TOKEN_LABEL, value)));
 	return (init_token(TOKEN_IDENTIFIER, value));
 }
