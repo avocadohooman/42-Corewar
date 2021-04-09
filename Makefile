@@ -66,6 +66,7 @@ INCL = ./includes
 LIBFT = ./libft
 LIBFTINCL = $(LIBFT)/includes
 
+.PHONY: all
 all: $(VM_NAME) $(ASM_NAME)
 
 $(VM_NAME): $(SRCS) $(INCL) $(VM_MAIN)
@@ -86,9 +87,11 @@ $(ASM_NAME): $(INCL) $(ASM)
 	gcc -o $(ASM_NAME) $(FLAGS) $(ASM) -I$(INCL) \
 	-L$(LIBFT) -lft -I$(LIBFTINCL)
 
+.PHONY: clean
 clean:
 	make clean -C $(LIBFT)
 
+.PHONY: fclean
 fclean:
 	make fclean -C $(LIBFT)
 	rm -f $(VM_NAME)
@@ -98,6 +101,7 @@ fclean:
 	rm -f encoder-test
 	rm -f hash-test
 
+.PHONY: re
 re: fclean all
 
 lexer-test: $(SRCS) $(INCL) srcs/lexer/lexer_test/lexer_test.c
