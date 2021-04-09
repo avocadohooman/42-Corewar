@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/04/09 16:57:15 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/10 00:37:34 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void		more_execute_statements(t_carriage *carriage, t_vm *vm,
 	else if (carriage->stmt->statement == 11)
 		op_sti(carriage, arena);
 	else if (carriage->stmt->statement == 12)
-		op_fork(carriage, vm, arena);
+		op_fork(carriage, vm);
 	else if (carriage->stmt->statement == 13)
 		op_lld(carriage, arena, vm->options[LLD_FIX]);
 	else if (carriage->stmt->statement == 14)
 		op_lldi(carriage, arena);
 	else if (carriage->stmt->statement == 15)
-		op_lfork(carriage, vm, arena);
+		op_lfork(carriage, vm);
 	else if (carriage->stmt->statement == 16)
 		op_aff(carriage);
 }
@@ -54,7 +54,7 @@ void		execute_statement(t_carriage *carriage, t_vm *vm,
 	else if (carriage->stmt->statement == 8)
 		op_xor(carriage, arena);
 	else if (carriage->stmt->statement == 9)
-		op_zjmp(carriage, arena);
+		op_zjmp(carriage);
 	more_execute_statements(carriage, vm, arena);
 }
 

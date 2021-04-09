@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 17:32:53 by seronen           #+#    #+#             */
-/*   Updated: 2021/04/09 17:12:33 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/10 00:31:55 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		new_player(t_vm *vm, int id, char *name)
 	vm->players[id - 1] = new;
 }
 
-int			get_player_amount(t_vm *vm, char **args, int ac)
+int			get_player_amount(char **args, int ac)
 {
 	int i;
 	int amount;

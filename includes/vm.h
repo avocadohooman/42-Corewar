@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/04/09 16:56:26 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/10 00:38:25 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,11 @@ int						parse_args(t_vm *vm, char **args, int ac);
 char					**parse_options(t_vm *vm, char **args, int ac);
 int						read_files(t_vm *vm);
 void					dump_arena(unsigned char *arena);
-int						get_player_amount(t_vm *vm, char **args, int ac);
+int						get_player_amount(char **args, int ac);
 void					new_player(t_vm *vm, int id, char *name);
 int						validate_filename(t_player *player);
 unsigned char			*init_arena(t_vm *vm);
-void					initiate_carriages(t_vm *vm, unsigned char *arena);
+void					initiate_carriages(t_vm *vm);
 void					battle_loop(t_vm *vm, unsigned char *arena);
 void					carriage_loop(t_vm *vm, t_loop *loop,
 										unsigned char *arena);
@@ -108,9 +108,8 @@ int						form_statement(t_carriage *carry,
 										unsigned char *arena);
 int						get_args(t_carriage *carry, unsigned char *arena,
 									int pos);
-int						stmt_error(t_carriage *carry, int step,
-									unsigned char *arena);
-int						decrypt(t_carriage *carry, unsigned char *arena);
+int						stmt_error(t_carriage *carry, int step);
+int						decrypt(t_carriage *carry);
 int						convert_4_bytes(unsigned char *data);
 
 t_carriage				*create_carriage(t_vm *vm, t_carriage *next,
@@ -150,16 +149,15 @@ void					op_sub(t_carriage *carriage);
 void					op_and(t_carriage *carriage, unsigned char *arena);
 void					op_or(t_carriage *carriage, unsigned char *arena);
 void					op_xor(t_carriage *carriage, unsigned char *arena);
-void					op_zjmp(t_carriage *carriage, unsigned char *arena);
+void					op_zjmp(t_carriage *carriage);
 void					op_ldi(t_carriage *carriage, unsigned char *arena);
 void					op_sti(t_carriage *carriage, unsigned char *arena);
-void					op_fork(t_carriage *carriage, t_vm *vm,
-								unsigned char *arena);
-void					op_lld(t_carriage *carriage, unsigned char *arena, int opt);
+void					op_fork(t_carriage *carriage, t_vm *vm);
+void					op_lld(t_carriage *carriage, unsigned char *arena,
+							int opt);
 void					op_lldi(t_carriage *carriage,
 								unsigned char *arena);
-void					op_lfork(t_carriage *carriage, t_vm *vm,
-								unsigned char *arena);
+void					op_lfork(t_carriage *carriage, t_vm *vm);
 void					op_aff(t_carriage *carriage);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/04/09 19:16:59 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/10 00:34:18 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		validate_arg_type(t_stmt *stmt, int i)
 	return (0);
 }
 
-int		decrypt(t_carriage *carry, unsigned char *arena)
+int		decrypt(t_carriage *carry)
 {
 	int size;
 
@@ -101,6 +101,6 @@ int		decrypt(t_carriage *carry, unsigned char *arena)
 		return (size);
 	}
 	if (validate_arg_type(carry->stmt, 0))
-		return (stmt_error(carry, size, arena));
+		return (stmt_error(carry, size));
 	return (size);
 }

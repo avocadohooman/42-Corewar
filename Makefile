@@ -14,7 +14,7 @@ VM_NAME = corewar
 ASM_NAME = asm
 
 LEXER_TEST_NAME = lexer-test
-# FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra
 VM_MAIN = srcs/vm/main.c srcs/error.c \
 
 FILE = srcs/file/file.c srcs/file/read.c srcs/file/write.c \
@@ -74,7 +74,7 @@ $(VM_NAME): $(SRCS) $(INCL) $(VM_MAIN)
 		git submodule update --init; \
 	fi
 	make -C $(LIBFT)
-	gcc -g -o $(VM_NAME) $(VM_MAIN) -I$(INCL) $(SRCS) $(FILE) \
+	gcc -o $(VM_NAME) $(FLAGS) $(VM_MAIN) -I$(INCL) $(SRCS) $(FILE) \
 	-L$(LIBFT) -lft -I$(LIBFTINCL)
 
 $(ASM_NAME): $(INCL) $(ASM)
@@ -83,7 +83,7 @@ $(ASM_NAME): $(INCL) $(ASM)
 		git submodule update --init; \
 	fi
 	make -C $(LIBFT)
-	gcc -g -o $(ASM_NAME) $(ASM) -I$(INCL) \
+	gcc -o $(ASM_NAME) $(FLAGS) $(ASM) -I$(INCL) \
 	-L$(LIBFT) -lft -I$(LIBFTINCL)
 
 clean:

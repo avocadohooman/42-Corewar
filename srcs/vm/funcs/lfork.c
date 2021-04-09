@@ -6,13 +6,13 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 15:09:16 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/16 18:13:09 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/10 00:37:10 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		op_lfork(t_carriage *carriage, t_vm *vm, unsigned char *arena)
+void		op_lfork(t_carriage *carriage, t_vm *vm)
 {
 	int			arg_value_1;
 	int			arg_idx_value;

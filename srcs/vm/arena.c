@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 22:52:50 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/17 18:13:22 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/10 00:33:23 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ unsigned char		*init_arena(t_vm *vm)
 	if (!(arena = ft_memalloc(sizeof(char) * MEM_SIZE)))
 		print_error(MALLOC);
 	place_players(vm, arena);
-	initiate_carriages(vm, arena);
+	initiate_carriages(vm);
 	return (arena);
 }

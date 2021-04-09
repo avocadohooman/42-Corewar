@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:54:55 by gmolin            #+#    #+#             */
-/*   Updated: 2021/03/16 17:42:32 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/10 00:31:15 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_carriage		*create_carriage(t_vm *vm, t_carriage *next, int player_id)
 	return (carriage);
 }
 
-void			initiate_carriages(t_vm *vm, unsigned char *arena)
+void			initiate_carriages(t_vm *vm)
 {
 	t_carriage	*head;
 	int			i;
