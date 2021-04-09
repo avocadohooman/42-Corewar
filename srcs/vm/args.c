@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:46:01 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/25 04:10:35 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/09 17:06:17 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int					parse_args(t_vm *vm, char **args, int ac)
 	int player;
 
 	player = 0;
-	if (!args || ac < 2)
+	if (!args || ac < 1)
 		print_error(INVALID_ARG);
 	args = parse_options(vm, args, ac);
 	vm->player_nb = get_player_amount(vm, args, ac);

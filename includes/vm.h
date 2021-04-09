@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/25 03:34:30 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/09 16:56:26 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ void					op_ldi(t_carriage *carriage, unsigned char *arena);
 void					op_sti(t_carriage *carriage, unsigned char *arena);
 void					op_fork(t_carriage *carriage, t_vm *vm,
 								unsigned char *arena);
-void					op_lld(t_carriage *carriage, unsigned char *arena);
+void					op_lld(t_carriage *carriage, unsigned char *arena, int opt);
 void					op_lldi(t_carriage *carriage,
 								unsigned char *arena);
 void					op_lfork(t_carriage *carriage, t_vm *vm,

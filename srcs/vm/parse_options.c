@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 02:52:36 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/25 04:18:49 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/09 17:19:06 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int		check_option(char *opt)
 		return (DUMP);
 	if (!ft_strcmp(opt, LLDFIX_LITERAL))
 		return (LLD_FIX);
-	if (!ft_strcmp(opt, DEBUG_LITERAL))
-		return (DEBUG);
 	return (NONE);
 }
 

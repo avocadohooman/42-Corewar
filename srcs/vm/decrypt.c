@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/25 02:36:32 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/09 19:16:59 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		decrypt_arg_type(t_stmt *stmt, int counter, int z)
 	int oct;
 
 	oct = stmt->arg_type;
-	while (z > 0)
+	while (z > 0 && counter < 3)
 	{
 		if (oct & z)
 		{

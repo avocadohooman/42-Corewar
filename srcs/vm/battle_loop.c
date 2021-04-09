@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/25 03:16:07 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/09 16:57:15 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		more_execute_statements(t_carriage *carriage, t_vm *vm,
 	else if (carriage->stmt->statement == 12)
 		op_fork(carriage, vm, arena);
 	else if (carriage->stmt->statement == 13)
-		op_lld(carriage, arena);
+		op_lld(carriage, arena, vm->options[LLD_FIX]);
 	else if (carriage->stmt->statement == 14)
 		op_lldi(carriage, arena);
 	else if (carriage->stmt->statement == 15)
