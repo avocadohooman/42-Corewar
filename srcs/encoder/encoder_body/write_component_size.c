@@ -75,8 +75,8 @@ void				write_component_size(t_ass *ass, t_statement *state)
 	ass->size = 0;
 	statement = state->statement_code;
 	index = fetch_index(statement);
-	if (index == 100)
-		ft_printf("Index not found for %s!\n", state->opcode);
+	// if (index == 100)
+		// ft_printf("Index not found for %s!\n", state->opcode);
 	// ass->size += op_table_redefined[index][1];
     ass->size += state->component_size;
 	dir_size = op_table_redefined[index][2];
@@ -85,9 +85,9 @@ void				write_component_size(t_ass *ass, t_statement *state)
 		state->arg_type_req = true;
 	else
 		state->arg_type_req = false;
-	ft_printf("Statement final size = %d\n", ass->size);
+	// ft_printf("Statement final size = %d\n", ass->size);
 	ass->statement_buff = (unsigned char*)malloc(sizeof(unsigned char) * ass->size);
 	ass->statement_buff[ass->buff_slot] = statement;
-	ft_printf("Statement Bytecode = 0x%.2x\n", ass->statement_buff[ass->buff_slot]);
+	// ft_printf("Statement Bytecode = 0x%.2x\n", ass->statement_buff[ass->buff_slot]);
 	ass->buff_slot++;
 }

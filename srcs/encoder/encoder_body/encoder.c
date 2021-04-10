@@ -30,15 +30,15 @@ void        encoding_hub(t_instruction *instruction)
         {
             write_component_size(&ass, tmp->statement);
             get_argument_type(&ass, tmp);
-            ft_printf("\nInstruction ByteCode: \n");
+            // ft_printf("\nInstruction ByteCode: \n");
             get_arguments(&ass, tmp->statement);
             i = 0;
             while (i < ass.buff_slot)
             {
-                ft_printf("%.2x ", ass.statement_buff[i]);
+                // ft_printf("%.2x ", ass.statement_buff[i]);
                 i++;
             }
-            ft_printf("\n------\n\n");
+            // ft_printf("\n------\n\n");
             ass.buff_slot = 0;
             write(fd, ass.statement_buff, ass.size);
         }
@@ -46,4 +46,3 @@ void        encoding_hub(t_instruction *instruction)
 	}
 	close(fd);
     return ;
-}
