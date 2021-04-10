@@ -73,11 +73,11 @@ t_buf				*encode_statement(t_ast *stmt)
 	unsigned char	*arg;
 	t_buf			*buf_statement;
 
-	byte = stmt->statement + 1;
+	byte = stmt->statement;
 	if (!(buf_statement = ft_memalloc(sizeof(t_buf))) ||
 		!(buf_insert(buf_statement, &byte, 1)))
 		return (NULL);
-	if (opcode_table[(int)stmt->statement].argument_type)
+	if (opcode_table[(int)stmt->statement - 1].argument_type)
 	{
 		byte = encode_arg_type(stmt->statement_args, stmt->statement_n_args);
 		if (!(buf_insert(buf_statement, &byte, 1)))

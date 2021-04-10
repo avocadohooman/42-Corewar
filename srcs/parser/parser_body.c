@@ -59,6 +59,8 @@ t_ast	*parser_parse_body_instructions(t_parser *parser)
 	t_ast	*instruction;
 	t_label *labels;
 
+	if (parser->current_token->type == TOKEN_EOF)
+		return (NULL);
 	labels = new_label("");
 	if (!(compound = init_ast(AST_BODY)))
 		return (NULL);

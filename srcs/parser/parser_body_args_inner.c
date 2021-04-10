@@ -12,7 +12,6 @@
 
 #include "parser.h"
 #include "opcodes.h"
-#include <stdio.h>
 
 int		is_registry(char *string) 
 {

@@ -57,9 +57,11 @@ t_ast	*parser_parse_header_instruction(t_parser *parser)
 	t_type	type;
 
 	type = parser->current_token->type;
-	if (type == TOKEN_COMMAND)
-		return (parser_parse_command(parser));
-	return (init_ast(AST_EMPTY));
+	if (type == TOKEN_NEWLINE)
+		return (init_ast(AST_EMPTY));
+	if (type != TOKEN_COMMAND)
+		return (NULL);
+	return (parser_parse_command(parser));
 }
 
 t_ast	*parser_parse_header_instructions(t_parser *parser)
@@ -80,11 +82,10 @@ t_ast	*parser_parse_header_instructions(t_parser *parser)
 		if (parser->current_token->type != TOKEN_COMMAND &&
 			parser->current_token->type != TOKEN_NEWLINE)
 			break ;
-		if ((statement = parser_parse_header_instruction(parser)))
-		{
-			if (!(compound_insert(compound, statement)))
-				return (NULL);
-		}
+		if (!(statement = parser_parse_header_instruction(parser)))
+			return (NULL);
+		if (!(compound_insert(compound, statement)))
+			return (NULL);
 	}
 	return (compound);
 }

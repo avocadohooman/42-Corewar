@@ -15,6 +15,8 @@
 #include "file.h"
 #include "parser.h"
 
+#include <stdio.h>
+
 int			create_file(char *name)
 {
 	char	*out;
@@ -65,6 +67,8 @@ int			main(int argc, char **argv)
 		return (1);
 	if (!(output_file = encode_ast(root)))
 		return (1);
+	printf("outfile size: %zu\n", output_file->size);
+	printf("outfile used: %zu\n", output_file->used);
 	fd = create_file(argv[1]);
 	buf_write(output_file, fd);
 	close(fd);
