@@ -6,13 +6,12 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:01 by gmolin            #+#    #+#             */
-/*   Updated: 2021/04/10 13:10:55 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/04/10 13:42:52 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "encoder.h"
 #include "file.h"
-#include <stdio.h> // delete
 
 
 int		op_table_redefined[17][3] =

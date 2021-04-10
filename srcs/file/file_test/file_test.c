@@ -6,11 +6,10 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 22:56:29 by npimenof          #+#    #+#             */
-/*   Updated: 2021/04/10 13:10:55 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/04/10 13:42:38 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "file.h"
 
 int		test_new_file(void)

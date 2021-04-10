@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser_body_args_inner.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 21:07:54 by npimenof          #+#    #+#             */
-/*   Updated: 2021/03/25 16:02:27 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/04/10 13:42:36 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "opcodes.h"
-#include <stdio.h>
 
 int		is_registry(char *string) 
 {

@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/04/10 13:14:21 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/04/10 13:42:35 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "error.h"
 # include "file.h"
 # include "options.h"
-# include <stdio.h> //remove
 # include <unistd.h>
 # include <fcntl.h>
 # define MIN_PLAYERS 1

@@ -13,7 +13,6 @@
 #include "asm.h"
 #include "file.h"
 #include "opcodes.h"
-#include <stdio.h> // delete
 
 #include "ast.h"
 
