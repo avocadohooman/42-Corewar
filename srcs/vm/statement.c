@@ -6,14 +6,14 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 21:29:33 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/20 16:30:59 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/10 00:35:34 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "opcodes.h"
 
-int		stmt_error(t_carriage *carry, int step, unsigned char *arena)
+int		stmt_error(t_carriage *carry, int step)
 {
 	free(carry->stmt);
 	carry->stmt = NULL;
@@ -23,7 +23,7 @@ int		stmt_error(t_carriage *carry, int step, unsigned char *arena)
 	return (0);
 }
 
-int		validate_regs(t_carriage *carry, unsigned char *arena, int i, int size)
+int		validate_regs(t_carriage *carry, int i, int size)
 {
 	while (i < 3)
 	{
@@ -31,7 +31,7 @@ int		validate_regs(t_carriage *carry, unsigned char *arena, int i, int size)
 		{
 			if (carry->stmt->args[i] < 1 || carry->stmt->args[i] > 16)
 			{
-				stmt_error(carry, size, arena);
+				stmt_error(carry, size);
 				return (1);
 			}
 		}
@@ -52,7 +52,7 @@ int		init_stmt(t_carriage *carry, unsigned char *arena)
 	carry->stmt->statement = arena[carry->abs_pos];
 	if (carry->stmt->statement > OPCODE_AMOUNT || carry->stmt->statement < 1)
 	{
-		stmt_error(carry, 1, arena);
+		stmt_error(carry, 1);
 		return (1);
 	}
 	carry->cycles_to_execute = opcode_table[carry->stmt->statement - 1].cost;
@@ -66,14 +66,14 @@ int		form_statement(t_carriage *carry, unsigned char *arena)
 	int size;
 
 	carry->stmt->arg_type = arena[real_modulo(carry->abs_pos, 1, MEM_SIZE)];
-	size = decrypt(carry, arena);
+	size = decrypt(carry);
 	if (!size)
 		return (1);
 	if (opcode_table[carry->stmt->statement - 1].argument_type)
 		get_args(carry, arena, real_modulo(carry->abs_pos, 2, MEM_SIZE));
 	else
 		get_args(carry, arena, real_modulo(carry->abs_pos, 1, MEM_SIZE));
-	if (validate_regs(carry, arena, 0, size))
+	if (validate_regs(carry, 0, size))
 		return (1);
 	carry->next_statement = size;
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   encode_statement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 11:16:07 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/03/24 12:26:30 by Gerhard          ###   ########.fr       */
+/*   Updated: 2021/04/10 00:44:06 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,19 @@ t_buf				*encode_statement(t_ast *stmt)
 
 	byte = stmt->statement;
 	if (!(buf_statement = ft_memalloc(sizeof(t_buf))) ||
-		!(buf_insert(buf_statement, &byte, 1)))
+		!(buf_insert(buf_statement, (char *)&byte, 1)))
 		return (NULL);
 	if (opcode_table[(int)stmt->statement - 1].argument_type)
 	{
 		byte = encode_arg_type(stmt->statement_args, stmt->statement_n_args);
-		if (!(buf_insert(buf_statement, &byte, 1)))
+		if (!(buf_insert(buf_statement, (char *)&byte, 1)))
 			return (NULL);
 	}
 	i = -1;
 	while (++i < stmt->statement_n_args)
 	{
 		if (!(arg = encode_arg(stmt->statement_args[i], stmt->label_list)) ||
-		!(buf_insert(buf_statement, arg, stmt->statement_args[i]->arg_size)))
+		!(buf_insert(buf_statement, (char *)arg, stmt->statement_args[i]->arg_size)))
 			return (NULL);
 		ft_strdel((char **)&arg);
 	}

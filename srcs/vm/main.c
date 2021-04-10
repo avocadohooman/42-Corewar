@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 17:46:02 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/25 04:19:49 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/09 19:40:20 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,23 @@ void	introduce_players(t_vm *vm)
 	int i;
 
 	i = -1;
-	printf("Introducing contestants...\n");
+	ft_putendl("Introducing contestants...");
 	while (++i < vm->player_nb)
 	{
-		ft_putstr("* Player ");
-		ft_putnbr(i + 1);
-		ft_putstr(", weighing ");
-		ft_putnbr(vm->players[i]->exec_size);
-		ft_putstr(" bytes, \"");
-		ft_putstr(vm->players[i]->name);
-		ft_putstr("\" (\"");
-		ft_putstr(vm->players[i]->comment);
-		ft_putstr("\") !\n");
+		if (vm->players[i])
+		{
+			ft_putstr("* Player ");
+			ft_putnbr(i + 1);
+			ft_putstr(", weighing ");
+			ft_putnbr(vm->players[i]->exec_size);
+			ft_putstr(" bytes, \"");
+			ft_putstr(vm->players[i]->name);
+			ft_putstr("\" (\"");
+			ft_putstr(vm->players[i]->comment);
+			ft_putstr("\") !\n");
+		}
 	}
-	printf("\n");
+	ft_putchar('\n');
 }
 
 t_vm	*init_game(void)
@@ -67,8 +70,9 @@ int		main(int ac, char **av)
 	parse_args(vm, &av[1], ac - 1);
 	read_files(vm);
 	introduce_players(vm);
-	arena = init_arena(vm);
+	if (!(arena = init_arena(vm)))
+		print_error(MALLOC);
 	battle_loop(vm, arena);
 	announce_winner(vm);
-	return (0);
+	return (EXIT_SUCCESS);
 }

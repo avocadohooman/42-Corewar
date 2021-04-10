@@ -20,5 +20,5 @@ char	*g_errors[] = {"Usage: ./asm [champion_file.s]", "Missing argument!",
 void	print_error(int type)
 {
 	ft_putendl(g_errors[type]);
-	exit(0);
+	exit(EXIT_FAILURE);
 }

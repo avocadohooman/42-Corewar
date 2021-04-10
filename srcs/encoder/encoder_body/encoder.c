@@ -6,12 +6,11 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 12:08:38 by gmolin            #+#    #+#             */
-/*   Updated: 2021/01/22 22:35:18 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/04/10 13:42:57 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "file.h"
-#include <stdio.h> // delete
 #include "encoder.h"
 
 void        encoding_hub(t_instruction *instruction) 
@@ -31,15 +30,15 @@ void        encoding_hub(t_instruction *instruction)
         {
             write_component_size(&ass, tmp->statement);
             get_argument_type(&ass, tmp);
-            printf("\nInstruction ByteCode: \n");
+            ft_printf("\nInstruction ByteCode: \n");
             get_arguments(&ass, tmp->statement);
             i = 0;
             while (i < ass.buff_slot)
             {
-                printf("%.2x ", ass.statement_buff[i]);
+                ft_printf("%.2x ", ass.statement_buff[i]);
                 i++;
             }
-            printf("\n------\n\n");
+            ft_printf("\n------\n\n");
             ass.buff_slot = 0;
             write(fd, ass.statement_buff, ass.size);
         }

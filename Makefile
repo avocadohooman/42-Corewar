@@ -14,7 +14,7 @@ VM_NAME = corewar
 ASM_NAME = asm
 
 LEXER_TEST_NAME = lexer-test
-# FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra
 VM_MAIN = srcs/vm/main.c srcs/error.c \
 
 FILE = srcs/file/file.c srcs/file/read.c srcs/file/write.c \
@@ -64,31 +64,26 @@ ASM = srcs/asm/main.c srcs/error.c $(TOKEN) $(LEXER) $(PARSER) $(AST) \
 
 INCL = ./includes
 LIBFT = ./libft
-LIBFTINCL = $(LIBFT)/includes
+LIBFTINCL = $(LIBFT)/libft/includes  -I ./libft/ft_printf/includes/
 
+.PHONY: all
 all: $(VM_NAME) $(ASM_NAME)
 
 $(VM_NAME): $(SRCS) $(INCL) $(VM_MAIN)
-	@if git submodule status | egrep -q '^[-]' ; then \
-		echo "INFO: Initializing git submodules"; \
-		git submodule update --init; \
-	fi
 	make -C $(LIBFT)
-	gcc -g -o $(VM_NAME) $(VM_MAIN) -I$(INCL) $(SRCS) $(FILE) \
+	gcc -o $(VM_NAME) $(FLAGS) $(VM_MAIN) -I$(INCL) $(SRCS) $(FILE) \
 	-L$(LIBFT) -lft -I$(LIBFTINCL)
 
 $(ASM_NAME): $(INCL) $(ASM)
-	@if git submodule status | egrep -q '^[-]' ; then \
-		echo "INFO: Initializing git submodules"; \
-		git submodule update --init; \
-	fi
 	make -C $(LIBFT)
-	gcc -g -o $(ASM_NAME) $(ASM) -I$(INCL) \
+	gcc -o $(ASM_NAME) $(FLAGS) $(ASM) -I$(INCL) \
 	-L$(LIBFT) -lft -I$(LIBFTINCL)
 
+.PHONY: clean
 clean:
 	make clean -C $(LIBFT)
 
+.PHONY: fclean
 fclean:
 	make fclean -C $(LIBFT)
 	rm -f $(VM_NAME)
@@ -98,6 +93,7 @@ fclean:
 	rm -f encoder-test
 	rm -f hash-test
 
+.PHONY: re
 re: fclean all
 
 lexer-test: $(SRCS) $(INCL) srcs/lexer/lexer_test/lexer_test.c

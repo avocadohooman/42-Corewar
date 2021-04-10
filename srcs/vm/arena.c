@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arena.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 22:52:50 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/17 18:13:22 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/10 13:38:09 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void				dump_arena(unsigned char *arena)
 	while (i < MEM_SIZE)
 	{
 		line = 0;
-		printf("%#04x : ", i);
+		ft_printf("%#05x : ", i);
 		while (line < 64)
 		{
-			printf("%02x ", arena[i + line]);
+			ft_printf("%02x ", arena[i + line]);
 			line++;
 		}
-		printf("\n");
+		ft_printf("\n");
 		i += line;
 	}
 }
@@ -58,6 +58,6 @@ unsigned char		*init_arena(t_vm *vm)
 	if (!(arena = ft_memalloc(sizeof(char) * MEM_SIZE)))
 		print_error(MALLOC);
 	place_players(vm, arena);
-	initiate_carriages(vm, arena);
+	initiate_carriages(vm);
 	return (arena);
 }

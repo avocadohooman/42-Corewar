@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 14:55:00 by npimenof          #+#    #+#             */
-/*   Updated: 2021/03/16 19:31:51 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/04/10 13:14:01 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "libft.h"
 # include <fcntl.h>
 # include "error.h"
+# include "ft_printf.h"
 
 typedef enum	e_buf_error
 {

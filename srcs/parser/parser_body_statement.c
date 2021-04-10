@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_body_statement.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:21:16 by npimenof          #+#    #+#             */
-/*   Updated: 2021/03/29 09:05:33 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/04/10 00:44:57 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_ast	*parser_parse_body_args(t_parser *parser, t_ast *stmt, t_opcode code)
 t_ast	*parser_parse_body_statement(t_parser *parser, t_label **labels)
 {
 	int			opcode;
-	int			i;
 	t_opcode	code;
 	t_ast		*stmt;
 

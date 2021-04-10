@@ -6,13 +6,13 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 15:02:48 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/16 18:18:54 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/10 00:35:51 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	op_zjmp(t_carriage *carriage, unsigned char *arena)
+void	op_zjmp(t_carriage *carriage)
 {
 	int		arg_idx_value;
 

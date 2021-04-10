@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_arguments.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:57:33 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/03 11:08:31 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/04/10 13:42:55 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "encoder.h"
 #include "file.h"
-#include <stdio.h> // delete
 #include <limits.h>
 
 static void		handle_t_ind(t_ass *ass, char *t_ind_arg)

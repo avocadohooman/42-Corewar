@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visit_header.c                                     :+:      :+:    :+:   */
+/*   encode_header.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 11:14:00 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/03/25 13:42:40 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/04/10 00:44:26 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_buf	*encode_header(t_ast *header)
 			comment = header->compound_value[i]->string;
 	}
 	buf = encode_output(name, comment, header->body_byte_size);
-	if (!(buf_insert(bufio, buf, (PROG_NAME_LENGTH + COMMENT_LENGTH + 16))))
+	if (!(buf_insert(bufio, (char *)buf, (PROG_NAME_LENGTH + COMMENT_LENGTH + 16))))
 		return (NULL);
 	free(buf);
 	buf = NULL;
