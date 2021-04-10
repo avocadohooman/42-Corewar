@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:03:11 by npimenof          #+#    #+#             */
-/*   Updated: 2021/03/29 08:32:50 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/04/10 13:14:07 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LEXER_H
 # include "token.h"
 # include "opcodes.h"
+# include "ft_printf.h"
 
 typedef struct	s_lexer
 {

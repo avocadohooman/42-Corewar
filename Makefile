@@ -64,25 +64,17 @@ ASM = srcs/asm/main.c srcs/error.c $(TOKEN) $(LEXER) $(PARSER) $(AST) \
 
 INCL = ./includes
 LIBFT = ./libft
-LIBFTINCL = $(LIBFT)/includes
+LIBFTINCL = $(LIBFT)/libft/includes  -I ./libft/ft_printf/includes/
 
 .PHONY: all
 all: $(VM_NAME) $(ASM_NAME)
 
 $(VM_NAME): $(SRCS) $(INCL) $(VM_MAIN)
-	@if git submodule status | egrep -q '^[-]' ; then \
-		echo "INFO: Initializing git submodules"; \
-		git submodule update --init; \
-	fi
 	make -C $(LIBFT)
 	gcc -o $(VM_NAME) $(FLAGS) $(VM_MAIN) -I$(INCL) $(SRCS) $(FILE) \
 	-L$(LIBFT) -lft -I$(LIBFTINCL)
 
 $(ASM_NAME): $(INCL) $(ASM)
-	@if git submodule status | egrep -q '^[-]' ; then \
-		echo "INFO: Initializing git submodules"; \
-		git submodule update --init; \
-	fi
 	make -C $(LIBFT)
 	gcc -o $(ASM_NAME) $(FLAGS) $(ASM) -I$(INCL) \
 	-L$(LIBFT) -lft -I$(LIBFTINCL)

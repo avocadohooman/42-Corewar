@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 15:54:25 by npimenof          #+#    #+#             */
-/*   Updated: 2021/03/16 20:31:31 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/04/10 13:22:24 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <sys/uio.h>
 # include <sys/types.h>
 # include "libft.h"
+# include "ft_printf.h"
 # include "op.h"
 # include <stdbool.h>
 # include "stdio.h" //remove

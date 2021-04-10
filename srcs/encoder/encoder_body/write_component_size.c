@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_component_size.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:01 by gmolin            #+#    #+#             */
-/*   Updated: 2021/02/03 11:17:27 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/04/10 13:10:55 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int				fetch_index(unsigned char code)
 // 	else if (ft_strstr(arg, "-"))
 // 		return 2;
 // 	else
-// 		printf("asm/get_component_size.c : Could not fetch arg size for %s!", arg);
+// 		ft_printf("asm/get_component_size.c : Could not fetch arg size for %s!", arg);
 // 		return 0;
 // }
 
@@ -77,7 +77,7 @@ void				write_component_size(t_ass *ass, t_statement *state)
 	statement = state->statement_code;
 	index = fetch_index(statement);
 	if (index == 100)
-		printf("Index not found for %s!\n", state->opcode);
+		ft_printf("Index not found for %s!\n", state->opcode);
 	// ass->size += op_table_redefined[index][1];
     ass->size += state->component_size;
 	dir_size = op_table_redefined[index][2];
@@ -86,9 +86,9 @@ void				write_component_size(t_ass *ass, t_statement *state)
 		state->arg_type_req = true;
 	else
 		state->arg_type_req = false;
-	printf("Statement final size = %d\n", ass->size);
+	ft_printf("Statement final size = %d\n", ass->size);
 	ass->statement_buff = (unsigned char*)malloc(sizeof(unsigned char) * ass->size);
 	ass->statement_buff[ass->buff_slot] = statement;
-	printf("Statement Bytecode = 0x%.2x\n", ass->statement_buff[ass->buff_slot]);
+	ft_printf("Statement Bytecode = 0x%.2x\n", ass->statement_buff[ass->buff_slot]);
 	ass->buff_slot++;
 }

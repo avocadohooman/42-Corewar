@@ -62,7 +62,7 @@ unsigned char *encode_arg(t_ast *arg) // Either generate buf in func or pass it 
 
 	if (!arg)
 	{
-		printf("No arg!\n");
+		ft_printf("No arg!\n");
 		return (NULL);
 	}
 	i = arg->arg_size;
@@ -71,7 +71,7 @@ unsigned char *encode_arg(t_ast *arg) // Either generate buf in func or pass it 
 	{
 		*buf = ((unsigned char *)&arg->arg_value)[i - 1];
 		buf++;
-		printf("Got index %d and char: %d\n", i, ((unsigned char *)&arg->arg_value)[i - 1]);
+		ft_printf("Got index %d and char: %d\n", i, ((unsigned char *)&arg->arg_value)[i - 1]);
 		i--;
 	}
 	return (buf);
@@ -110,7 +110,7 @@ int			main(int argc, char **argv)
 	unsigned char	*buf;
 	unsigned char	*arg_type;
 
-/*	printf("type: %d\nstatement: %s\nsize: %d\nn_args:%d\n\targ_type: %d\n\targ_val: %d\n",
+/*	ft_printf("type: %d\nstatement: %s\nsize: %d\nn_args:%d\n\targ_type: %d\n\targ_val: %d\n",
 			statement->type,
 			opcode_table[statement->statement - 1].literal,
 			statement->statement_size,
@@ -128,7 +128,7 @@ int			main(int argc, char **argv)
 	while (i < 2)
 	{
 		encode_arg(&arg_table[i]);
-		printf("\n");
+		ft_printf("\n");
 		i++;
 	}
 	return 0;
@@ -154,7 +154,7 @@ int			main(int argc, char **argv)
 	}
 	i = -1;
 	while (++i < statement->statement_size)
-		printf("%02x ", arg_type[i]);
+		ft_printf("%02x ", arg_type[i]);
 	// t_file			file;
 	// int				bytes;
 	// char 			*line;
@@ -234,15 +234,15 @@ int			main(int argc, char **argv)
 	// {
 	// 	get_component_size(&ass, tmp->statement, true);
 	// 	get_argument_type(&ass, tmp);
-	// 	printf("\nInstruction ByteCode: \n");
+	// 	ft_printf("\nInstruction ByteCode: \n");
 	// 	get_arguments(&ass, tmp->statement);
 	// 	i = 0;
 	// 	while (i < ass.buff_slot)
 	// 	{
-	// 		printf("%.2x ", ass.statement_buff[i]);
+	// 		ft_printf("%.2x ", ass.statement_buff[i]);
 	// 		i++;
 	// 	}
-	// 	printf("\n------\n\n");
+	// 	ft_printf("\n------\n\n");
 	// 	ass.buff_slot = 0;
 	// 	tmp = tmp->next;
 	// 	write(fd, ass.statement_buff, ass.size);

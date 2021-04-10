@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:51:26 by orantane          #+#    #+#             */
-/*   Updated: 2021/04/10 00:38:25 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/10 13:14:21 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define VM_H
 # include "op.h"
 # include "libft.h"
+# include "ft_printf.h"
 # include "error.h"
 # include "file.h"
 # include "options.h"

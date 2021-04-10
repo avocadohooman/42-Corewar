@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 22:56:29 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/25 10:31:58 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/04/10 13:10:55 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ int		main(void)
 {
 	if (!test_new_file())
 	{
-		printf("test_new_file: [ FAILED ]\n");
+		ft_printf("test_new_file: [ FAILED ]\n");
 		return (1);
 	}
 	if (!test_insert_file())
 	{
-		printf("test_insert_file: [ FAILED ]\n");
+		ft_printf("test_insert_file: [ FAILED ]\n");
 		return (1);
 	}
 	return (0);
