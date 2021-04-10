@@ -2,7 +2,6 @@
 #define COMMENT_LENGTH 156
 #define COREWAR_EXEC_MAGIC 0xea83f3
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>

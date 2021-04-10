@@ -12,7 +12,6 @@
 
 #include "lexer.h"
 #include "unistd.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 typedef struct	s_test
@@ -68,18 +67,18 @@ int		main(void)
 		lexer = init_lexer((char *)g_table[test].value, ft_strlen(g_table[test].value));
 		if (!(token = lex_get_next_token(lexer)))
 		{
-			printf("[ TEST:%d ]: FAILED\t--\tGot NULL, expected non-NULL token\n", test);
+			ft_printf("[ TEST:%d ]: FAILED\t--\tGot NULL, expected non-NULL token\n", test);
 			continue ;
 		}
 		if (token->type != g_table[test].expected_type)
-			printf("[ TEST:%d ]: FAILED\t--\tExpected type %s, got %s\n",
+			ft_printf("[ TEST:%d ]: FAILED\t--\tExpected type %s, got %s\n",
 					test,
 					g_type_table[g_table[test].expected_type],
 					g_type_table[token->type]);
 		else
 			success++;
 	}
-	printf("[ TEST COMPLETED ]: %d/%d tests succesfull\n", success, test);
+	ft_printf("[ TEST COMPLETED ]: %d/%d tests succesfull\n", success, test);
 	if (success != test)
 		return (1);
 	return (0);

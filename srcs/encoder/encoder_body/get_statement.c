@@ -6,13 +6,12 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:56:27 by gmolin            #+#    #+#             */
-/*   Updated: 2021/01/22 22:18:03 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/04/10 13:42:54 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "encoder.h"
 #include "file.h"
-#include <stdio.h> // delete
 
 unsigned char		get_statement(char *statement)
 {
