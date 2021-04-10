@@ -1,15 +1,10 @@
 .name "heatdeath.png"
 .comment "I'll make all existence reach thermodynamic equilibrium."
 
-reproduce:
-	fork %:infinite_expansion
+reproduce:	fork %:expansion
 
-infinite_expansion:
-	sti r1, %7, %1
-	ld %0, r2
-	ld %70, r4
-	aff r4
+expansion:	sti r1, %:enthropy, %1
+			ld %0, r2
 
-maximum_enthropy:
-	live %1
-	zjmp %:infinite_expansion
+enthropy:	live %1
+			zjmp %:expansion
