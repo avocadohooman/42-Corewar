@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 12:17:04 by npimenof          #+#    #+#             */
-/*   Updated: 2020/12/03 12:17:04 by npimenof         ###   ########.fr       */
+/*   Created: 2021/04/14 11:20:52 by gmolin            #+#    #+#             */
+/*   Updated: 2021/04/14 11:23:21 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "file.h"
 
-t_buf	*buf_new(t_buf *buf, size_t s)
+t_buf		*buf_new(t_buf *buf, size_t s)
 {
-    if (!(buf->data = ft_memalloc(s)))
-        return (NULL);
-    buf->size = s;
-    buf->used = 0;
-    return (buf);
+	if (!(buf->data = ft_memalloc(s)))
+		return (NULL);
+	buf->size = s;
+	buf->used = 0;
+	return (buf);
 }
 
-t_buf	*buf_insert(t_buf *buf, char *data, size_t size)
+t_buf		*buf_insert(t_buf *buf, char *data, size_t size)
 {
 	char	*tmp;
-	
+
 	if (!buf || !data)
 		return (buf);
 	if (buf->used + size >= buf->size)
@@ -41,7 +41,7 @@ t_buf	*buf_insert(t_buf *buf, char *data, size_t size)
 	return (buf);
 }
 
-t_buf	*buf_join(t_buf *buf1, t_buf *buf2)
+t_buf		*buf_join(t_buf *buf1, t_buf *buf2)
 {
 	t_buf	*new;
 
@@ -58,7 +58,7 @@ t_buf	*buf_join(t_buf *buf1, t_buf *buf2)
 	return (new);
 }
 
-void	buf_free(t_buf **buf)
+void		buf_free(t_buf **buf)
 {
 	if (*buf)
 	{

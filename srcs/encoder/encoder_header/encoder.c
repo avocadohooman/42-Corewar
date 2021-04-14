@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   encoder.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 13:51:56 by orantane          #+#    #+#             */
-/*   Updated: 2021/03/25 13:27:28 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/04/14 11:19:58 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 
 static unsigned char	*encode_int(unsigned char *out, int i, int champ_size)
 {
- 	int		*nbr;
+	int		*nbr;
 	int		len;
 	int		magic;
 	int		j;
 
-    j = 0;
-    magic = COREWAR_EXEC_MAGIC;
+	j = 0;
+	magic = COREWAR_EXEC_MAGIC;
 	len = 4;
 	if (champ_size > 0)
 		nbr = &champ_size;
@@ -33,12 +33,12 @@ static unsigned char	*encode_int(unsigned char *out, int i, int champ_size)
 	while (--len >= 0)
 	{
 		out[i + j] = *(((unsigned char*)nbr) + len);
-        j++;
+		j++;
 	}
 	return (out);
 }
 
-static unsigned char	*encode_string(unsigned char *out, int i, 
+static unsigned char	*encode_string(unsigned char *out, int i,
 										char *text, int type)
 {
 	int		index;
@@ -60,7 +60,7 @@ static unsigned char	*encode_string(unsigned char *out, int i,
 	return (out);
 }
 
-unsigned char			*encode_output(char *name, char *comment, 
+unsigned char			*encode_output(char *name, char *comment,
 										int champ_size)
 {
 	unsigned char	*out;

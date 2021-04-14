@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_body_statement.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:21:16 by npimenof          #+#    #+#             */
-/*   Updated: 2021/04/10 00:44:57 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/14 11:36:23 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_ast	*new_statement(t_parser *parser, t_label **labels, t_opcode code)
 	statement->label_list = *labels;
 	statement->statement = (char)code.statement_code;
 	statement->statement_position = parser->bytes;
-	statement->statement_size =  1 + code.argument_type;
+	statement->statement_size = 1 + code.argument_type;
 	statement->statement_n_args = code.argument_amount;
 	return (statement);
 }

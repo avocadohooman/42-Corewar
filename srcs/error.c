@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/01 14:11:42 by orantane          #+#    #+#             */
-/*   Updated: 2021/01/14 13:20:07 by seronen          ###   ########.fr       */
+/*   Created: 2021/04/14 11:42:42 by gmolin            #+#    #+#             */
+/*   Updated: 2021/04/14 11:44:28 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
 
 char	*g_errors[] = {"Usage: ./asm [champion_file.s]", "Missing argument!",
-						"three", "File could not be opened.","Buffer Error", 
-						"Get Next Line Error", "Invalid argument!",
-						"Malloc error!", "Name or comment is too long.", "label not found: %s"};
+	"three", "File could not be opened.", "Buffer Error",
+	"Get Next Line Error", "Invalid argument!",
+	"Malloc error!", "Name or comment is too long.",
+	"label not found: %s"};
 
 void	print_error(int type)
 {

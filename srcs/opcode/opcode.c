@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   opcode.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 15:44:22 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/13 19:23:27 by npimenof         ###   ########.fr       */
+/*   Created: 2021/04/14 11:24:05 by gmolin            #+#    #+#             */
+/*   Updated: 2021/04/14 11:24:36 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "opcodes.h"
 
-int		lookup_opcode(char *str)
+int			lookup_opcode(char *str)
 {
 	int		i;
 
@@ -27,14 +27,14 @@ int		lookup_opcode(char *str)
 	return (-1);
 }
 
-int		check_argument(int options, int received)
+int			check_argument(int options, int received)
 {
 	if ((options & received) == received)
 		return (1);
 	return (0);
 }
 
-int				is_label_char(char c)
+int			is_label_char(char c)
 {
 	if (!c)
 		return (0);
@@ -42,4 +42,3 @@ int				is_label_char(char c)
 		return (1);
 	return (0);
 }
-

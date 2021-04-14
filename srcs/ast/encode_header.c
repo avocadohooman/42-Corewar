@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   encode_header.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 11:14:00 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/04/10 00:44:26 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/14 11:08:53 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ t_buf	*encode_header(t_ast *header)
 			comment = header->compound_value[i]->string;
 	}
 	buf = encode_output(name, comment, header->body_byte_size);
-	if (!(buf_insert(bufio, (char *)buf, (PROG_NAME_LENGTH + COMMENT_LENGTH + 16))))
+	if (!(buf_insert(bufio, (char *)buf,
+		(PROG_NAME_LENGTH + COMMENT_LENGTH + 16))))
 		return (NULL);
 	free(buf);
 	buf = NULL;

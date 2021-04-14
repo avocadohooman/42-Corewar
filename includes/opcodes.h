@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opcodes.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 02:22:20 by seronen           #+#    #+#             */
-/*   Updated: 2021/03/25 22:12:16 by npimenof         ###   ########.fr       */
+/*   Updated: 2021/04/14 10:50:51 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ typedef struct	s_opcode
 	int			cost;
 }				t_opcode;
 
-int		lookup_opcode(char *str);
-int		check_argument(int options, int received);
-int		is_label_char(char c);
+int				lookup_opcode(char *str);
+int				check_argument(int options, int received);
+int				is_label_char(char c);
 
 enum {
 	LIVE_INDEX,
@@ -67,7 +67,7 @@ enum {
 	NO_OPERATION
 };
 
-static const t_opcode opcode_table[] = {
+static const	t_opcode opcode_table[] = {
 
 	[LFORK_INDEX] = {LFORK_LITERAL, 0x0f, 1, {T_DIR}, 0, 2, 1000},
 	[STI_INDEX] = {STI_LITERAL, 0x0b, 3,

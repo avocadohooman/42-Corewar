@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   encode_statement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 11:16:07 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/04/10 00:44:06 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/14 11:09:11 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ t_buf				*encode_statement(t_ast *stmt)
 	while (++i < stmt->statement_n_args)
 	{
 		if (!(arg = encode_arg(stmt->statement_args[i], stmt->label_list)) ||
-		!(buf_insert(buf_statement, (char *)arg, stmt->statement_args[i]->arg_size)))
+		!(buf_insert(buf_statement, (char *)arg,
+			stmt->statement_args[i]->arg_size)))
 			return (NULL);
 		ft_strdel((char **)&arg);
 	}
