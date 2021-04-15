@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   encode_statement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 11:16:07 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/04/14 11:09:11 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/04/15 16:26:52 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_buf				*encode_statement(t_ast *stmt)
 	if (!(buf_statement = ft_memalloc(sizeof(t_buf))) ||
 		!(buf_insert(buf_statement, (char *)&byte, 1)))
 		return (NULL);
-	if (opcode_table[(int)stmt->statement].argument_type)
+	if (g_opcode_table[(int)stmt->statement].argument_type)
 	{
 		byte = encode_arg_type(stmt->statement_args, stmt->statement_n_args);
 		if (!(buf_insert(buf_statement, (char *)&byte, 1)))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_body_statement.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:21:16 by npimenof          #+#    #+#             */
-/*   Updated: 2021/04/14 11:36:23 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/04/15 16:27:23 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_ast	*parser_parse_body_statement(t_parser *parser, t_label **labels)
 	parser_consume(parser, TOKEN_IDENTIFIER);
 	if ((opcode = lookup_opcode(parser->prev_token->value)) < 0)
 		parser_exit_with_message(parser, ERROR_UNKNOWN_STATEMENT);
-	code = opcode_table[opcode];
+	code = g_opcode_table[opcode];
 	if (!(stmt = new_statement(parser, labels, code)))
 		return (NULL);
 	if (!(stmt->statement_args =

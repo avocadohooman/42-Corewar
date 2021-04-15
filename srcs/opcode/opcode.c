@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opcode.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 11:24:05 by gmolin            #+#    #+#             */
-/*   Updated: 2021/04/14 11:24:36 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/04/15 16:27:02 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int			lookup_opcode(char *str)
 	int		i;
 
 	i = 0;
-	while (opcode_table[i].literal)
+	while (g_opcode_table[i].literal)
 	{
-		if (!ft_strcmp(opcode_table[i].literal, str))
+		if (!ft_strcmp(g_opcode_table[i].literal, str))
 			return (i);
 		i++;
 	}

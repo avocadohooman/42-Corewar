@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 14:48:04 by seronen           #+#    #+#             */
-/*   Updated: 2021/04/10 00:34:18 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/15 16:27:59 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int		calc_argtype_size(t_stmt *stmt)
 
 	size = 0;
 	i = 0;
-	while (i < opcode_table[stmt->statement - 1].argument_amount)
+	while (i < g_opcode_table[stmt->statement - 1].argument_amount)
 	{
 		if (stmt->arg_types[i] == T_REG)
 			size += 1;
 		else if (stmt->arg_types[i] == T_DIR &&
-			opcode_table[stmt->statement - 1].dir_size == 4)
+			g_opcode_table[stmt->statement - 1].dir_size == 4)
 			size += 4;
 		else if (stmt->arg_types[i])
 			size += 2;
@@ -74,10 +74,10 @@ int		validate_arg_type(t_stmt *stmt, int i)
 	int val;
 	int aim;
 
-	while (i < opcode_table[stmt->statement - 1].argument_amount)
+	while (i < g_opcode_table[stmt->statement - 1].argument_amount)
 	{
 		val = stmt->arg_types[i];
-		aim = opcode_table[stmt->statement - 1].argument_types[i];
+		aim = g_opcode_table[stmt->statement - 1].argument_types[i];
 		if (!val)
 			return (1);
 		if ((val & aim) != val)
@@ -92,12 +92,12 @@ int		decrypt(t_carriage *carry)
 	int size;
 
 	size = 1;
-	if (opcode_table[carry->stmt->statement - 1].argument_type)
+	if (g_opcode_table[carry->stmt->statement - 1].argument_type)
 		size += decrypt_arg_type(carry->stmt, 0, 128) + 1;
 	else
 	{
 		carry->stmt->arg_types[0] = T_DIR;
-		size += opcode_table[carry->stmt->statement - 1].dir_size;
+		size += g_opcode_table[carry->stmt->statement - 1].dir_size;
 		return (size);
 	}
 	if (validate_arg_type(carry->stmt, 0))

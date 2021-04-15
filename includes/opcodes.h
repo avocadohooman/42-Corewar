@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opcodes.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 02:22:20 by seronen           #+#    #+#             */
-/*   Updated: 2021/04/14 10:50:51 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/04/15 16:26:26 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ enum {
 	NO_OPERATION
 };
 
-static const	t_opcode opcode_table[] = {
+static const	t_opcode g_opcode_table[] = {
 
 	[LFORK_INDEX] = {LFORK_LITERAL, 0x0f, 1, {T_DIR}, 0, 2, 1000},
 	[STI_INDEX] = {STI_LITERAL, 0x0b, 3,
