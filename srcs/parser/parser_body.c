@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_body_.c                                     :+:      :+:    :+:   */
+/*   parser_body.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/14 11:45:52 by gmolin            #+#    #+#             */
-/*   Updated: 2021/04/14 11:46:04 by gmolin           ###   ########.fr       */
+/*   Created: 2020/12/15 13:07:14 by npimenof          #+#    #+#             */
+/*   Updated: 2021/01/13 22:23:11 by npimenof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ t_ast	*parser_parse_body_instructions(t_parser *parser)
 	t_ast	*instruction;
 	t_label *labels;
 
+	if (parser->current_token->type == TOKEN_EOF)
+		return (NULL);
 	labels = new_label("");
 	if (!(compound = init_ast(AST_BODY)))
 		return (NULL);

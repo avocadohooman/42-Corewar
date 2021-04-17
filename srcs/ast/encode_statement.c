@@ -29,7 +29,7 @@ unsigned char		*encode_arg(t_ast *arg, t_label *labels)
 	if (arg->label)
 	{
 		if ((value = label_value(labels, arg->label)) < 0)
-			print_error(8);
+			print_error(9);
 		value -= arg->statement_position;
 	}
 	else
@@ -73,11 +73,11 @@ t_buf				*encode_statement(t_ast *stmt)
 	unsigned char	*arg;
 	t_buf			*buf_statement;
 
-	byte = stmt->statement + 1;
+	byte = stmt->statement;
 	if (!(buf_statement = ft_memalloc(sizeof(t_buf))) ||
 		!(buf_insert(buf_statement, (char *)&byte, 1)))
 		return (NULL);
-	if (g_opcode_table[(int)stmt->statement].argument_type)
+	if (g_opcode_table[(int)stmt->statement - 1].argument_type)
 	{
 		byte = encode_arg_type(stmt->statement_args, stmt->statement_n_args);
 		if (!(buf_insert(buf_statement, (char *)&byte, 1)))

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/14 11:37:07 by gmolin            #+#    #+#             */
-/*   Updated: 2021/04/14 11:45:23 by gmolin           ###   ########.fr       */
+/*   Created: 2020/12/15 12:48:49 by npimenof          #+#    #+#             */
+/*   Updated: 2021/04/17 17:26:45 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,11 @@ t_ast	*parser_parse_header_instruction(t_parser *parser)
 	t_type	type;
 
 	type = parser->current_token->type;
-	if (type == TOKEN_COMMAND)
-		return (parser_parse_command(parser));
-	return (init_ast(AST_EMPTY));
+	if (type == TOKEN_NEWLINE)
+		return (init_ast(AST_EMPTY));
+	if (type != TOKEN_COMMAND)
+		return (NULL);
+	return (parser_parse_command(parser));
 }
 
 t_ast	*parser_parse_header_instructions(t_parser *parser)
@@ -72,7 +74,7 @@ t_ast	*parser_parse_header_instructions(t_parser *parser)
 	if (!(compound->compound_value = ft_memalloc(sizeof(t_ast *))))
 		return (NULL);
 	if (!(compound->compound_value[0] =
-	parser_parse_header_instruction(parser)))
+		parser_parse_header_instruction(parser)))
 		return (NULL);
 	compound->compound_size = 1;
 	while (parser->current_token->type == TOKEN_NEWLINE)
@@ -81,11 +83,10 @@ t_ast	*parser_parse_header_instructions(t_parser *parser)
 		if (parser->current_token->type != TOKEN_COMMAND &&
 			parser->current_token->type != TOKEN_NEWLINE)
 			break ;
-		if ((statement = parser_parse_header_instruction(parser)))
-		{
-			if (!(compound_insert(compound, statement)))
-				return (NULL);
-		}
+		if (!(statement = parser_parse_header_instruction(parser)))
+			return (NULL);
+		if (!(compound_insert(compound, statement)))
+			return (NULL);
 	}
 	return (compound);
 }

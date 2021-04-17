@@ -19,7 +19,8 @@ t_parser	*new_parser(t_lexer *lexer)
 
 	if (!(parser = ft_memalloc(sizeof(t_parser))))
 		return (NULL);
-	token = lex_get_next_token(lexer);
+	if (!(token = lex_get_next_token(lexer)))
+		return (NULL);
 	parser->lexer = lexer;
 	parser->current_token = token;
 	parser->prev_token = NULL;
