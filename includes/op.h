@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2021/04/15 17:49:43 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/17 17:23:28 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,5 @@
 # define COREWAR_EXEC_MAGIC	0xea83f3
 
 typedef char			t_arg_type;
-
-// typedef	struct			s_header
-// {
-// 	unsigned int		magic;
-// 	char				prog_name[PROG_NAME_LENGTH + 1];
-// 	unsigned int		prog_size;
-// 	char				comment[COMMENT_LENGTH + 1];
-// }						t_header;
 
 #endif
