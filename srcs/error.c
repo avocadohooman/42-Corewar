@@ -16,7 +16,7 @@ char	*g_errors[] = {"Usage: ./asm [champion_file.s]", "Missing argument!",
 	"three", "File could not be opened.", "Buffer Error",
 	"Get Next Line Error", "Invalid argument!",
 	"Malloc error!", "Name or comment is too long.",
-	"label not found: %s"};
+	"label not found"};
 
 void	print_error(int type)
 {
