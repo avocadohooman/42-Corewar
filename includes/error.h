@@ -6,7 +6,7 @@
 /*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:31:29 by gmolin            #+#    #+#             */
-/*   Updated: 2021/04/10 13:13:56 by gmolin           ###   ########.fr       */
+/*   Updated: 2021/04/14 10:33:21 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define ERROR_H
 # include "libft.h"
 # include "ft_printf.h"
-# include "stdio.h" //remove
 
 typedef enum	e_error_type
 {

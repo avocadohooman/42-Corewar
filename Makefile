@@ -40,8 +40,7 @@ LABEL = srcs/label/label.c \
 
 OPCODE = srcs/opcode/opcode.c \
 
-ENCODER = srcs/encoder/encoder_header/encoder.c \
-
+ENCODER = srcs/encoder/encoder_header/encoder.c
 
 SRCS = 	srcs/vm/args.c srcs/vm/read_files.c srcs/vm/arena.c srcs/vm/initiate_carriage.c srcs/vm/decrypt.c srcs/vm/player.c \
 		srcs/vm/funcs/helper_functions/get_arg_value.c srcs/vm/funcs/helper_functions/write_bytes.c srcs/vm/funcs/helper_functions/read_bytes.c\

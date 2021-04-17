@@ -3,27 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   parser_body_args_inner.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/24 21:07:54 by npimenof          #+#    #+#             */
-/*   Updated: 2021/04/10 13:42:36 by gmolin           ###   ########.fr       */
+/*   Created: 2021/04/14 11:27:14 by gmolin            #+#    #+#             */
+/*   Updated: 2021/04/15 17:10:25 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "opcodes.h"
 
-int		is_registry(char *string) 
+int		is_registry(char *string)
 {
 	if (*string == 'r' && ++string)
-		while (ft_isdigit(*string) && string++);
+		while (ft_isdigit(*string) && string++)
+			;
 	return (!*string);
 }
 
 int		is_number(char *string)
 {
-	if (*string == '-' && ++string){}
-	while (ft_isdigit(*string) && string++);
+	if (*string == '-' && ++string)
+		;
+	while (ft_isdigit(*string) && string++)
+		;
 	return (!*string);
 }
 

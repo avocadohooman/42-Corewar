@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 11:16:07 by Gerhard           #+#    #+#             */
-/*   Updated: 2021/04/10 00:44:06 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/15 16:26:52 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_buf				*encode_statement(t_ast *stmt)
 	if (!(buf_statement = ft_memalloc(sizeof(t_buf))) ||
 		!(buf_insert(buf_statement, (char *)&byte, 1)))
 		return (NULL);
-	if (opcode_table[(int)stmt->statement - 1].argument_type)
+	if (g_opcode_table[(int)stmt->statement - 1].argument_type)
 	{
 		byte = encode_arg_type(stmt->statement_args, stmt->statement_n_args);
 		if (!(buf_insert(buf_statement, (char *)&byte, 1)))
@@ -87,7 +87,8 @@ t_buf				*encode_statement(t_ast *stmt)
 	while (++i < stmt->statement_n_args)
 	{
 		if (!(arg = encode_arg(stmt->statement_args[i], stmt->label_list)) ||
-		!(buf_insert(buf_statement, (char *)arg, stmt->statement_args[i]->arg_size)))
+		!(buf_insert(buf_statement, (char *)arg,
+			stmt->statement_args[i]->arg_size)))
 			return (NULL);
 		ft_strdel((char **)&arg);
 	}

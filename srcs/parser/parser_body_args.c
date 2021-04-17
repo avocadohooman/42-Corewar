@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_args.c                                      :+:      :+:    :+:   */
+/*   parser_body_args.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 19:29:26 by npimenof          #+#    #+#             */
-/*   Updated: 2021/01/13 23:50:56 by npimenof         ###   ########.fr       */
+/*   Created: 2021/04/14 11:32:12 by gmolin            #+#    #+#             */
+/*   Updated: 2021/04/14 11:35:40 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_ast	*parser_parse_body_registry(t_parser *parser)
 	return (arg);
 }
 
-t_ast	*parser_parse_argtype(int opts, int recieved, 
+t_ast	*parser_parse_argtype(int opts, int recieved,
 							t_ast *(*type)(t_parser*), t_parser *parser)
 {
 	if (!check_argument(opts, recieved))
@@ -69,6 +69,6 @@ t_ast	*parser_parse_body_arg(t_parser *parser, int opts)
 	else if (parser->current_token->type == TOKEN_DIRECT)
 		return (parser_parse_argtype(opts,
 				T_DIR, parser_parse_body_direct, parser));
-	return (parser_parse_argtype(opts,
-			T_IND, parser_parse_body_indirect, parser));
+		return (parser_parse_argtype(opts,
+		T_IND, parser_parse_body_indirect, parser));
 }

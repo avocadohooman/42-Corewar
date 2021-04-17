@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:21:16 by npimenof          #+#    #+#             */
-/*   Updated: 2021/04/10 00:44:57 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/15 16:27:23 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_ast	*new_statement(t_parser *parser, t_label **labels, t_opcode code)
 	statement->label_list = *labels;
 	statement->statement = (char)code.statement_code;
 	statement->statement_position = parser->bytes;
-	statement->statement_size =  1 + code.argument_type;
+	statement->statement_size = 1 + code.argument_type;
 	statement->statement_n_args = code.argument_amount;
 	return (statement);
 }
@@ -59,7 +59,7 @@ t_ast	*parser_parse_body_statement(t_parser *parser, t_label **labels)
 	parser_consume(parser, TOKEN_IDENTIFIER);
 	if ((opcode = lookup_opcode(parser->prev_token->value)) < 0)
 		parser_exit_with_message(parser, ERROR_UNKNOWN_STATEMENT);
-	code = opcode_table[opcode];
+	code = g_opcode_table[opcode];
 	if (!(stmt = new_statement(parser, labels, code)))
 		return (NULL);
 	if (!(stmt->statement_args =

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npimenof <npimenof@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: gmolin <gmolin@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/11 15:03:07 by npimenof          #+#    #+#             */
-/*   Updated: 2021/02/11 15:03:07 by npimenof         ###   ########.fr       */
+/*   Created: 2021/04/14 11:07:37 by gmolin            #+#    #+#             */
+/*   Updated: 2021/04/14 11:08:07 by gmolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "encoder.h"
 #include "file.h"
 #include "parser.h"
-
-#include <stdio.h>
 
 int			create_file(char *name)
 {
@@ -67,8 +65,6 @@ int			main(int argc, char **argv)
 		return (1);
 	if (!(output_file = encode_ast(root)))
 		return (1);
-	printf("outfile size: %zu\n", output_file->size);
-	printf("outfile used: %zu\n", output_file->used);
 	fd = create_file(argv[1]);
 	buf_write(output_file, fd);
 	close(fd);

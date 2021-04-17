@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 21:29:33 by seronen           #+#    #+#             */
-/*   Updated: 2021/04/10 00:35:34 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/15 16:28:31 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		init_stmt(t_carriage *carry, unsigned char *arena)
 		stmt_error(carry, 1);
 		return (1);
 	}
-	carry->cycles_to_execute = opcode_table[carry->stmt->statement - 1].cost;
+	carry->cycles_to_execute = g_opcode_table[carry->stmt->statement - 1].cost;
 	ft_bzero(carry->stmt->arg_types, sizeof(int) * 3);
 	ft_bzero(carry->stmt->args, sizeof(int) * 3);
 	return (0);
@@ -69,7 +69,7 @@ int		form_statement(t_carriage *carry, unsigned char *arena)
 	size = decrypt(carry);
 	if (!size)
 		return (1);
-	if (opcode_table[carry->stmt->statement - 1].argument_type)
+	if (g_opcode_table[carry->stmt->statement - 1].argument_type)
 		get_args(carry, arena, real_modulo(carry->abs_pos, 2, MEM_SIZE));
 	else
 		get_args(carry, arena, real_modulo(carry->abs_pos, 1, MEM_SIZE));
