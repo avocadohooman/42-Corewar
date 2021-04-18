@@ -35,7 +35,7 @@ Clean all<br>
 `$ make fclean`<br>
 
 ### How to run
-How to run MV
+How to run VM
 ```
 $ ./corewar champion_file.cor ... <champion_file_4.cor>
 ```
@@ -43,7 +43,7 @@ Corewar can handle 1 to 4 champions at a time.<br><br>
 Additional options for VM:
 * `-lldfix`: Reference corewar's _lld_ only reads 2 bytes, and this flag fixes that bug.
 * `-dump <cycle>`: Dump memory to stdout 32 octets / line and exit the game.
-* `-prettydump`: Dump memory to stdout 64 octets / line fancier and exit the game.
+* `-prettydump <cycle>`: Dump memory to stdout 64 octets / line fancier and exit the game.
 * `-n <nb> champion_file_2.cor`: Override champion execution order by giving a champion a custom number.
 
 
