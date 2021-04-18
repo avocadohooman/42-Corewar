@@ -23,16 +23,16 @@ Execute instructions :))
 ## Assembler
 Compile custom assembly code (Redcode)
 ## How to Makefile
-Build all
-`$ make`
-Build asm (Assembler)
-`$ make asm`
-Build corewar (VM)
-`$ make corewar`
-Clean .o files and clutter
-`$ make clean`
-Clean all
-`$ make fclean`
+Build all<br>
+`$ make`<br>
+Build asm (Assembler)<br>
+`$ make asm`<br>
+Build corewar (VM)<br>
+`$ make corewar`<br>
+Clean .o files and clutter<br>
+`$ make clean`<br>
+Clean all<br>
+`$ make fclean`<br>
 
 ### How to run
 How to run MV
