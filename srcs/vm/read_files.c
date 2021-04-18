@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/04/09 17:18:25 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/18 12:38:02 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ int		gather_data(t_player *player, char *data, size_t total_size)
 	if (!data || !player)
 		print_error(MALLOC);
 	player->magic = convert_exec_size(&data[0]);
-	ft_memcpy(&player->name, &data[4], 128);
-	ft_memcpy(&player->comment, &data[140], 2048);
+	ft_strncpy(player->name, &data[4], 128);
+	ft_strncpy(player->comment, &data[140], 2048);
 	player->exec_size = convert_exec_size(&data[136]);
 	if (!player->exec_size)
 		player->exec_size = total_size - 2192;
+	if (player->exec_size < 1)
+		print_error(INVALID_ARG);
 	player->exec_code = ft_memalloc(sizeof(char) * player->exec_size + 1);
 	ft_memcpy(player->exec_code, &data[2192], player->exec_size);
 	validate_player(player);
