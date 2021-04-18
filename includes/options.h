@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 02:29:03 by seronen           #+#    #+#             */
-/*   Updated: 2021/04/09 17:18:46 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/18 14:54:23 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 # define DUMP_LITERAL "-dump"
 # define PLAYERNB_LITERAL "-n"
 # define LLDFIX_LITERAL "-lldfix"
+# define PRETTY_LITERAL "-prettydump"
 
-# define OPT_AMOUNT 3
+# define OPT_AMOUNT 4
 
 enum {
 	NONE,
 	DUMP,
 	LLD_FIX,
+	PRETTYDUMP
 };
 
 #endif

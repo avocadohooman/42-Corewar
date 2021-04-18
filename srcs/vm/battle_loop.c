@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:46:01 by orantane          #+#    #+#             */
-/*   Updated: 2021/04/10 00:37:34 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/18 15:04:03 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void		battle_loop(t_vm *vm, unsigned char *arena)
 		if (vm->options[DUMP] != 0 &&
 			loop.cycle == vm->options[DUMP] - 1)
 		{
-			dump_arena(arena);
+			dump_arena(vm, arena);
 			exit(0);
 		}
 		carriage_loop(vm, &loop, arena);

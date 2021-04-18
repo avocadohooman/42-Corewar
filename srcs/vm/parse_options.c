@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 02:52:36 by seronen           #+#    #+#             */
-/*   Updated: 2021/04/09 17:19:06 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/18 15:06:29 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int		check_option(char *opt)
 		return (DUMP);
 	if (!ft_strcmp(opt, LLDFIX_LITERAL))
 		return (LLD_FIX);
+	if (!ft_strcmp(opt, PRETTY_LITERAL))
+		return (PRETTYDUMP);
 	return (NONE);
 }
 
@@ -48,7 +50,7 @@ int		toggle_option(int opt_id, char **args)
 	int res;
 
 	res = 1;
-	if (opt_id == DUMP)
+	if (opt_id == DUMP || opt_id == PRETTYDUMP)
 	{
 		res = get_dump_cycle(args[1]);
 		args[1] = NULL;
@@ -70,6 +72,11 @@ char	**parse_options(t_vm *vm, char **args, int ac)
 			opt_id = check_option(args[i]);
 			if (opt_id)
 				vm->options[opt_id] = toggle_option(opt_id, &args[i]);
+			if (opt_id == PRETTYDUMP)
+			{
+				vm->options[DUMP] = vm->options[PRETTYDUMP];
+				vm->options[PRETTYDUMP] = 1;
+			}
 		}
 		i++;
 	}
