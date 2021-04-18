@@ -6,7 +6,7 @@
 /*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/04/18 12:38:02 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/18 17:31:27 by seronen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,20 @@ int		validate_player(t_player *player)
 	return (0);
 }
 
+int		validate_exec_code_size(int size, int total_size)
+{
+	if (!size)
+	{
+		size = total_size - 2192;
+		if (size < 1)
+			return (1);
+		return (0);
+	}
+	if (size != total_size - 2192)
+		return (1);
+	return (0);
+}
+
 int		gather_data(t_player *player, char *data, size_t total_size)
 {
 	if (!data || !player)
@@ -39,9 +53,7 @@ int		gather_data(t_player *player, char *data, size_t total_size)
 	ft_strncpy(player->name, &data[4], 128);
 	ft_strncpy(player->comment, &data[140], 2048);
 	player->exec_size = convert_exec_size(&data[136]);
-	if (!player->exec_size)
-		player->exec_size = total_size - 2192;
-	if (player->exec_size < 1)
+	if (validate_exec_code_size(player->exec_size, total_size))
 		print_error(INVALID_ARG);
 	player->exec_code = ft_memalloc(sizeof(char) * player->exec_size + 1);
 	ft_memcpy(player->exec_code, &data[2192], player->exec_size);
