@@ -1,0 +1,9 @@
+.                                          path to corewar folder
+__CHAMPS__                                 regular usage
+-d __CYCLE__ __CHAMPS__                    dump usage
+64                                         number of lines in dump
+0                                          number of extra lines following dump (if any)
+10                                         index in a dump line at which the hex starts
+200                                        index in a dump line at which the hex ends
+                                           delimiter between octets (if any)
+Contestant __NUM__, "__NAME__", has won !  format of victory message
