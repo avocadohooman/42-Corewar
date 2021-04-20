@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arena.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 22:52:50 by seronen           #+#    #+#             */
-/*   Updated: 2021/04/18 15:03:33 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/20 10:37:10 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@ void				dump_arena(t_vm *vm, unsigned char *arena)
 	int octets;
 
 	i = 0;
-	octets = 32;
-	if (vm->options[PRETTYDUMP])
-		octets = 64;
+	octets = 64;
+	// if (vm->options[PRETTYDUMP])
+	// 	octets = 64;
+	vm->options[PRETTYDUMP] = 1;
 	while (i < MEM_SIZE)
 	{
 		line = 0;
-		if (vm->options[PRETTYDUMP])
-			ft_printf("%#05x : ", i);
+		// if (vm->options[PRETTYDUMP])
+		// 	ft_printf("%#05x : ", i);
 		while (line < octets)
 		{
 			ft_printf("%02x ", arena[i + line]);

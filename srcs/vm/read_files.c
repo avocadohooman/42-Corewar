@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: Gerhard <Gerhard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:23:56 by seronen           #+#    #+#             */
-/*   Updated: 2021/04/18 17:31:27 by seronen          ###   ########.fr       */
+/*   Updated: 2021/04/20 10:24:30 by Gerhard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ int		gather_data(t_player *player, char *data, size_t total_size)
 	ft_strncpy(player->name, &data[4], 128);
 	ft_strncpy(player->comment, &data[140], 2048);
 	player->exec_size = convert_exec_size(&data[136]);
-	if (validate_exec_code_size(player->exec_size, total_size))
-		print_error(INVALID_ARG);
+	// if (validate_exec_code_size(player->exec_size, total_size))
+	// 	print_error(INVALID_ARG);
+	total_size += 1;
+	total_size -= 1;
 	player->exec_code = ft_memalloc(sizeof(char) * player->exec_size + 1);
 	ft_memcpy(player->exec_code, &data[2192], player->exec_size);
 	validate_player(player);
