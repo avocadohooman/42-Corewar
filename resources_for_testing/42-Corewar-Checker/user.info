@@ -1,0 +1,9 @@
+/Users/Gerhard/Desktop/github/42-Corewar  path to corewar folder
+__CHAMPS__                                command line args (regular usage)
+-dump __CYCLE__ __CHAMPS__                command line args (dump after cycles)
+64                                        number of lines in dump
+0                                         number of extra lines following dump (if any)
+1                                         index in a dump line at which the hex starts
+191                                       index in a dump line at which the hex ends
+                                          delimiter between octets (if any)
+Contestant __NUM__, "__NAME__" has won !  format of victory message
