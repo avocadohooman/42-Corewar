@@ -18,10 +18,10 @@ In this project our assignment was:
 * Do our own Champion.
 
 ## The Team
-[Niklas Pimenoff](https://github.com/nikunicke)
-[Samuli Eronen](https://github.com/samulieronen)
-[Oskari Rantanen](https://github.com/orantane)
-[Gerhard Molin](https://github.com/avocadohooman)
+- [Niklas Pimenoff](https://github.com/nikunicke)
+- [Samuli Eronen](https://github.com/samulieronen)
+- [Oskari Rantanen](https://github.com/orantane)
+- [Gerhard Molin](https://github.com/avocadohooman)
 
 ## The Game
 The last player to stay alive wins!
